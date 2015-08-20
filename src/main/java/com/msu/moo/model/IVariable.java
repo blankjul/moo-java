@@ -1,6 +1,6 @@
 package com.msu.moo.model;
 
-public interface IVariable<C, E> extends ICopyable<C> {
+public interface IVariable<C, E> {
 
 	public E encode();
 

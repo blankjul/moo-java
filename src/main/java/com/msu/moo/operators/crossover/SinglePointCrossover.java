@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.msu.moo.operators.AbstractCrossover;
-import com.msu.moo.util.Rnd;
+import com.msu.moo.util.Random;
 
 /**
  * This is the single point crossover where a list with any type could but cut
@@ -33,7 +33,7 @@ public class SinglePointCrossover<T> extends AbstractCrossover<List<T>> {
 	
 	@Override
 	protected List<List<T>> crossover_(List<T> a, List<T> b) {
-		return crossover_(a, b, Rnd.rndInt(1, a.size() - 2));
+		return crossover_(a, b, Random.getInstance().nextInt(1, a.size() - 2));
 
 	}
 

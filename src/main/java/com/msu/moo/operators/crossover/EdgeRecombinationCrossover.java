@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msu.moo.operators.AbstractCrossover;
-import com.msu.moo.util.Rnd;
+import com.msu.moo.util.Random;
 import com.rits.cloning.Cloner;
 
 public class EdgeRecombinationCrossover<T> extends AbstractCrossover<List<T>> {
@@ -99,8 +99,8 @@ public class EdgeRecombinationCrossover<T> extends AbstractCrossover<List<T>> {
 					if (size <= minimalSize)
 						choice.add(item);
 				}
-
-				int idx = Rnd.rndInt(choice.size());
+				
+				int idx = Random.getInstance().nextInt(choice.size());
 				next = choice.get(idx);
 
 			}

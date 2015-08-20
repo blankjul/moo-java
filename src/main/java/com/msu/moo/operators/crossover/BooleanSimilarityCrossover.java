@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.msu.moo.operators.AbstractCrossover;
-import com.msu.moo.util.Rnd;
+import com.msu.moo.util.Random;
 
 public class BooleanSimilarityCrossover extends AbstractCrossover<List<Boolean>> {
 
@@ -21,8 +21,8 @@ public class BooleanSimilarityCrossover extends AbstractCrossover<List<Boolean>>
 			if (a.get(i) == true && b.get(i) == true) continue;
 			
 			// if only 1 parent has true choose random bit kipping
-			if (a.get(i) == true && Rnd.rndDouble() < 0.5) a.set(i, false);
-			if (b.get(i) == true && Rnd.rndDouble() < 0.5) b.set(i, false);
+			if (a.get(i) == true && Random.getInstance().nextDouble() < 0.5) a.set(i, false);
+			if (b.get(i) == true && Random.getInstance().nextDouble() < 0.5) b.set(i, false);
 			
 			// if it is false, it will just stay false
 		}

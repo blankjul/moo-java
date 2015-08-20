@@ -4,7 +4,7 @@ package com.msu.moo.operators.mutation;
 import java.util.List;
 
 import com.msu.moo.operators.AbstractMutation;
-import com.msu.moo.util.Rnd;
+import com.msu.moo.util.Random;
 import com.msu.moo.util.Util;
 
 /**
@@ -62,8 +62,9 @@ public class SwapMutation<T> extends AbstractMutation<List<T>>{
 		if (maxIndex == null) maxIndex = obj.size()-1;
 		
 		// search for two random positions
-		int a = Rnd.rndInt(minIndex, maxIndex);
-		int b = Rnd.rndInt(minIndex, maxIndex);
+		
+		int a = Random.getInstance().nextInt(minIndex, maxIndex);
+		int b = Random.getInstance().nextInt(minIndex, maxIndex);
 		
 		// swap this two!
 		Util.swap(obj, a, b);

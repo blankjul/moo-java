@@ -3,7 +3,7 @@ package com.msu.moo.operators.mutation;
 import java.util.List;
 
 import com.msu.moo.operators.AbstractMutation;
-import com.msu.moo.util.Rnd;
+import com.msu.moo.util.Random;
 
 /**
  * This is a basic BitFlipMutation which is allowed on all List<Boolean> objects.
@@ -39,7 +39,7 @@ public class BitFlipMutation extends AbstractMutation<List<Boolean>> {
 	protected void mutate_(List<Boolean> b) {
 		if (probability == null) probability = 1 / (double) b.size();
 		for (int i = 0; i < b.size(); i++) {
-			if (Rnd.rndDouble() < probability)
+			if (Random.getInstance().nextDouble() < probability)
 				b.set(i, !b.get(i));
 		}
 

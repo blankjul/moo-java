@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.msu.moo.operators.AbstractCrossover;
-import com.msu.moo.util.Rnd;
+import com.msu.moo.util.Random;
 
 /**
  * This is the single point crossover where a list with any type could but cut
@@ -41,7 +41,7 @@ public class CycleCrossover<T> extends AbstractCrossover<List<T>> {
 	
 	@Override
 	protected List<List<T>> crossover_(List<T> a, List<T> b) {
-		return crossover_(a, b, Rnd.rndInt(0, a.size() - 1));
+		return crossover_(a, b, Random.getInstance().nextInt(0, a.size() - 1));
 	}
 
 
