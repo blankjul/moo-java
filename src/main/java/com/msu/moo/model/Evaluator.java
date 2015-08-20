@@ -15,14 +15,23 @@ import com.msu.moo.model.solution.Solution;
  */
 public abstract class Evaluator<V extends IVariable<?>, P extends IProblem<V,P>>  {
 	
-	//! number of evaluations so far
-	long numOfEvaluations = 0;
-
+	//! the problem which the evaluator should evaluate
+	protected P problem;
 	
-	public Solution run(P problem, V variable) {
+	//! number of evaluations so far
+	protected long numOfEvaluations = 0;
+	
+
+	public Evaluator(P problem) {
+		super();
+		this.problem = problem;
+	}
+
+
+	public Solution run(V variable) {
 		// increase amount of evaluations
 		++numOfEvaluations;
-		
+			
 		// TODO: Hash the result value and return it directly if it fits!
 		return new Solution(variable, evaluate(problem, variable));
 	}

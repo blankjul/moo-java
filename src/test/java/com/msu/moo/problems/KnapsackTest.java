@@ -32,19 +32,19 @@ public class KnapsackTest {
 
 	@Test
 	public void testEvaluateFunctionIsNonZero() {
-		Solution s = new KnapsackEvaluator().run(k, new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true, false))));
+		Solution s = new KnapsackEvaluator(k).run(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true, false))));
 		assertEquals(3d, s.getObjectives().get(0), 0.05);
 	}
 
 	@Test
 	public void testEvaluateFunctionIsZero() {
-		Solution s = new KnapsackEvaluator().run(k, new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true, true))));
+		Solution s = new KnapsackEvaluator(k).run(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true, true))));
 		assertEquals(0d, s.getObjectives().get(0), 0.05);
 	}
 
 	@Test (expected=RuntimeException.class) 
 	public void testWrongSizeOfTour() throws RuntimeException {
-		new KnapsackEvaluator().run(k, new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true))));
+		new KnapsackEvaluator(k).run(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true))));
 	}
 	
 	

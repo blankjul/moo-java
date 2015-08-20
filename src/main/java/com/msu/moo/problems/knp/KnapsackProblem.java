@@ -45,7 +45,7 @@ public class KnapsackProblem implements IProblem<KnapsackVariable, KnapsackProbl
 
 	@Override
 	public Evaluator<KnapsackVariable, KnapsackProblem> getEvaluator() {
-		return new KnapsackEvaluator();
+		return new KnapsackEvaluator(this);
 	}
 
 

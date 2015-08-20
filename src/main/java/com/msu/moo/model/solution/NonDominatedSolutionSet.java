@@ -3,8 +3,6 @@ package com.msu.moo.model.solution;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.comparator.SolutionDominator;
-
 public class NonDominatedSolutionSet {
 	
 	//! list which contains all the solutions

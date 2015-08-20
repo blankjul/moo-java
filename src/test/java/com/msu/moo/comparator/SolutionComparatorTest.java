@@ -7,9 +7,9 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.msu.moo.comparator.SolutionDominator;
 import com.msu.moo.mocks.MockVariable;
 import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.SolutionDominator;
 
 
 /**

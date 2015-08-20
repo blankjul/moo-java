@@ -1,8 +1,7 @@
-package com.msu.moo.comparator;
+package com.msu.moo.model.solution;
 
 import java.util.List;
 
-import com.msu.moo.model.solution.Solution;
 import com.msu.moo.util.Pair;
 
 /**

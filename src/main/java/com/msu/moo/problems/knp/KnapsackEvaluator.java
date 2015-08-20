@@ -9,6 +9,11 @@ import com.msu.moo.model.Evaluator;
 
 public class KnapsackEvaluator extends Evaluator<KnapsackVariable, KnapsackProblem> {
 
+	public KnapsackEvaluator(KnapsackProblem problem) {
+		super(problem);
+	}
+
+
 	@Override
 	protected <T> List<Double> evaluate(KnapsackProblem problem, KnapsackVariable variable) {
 		List<Boolean> b = variable.plan;

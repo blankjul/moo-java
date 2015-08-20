@@ -13,6 +13,10 @@ public class Kursawe implements IProblem<DoubleListVariable, Kursawe>{
 
 	private class KursaweEvaluator extends Evaluator<DoubleListVariable, Kursawe> {
 
+		public KursaweEvaluator(Kursawe problem) {
+			super(problem);
+		}
+
 		@Override
 		protected <T> List<Double> evaluate(Kursawe problem, DoubleListVariable var) {
 			
@@ -50,7 +54,7 @@ public class Kursawe implements IProblem<DoubleListVariable, Kursawe>{
 	
 	@Override
 	public Evaluator<DoubleListVariable, Kursawe> getEvaluator() {
-		return new KursaweEvaluator();
+		return new KursaweEvaluator(this);
 	}
 
 
