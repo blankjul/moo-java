@@ -8,8 +8,8 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.moo.problems.knp.Item;
-import com.moo.problems.knp.Knapsack;
+import com.msu.moo.problems.knp.Item;
+import com.msu.moo.problems.knp.Knapsack;
 
 public class KnapsackTest {
 

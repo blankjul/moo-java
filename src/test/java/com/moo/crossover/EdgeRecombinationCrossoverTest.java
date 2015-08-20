@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.moo.operators.crossover.EdgeRecombinationCrossover;
+import com.msu.moo.operators.crossover.EdgeRecombinationCrossover;
 
 public class EdgeRecombinationCrossoverTest {
 

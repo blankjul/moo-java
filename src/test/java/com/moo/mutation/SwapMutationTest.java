@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.moo.operators.mutation.SwapMutation;
+import com.msu.moo.operators.mutation.SwapMutation;
 
 public class SwapMutationTest {
 	

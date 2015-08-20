@@ -9,7 +9,7 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.moo.operators.mutation.BitFlipMutation;
+import com.msu.moo.operators.mutation.BitFlipMutation;
 
 public class BitFlipMutationTest {
 	

@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.moo.operators.crossover.OrderedCrossover;
+import com.msu.moo.operators.crossover.OrderedCrossover;
 
 public class OrderedCrossoverTest {
 

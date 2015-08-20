@@ -5,7 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.moo.problems.tsp.Map;
+import com.msu.moo.problems.tsp.Map;
 
 
 
