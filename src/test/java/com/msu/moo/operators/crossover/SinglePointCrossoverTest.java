@@ -1,4 +1,4 @@
-package com.moo.crossover;
+package com.msu.moo.operators.crossover;
 
 import static org.junit.Assert.assertEquals;
 

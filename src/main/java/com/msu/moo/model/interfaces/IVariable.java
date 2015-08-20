@@ -1,13 +1,4 @@
-package com.msu.moo.model;
+package com.msu.moo.model.interfaces;
 
-public interface IVariable<C, E> {
-
-	public E encode();
-
-	public C random(int length);
-
-	public void set(Object obj);
-
-	public Object get();
-
+public interface IVariable {
 }

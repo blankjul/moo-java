@@ -1,4 +1,4 @@
-package com.moo.crossover;
+package com.msu.moo.operators.crossover;
 
 import static org.junit.Assert.assertEquals;
 
@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.moo.operators.crossover.PMXCrossover;
+import com.msu.moo.operators.crossover.permutation.PMXCrossover;
 
 public class PMXCrossoverTest {
 

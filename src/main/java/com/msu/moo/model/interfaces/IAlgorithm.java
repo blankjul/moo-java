@@ -1,10 +1,17 @@
-package com.msu.moo.model;
+package com.msu.moo.model.interfaces;
 
-/**
- * Every algorithm has a problem as Input 
- */
-public interface IAlgorithm {
+import com.msu.moo.model.NonDominatedSet;
+
+public interface IAlgorithm<V extends IVariable, P extends IProblem<V, P>> {
 	
-	public <T, I, O> NonDomintedSet<T> solve(Problem<I,O> p);
+	
+	/**
+	 * Execute the algorithm.
+	 * @param problem instance of the problem
+	 * @return NonDomintedSet which was calculated
+	 */
+	public NonDominatedSet run(P problem);
+
+
 
 }

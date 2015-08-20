@@ -3,14 +3,13 @@ package com.msu.moo.problems.tsp;
 import java.util.HashSet;
 import java.util.List;
 
-import com.msu.moo.model.Problem;
 import com.msu.moo.util.Util;
 
 /**
  * This class defines the TravellingSalesmanProblem which aims to minimize the
  * tour distance of a salesman on a given map.
  */
-public class TravellingSalesmanProblem implements Problem<List<Integer>, Integer> {
+public class TravellingSalesmanProblem {
 
 	// ! Map on which the salesman could plan his tour
 	protected Map map;

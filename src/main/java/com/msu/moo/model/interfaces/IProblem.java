@@ -1,15 +1,23 @@
-package com.msu.moo.model;
+package com.msu.moo.model.interfaces;
+
+import com.msu.moo.model.Evaluator;
 
 /**
- * This interface defines the values of a problem
+ * This interface defines the values of a problem.
  * 
- * Each problem needs to have a evaluation method that
- * has a predefined input I and output o
- * @param <I> input value
- * @param <O> input value
+ * Each problem needs to have a evaluation method that has a predefined input I
+ * and output o
+ * 
+ * @param <T>
+ *            variable as input
  */
-public interface Problem<I,O> {
-	
-	public O evaluate(I input);
+public interface IProblem<V extends IVariable, P extends IProblem<V, P>> {
+
+	/**
+	 * @return the evaluator which is used to calculate the result for this
+	 *         problem class.
+	 */
+	public Evaluator<V,P> getEvaluator();
+
 
 }

@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-package com.msu.moo.operators.crossover;
+package com.msu.moo.operators.crossover.permutation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msu.moo.operators.AbstractCrossover;
+import com.msu.moo.operators.crossover.CrossoverUtil;
 import com.msu.moo.util.Pair;
 
 
