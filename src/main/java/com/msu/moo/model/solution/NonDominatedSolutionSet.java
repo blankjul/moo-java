@@ -1,17 +1,17 @@
-package com.msu.moo.model;
+package com.msu.moo.model.solution;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.comparator.SolutionComparator;
+import com.msu.moo.comparator.SolutionDominator;
 
-public class NonDominatedSet {
+public class NonDominatedSolutionSet {
 	
 	//! list which contains all the solutions
 	protected List<Solution> solutions = new ArrayList<>();
 	
 	//! solution comparator for testing domination
-	protected SolutionComparator cmp = new SolutionComparator();
+	protected SolutionDominator cmp = new SolutionDominator();
 	
 	public boolean add(Solution solutionToAdd) {
 		
@@ -54,12 +54,8 @@ public class NonDominatedSet {
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (Solution s : solutions) {
-			for(Double obj : s.getObjectives()) {
-				sb.append(obj);
-				sb.append(" ");
-			}
+			sb.append(s.toString());
 			sb.append("\n");
-			
 		}
 		return sb.toString();
 	}

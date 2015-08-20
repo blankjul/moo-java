@@ -7,9 +7,9 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.msu.moo.comparator.SolutionComparator;
+import com.msu.moo.comparator.SolutionDominator;
 import com.msu.moo.mocks.MockVariable;
-import com.msu.moo.model.Solution;
+import com.msu.moo.model.solution.Solution;
 
 
 /**
@@ -18,7 +18,7 @@ import com.msu.moo.model.Solution;
  */
 public class SolutionComparatorTest {
 
-	private SolutionComparator cmp = new SolutionComparator();
+	private SolutionDominator cmp = new SolutionDominator();
 	
 	@Test
 	public void testDominationBiObjectiveBoth() {

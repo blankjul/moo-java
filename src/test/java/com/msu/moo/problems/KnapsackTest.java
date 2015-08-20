@@ -8,7 +8,7 @@ import java.util.Arrays;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.msu.moo.model.Solution;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.problems.knp.Item;
 import com.msu.moo.problems.knp.KnapsackEvaluator;
 import com.msu.moo.problems.knp.KnapsackProblem;

@@ -8,13 +8,14 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import com.msu.moo.mocks.MockSolution;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public class NonDominatedSetTest {
 
 
 	@Test
 	public void testAddingSolutionsThatAreDominatedAndNotAdded() {
-		NonDominatedSet s = new NonDominatedSet();
+		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,1d))));
 		assertEquals(1, s.size());
@@ -22,7 +23,7 @@ public class NonDominatedSetTest {
 	
 	@Test
 	public void testAddingSolutionsIndifferentAndAdded() {
-		NonDominatedSet s = new NonDominatedSet();
+		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(1d,0d))));
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,1d))));
 		assertEquals(2, s.size());
@@ -30,7 +31,7 @@ public class NonDominatedSetTest {
 	
 	@Test
 	public void testAddingSolutionsEqualAndNotAdded() {
-		NonDominatedSet s = new NonDominatedSet();
+		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
 		assertEquals(1, s.size());
@@ -38,7 +39,7 @@ public class NonDominatedSetTest {
 	
 	@Test
 	public void testAddingSolutionsThatDominatedCausesRemoving() {
-		NonDominatedSet s = new NonDominatedSet();
+		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(1d,0d))));
 		MockSolution sol = new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d)));
 		s.add(sol);

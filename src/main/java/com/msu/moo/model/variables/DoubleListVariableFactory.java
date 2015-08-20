@@ -1,4 +1,4 @@
-package com.msu.moo.variables;
+package com.msu.moo.model.variables;
 
 import java.util.ArrayList;
 import java.util.List;

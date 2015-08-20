@@ -1,6 +1,6 @@
 package com.msu.moo.model.interfaces;
 
-import com.msu.moo.model.NonDominatedSet;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public interface IAlgorithm<V extends IVariable<?>, P extends IProblem<V, P>> {
 	
@@ -10,7 +10,7 @@ public interface IAlgorithm<V extends IVariable<?>, P extends IProblem<V, P>> {
 	 * @param problem instance of the problem
 	 * @return NonDomintedSet which was calculated
 	 */
-	public NonDominatedSet run(P problem);
+	public NonDominatedSolutionSet run(P problem);
 
 
 

@@ -2,8 +2,8 @@ package com.msu.moo.util.sorting;
 
 import java.util.List;
 
-import com.msu.moo.model.NonDominatedSet;
-import com.msu.moo.model.Solution;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.solution.Solution;
 
 /**
  * This interface provides general sorting approach which means to
@@ -12,6 +12,6 @@ import com.msu.moo.model.Solution;
  */
 public interface NonDominatedSorting {
 	
-	List<NonDominatedSet> run(List<Solution> solutions);
+	List<NonDominatedSolutionSet> run(List<Solution> solutions);
 
 }

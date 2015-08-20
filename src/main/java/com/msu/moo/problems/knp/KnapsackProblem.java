@@ -49,6 +49,7 @@ public class KnapsackProblem implements IProblem<KnapsackVariable, KnapsackProbl
 	}
 
 
+
 	
 
 

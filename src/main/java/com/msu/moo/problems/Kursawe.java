@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.interfaces.IProblem;
-import com.msu.moo.variables.DoubleListVariable;
+import com.msu.moo.model.variables.DoubleListVariable;
 
 public class Kursawe implements IProblem<DoubleListVariable, Kursawe>{
 	
@@ -52,5 +52,7 @@ public class Kursawe implements IProblem<DoubleListVariable, Kursawe>{
 	public Evaluator<DoubleListVariable, Kursawe> getEvaluator() {
 		return new KursaweEvaluator();
 	}
+
+
 
 }

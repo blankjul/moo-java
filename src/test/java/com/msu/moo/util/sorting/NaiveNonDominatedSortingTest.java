@@ -9,8 +9,8 @@ import java.util.List;
 import org.junit.Test;
 
 import com.msu.moo.mocks.MockVariable;
-import com.msu.moo.model.NonDominatedSet;
-import com.msu.moo.model.Solution;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.solution.Solution;
 
 
 /**
@@ -25,7 +25,7 @@ public class NaiveNonDominatedSortingTest {
 		Solution s1 = new Solution(new MockVariable(), new ArrayList<Double>(Arrays.asList(1d,1d)));
 		Solution s2 = new Solution(new MockVariable(), new ArrayList<Double>(Arrays.asList(0d,0d)));
 		
-		List<NonDominatedSet> set = new NaiveNonDominatedSorting().run(new ArrayList<>(Arrays.asList(s1,s2)));
+		List<NonDominatedSolutionSet> set = new NaiveNonDominatedSorting().run(new ArrayList<>(Arrays.asList(s1,s2)));
 		
 		assertEquals(2, set.size());
 		assertEquals(s2,set.get(0).getSolutions().get(0));

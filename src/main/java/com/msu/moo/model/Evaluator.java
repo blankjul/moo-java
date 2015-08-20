@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.IVariable;
+import com.msu.moo.model.solution.Solution;
 
 /**
  * Additionally, the class provides evaluation counting and returns hashed

@@ -2,7 +2,7 @@ package com.msu.moo.comparator;
 
 import java.util.List;
 
-import com.msu.moo.model.Solution;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.util.Pair;
 
 /**
@@ -11,7 +11,7 @@ import com.msu.moo.util.Pair;
  * non-domination or equality.
  *
  */
-public class SolutionComparator {
+public class SolutionDominator {
 
 	/**
 	 * Check if the objective space is the same

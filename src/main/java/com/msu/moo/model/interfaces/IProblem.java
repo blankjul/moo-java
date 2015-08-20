@@ -18,6 +18,6 @@ public interface IProblem<V extends IVariable<?>, P extends IProblem<V, P>> {
 	 *         problem class.
 	 */
 	public Evaluator<V,P> getEvaluator();
-
+	
 
 }

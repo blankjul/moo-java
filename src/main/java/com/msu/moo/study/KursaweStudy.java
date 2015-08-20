@@ -1,10 +1,10 @@
 package com.msu.moo.study;
 
 import com.msu.moo.algorithms.RandomSearch;
-import com.msu.moo.model.NonDominatedSet;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.variables.DoubleListVariable;
+import com.msu.moo.model.variables.DoubleListVariableFactory;
 import com.msu.moo.problems.Kursawe;
-import com.msu.moo.variables.DoubleListVariable;
-import com.msu.moo.variables.DoubleListVariableFactory;
 
 public class KursaweStudy {
 
@@ -13,7 +13,7 @@ public class KursaweStudy {
 		Kursawe k = new Kursawe();
 		RandomSearch<DoubleListVariable, Kursawe> s = new RandomSearch<>(
 				new DoubleListVariableFactory(3, new double[] { -5, 5 }), 10000000L);
-		NonDominatedSet set = s.run(k);
+		NonDominatedSolutionSet set = s.run(k);
 		System.out.println(set);
 
 	}
