@@ -10,13 +10,14 @@ public class KnapsackVariable implements IVariable {
 
 	protected List<Boolean> plan = new ArrayList<>();
 	
-	public List<Boolean> getPlan() {
-		return plan;
-	}
-
 	public KnapsackVariable(List<Boolean> plan) {
 		super();
 		this.plan = plan;
+	}
+
+	@Override
+	public Object get() {
+		return plan;
 	}
 	
 	

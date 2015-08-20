@@ -51,6 +51,20 @@ public class NonDominatedSet {
 	}
 	
 	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Solution s : solutions) {
+			for(Double obj : s.getObjectives()) {
+				sb.append(obj);
+				sb.append(" ");
+			}
+			sb.append("\n");
+			
+		}
+		return sb.toString();
+	}
+	
+	
 	
 
 }

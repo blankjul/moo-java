@@ -37,28 +37,28 @@ public class Random {
 	/**
 	 * Create an Integer without range
 	 */
-	public int nextInt(int max) {
+	public Integer nextInt(int max) {
 		return r.nextInt(max);
 	}
 	
 	/**
 	 * Create an Integer in range
 	 */
-	public int nextInt(int min, int max) {
+	public Integer nextInt(int min, int max) {
 		return r.nextInt(max - min + 1) + min;
 	}
 
 	/**
 	 * Create a double value between 0 and 1.
 	 */
-	public double nextDouble() {
+	public Double nextDouble() {
 		return r.nextDouble();
 	}
 
 	/**
 	 * Create a double value in range
 	 */
-	public double nextDouble(double min, double max) {
+	public Double nextDouble(double min, double max) {
 		return min + (max - min) * r.nextDouble();
 	}
 
