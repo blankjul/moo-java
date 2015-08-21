@@ -51,7 +51,7 @@ public abstract class AbstractCrossover<T> {
 		List<Solution> result = new ArrayList<>();
 
 		for (IVariable var : vars) {
-			Solution s = eval.run(var);
+			Solution s = eval.run((V) var);
 			result.add(s);
 		}
 

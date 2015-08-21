@@ -1,11 +1,13 @@
 package com.msu.moo.algorithms;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
 import com.msu.moo.indicator.CrowdingIndicator;
 import com.msu.moo.indicator.NonDominatedRankIndicator;
 import com.msu.moo.model.Algorithm;
+import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.interfaces.IFactory;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.IVariable;
@@ -38,9 +40,11 @@ public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Algor
 
 	@Override
 	public NonDominatedSolutionSet run(P problem) {
+		
+		Evaluator<V, P> eval = problem.getEvaluator();
 
 		// initialize the population with populationSize
-		SolutionSet P = new SolutionSet(populationSize);
+		SolutionSet P = new SolutionSet(populationSize * 2);
 		for (int i = 0; i < populationSize; i++) {
 			P.add(problem.getEvaluator().run(factory.create()));
 		}
@@ -50,32 +54,46 @@ public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Algor
 
 		// if stopping condition false -> evaluations left -> start next
 		// generation
-		while (maxEvaluations > problem.getEvaluator().count()) {
+		while (maxEvaluations > eval.count()) {
 
 			// tournament selection
 			BinaryTournamentSelection bts = new BinaryTournamentSelection(P,
 					new RankAndCrowdingComparator(rank, crowding));
 
+			SolutionSet Q = new SolutionSet(populationSize);
+			
 			// create offspring population until size two times
-			while (P.size() <= populationSize * 2) {
+			while (Q.size() < populationSize) {
 
 				// crossover
-				List<Solution> offsprings = crossover.crossover(problem.getEvaluator(), bts.next(), bts.next());
+				List<IVariable> offsprings = crossover.crossover(bts.next().getVariable(), bts.next().getVariable());
 
 				// mutation
-				for (Solution offspring : offsprings) {
+				for (IVariable offspring : offsprings) {
 					if (Random.getInstance().nextDouble() < 0.5)
-						offspring = mutation.mutate(problem.getEvaluator(), offspring);
-					P.add(offspring);
+						offspring = mutation.mutate(offspring);
+					Q.add(eval.run(offspring));
 				}
 
 			}
+			
+			// merge parents and offsprings
+			P.addAll(Q);
 
 			rank = new NonDominatedRankIndicator().calculate(P);
 			crowding = new CrowdingIndicator().calculate(P);
 
 			// survival of the best population
 			P.sort(new RankAndCrowdingComparator(rank, crowding));
+			Collections.reverse(P);
+			
+			/*
+			for (Solution s : P) {
+				System.out.println(String.format("rank%s | crowding:%s", rank.get(s), crowding.get(s)));
+			}
+			System.out.println("----------------");
+			*/
+			
 			P = new SolutionSet(P.subList(0, populationSize));
 
 		}

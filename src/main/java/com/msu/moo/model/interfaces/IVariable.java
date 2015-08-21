@@ -20,4 +20,6 @@ public interface IVariable {
 	 * @return copy of the current variable
 	 */
 	public IVariable copy();
+	
+	
 }

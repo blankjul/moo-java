@@ -1,6 +1,9 @@
 package com.msu.moo.model.variables;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import com.msu.moo.model.interfaces.IVariable;
 
 public class DoubleListVariable extends ListVariable<Double>{
 
@@ -8,5 +11,9 @@ public class DoubleListVariable extends ListVariable<Double>{
 		super(list);
 	}
 
+	@Override
+	public IVariable copy() {
+		return new DoubleListVariable(new ArrayList<>(obj));
+	}
 	
 }

@@ -44,7 +44,7 @@ public abstract class AbstractMutation<T> {
 
 	public <V extends IVariable, P extends IProblem<V, P>> Solution mutate(Evaluator<V, P> eval, Solution a) {
 		IVariable var = mutate(a.getVariable());
-		return eval.run(var);
+		return eval.run((V) var);
 	}
 	
 	
