@@ -4,20 +4,20 @@ package com.msu.moo.model.interfaces;
  * Interface for any variable that could be used. 
  *
  */
-public interface IVariable<T> {
+public interface IVariable {
 	
 	/**
 	 * @return the variable by it self
 	 */
-	public T get();
+	public Object get();
 	
 	/**
 	 * Set the value for the variable
 	 */
-	public void set(T obj);
+	public void set(Object obj);
 	
 	/**
 	 * @return copy of the current variable
 	 */
-	public IVariable<T> copy();
+	public IVariable copy();
 }

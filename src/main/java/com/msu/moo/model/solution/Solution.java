@@ -18,12 +18,12 @@ public class Solution {
 	final private List<Double> objectives;
 
 	// ! variable immutable
-	final private IVariable<?> variable;
+	final private IVariable variable;
 
 	/**
 	 * Construct an immutable solution object
 	 */
-	public Solution(IVariable<?> variable, List<Double> objectives) {
+	public Solution(IVariable variable, List<Double> objectives) {
 		this.variable = variable;
 		this.objectives = objectives;
 	}
@@ -38,7 +38,7 @@ public class Solution {
 	/**
 	 * @return all variables
 	 */
-	public IVariable<?> getVariable() {
+	public IVariable getVariable() {
 		return variable;
 	}
 

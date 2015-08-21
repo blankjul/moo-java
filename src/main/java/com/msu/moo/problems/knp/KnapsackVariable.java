@@ -3,20 +3,18 @@ package com.msu.moo.problems.knp;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.moo.model.AbstractVariable;
 import com.msu.moo.model.interfaces.IVariable;
 
-public class KnapsackVariable implements IVariable<List<Boolean>> {
+public class KnapsackVariable extends AbstractVariable<List<Boolean>> {
 
-	protected List<Boolean> plan = new ArrayList<>();
-
-	public KnapsackVariable(List<Boolean> plan) {
-		super();
-		this.plan = plan;
+	public KnapsackVariable(List<Boolean> obj) {
+		super(obj);
 	}
 
 	@Override
-	public List<Boolean> get() {
-		return plan;
+	public IVariable copy() {
+		return new KnapsackVariable(new ArrayList<Boolean>(obj));
 	}
 
 }

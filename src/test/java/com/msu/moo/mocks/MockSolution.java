@@ -11,7 +11,7 @@ public class MockSolution extends Solution {
 		super(null, objectives);
 	}
 	
-	public MockSolution(IVariable<?> variable, List<Double> objectives) {
+	public MockSolution(IVariable variable, List<Double> objectives) {
 		super(variable, objectives);
 	}
 

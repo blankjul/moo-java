@@ -11,7 +11,7 @@ import com.msu.moo.model.Evaluator;
  * @param <T>
  *            variable as input
  */
-public interface IProblem<V extends IVariable<?>, P extends IProblem<V, P>> {
+public interface IProblem<V extends IVariable, P extends IProblem<V, P>> {
 
 	/**
 	 * @return the evaluator which is used to calculate the result for this

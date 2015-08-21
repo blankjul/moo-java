@@ -20,7 +20,7 @@ public class ListVariable<T> extends AbstractVariable<List<T>>{
 
 
 	@Override
-	public IVariable<List<T>> copy() {
+	public IVariable copy() {
 		return new ListVariable<>(new ArrayList<>(obj));
 	}
 	

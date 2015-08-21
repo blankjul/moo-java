@@ -13,7 +13,7 @@ import com.msu.moo.model.solution.Solution;
  * This only works if you override the hash function for you variable correctly!
  * 
  */
-public abstract class Evaluator<V extends IVariable<?>, P extends IProblem<V,P>>  {
+public abstract class Evaluator<V extends IVariable, P extends IProblem<V,P>>  {
 	
 	//! the problem which the evaluator should evaluate
 	protected P problem;
@@ -28,12 +28,22 @@ public abstract class Evaluator<V extends IVariable<?>, P extends IProblem<V,P>>
 	}
 
 
-	public Solution run(V variable) {
+	public Solution run(IVariable variable) {
 		// increase amount of evaluations
 		++numOfEvaluations;
+		
+		try { 
 			
-		// TODO: Hash the result value and return it directly if it fits!
-		return new Solution(variable, evaluate(problem, variable));
+			@SuppressWarnings("unchecked")
+			V varToEvaluate =  (V) variable;
+			
+			// TODO: Hash the result value and return it directly if it fits!
+			return new Solution(variable, evaluate(problem, varToEvaluate));
+			
+		} catch (Exception e) {
+			throw new RuntimeException("Could not evaluate variable. Wrong Type!");
+		}
+			
 	}
 	
 

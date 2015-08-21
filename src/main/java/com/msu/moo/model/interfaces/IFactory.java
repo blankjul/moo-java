@@ -6,7 +6,7 @@ package com.msu.moo.model.interfaces;
  *
  * @param <T> variable type
  */
-public interface IFactory<T extends IVariable<?>> {
+public interface IFactory<T extends IVariable> {
 	
 	/**
 	 * Create a new object from the class.

@@ -16,7 +16,7 @@ public class KnapsackEvaluator extends Evaluator<KnapsackVariable, KnapsackProbl
 
 	@Override
 	protected <T> List<Double> evaluate(KnapsackProblem problem, KnapsackVariable variable) {
-		List<Boolean> b = variable.plan;
+		List<Boolean> b = variable.get();
 		List<Item> items = problem.getItems();
 		if (b.size() != items.size())
 			throw new RuntimeException("Sizes of the varialbes are different " + b.size() + " != " + items.size());

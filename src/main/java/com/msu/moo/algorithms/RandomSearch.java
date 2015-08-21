@@ -8,7 +8,7 @@ import com.msu.moo.model.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 
-public class RandomSearch<V extends IVariable<?>, P extends IProblem<V,P>> extends Algorithm<V,P>{
+public class RandomSearch<V extends IVariable, P extends IProblem<V,P>> extends Algorithm<V,P>{
 
 
 	public RandomSearch(IFactory<V> factory, long maxEvaluations) {

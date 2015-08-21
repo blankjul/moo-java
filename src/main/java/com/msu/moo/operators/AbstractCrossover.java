@@ -18,35 +18,46 @@ import com.msu.moo.model.solution.Solution;
  */
 public abstract class AbstractCrossover<T> {
 
-	public List<IVariable<T>> crossover(IVariable<T> a, IVariable<T> b) {
+	@SuppressWarnings("unchecked")
+	public List<IVariable> crossover(IVariable a, IVariable b) {
 
 		// TODO: This solution is very ugly. could be improved but all crossover
 		// subclasses has to be changed.
+		try {
+			
+			T first = (T) a.get();
+			T second = (T) b.get();
+			List<T> offspring = crossover_(first,second);
+			
+			List<IVariable> result = new ArrayList<>();
+			for (T o : offspring) {
+				IVariable tmp = a.copy();
+				tmp.set(o);
+				result.add(tmp);
+			}
 
-		List<T> genomes = crossover_(a.get(), b.get());
-		List<IVariable<T>> result = new ArrayList<>();
-
-		for (T g : genomes) {
-			IVariable<T> tmp = a.copy();
-			tmp.set(g);
-			result.add(tmp);
+			return result;
+			
+		} catch (Exception e){
+			throw new RuntimeException("Crossover could not be performed. Wrong IVariable types!");
 		}
 
-		return result;
 	}
 
-	public <V extends IVariable<?>, P extends IProblem<V, P>> List<Solution> crossover(Evaluator<V, P> eval, Solution a,
+	public <V extends IVariable, P extends IProblem<V, P>> List<Solution> crossover(Evaluator<V, P> eval, Solution a,
 			Solution b) {
 
-		List<IVariable<T>> vars = crossover(a.getVariable(), b.getVariable());
+		List<IVariable> vars = crossover(a.getVariable(), b.getVariable());
 		List<Solution> result = new ArrayList<>();
 
-		for (IVariable<T> var : vars) {
-			Solution s = new Solution(var, eval.run(var));
+		for (IVariable var : vars) {
+			Solution s = eval.run(var);
+			result.add(s);
 		}
 
 		return result;
 	}
+	
 
 	abstract protected List<T> crossover_(T a, T b);
 

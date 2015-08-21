@@ -11,6 +11,17 @@ public class NonDominatedSolutionSet {
 	//! solution comparator for testing domination
 	protected SolutionDominator cmp = new SolutionDominator();
 	
+	
+	public NonDominatedSolutionSet() {
+		super();
+	}
+
+
+	public NonDominatedSolutionSet(List<Solution> solutions) {
+		for (Solution s : solutions) add(s);
+	}
+
+
 	public boolean add(Solution solutionToAdd) {
 		
 		// all the solutions which are dominated by new one

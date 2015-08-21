@@ -1,5 +1,6 @@
 package com.msu.moo.algorithms;
 
+import java.util.List;
 import java.util.Map;
 
 import com.msu.moo.indicator.CrowdingIndicator;
@@ -14,23 +15,25 @@ import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.AbstractCrossover;
 import com.msu.moo.operators.AbstractMutation;
 import com.msu.moo.operators.selection.BinaryTournamentSelection;
+import com.msu.moo.util.Random;
 import com.msu.moo.util.comparator.RankAndCrowdingComparator;
 
-public class NSGAII<V extends IVariable<?>, P extends IProblem<V, P>> extends Algorithm<V, P> {
+public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Algorithm<V, P> {
 
 	// ! size of the whole Population
 	protected int populationSize = 100;
-	
-	protected double probMutation = 0.2;
-	
-	protected AbstractCrossover<IVariable<?>> crossover;
-	
-	protected AbstractMutation<IVariable<?>> mutation;
-	
-	
 
-	public NSGAII(IFactory<V> factory, long maxEvaluations) {
+	protected double probMutation = 0.2;
+
+	protected AbstractCrossover<?> crossover;
+
+	protected AbstractMutation<?> mutation;
+
+	public NSGAII(IFactory<V> factory, long maxEvaluations, AbstractCrossover<?> crossover,
+			AbstractMutation<?> mutation) {
 		super(factory, maxEvaluations);
+		this.mutation = mutation;
+		this.crossover = crossover;
 	}
 
 	@Override
@@ -49,26 +52,35 @@ public class NSGAII<V extends IVariable<?>, P extends IProblem<V, P>> extends Al
 		// generation
 		while (maxEvaluations > problem.getEvaluator().count()) {
 
-			// create offspring population using binary tournament selection
-			SolutionSet Q = new SolutionSet(populationSize);
-			RankAndCrowdingComparator cmp = new RankAndCrowdingComparator(rank, crowding);
-			BinaryTournamentSelection bts = new BinaryTournamentSelection(P, cmp);
-			for (int i = 0; i < populationSize; i++) {
-				//List<Solution> offsprings = crossover.crossover(bts.next(), bts.next());
-				
+			// tournament selection
+			BinaryTournamentSelection bts = new BinaryTournamentSelection(P,
+					new RankAndCrowdingComparator(rank, crowding));
+
+			// create offspring population until size two times
+			while (P.size() <= populationSize * 2) {
+
+				// crossover
+				List<Solution> offsprings = crossover.crossover(problem.getEvaluator(), bts.next(), bts.next());
+
+				// mutation
+				for (Solution offspring : offsprings) {
+					if (Random.getInstance().nextDouble() < 0.5)
+						offspring = mutation.mutate(problem.getEvaluator(), offspring);
+					P.add(offspring);
+				}
+
 			}
+
+			rank = new NonDominatedRankIndicator().calculate(P);
+			crowding = new CrowdingIndicator().calculate(P);
+
+			// survival of the best population
+			P.sort(new RankAndCrowdingComparator(rank, crowding));
+			P = new SolutionSet(P.subList(0, populationSize));
 
 		}
 
-		// Create the offspring population with crossover and mutation
-
-		// Calculate the fronts
-
-		// choose all except for last calculate Crowding
-
-		// fill up
-
-		return null;
+		return new NonDominatedSolutionSet(P);
 	}
 
 }
