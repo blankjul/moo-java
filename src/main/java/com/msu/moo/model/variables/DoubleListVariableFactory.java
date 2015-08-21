@@ -15,7 +15,6 @@ public class DoubleListVariableFactory implements IFactory<DoubleListVariable>{
 	protected double[] range = new double[]{ Double.MIN_VALUE, Double.MAX_VALUE};
 		
 
-	
 	public DoubleListVariableFactory(int length) {
 		super();
 		this.length = length;
@@ -27,9 +26,6 @@ public class DoubleListVariableFactory implements IFactory<DoubleListVariable>{
 		this.length = length;
 		this.range = range;
 	}
-
-
-
 
 
 	@Override
