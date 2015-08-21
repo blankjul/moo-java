@@ -31,7 +31,6 @@ public class Kursawe implements IProblem<DoubleListVariable, Kursawe>{
 		    	new ArrayList<Double>(Arrays.asList(Double.MAX_VALUE, Double.MAX_VALUE));
 		    }
 		    
-		    
 		    fx[0] = 0.0;
 		    for (int i = 0; i < var.get().size() - 1; i++) {
 		      xi = x[i] * x[i];

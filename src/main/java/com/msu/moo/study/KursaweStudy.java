@@ -12,7 +12,7 @@ public class KursaweStudy {
 
 		Kursawe k = new Kursawe();
 		RandomSearch<DoubleListVariable, Kursawe> s = new RandomSearch<>(
-				new DoubleListVariableFactory(3, new double[] { -5, 5 }), 10000000L);
+				new DoubleListVariableFactory(3, new double[] { -5, 5 }), 10000L);
 		NonDominatedSolutionSet set = s.run(k);
 		System.out.println(set);
 
