@@ -19,19 +19,19 @@ import com.msu.moo.model.solution.Solution;
 public abstract class AbstractCrossover<T> {
 
 	@SuppressWarnings("unchecked")
-	public List<IVariable> crossover(IVariable a, IVariable b) {
+	public List<IVariable> crossover(Object a, Object b) {
 
 		// TODO: This solution is very ugly. could be improved but all crossover
 		// subclasses has to be changed.
 		try {
 			
-			T first = (T) a.get();
-			T second = (T) b.get();
+			T first = (T) ((IVariable)a).get();
+			T second = (T) ((IVariable)b).get();
 			List<T> offspring = crossover_(first,second);
 			
 			List<IVariable> result = new ArrayList<>();
 			for (T o : offspring) {
-				IVariable tmp = a.copy();
+				IVariable tmp = ((IVariable)a).copy();
 				tmp.set(o);
 				result.add(tmp);
 			}
@@ -51,7 +51,7 @@ public abstract class AbstractCrossover<T> {
 		List<Solution> result = new ArrayList<>();
 
 		for (IVariable var : vars) {
-			Solution s = eval.run((V) var);
+			Solution s = eval.run(var);
 			result.add(s);
 		}
 
