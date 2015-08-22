@@ -2,7 +2,7 @@ package com.msu.moo.model.interfaces;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
-public interface IAlgorithm<V extends IVariable, P extends IProblem<V, P>> {
+public interface IAlgorithm<P extends IProblem<?, P>> {
 	
 	
 	/**

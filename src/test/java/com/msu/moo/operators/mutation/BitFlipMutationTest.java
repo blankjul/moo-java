@@ -5,15 +5,26 @@ import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import com.msu.moo.operators.mutation.BitFlipMutation;
-
 public class BitFlipMutationTest {
 	
-	BitFlipMutation bitMutation = new BitFlipMutation();
+	private class BitFlipMutationMock extends BitFlipMutation {
+		public BitFlipMutationMock() {
+			super();
+		}
+		public BitFlipMutationMock(Double probability) {
+			super(probability);
+		}
+		public void mutate_(List<Boolean> l) {
+			super.mutate_(l);
+		}
+	}
+	
+	BitFlipMutationMock bitMutation = new BitFlipMutationMock();
 
 	private ArrayList<Boolean> l;
 	private ArrayList<Boolean> org;
@@ -26,8 +37,8 @@ public class BitFlipMutationTest {
 
 	@Test
 	public void testFlipAllBits() {
-		bitMutation = new BitFlipMutation(1.0);
-		bitMutation.mutate(l);
+		bitMutation = new BitFlipMutationMock(1.0);
+		bitMutation.mutate_(l);
 		assertEquals(l, new ArrayList<>(Arrays.asList(true, true, true, false)));
 	}
 	
@@ -35,13 +46,13 @@ public class BitFlipMutationTest {
 	
 	@Test
 	public void testLargeArrayFlipAtLeastOne() {
-		bitMutation = new BitFlipMutation(0.2);
+		bitMutation = new BitFlipMutationMock(0.2);
 		l = new ArrayList<>();
 		for (int i = 0; i < 2000; i++) {
 			l.add(false);
 		}
 		org = new ArrayList<>(l);
-		bitMutation.mutate(l);
+		bitMutation.mutate_(l);
 		assertNotEquals(l, org);
 	}
 	

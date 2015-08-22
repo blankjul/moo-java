@@ -1,6 +1,7 @@
 package com.msu.moo.operators.mutation;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,11 +10,22 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.msu.moo.operators.mutation.SwapMutation;
-
 public class SwapMutationTest {
 	
-	SwapMutation<List<Integer>> swapMutation = new SwapMutation<>();
+	private class SwapMutationMock<T> extends SwapMutation<T> {
+		
+		public SwapMutationMock() {
+			super();
+		}
+		public SwapMutationMock(Integer minIndex) {
+			super(minIndex);
+		}
+		public void mutate_(List<T> l) {
+			super.mutate_(l);
+		}
+	}
+	
+	SwapMutationMock<Integer> swapMutation = new SwapMutationMock<>();
 
 	private ArrayList<Integer> l;
 	private ArrayList<Integer> org;
@@ -26,16 +38,16 @@ public class SwapMutationTest {
 
 	@Test
 	public void testSwapByPositions() {
-		for (int i = 0; i < 20; i++) swapMutation.mutate(l);
+		for (int i = 0; i < 20; i++) swapMutation.mutate_(l);
 		assertNotEquals(l, org);
 	}
 	
 	@Test
 	public void testSwapNotTheFirstPosition() {
-		swapMutation = new SwapMutation<>(1);
+		swapMutation = new SwapMutationMock<>(1);
 		for (int i = 0; i < 20; i++) {
 			l = new ArrayList<>(org);
-			swapMutation.mutate(l);
+			swapMutation.mutate_(l);
 			assertEquals(l.get(0), new Integer(0));
 		}
 

@@ -13,19 +13,7 @@ import com.msu.moo.model.solution.Solution;
  */
 public abstract class AbstractMutation<T> {
 
-	@SuppressWarnings("unchecked")
-	public void mutate(Object obj) {
-		T element = null;
-		
-		try {
-			element = (T) obj;
-	    } catch (ClassCastException e) {
-	    	throw new RuntimeException("This Mutation is not allowed for this variable!");
-	    }
-		
-		mutate_(element);
-	}
-	
+
 	public IVariable mutate(IVariable a) {
 
 		try {
