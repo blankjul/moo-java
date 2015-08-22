@@ -14,7 +14,7 @@ public abstract class Algorithm<V extends IVariable, P extends IProblem<V,P>> im
 	
 	//! maximal number of evaluations
 	protected long maxEvaluations;
-
+	
 	public Algorithm(IFactory<V> factory, long maxEvaluations) {
 		super();
 		this.factory = factory;

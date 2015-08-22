@@ -18,7 +18,7 @@ public class Kursawe implements IProblem<DoubleListVariable, Kursawe>{
 		}
 
 		@Override
-		protected <T> List<Double> evaluate(Kursawe problem, DoubleListVariable var) {
+		protected <T> List<Double> evaluate(DoubleListVariable var) {
 			
 			double aux, xi, xj;
 		    double[] fx = new double[2];

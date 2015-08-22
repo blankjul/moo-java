@@ -27,26 +27,24 @@ public abstract class Evaluator<V extends IVariable, P extends IProblem<V, P>> {
 	}
 
 	public Solution run(IVariable variable) {
+
+		// TODO: Hash the result value and return it directly if it fits!
+
 		// increase amount of evaluations
 		++numOfEvaluations;
-		
-		try {
-			
-		} catch (Exception e) {
-			 
-		}
-		
+
 		@SuppressWarnings("unchecked")
 		V v = (V) variable;
-		
-		// TODO: Hash the result value and return it directly if it fits!
-		return new Solution(variable, evaluate(problem, v));
+
+		List<Double> objectives = evaluate(v);
+		return new Solution(variable, objectives);
+
 	}
 
 	public long count() {
 		return numOfEvaluations;
 	}
 
-	abstract protected <T> List<Double> evaluate(P problem, V variable);
+	abstract protected <T> List<Double> evaluate(V variable);
 
 }

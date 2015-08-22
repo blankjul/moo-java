@@ -10,6 +10,7 @@ import com.msu.moo.model.variables.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SinglePointCrossover;
 import com.msu.moo.operators.mutation.PolynomialMutation;
 import com.msu.moo.problems.Kursawe;
+import com.msu.moo.visualization.ScatterPlot;
 
 public class KursaweStudy {
 
@@ -33,6 +34,12 @@ public class KursaweStudy {
 				new DoubleListVariableFactory(3, new double[] { -5, 5 }), 1000000L, spc, sm);
 		NonDominatedSolutionSet set2 = nsgaII.run(k);
 		System.out.println(set2);
+		
+		ScatterPlot sp = new ScatterPlot("Kursawe", "X", "Y");
+		sp.add(set.getSolutions(), "RANDOM");
+		sp.add(set2.getSolutions(), "NSGAII");
+		sp.show();
+		
 	}
 	
 

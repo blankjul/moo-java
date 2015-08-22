@@ -15,7 +15,7 @@ public class KnapsackEvaluator extends Evaluator<KnapsackVariable, KnapsackProbl
 
 
 	@Override
-	protected <T> List<Double> evaluate(KnapsackProblem problem, KnapsackVariable variable) {
+	protected <T> List<Double> evaluate(KnapsackVariable variable) {
 		List<Boolean> b = variable.get();
 		List<Item> items = problem.getItems();
 		if (b.size() != items.size())

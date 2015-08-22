@@ -6,7 +6,7 @@ import java.util.List;
 public class NonDominatedSolutionSet {
 	
 	//! list which contains all the solutions
-	protected List<Solution> solutions = new ArrayList<>();
+	protected SolutionSet solutions = new SolutionSet();
 	
 	//! solution comparator for testing domination
 	protected SolutionDominator cmp = new SolutionDominator();
@@ -55,7 +55,7 @@ public class NonDominatedSolutionSet {
 	/**
 	 * @return all the solutions in a list!
 	 */
-	public List<Solution> getSolutions() {
+	public SolutionSet getSolutions() {
 		return solutions;
 	}
 	
