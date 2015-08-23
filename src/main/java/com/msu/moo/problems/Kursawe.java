@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.model.Evaluator;
+import com.msu.moo.model.AbstractEvaluator;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.variables.DoubleListVariable;
 
 public class Kursawe implements IProblem<DoubleListVariable, Kursawe>{
 	
 
-	private class KursaweEvaluator extends Evaluator<DoubleListVariable, Kursawe> {
+	private class KursaweEvaluator extends AbstractEvaluator<DoubleListVariable, Kursawe> {
 
 		public KursaweEvaluator(Kursawe problem) {
 			super(problem);
@@ -52,7 +52,7 @@ public class Kursawe implements IProblem<DoubleListVariable, Kursawe>{
 	
 	
 	@Override
-	public Evaluator<DoubleListVariable, Kursawe> getEvaluator() {
+	public AbstractEvaluator<DoubleListVariable, Kursawe> getEvaluator() {
 		return new KursaweEvaluator(this);
 	}
 

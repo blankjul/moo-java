@@ -1,6 +1,6 @@
 package com.msu.moo.model.interfaces;
 
-import com.msu.moo.model.Evaluator;
+import com.msu.moo.model.AbstractEvaluator;
 
 /**
  * This interface defines the values of a problem.
@@ -17,7 +17,7 @@ public interface IProblem<V extends IVariable, P extends IProblem<V, P>> {
 	 * @return the evaluator which is used to calculate the result for this
 	 *         problem class.
 	 */
-	public Evaluator<V,P> getEvaluator();
+	public AbstractEvaluator<V,P> getEvaluator();
 	
 
 }

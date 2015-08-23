@@ -12,6 +12,12 @@ public interface IAlgorithm<P extends IProblem<?, P>> {
 	 */
 	public NonDominatedSolutionSet run(P problem);
 
+	
+	/**
+	 * Execute the algorithm multiple times
+	 * @return NonDomintedSet median result of all iterations
+	 */
+	public NonDominatedSolutionSet run(P problem, int iteration);
 
 
 }

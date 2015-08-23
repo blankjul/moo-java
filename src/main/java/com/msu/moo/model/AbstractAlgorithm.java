@@ -11,7 +11,7 @@ import com.msu.moo.model.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 
-public abstract class Algorithm<V extends IVariable, P extends IProblem<V,P>> implements IAlgorithm<P> {
+public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem<V,P>> implements IAlgorithm<P> {
 	
 
 	//! factory for producing new variables
@@ -20,7 +20,7 @@ public abstract class Algorithm<V extends IVariable, P extends IProblem<V,P>> im
 	//! maximal number of evaluations
 	protected long maxEvaluations;
 	
-	public Algorithm(IFactory<V> factory, long maxEvaluations) {
+	public AbstractAlgorithm(IFactory<V> factory, long maxEvaluations) {
 		super();
 		this.factory = factory;
 		this.maxEvaluations = maxEvaluations;

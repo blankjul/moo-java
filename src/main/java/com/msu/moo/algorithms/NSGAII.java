@@ -4,8 +4,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.model.Algorithm;
-import com.msu.moo.model.Evaluator;
+import com.msu.moo.model.AbstractAlgorithm;
+import com.msu.moo.model.AbstractEvaluator;
 import com.msu.moo.model.interfaces.IFactory;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.IVariable;
@@ -20,7 +20,7 @@ import com.msu.moo.util.comparator.RankAndCrowdingComparator;
 import com.msu.moo.util.measures.CrowdingIndicator;
 import com.msu.moo.util.measures.NonDominatedRankIndicator;
 
-public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Algorithm<V, P> {
+public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends AbstractAlgorithm<V, P> {
 
 	// ! size of the whole Population
 	protected int populationSize = 100;
@@ -41,7 +41,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Algor
 	@Override
 	public NonDominatedSolutionSet run(P problem) {
 		
-		Evaluator<V, P> eval = problem.getEvaluator();
+		AbstractEvaluator<V, P> eval = problem.getEvaluator();
 
 		// initialize the population with populationSize
 		SolutionSet P = new SolutionSet(populationSize * 2);

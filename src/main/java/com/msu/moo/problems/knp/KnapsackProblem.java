@@ -2,7 +2,7 @@ package com.msu.moo.problems.knp;
 
 import java.util.ArrayList;
 
-import com.msu.moo.model.Evaluator;
+import com.msu.moo.model.AbstractEvaluator;
 import com.msu.moo.model.interfaces.IProblem;
 
 /**
@@ -44,7 +44,7 @@ public class KnapsackProblem implements IProblem<KnapsackVariable, KnapsackProbl
 
 
 	@Override
-	public Evaluator<KnapsackVariable, KnapsackProblem> getEvaluator() {
+	public AbstractEvaluator<KnapsackVariable, KnapsackProblem> getEvaluator() {
 		return new KnapsackEvaluator(this);
 	}
 

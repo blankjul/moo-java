@@ -13,7 +13,7 @@ import com.msu.moo.model.solution.Solution;
  * This only works if you override the hash function for you variable correctly!
  * 
  */
-public abstract class Evaluator<V extends IVariable, P extends IProblem<V, P>> {
+public abstract class AbstractEvaluator<V extends IVariable, P extends IProblem<V, P>> {
 
 	// ! the problem which the evaluator should evaluate
 	protected P problem;
@@ -21,7 +21,7 @@ public abstract class Evaluator<V extends IVariable, P extends IProblem<V, P>> {
 	// ! number of evaluations so far
 	protected long numOfEvaluations = 0;
 
-	public Evaluator(P problem) {
+	public AbstractEvaluator(P problem) {
 		super();
 		this.problem = problem;
 	}

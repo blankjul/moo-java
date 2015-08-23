@@ -32,8 +32,6 @@ public class EmpiricalAttainmentFunction {
 			stdin.flush();
 			stdin.close();
 			
-			System.out.println(command);
-			
 			String out = FonsecaUtil.fromStream(p.getInputStream());
 			
 			// for each line at the results

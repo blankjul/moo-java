@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 
-import com.msu.moo.model.Evaluator;
+import com.msu.moo.model.AbstractEvaluator;
 
-public class KnapsackEvaluator extends Evaluator<KnapsackVariable, KnapsackProblem> {
+public class KnapsackEvaluator extends AbstractEvaluator<KnapsackVariable, KnapsackProblem> {
 
 	public KnapsackEvaluator(KnapsackProblem problem) {
 		super(problem);
