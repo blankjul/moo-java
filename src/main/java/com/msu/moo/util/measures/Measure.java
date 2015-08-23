@@ -1,4 +1,4 @@
-package com.msu.moo.indicator;
+package com.msu.moo.util.measures;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import com.msu.moo.model.solution.SolutionSet;
  *
  * @param <T> type of the result of indicator
  */
-public interface Indicator<T> {
+public interface Measure<T> {
 	
 	Map<Solution, T> calculate(SolutionSet solutions);
 

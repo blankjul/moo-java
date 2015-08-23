@@ -4,10 +4,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.msu.moo.ExampleSolutionSet;
-import com.msu.moo.indicator.CrowdingIndicator;
-import com.msu.moo.indicator.NonDominatedRankIndicator;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.comparator.RankAndCrowdingComparator;
+import com.msu.moo.util.measures.CrowdingIndicator;
+import com.msu.moo.util.measures.NonDominatedRankIndicator;
 
 public class BinaryTournamentSelectionTest {
 	

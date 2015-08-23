@@ -1,4 +1,4 @@
-package com.msu.moo.indicator;
+package com.msu.moo.util.measures;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.sorting.NaiveNonDominatedSorting;
 import com.msu.moo.util.sorting.NonDominatedSorting;
 
-public class NonDominatedRankIndicator implements Indicator<Integer>{
+public class NonDominatedRankIndicator implements Measure<Integer>{
 
 	//! NonDominatedSorting that is used for caclulating the rank
 	NonDominatedSorting sort = new NaiveNonDominatedSorting();

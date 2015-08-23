@@ -4,8 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.indicator.CrowdingIndicator;
-import com.msu.moo.indicator.NonDominatedRankIndicator;
 import com.msu.moo.model.Algorithm;
 import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.interfaces.IFactory;
@@ -19,6 +17,8 @@ import com.msu.moo.operators.AbstractMutation;
 import com.msu.moo.operators.selection.BinaryTournamentSelection;
 import com.msu.moo.util.Random;
 import com.msu.moo.util.comparator.RankAndCrowdingComparator;
+import com.msu.moo.util.measures.CrowdingIndicator;
+import com.msu.moo.util.measures.NonDominatedRankIndicator;
 
 public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Algorithm<V, P> {
 

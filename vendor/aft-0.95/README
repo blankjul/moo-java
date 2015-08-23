@@ -1,0 +1,216 @@
+
+Attainment Function Tools
+-------------------------
+
+The empirical first-order attainment function (EAF) is used to assess the
+performance of stochastic multiobjective optimisers such as multiobjective
+evolutionary algorithms [3].  It is an estimator for the first-order
+attainment function, which provides information about the location and, to
+some extent, the variability of the random sets of non-dominated objective
+vectors produced by such optimisers when applied to given problem instances.
+
+A program to compute the EAF from non-dominated sets of two or
+three-dimensional objective vectors is provided.  It is a C implementation
+of the dimension-sweep algorithms proposed in [1].  In the two-objective
+case, it runs in asymptotically optimal Θ(m log m+nm) time, where m is the
+total number of input points and n is the number of input sets.  In the
+three-objective case, the time complexity is O(n²m log m).
+
+Also provided is a program to perform statistical hypothesis tests based on
+empirical first or second-order attainment functions, as described in [4]. 
+It uses randomisation to estimate the critical value for a two-sample,
+two-sided Kolmogorov-Smirnov-like test at a given significance level.  If
+the null-hypothesis can be rejected at that significance level, p-value
+estimates are returned as well.  The two samples are implicitly assumed to
+have the same size.
+
+------------
+License
+------------
+
+This software is Copyright © 2011 Andreia P. Guerreiro, Carlos M. Fonseca,
+Manuel López-Ibáñez and Luís Paquete.
+
+This program is free software. You can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the Free
+Software Foundation; either version 2 of the License, or (at your option)
+any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+more details.
+
+Appropriate reference to this software should be made when describing
+research in which it played a substantive role, so that it may be replicated
+and verified by others.  The EAF computation problem and the algorithms
+which this software implements are described in detail in [1].
+
+------------
+Download
+------------
+
+The latest version of this software may be downloaded from
+http://eden.dei.uc.pt/~cmfonsec/software.html
+
+------------
+Building
+------------
+
+In GNU/Linux, the program can be compiled from source by running make.  We
+recommend that you compile it specifically for your architecture using GCC's
+-march= option, since this should reduce computation time.  You can use the
+Makefile provided to do it.  For example, for an Intel Pentium 4
+architecture you would use the command:
+
+make arch=pentium4
+
+Please check the GCC documentation for the names of the architectures
+supported by your version of GCC.
+
+In Windows, the program may be compiled using either the mingw32 compiler
+suite and mingw32-make or the cygwin environment.
+
+------------
+Usage
+------------
+
+To compute the empirical attainment function from a number of point sets,
+you should type:
+
+./eaf inputFile
+
+where inputFile should be a text file containing the input sets, one point
+per line, with point coordinates separated by spaces or tabs.  Different
+sets should be separated by blank lines or lines starting with a #.
+
+The program will return one set of points per attainment level. Each output
+set is separated from the next set by a blank line.  As long as option -l is
+not passed on the command line (see below), the first set represents level
+1, the second represents level 2 and so on.
+
+Additionally you can indicate a file to which the output should be written
+by using the option -o followed by the name of the output file, for example:
+
+./eaf -o outputFile inputFile
+
+It is also possible to provide a file name such as "outputFile-%d.dat" or
+"outputFile-%02d.dat", in order to write each level separately to its own
+file.  In that case, the number of the attainment level is identified in the
+file name.  For example:
+
+./eaf -o outputFile-%d.dat inputFile
+
+In this example, n files will be created, where n is the number of input
+sets.  The files created will have the following names:
+
+outputFile-1.dat
+outputFile-2.dat
+...
+outputFile-n.dat
+
+The program also recognises option -l, which is used to specify which
+attainment levels should be printed.  The levels are numbered from 1 to n,
+where n is the number of input sets.  Level numbers should be separated by a
+comma, ',', and may also be specified as a range, with '-'.  For example:
+
+./eaf -l 1,3,5-8,10 inputFile
+
+In this case, the output levels will be the levels 1,3,5,6,7,8 and 10. 
+Moreover, if the output is sent to a single file or to the standard output,
+levels are printed in the order specified by the -l option.
+
+For additional options, please use:
+
+./eaf -h
+
+
+------------
+Advanced usage
+------------
+
+Some support for EAF-based comparison of multiobjective optimiser outcomes
+is also provided.  To compare the outcomes of two algorithms A and B using a
+two-sample two-sided Kolmogorov-Smirnov-like hypothesis test based on the
+empirical attainment function, as proposed in [4], the joint EAF needs to be
+computed first.  The test procedure operates on the attainment indicator
+values at the joint-EAF points, which can be obtained with the command:
+
+./eaf -i indicatorFile inputFileA inputFileB
+ 
+inputFileA and inputFileB should contain the results obtained with algorithm
+A and the results obtained with algorithm B, respectively.  The number of
+sets in each file should be the same, although set sizes may vary.
+
+Then, run the test:
+
+./eaf-test indicatorFile
+
+The significance level of the test is set to 0.05 by default, but a
+different value may be specified using option -a.  For example:
+
+./eaf-test -a 0.01 indicatorFile
+
+The number of random permutations used to estimate the critical value is set
+using option -p (default: 10000).  In addition, the seed of the random
+number generator may be set using option -s followed by a positive integer.
+
+Finally,
+
+./eaf-test -2 indicatorFile
+
+will perform an empirical second-order attainment function based test. These
+tests will typically take *much* longer to run.  You may speed up the
+process, sometimes quite considerably, by eliminating duplicate rows in
+indicatorFile.  Under Unix, this can be easily accomplished by:
+
+sort -u indicatorFile | ./eaf-test -2 
+
+Finally, the EAF output points and the attainment indicator values at those
+points contain all the information needed to produce graphical
+representations of the EAF and of EAF differences.  To see some of the
+possibilities, please check out the EAF Graphical Tools on
+http://iridia.ulb.ac.be/~manuel/eaftools
+
+---------------------------------
+References and related literature
+---------------------------------
+
+[1] C. M. Fonseca, A. P. Guerreiro, M. López-Ibáñez, and L. Paquete, "On the
+    computation of the empirical attainment function," in Evolutionary
+    Multi-Criterion Optimization. Sixth International Conference, EMO 2011
+    (R. H. C. Takahashi et al., eds.), vol. 6576 of Lecture Notes in Computer
+    Science, pp. 106-120, Berlin: Springer, 2011. To appear.
+
+[2] Manuel López-Ibáñez, Luís Paquete, and Thomas Stützle, "Exploratory
+    analysis of stochastic local search algorithms in biobjective optimization,"
+    in Experimental Methods for the Analysis of Optimization Algorithms
+    (T. Bartz-Beielstein, M. Chiarandini, L. Paquete, and M. Preuss, eds.),
+    ch. 9, pp. 209-222, Springer Berlin Heidelberg, 2010.
+
+[3] V. Grunert da Fonseca and C. M. Fonseca, "The attainment-function approach
+    to stochastic multiobjective optimizer assessment and comparison," in
+    Experimental Methods for the Analysis of Optimization Algorithms
+    (T. Bartz-Beielstein, M. Chiarandini, L. Paquete, and M. Preuss, eds.),
+    ch. 5, pp. 103-130, Springer Berlin Heidelberg, 2010.
+
+[4] C. M. Fonseca, V. Grunert da Fonseca, and L. Paquete, "Exploring the
+    performance of stochastic multiobjective optimisers with the second-order
+    attainment function," in Evolutionary Multi-Criterion Optimization. Third
+    International Conference, EMO 2005 (C. A. Coello Coello, A. Hernández
+    Aguirre, and E. Zitzler, eds.), vol. 3410 of Lecture Notes in Computer
+    Science, pp. 250-264, Berlin: Springer, 2005.
+
+[5] V. Grunert da Fonseca, C. M. Fonseca, and A. O. Hall, "Inferential
+    performance assessment of stochastic optimisers and the attainment
+    function," in  Evolutionary Multi-Criterion Optimization. First
+    International Conference, EMO 2001 (E. Zitzler, K. Deb, L. Thiele,
+    C. A. Coello Coello, and D. Corne, eds.), vol. 1993 of Lecture Notes in
+    Computer Science, pp. 213-225, Berlin: Springer, 2001.
+
+[6] C. M. Fonseca and P. J. Fleming, "On the performance assessment and
+    comparison of stochastic multiobjective optimizers," in Parallel Problem
+    Solving from Nature - PPSN IV (H.-M. Voigt, W. Ebeling, I. Rechenberg,
+    and H.-P. Schwefel, eds.), vol. 1141 of Lecture Notes in Computer Science,
+    pp. 584-593, Berlin: Springer, 1996.
+
