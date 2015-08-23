@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.model.interfaces.IVariable;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionSet;
 
 public class MockSolution extends Solution {
 
@@ -18,8 +18,8 @@ public class MockSolution extends Solution {
 	}
 	
 	
-	public static SolutionSet create(Double[][] d) {
-		SolutionSet s = new SolutionSet();
+	public static NonDominatedSolutionSet create(Double[][] d) {
+		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
 		for (int i = 0; i < d.length; i++) {
 			List<Double> l = new ArrayList<>();
 			for (int j = 0; j < d[i].length; j++) {

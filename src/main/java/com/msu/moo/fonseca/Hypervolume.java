@@ -5,16 +5,16 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
-import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public class Hypervolume {
 
 	
-	public Double calculate(SolutionSet set) {
+	public Double calculate(NonDominatedSolutionSet set) {
 		return calculate(set, null);
 	}
 	
-	public Double calculate(SolutionSet set, List<Double> referencePoint) {
+	public Double calculate(NonDominatedSolutionSet set, List<Double> referencePoint) {
 
 		Double hv = null;
 		
@@ -52,10 +52,10 @@ public class Hypervolume {
 	}
 
 	
-	protected String getCommand(SolutionSet set) {
+	protected String getCommand(NonDominatedSolutionSet set) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("printf \"");
-		sb.append(FonsecaUtil.toString(set));
+		sb.append("echo -e  \"");
+		sb.append(FonsecaUtil.toString(set.getSolutions()));
 		sb.append("\" | ");
 		sb.append("vendor/hv-1.3-src/hv");
 		return sb.toString();

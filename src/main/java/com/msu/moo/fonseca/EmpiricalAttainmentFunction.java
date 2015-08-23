@@ -4,31 +4,21 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionSet;
 
 public class EmpiricalAttainmentFunction {
 
-	public SolutionSet calculate(List<SolutionSet> sets) {
+	public NonDominatedSolutionSet calculate(List<NonDominatedSolutionSet> sets) {
 		return calculate(sets, (sets.size() / 2) + 1);
 	}
 	
-	public SolutionSet calculate(List<SolutionSet> sets, int level) {
+	public NonDominatedSolutionSet calculate(List<NonDominatedSolutionSet> sets, int level) {
 
-		// hash all the solution to re-map to median front!
-		Map<List<Double>, Solution> map = new HashMap<>();
-		for(SolutionSet set : sets) {
-			for (Solution s : set) {
-				map.put(s.getObjectives(), s);
-			}
-		}
-		
 		// result where the value are added
-		SolutionSet result = new SolutionSet();
+		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
 		String command = getCommand(sets, level);
 		
 		try {
@@ -42,6 +32,8 @@ public class EmpiricalAttainmentFunction {
 			stdin.flush();
 			stdin.close();
 			
+			System.out.println(command);
+			
 			String out = FonsecaUtil.fromStream(p.getInputStream());
 			
 			// for each line at the results
@@ -53,8 +45,7 @@ public class EmpiricalAttainmentFunction {
 				List<Double> objectives = new ArrayList<>();
 				for(String value : line.split("\\s")) objectives.add(Double.valueOf(value));
 				
-				// find corresponding solution and add
-				result.add(map.get(objectives));
+				result.add(new Solution(null, objectives));
 				
 			}
 
@@ -67,11 +58,11 @@ public class EmpiricalAttainmentFunction {
 	}
 
 	
-	protected String getCommand(List<SolutionSet> sets, int level) {
+	protected String getCommand(List<NonDominatedSolutionSet> sets, int level) {
 		StringBuilder sb = new StringBuilder();
-		sb.append("printf \"");
-		for (SolutionSet set : sets) {
-			sb.append(FonsecaUtil.toString(set));
+		sb.append("echo -e \"");
+		for (NonDominatedSolutionSet set : sets) {
+			sb.append(FonsecaUtil.toString(set.getSolutions()));
 			sb.append("\n");
 		}
 		sb.append("\" | ");
