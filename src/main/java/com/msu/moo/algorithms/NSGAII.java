@@ -5,10 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.msu.moo.model.AbstractAlgorithm;
-import com.msu.moo.model.AbstractEvaluator;
-import com.msu.moo.model.interfaces.IFactory;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.IVariable;
+import com.msu.moo.model.interfaces.VariableFactory;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
@@ -20,7 +19,7 @@ import com.msu.moo.util.comparator.RankAndCrowdingComparator;
 import com.msu.moo.util.measures.CrowdingIndicator;
 import com.msu.moo.util.measures.NonDominatedRankIndicator;
 
-public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends AbstractAlgorithm<V, P> {
+public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AbstractAlgorithm<V, P> {
 
 	// ! size of the whole Population
 	protected int populationSize = 100;
@@ -31,22 +30,20 @@ public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Abstr
 
 	protected AbstractMutation<?> mutation;
 
-	public NSGAII(IFactory<V> factory, long maxEvaluations, AbstractCrossover<?> crossover,
+	public NSGAII(VariableFactory<V, P> factory, AbstractCrossover<?> crossover,
 			AbstractMutation<?> mutation) {
-		super(factory, maxEvaluations);
+		super(factory);
 		this.mutation = mutation;
 		this.crossover = crossover;
 	}
 
 	@Override
-	public NonDominatedSolutionSet run(P problem) {
-		
-		AbstractEvaluator<V, P> eval = problem.getEvaluator();
+	public NonDominatedSolutionSet run_(P problem) {
 
 		// initialize the population with populationSize
 		SolutionSet P = new SolutionSet(populationSize * 2);
 		for (int i = 0; i < populationSize; i++) {
-			P.add(problem.getEvaluator().run(factory.create()));
+			P.add(problem.evaluate(factory.create(problem)));
 		}
 
 		Map<Solution, Integer> rank = new NonDominatedRankIndicator().calculate(P);
@@ -54,7 +51,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Abstr
 
 		// if stopping condition false -> evaluations left -> start next
 		// generation
-		while (maxEvaluations > eval.count()) {
+		while (maxEvaluations > problem.getNumOfEvaluations()) {
 
 			// tournament selection
 			BinaryTournamentSelection bts = new BinaryTournamentSelection(P,
@@ -72,7 +69,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V, P>> extends Abstr
 				for (IVariable offspring : offsprings) {
 					if (Random.getInstance().nextDouble() < 0.5)
 						offspring = mutation.mutate(offspring);
-					Q.add(eval.run(offspring));
+					Q.add(problem.evaluate(offspring));
 				}
 
 			}

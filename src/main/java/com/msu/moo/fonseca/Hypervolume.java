@@ -1,7 +1,6 @@
 package com.msu.moo.fonseca;
 
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.util.List;
 
@@ -35,6 +34,8 @@ public class Hypervolume {
 			stdin.flush();
 			stdin.close();
 			
+			p.waitFor();
+			
 			String out = FonsecaUtil.fromStream(p.getInputStream());
 			//String err = fromStream(p.getErrorStream());
 			
@@ -43,7 +44,7 @@ public class Hypervolume {
 			hv = Double.valueOf(out);
 
 
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new RuntimeException("Could not calculate Hypervolume!");
 		}

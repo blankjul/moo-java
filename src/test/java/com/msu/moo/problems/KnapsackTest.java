@@ -10,7 +10,6 @@ import org.junit.Test;
 
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.problems.knp.Item;
-import com.msu.moo.problems.knp.KnapsackEvaluator;
 import com.msu.moo.problems.knp.KnapsackProblem;
 import com.msu.moo.problems.knp.KnapsackVariable;
 
@@ -27,24 +26,24 @@ public class KnapsackTest {
 
 	@Test
 	public void testGetWeightFunction() {
-		assertEquals(6, (int) KnapsackEvaluator.getWeight(l, new ArrayList<Boolean>(Arrays.asList(true, true, true))));
+		assertEquals(6, (int) KnapsackProblem.getWeight(l, new ArrayList<Boolean>(Arrays.asList(true, true, true))));
 	}
 
 	@Test
 	public void testEvaluateFunctionIsNonZero() {
-		Solution s = new KnapsackEvaluator(k).run(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true, false))));
+		Solution s = k.evaluate(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true, false))));
 		assertEquals(3d, s.getObjectives().get(0), 0.05);
 	}
 
 	@Test
 	public void testEvaluateFunctionIsZero() {
-		Solution s = new KnapsackEvaluator(k).run(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true, true))));
+		Solution s = k.evaluate(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true, true))));
 		assertEquals(0d, s.getObjectives().get(0), 0.05);
 	}
 
 	@Test (expected=RuntimeException.class) 
 	public void testWrongSizeOfTour() throws RuntimeException {
-		new KnapsackEvaluator(k).run(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true))));
+		k.evaluate(new KnapsackVariable(new ArrayList<Boolean>(Arrays.asList(true, true))));
 	}
 	
 	

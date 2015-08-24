@@ -1,6 +1,5 @@
 package com.msu.moo.operators;
 
-import com.msu.moo.model.AbstractEvaluator;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
@@ -30,9 +29,9 @@ public abstract class AbstractMutation<T> {
 
 	}
 
-	public <V extends IVariable, P extends IProblem<V, P>> Solution mutate(AbstractEvaluator<V, P> eval, Solution a) {
+	public <V extends IVariable, P extends IProblem<V>> Solution mutate(P problem, Solution a) {
 		IVariable var = mutate(a.getVariable());
-		return eval.run(var);
+		return problem.evaluate(var);
 	}
 	
 	

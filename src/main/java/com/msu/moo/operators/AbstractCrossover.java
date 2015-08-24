@@ -3,7 +3,6 @@ package com.msu.moo.operators;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.model.AbstractEvaluator;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
@@ -45,14 +44,14 @@ public abstract class AbstractCrossover<T> {
 
 	}
 
-	public <V extends IVariable, P extends IProblem<V, P>> List<Solution> crossover(AbstractEvaluator<V, P> eval, Solution a,
+	public <V extends IVariable, P extends IProblem<V>> List<Solution> crossover(P problem, Solution a,
 			Solution b) {
 
 		List<IVariable> vars = crossover(a.getVariable(), b.getVariable());
 		List<Solution> result = new ArrayList<>();
 
 		for (IVariable var : vars) {
-			Solution s = eval.run(var);
+			Solution s = problem.evaluate(var);
 			result.add(s);
 		}
 

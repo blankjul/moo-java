@@ -1,6 +1,6 @@
 package com.msu.moo.model.interfaces;
 
-import com.msu.moo.model.AbstractEvaluator;
+import com.msu.moo.model.solution.Solution;
 
 /**
  * This interface defines the values of a problem.
@@ -11,13 +11,24 @@ import com.msu.moo.model.AbstractEvaluator;
  * @param <T>
  *            variable as input
  */
-public interface IProblem<V extends IVariable, P extends IProblem<V, P>> {
+public interface IProblem<V extends IVariable> {
 
 	/**
-	 * @return the evaluator which is used to calculate the result for this
-	 *         problem class.
+	 * Returns the result of the problem according to the variable
+	 * @param variable extends IVariable and could be problem specific.
+	 * @return Solution object which contains the result.
 	 */
-	public AbstractEvaluator<V,P> getEvaluator();
+	public Solution evaluate(IVariable variable);
+
+	/**
+	 * @return number of evaluations so far.
+	 */
+	public long getNumOfEvaluations();
 	
+	
+	/**
+	 * Reset all evaluations, hashes and so on!
+	 */
+	public void reset();
 
 }

@@ -1,5 +1,7 @@
 package com.msu.moo.fonseca;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,8 @@ public class EmpiricalAttainmentFunctionTest {
 		fronts.add(MockSolution.create(new Double[][] {{0.0,0.5}, {0.5,0.5}, {0.0,1.0}}));
 		fronts.add(MockSolution.create(new Double[][] {{0.0,0.2}, {0.5,0.5}, {0.0,1.0}}));
 		fronts.add(MockSolution.create(new Double[][] {{1.0,0.7}, {0.5,0.5}, {0.0,1.0}}));
-		eaf.calculate(fronts);
+		NonDominatedSolutionSet d = eaf.calculate(fronts);
+		assertTrue(!d.getSolutions().isEmpty());
 	}
 
 	
