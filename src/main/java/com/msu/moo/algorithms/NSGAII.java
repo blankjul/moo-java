@@ -84,18 +84,14 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends Abstract
 			P.sort(new RankAndCrowdingComparator(rank, crowding));
 			Collections.reverse(P);
 			
-			/*
-			for (Solution s : P) {
-				System.out.println(String.format("rank%s | crowding:%s", rank.get(s), crowding.get(s)));
-			}
-			System.out.println("----------------");
-			*/
-			
 			P = new SolutionSet(P.subList(0, populationSize));
 
 		}
 
 		return new NonDominatedSolutionSet(P);
 	}
+	
+	
+	
 
 }

@@ -6,6 +6,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import com.msu.moo.util.Pair;
+import com.msu.moo.util.Range;
+
 public class SolutionSet extends ArrayList<Solution>{
 	
 
@@ -51,23 +54,38 @@ public class SolutionSet extends ArrayList<Solution>{
 		return l;
 	}
 	
+	
 	/**
-	 * @return normalized front with objectives values between [0,1]
+	 * Normalize by using the boundaries of this set.
 	 */
 	public SolutionSet normalize() {
+		Range<Double> range = new Range<Double>();
+		for (Solution s : this) range.add(s.getObjectives());
+		return normalize(range.get());
+	}
+	
+	
+	/**
+	 * The given boundaries are used for maximum and minimum calculation.
+	 * @return normalized front with objectives values between [0,1]
+	 */
+	public SolutionSet normalize(List<Pair<Double,Double>> boundaries) {
 		if (this.isEmpty()) return new SolutionSet();
 		int dimensions = this.get(0).getObjectives().size();
 		
 		double[][] points = new double[dimensions][this.size()];
 		
 		for (int i = 0; i < dimensions; i++) {
-			List<Double> v = getVector(i);
-			double min = Collections.min(v);
-			double max = Collections.max(v);
+			double min = boundaries.get(i).first;
+			double max = boundaries.get(i).second;
 			
 			for (int k = 0; k < size(); k++) {
 				double value = this.get(k).getObjectives().get(i);
 				points[i][k] = (value - min) / (max - min);
+				
+				// even if max or min are not fitting get the values in range
+				if (points[i][k] > 1) points[i][k] = 1;
+				if (points[i][k] < 0) points[i][k] = 0;
 			}
 		}
 		

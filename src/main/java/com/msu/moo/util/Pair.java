@@ -22,8 +22,8 @@ package com.msu.moo.util;
  * objects.
  */
 public class Pair<F, S> {
-    public final F first;
-    public final S second;
+    public F first;
+    public S second;
 
     /**
      * Constructor for a Pair. If either are null then equals() and hashCode() will throw
@@ -73,5 +73,10 @@ public class Pair<F, S> {
      */
     public static <A, B> Pair<A, B>  create(A a, B b) {
         return new Pair<A, B>(a, b);
+    }
+    
+    @Override
+    public String toString() {
+    	return String.format("(%s, %s)", first.toString(), second.toString());
     }
 }
