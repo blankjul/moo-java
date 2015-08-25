@@ -40,5 +40,10 @@ public class Kursawe extends AbstractProblem<DoubleListVariable> {
 		return new ArrayList<Double>(Arrays.asList(fx[0], fx[1]));
 	}
 
+	@Override
+	public int getNumberOfObjectives() {
+		return 2;
+	}
+
 
 }

@@ -87,6 +87,11 @@ public class KnapsackProblem extends AbstractProblem<KnapsackVariable> {
 		return weight;
 	}
 
+	@Override
+	public int getNumberOfObjectives() {
+		return 1;
+	}
+
 
 
 

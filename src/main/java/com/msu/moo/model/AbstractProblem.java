@@ -42,6 +42,11 @@ public abstract class AbstractProblem<V extends IVariable> implements IProblem<V
 		List<Double> objectives = evaluate_(v);
 		return new Solution(variable, objectives);
 	}
+	
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName();
+	}
 
 
 }

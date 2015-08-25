@@ -32,10 +32,6 @@ public class BoxPlot extends Abstract2DPlot {
 	    renderer.setMedianVisible(true);
 	    renderer.setMeanVisible(false);
 	    
-	    for (int i = 0; i < 15; i++) {
-			System.out.println(renderer.getSeriesPaint(i));
-		}
-	    
 		CategoryPlot xyplot = new CategoryPlot(set, new CategoryAxis(xLabel), new NumberAxis(yLabel), renderer);
 		JFreeChart jfreechart = new JFreeChart(title, xyplot);
 		jfreechart.setBackgroundPaint(Color.white);

@@ -30,5 +30,12 @@ public interface IProblem<V extends IVariable> {
 	 * Reset all evaluations, hashes and so on!
 	 */
 	public void reset();
+	
+	
+	/**
+	 * @return number of objectives that should be optimized!
+	 */
+	public int getNumberOfObjectives();
+	
 
 }

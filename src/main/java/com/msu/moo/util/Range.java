@@ -33,4 +33,14 @@ public class Range<T extends Comparable<T>> {
 		return ranges;
 	}
 	
+	public T getMinimum(int n) {
+		return ranges.get(n).first;
+	}
+	
+	public T getMaximum(int n) {
+		return ranges.get(n).second;
+	}
+	
+	
+	
 }

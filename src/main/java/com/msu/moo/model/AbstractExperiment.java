@@ -48,7 +48,7 @@ public abstract class AbstractExperiment<P extends IProblem<?>> {
 		
 		for(P problem : getProblems()) {
 			
-			ScatterPlot sp = new ScatterPlot(problem.getClass().getSimpleName(), "X", "Y");
+			ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
 			
 			Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> detail = new HashMap<>();	
 			Map<IAlgorithm<P>, NonDominatedSolutionSet> median = new HashMap<>();	
@@ -57,7 +57,6 @@ public abstract class AbstractExperiment<P extends IProblem<?>> {
 			
 			for (IAlgorithm<P> algorithm : algorithms) {
 				algorithm.setMaxEvaluations(maxEvaluations);
-				
 				
 				// calculate for each algorithm the sets in n runs
 				List<NonDominatedSolutionSet> sets = new ArrayList<>();
@@ -82,24 +81,24 @@ public abstract class AbstractExperiment<P extends IProblem<?>> {
 			
 			
 			BoxPlot bp = new BoxPlot();
+			List<Double> referencePoint = new ArrayList<>();
+			for (int i = 0; i < problem.getNumberOfObjectives(); i++) {
+				referencePoint.add(1.0);
+			}
 			
 			// normalize all the fronts according to the maximal range
 			for (IAlgorithm<P> algorithm : algorithms)
 			{
-				
 				List<NonDominatedSolutionSet> sets = detail.get(algorithm);
 				List<Double> hvs = new ArrayList<>();
 				for (NonDominatedSolutionSet set : sets) {
 					SolutionSet norm = set.getSolutions().normalize(range.get());
-					Double hv = new Hypervolume(pathToHV).calculate(new NonDominatedSolutionSet(norm));
+					Double hv = new Hypervolume(pathToHV).calculate(new NonDominatedSolutionSet(norm), referencePoint);
 					hvs.add(hv);
 				}
 				bp.add(hvs, algorithm.getName());
 			}
 			bp.show();
-			
-			
-			
 		}
 		
 	}
