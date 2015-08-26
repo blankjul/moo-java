@@ -10,7 +10,7 @@ import org.junit.Test;
 import com.msu.moo.ExampleSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.measures.NonDominatedRankIndicator;
+import com.msu.moo.util.indicator.NonDominatedRankIndicator;
 
 public class NonDominatedRankIndicatorTest {
 

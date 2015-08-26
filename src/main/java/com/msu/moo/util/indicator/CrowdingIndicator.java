@@ -1,12 +1,11 @@
-package com.msu.moo.util.measures;
+package com.msu.moo.util.indicator;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 
-public class CrowdingIndicator implements Measure<Double>{
+public class CrowdingIndicator extends Indicator<Double>{
 
 	
 	//! helping method for fast access to objective values
@@ -15,16 +14,15 @@ public class CrowdingIndicator implements Measure<Double>{
 	}
 	
 	@Override
-	public Map<Solution, Double> calculate(SolutionSet solutions) {
+	public void calculate(Map<Solution, Double> map, SolutionSet solutions) {
 		
 		// the result
-		Map<Solution, Double> map = new HashMap<>();
 		for (Solution s : solutions) {
 			map.put(s, 0d);
 		}
 		
 		// the resulting set is also empty
-		if (solutions.isEmpty()) return map;
+		if (solutions.isEmpty()) return;
 		
 		// the resulting set is also empty
 		if (solutions.size() <= 2) {
@@ -55,9 +53,7 @@ public class CrowdingIndicator implements Measure<Double>{
 			}
 			
 		}
-		
-		
-		return map;
 	}
+
 
 }
