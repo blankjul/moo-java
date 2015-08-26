@@ -96,13 +96,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 				for (NonDominatedSolutionSet set : sets) {
 					SolutionSet norm = set.getSolutions().normalize(range.get());
 					Double hv = new Hypervolume(pathToHV).calculate(new NonDominatedSolutionSet(norm), referencePoint);
-					
-					System.out.print(problem.toString());
-					System.out.print(",");
-					System.out.print(algorithm.getName());
-					System.out.print(",");
-					System.out.print(hv);
-					System.out.print("\n");
+
 					
 					hvs.add(hv);
 				}

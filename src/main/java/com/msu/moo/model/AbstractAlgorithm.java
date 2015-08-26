@@ -20,7 +20,7 @@ public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem>
 	protected VariableFactory<V, P> factory = null;
 	
 	//! maximal number of evaluations
-	protected long maxEvaluations = 10000L;
+	protected long maxEvaluations = 50000L;
 	
 	//! name for this algorithm
 	protected String name = getClass().getSimpleName();

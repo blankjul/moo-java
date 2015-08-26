@@ -89,7 +89,7 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlg
 			Collections.reverse(population);
 
 			population = new SolutionSet(population.subList(0, populationSize));
-
+			
 		}
 
 		return new NonDominatedSolutionSet(population);
