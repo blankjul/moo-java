@@ -112,7 +112,7 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlg
 		rank = rankInd.calculate(population);
 		crowding = new HashMap<>();
 		for (NonDominatedSolutionSet set : rankInd.getNonDominatedSets()) {
-			crowdInd.calculate(crowding, set.getSolutions().normalize());
+			crowdInd.calculate(crowding, set.getSolutions());
 		}
 	}
 	
