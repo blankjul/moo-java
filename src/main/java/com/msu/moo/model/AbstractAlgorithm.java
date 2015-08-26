@@ -11,7 +11,7 @@ import com.msu.moo.model.interfaces.VariableFactory;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 
-public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem<V>> implements IAlgorithm<P> {
+public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem> implements IAlgorithm<P> {
 	
 	//!This method has to be implemented by all algorithms
 	protected abstract NonDominatedSolutionSet run_(P problem);
@@ -61,6 +61,11 @@ public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem<
 	@Override
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	@Override
+	public String toString() {
+		return name;
 	}
 	
 	

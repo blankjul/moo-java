@@ -6,7 +6,7 @@ import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
 
-public abstract class AbstractProblem<V extends IVariable> implements IProblem<V> {
+public abstract class AbstractProblem<V extends IVariable> implements IProblem {
 
 	/**
 	 * Evaluation method that must be implemented by all subclasses.

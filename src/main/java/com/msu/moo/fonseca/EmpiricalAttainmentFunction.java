@@ -1,10 +1,7 @@
 package com.msu.moo.fonseca;
 
 import java.io.BufferedWriter;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,16 +32,6 @@ public class EmpiricalAttainmentFunction {
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
 		String command = getCommand(sets, level);
 		Process p = null;
-
-		try (Writer writer = new BufferedWriter(
-				new OutputStreamWriter(new FileOutputStream("input.pf"), "utf-8"))) {
-			for (NonDominatedSolutionSet set : sets) {
-				writer.write(FonsecaUtil.toString(set.getSolutions()));
-				writer.write("\n");
-			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		}
 
 		try {
 
@@ -89,15 +76,13 @@ public class EmpiricalAttainmentFunction {
 
 	protected String getCommand(List<NonDominatedSolutionSet> sets, int level) {
 		StringBuilder sb = new StringBuilder();
-		/*
 		sb.append("echo -e \"");
 		for (NonDominatedSolutionSet set : sets) {
 			sb.append(FonsecaUtil.toString(set.getSolutions()));
 			sb.append("\n");
 		}
 		sb.append("\" | ");
-		*/
-		sb.append(pathToEaf + " input.pf -l " + level);
+		sb.append(pathToEaf + " -l " + level);
 		return sb.toString();
 	}
 

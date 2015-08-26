@@ -39,7 +39,7 @@ public class HalfUniformCrossover<T> extends AbstractCrossover<List<T>> {
 
 		// swap half of the not equal positions 
 		// (for loop since shuffled before!)
-		for (int i = 0; i < hammiltonDistance / 2; i++) {
+		for (int i = 0; i < hammiltonDistance / 2.0; i++) {
 			int idx = indices.get(i);
 			c1.set(i, b.get(idx));
 			c2.set(i, a.get(idx));

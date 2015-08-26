@@ -5,7 +5,7 @@ package com.msu.moo.model.interfaces;
  *
  * @param <T> variable type
  */
-public interface VariableFactory<V extends IVariable, P extends IProblem<V>> {
+public interface VariableFactory<V extends IVariable, P extends IProblem> {
 	
 	/**
 	 * Create a new object from the class. The problem information are provided if needed.

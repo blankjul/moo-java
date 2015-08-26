@@ -29,6 +29,8 @@ public abstract class AbstractVariable<T> implements IVariable {
 		}
 		
 	}
+	
+	
 
 	@Override
 	abstract public IVariable copy();

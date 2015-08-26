@@ -29,7 +29,7 @@ public abstract class AbstractMutation<T> {
 
 	}
 
-	public <V extends IVariable, P extends IProblem<V>> Solution mutate(P problem, Solution a) {
+	public <V extends IVariable, P extends IProblem> Solution mutate(P problem, Solution a) {
 		IVariable var = mutate(a.getVariable());
 		return problem.evaluate(var);
 	}

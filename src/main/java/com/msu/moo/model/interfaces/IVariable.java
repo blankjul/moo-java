@@ -22,4 +22,5 @@ public interface IVariable {
 	public IVariable copy();
 	
 	
+	
 }

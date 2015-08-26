@@ -1,6 +1,11 @@
 package com.msu.moo.visualization;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartUtilities;
 
 public abstract class Abstract2DPlot implements IPlot {
 	
@@ -12,6 +17,12 @@ public abstract class Abstract2DPlot implements IPlot {
 	public Abstract2DPlot() {
 		super();
 	}
+	
+	
+	public Abstract2DPlot(String title) {
+		super();
+		this.title = title;
+	}
 
 
 	public Abstract2DPlot(String title, String xLabel, String yLabel) {
@@ -20,7 +31,17 @@ public abstract class Abstract2DPlot implements IPlot {
 		this.xLabel = xLabel;
 		this.yLabel = yLabel;
 	}
-
+	
+	
+	public void save(String name) {
+		try {
+			File file = new File(name);
+			FileOutputStream fop = new FileOutputStream(file);
+			ChartUtilities.writeChartAsPNG(fop, getChart(), 800, 600);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 	public void show() {

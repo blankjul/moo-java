@@ -7,7 +7,7 @@ import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.VariableFactory;
 import com.msu.moo.util.Random;
 
-public class DoubleListVariableFactory<P extends IProblem<DoubleListVariable>> implements VariableFactory<DoubleListVariable, P> {
+public class DoubleListVariableFactory<P extends IProblem> implements VariableFactory<DoubleListVariable, P> {
 	
 	//! length of the vector
 	protected int length;

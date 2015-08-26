@@ -16,11 +16,11 @@ import com.msu.moo.util.Range;
 import com.msu.moo.visualization.BoxPlot;
 import com.msu.moo.visualization.ScatterPlot;
 
-public abstract class AbstractExperiment<P extends IProblem<?>> {
+public abstract class AbstractExperiment<P extends IProblem> {
 	
 	
 	//! default amount of iterations
-	protected int iterations = 10;
+	protected int iterations = 100;
 	
 	//! maximal evaluations of each algorithm
 	protected long maxEvaluations = 100000L;
@@ -77,14 +77,16 @@ public abstract class AbstractExperiment<P extends IProblem<?>> {
 				
 			}
 			
+			//sp.save(String.format("experiment/%s.png", problem));
 			sp.show();
 			
 			
-			BoxPlot bp = new BoxPlot();
+			BoxPlot bp = new BoxPlot(problem.toString());
 			List<Double> referencePoint = new ArrayList<>();
 			for (int i = 0; i < problem.getNumberOfObjectives(); i++) {
 				referencePoint.add(1.0);
 			}
+			System.out.println("problem,algorithm,hv");
 			
 			// normalize all the fronts according to the maximal range
 			for (IAlgorithm<P> algorithm : algorithms)
@@ -94,11 +96,20 @@ public abstract class AbstractExperiment<P extends IProblem<?>> {
 				for (NonDominatedSolutionSet set : sets) {
 					SolutionSet norm = set.getSolutions().normalize(range.get());
 					Double hv = new Hypervolume(pathToHV).calculate(new NonDominatedSolutionSet(norm), referencePoint);
+					
+					System.out.print(problem.toString());
+					System.out.print(",");
+					System.out.print(algorithm.getName());
+					System.out.print(",");
+					System.out.print(hv);
+					System.out.print("\n");
+					
 					hvs.add(hv);
 				}
 				bp.add(hvs, algorithm.getName());
 			}
 			bp.show();
+			//bp.save(String.format("experiment/%s_hv.png", problem));
 		}
 		
 	}

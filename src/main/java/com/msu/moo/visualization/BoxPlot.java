@@ -18,6 +18,15 @@ public class BoxPlot extends Abstract2DPlot {
 	protected DefaultBoxAndWhiskerCategoryDataset set = new DefaultBoxAndWhiskerCategoryDataset();
 
 	
+	public BoxPlot() {
+		super();
+	}
+
+	public BoxPlot(String title) {
+		super(title);
+	}
+
+
 	public void add(List<Double> l, String name) {
 		BoxAndWhiskerItem entry = BoxAndWhiskerCalculator.calculateBoxAndWhiskerStatistics(l);
 		set.add(entry, name, "");
@@ -35,8 +44,6 @@ public class BoxPlot extends Abstract2DPlot {
 		CategoryPlot xyplot = new CategoryPlot(set, new CategoryAxis(xLabel), new NumberAxis(yLabel), renderer);
 		JFreeChart jfreechart = new JFreeChart(title, xyplot);
 		jfreechart.setBackgroundPaint(Color.white);
-		
-		
 		return jfreechart;
 	}
 

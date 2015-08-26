@@ -7,7 +7,7 @@ import com.msu.moo.model.interfaces.VariableFactory;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 
-public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AbstractAlgorithm<V,P>{
+public class RandomSearch<V extends IVariable, P extends IProblem> extends AbstractAlgorithm<V,P>{
 
 
 	public RandomSearch(VariableFactory<V, P> factory) {

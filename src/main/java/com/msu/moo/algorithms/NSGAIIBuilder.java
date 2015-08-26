@@ -6,7 +6,7 @@ import com.msu.moo.model.interfaces.VariableFactory;
 import com.msu.moo.operators.AbstractCrossover;
 import com.msu.moo.operators.AbstractMutation;
 
-public class NSGAIIBuilder<V extends IVariable, P extends IProblem<V>> {
+public class NSGAIIBuilder<V extends IVariable, P extends IProblem> {
 
 	protected int populationSize = 100;
 

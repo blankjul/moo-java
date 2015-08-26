@@ -19,7 +19,7 @@ import com.msu.moo.util.comparator.RankAndCrowdingComparator;
 import com.msu.moo.util.measures.CrowdingIndicator;
 import com.msu.moo.util.measures.NonDominatedRankIndicator;
 
-public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AbstractAlgorithm<V, P> {
+public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlgorithm<V, P> {
 
 	// ! size of the whole Population
 	protected int populationSize = 100;

@@ -44,7 +44,7 @@ public abstract class AbstractCrossover<T> {
 
 	}
 
-	public <V extends IVariable, P extends IProblem<V>> List<Solution> crossover(P problem, Solution a,
+	public <V extends IVariable, P extends IProblem> List<Solution> crossover(P problem, Solution a,
 			Solution b) {
 
 		List<IVariable> vars = crossover(a.getVariable(), b.getVariable());

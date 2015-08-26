@@ -11,7 +11,7 @@ import com.msu.moo.model.solution.Solution;
  * @param <T>
  *            variable as input
  */
-public interface IProblem<V extends IVariable> {
+public interface IProblem {
 
 	/**
 	 * Returns the result of the problem according to the variable
