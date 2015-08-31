@@ -23,12 +23,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.operators.AbstractCrossover;
+import com.msu.moo.operators.AbstractListCrossover;
 import com.msu.moo.operators.crossover.CrossoverUtil;
 import com.msu.moo.util.Pair;
 
 
-public class PMXCrossover<T> extends AbstractCrossover<List<T>> {
+public class PMXCrossover<T> extends AbstractListCrossover<T> {
 
 
 	
@@ -65,7 +65,7 @@ public class PMXCrossover<T> extends AbstractCrossover<List<T>> {
 	
 	
 	@Override
-	protected List<List<T>> crossover_(List<T> a, List<T> b) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
         Pair<Integer, Integer> bounds = CrossoverUtil.getSection(a.size());
 
 		return new ArrayList<>( Arrays.asList(crossover_(a, b, bounds.first, bounds.second), 

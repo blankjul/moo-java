@@ -67,6 +67,20 @@ public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem>
 	public String toString() {
 		return name;
 	}
+
+	public VariableFactory<V, P> getFactory() {
+		return factory;
+	}
+
+	public void setFactory(VariableFactory<V, P> factory) {
+		this.factory = factory;
+	}
+
+	public long getMaxEvaluations() {
+		return maxEvaluations;
+	}
+	
+	
 	
 	
 	

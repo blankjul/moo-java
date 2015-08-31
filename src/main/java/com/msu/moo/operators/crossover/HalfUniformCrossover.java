@@ -5,9 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import com.msu.moo.operators.AbstractCrossover;
+import com.msu.moo.operators.AbstractListCrossover;
 
-public class HalfUniformCrossover<T> extends AbstractCrossover<List<T>> {
+public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 
 	/**
 	 * Returns all the positions that are different at the two parents.
@@ -25,7 +25,7 @@ public class HalfUniformCrossover<T> extends AbstractCrossover<List<T>> {
 	}
 
 	@Override
-	protected List<List<T>> crossover_(List<T> a, List<T> b) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
 		// copy the both list and change values
 		List<T> c1 = new ArrayList<T>(a);
 		List<T> c2 = new ArrayList<T>(b);

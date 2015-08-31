@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.operators.AbstractCrossover;
+import com.msu.moo.operators.AbstractListCrossover;
 import com.msu.moo.util.Random;
 
 /**
@@ -16,7 +16,7 @@ import com.msu.moo.util.Random;
  * [0] + [3,2,1,0] = [0,3,2,1,0] and [4] + [1,2,3,4] = [4,1,2,3,4]
  * 
  */
-public class SinglePointCrossover<T> extends AbstractCrossover<List<T>> {
+public class SinglePointCrossover<T> extends AbstractListCrossover<T> {
 
 	protected List<List<T>> crossover_(List<T> a, List<T> b, int point) {
 
@@ -32,7 +32,7 @@ public class SinglePointCrossover<T> extends AbstractCrossover<List<T>> {
 	
 	
 	@Override
-	protected List<List<T>> crossover_(List<T> a, List<T> b) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
 		return crossover_(a, b, Random.getInstance().nextInt(1, a.size() - 2));
 
 	}

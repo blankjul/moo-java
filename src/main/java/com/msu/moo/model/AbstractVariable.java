@@ -7,6 +7,7 @@ public abstract class AbstractVariable<T> implements IVariable {
 	//! list that contains all the values
 	protected T obj;
 	
+	abstract public IVariable copy();
 	
 	public AbstractVariable(T obj) {
 		super();
@@ -30,9 +31,12 @@ public abstract class AbstractVariable<T> implements IVariable {
 		
 	}
 	
-	
 
+	
 	@Override
-	abstract public IVariable copy();
+	public String toString() {
+		return obj.toString();
+	}
+
 
 }

@@ -17,6 +17,8 @@ public class NSGAIIBuilder<V extends IVariable, P extends IProblem> {
 	protected AbstractMutation<?> mutation;
 
 	protected VariableFactory<V, P> factory;
+	
+	protected long maxEvaluations;
 
 	protected String name;
 
@@ -49,11 +51,18 @@ public class NSGAIIBuilder<V extends IVariable, P extends IProblem> {
 		this.name = name;
 		return this;
 	}
+	
+	public NSGAIIBuilder<V, P> setMaxEvaluations(long n) {
+		this.maxEvaluations = n;
+		return this;
+	}
 
 	public NSGAII<V, P> create() {
 		NSGAII<V, P> nsgaII = new NSGAII<>(factory, crossover, mutation);
 		if (name != null) nsgaII.setName(name);
 		nsgaII.populationSize = populationSize;
+		nsgaII.probMutation = probMutation;
+		nsgaII.setMaxEvaluations(maxEvaluations);
 		return nsgaII;
 	}
 

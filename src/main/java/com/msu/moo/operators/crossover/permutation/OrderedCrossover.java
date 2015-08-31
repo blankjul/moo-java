@@ -24,12 +24,12 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.msu.moo.operators.AbstractCrossover;
+import com.msu.moo.operators.AbstractListCrossover;
 import com.msu.moo.operators.crossover.CrossoverUtil;
 import com.msu.moo.util.Pair;
 
 
-public class OrderedCrossover<T> extends AbstractCrossover<List<T>> {
+public class OrderedCrossover<T> extends AbstractListCrossover<T> {
 
 
 	
@@ -62,7 +62,7 @@ public class OrderedCrossover<T> extends AbstractCrossover<List<T>> {
 	
 	
 	@Override
-	protected List<List<T>> crossover_(List<T> a, List<T> b) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
         Pair<Integer, Integer> bounds = CrossoverUtil.getSection(a.size());
 
 		return new ArrayList<>( Arrays.asList(crossover_(a, b, bounds.first, bounds.second), 

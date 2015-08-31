@@ -3,6 +3,8 @@ package com.msu.moo.model.solution;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.moo.util.Range;
+
 public class NonDominatedSolutionSet {
 	
 	//! list which contains all the solutions
@@ -19,6 +21,10 @@ public class NonDominatedSolutionSet {
 
 	public NonDominatedSolutionSet(List<Solution> solutions) {
 		for (Solution s : solutions) add(s);
+	}
+	
+	public <T extends List<Solution>> void addAll(T solutions) {
+		for (Solution entry : solutions) add(entry);
 	}
 
 
@@ -67,6 +73,10 @@ public class NonDominatedSolutionSet {
 			sb.append("\n");
 		}
 		return sb.toString();
+	}
+	
+	public Range<Double> getRange() {
+		return this.solutions.getRange();
 	}
 	
 	

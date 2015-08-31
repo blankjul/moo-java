@@ -31,5 +31,13 @@ public class CycleCrossoverTest {
 		assertEquals(new ArrayList<Integer>(Arrays.asList(8,1,2,3,4,5,6,7,9,0)), result.get(1));
 	}
 
+	
+	@Test
+	public void testCycleCrossoverListOfSizeThree() {
+		List<Integer> a = new ArrayList<>(Arrays.asList(1,2,3));
+		List<Integer> b = new ArrayList<>(Arrays.asList(3,2,1));
+		c.crossover_(a, b, 0);
+	}
+
 
 }

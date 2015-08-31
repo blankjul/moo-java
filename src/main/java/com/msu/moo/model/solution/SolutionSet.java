@@ -79,6 +79,9 @@ public class SolutionSet extends ArrayList<Solution>{
 			double min = boundaries.get(i).first;
 			double max = boundaries.get(i).second;
 			
+			//if (min == max) throw new RuntimeException("Error when normalizing: Min is equal to Max!");
+			if (min == max) min = min - 0.00001;
+			
 			for (int k = 0; k < size(); k++) {
 				double value = this.get(k).getObjectives().get(i);
 				points[i][k] = (value - min) / (max - min);
@@ -125,6 +128,15 @@ public class SolutionSet extends ArrayList<Solution>{
 			result.add(new Solution(this.get(k).getVariable(), obj));
 		}
 		return result;
+	}
+	
+	
+	public Range<Double> getRange() {
+		Range<Double> r = new Range<>();
+		for (Solution s : this) {
+			r.add(s.getObjectives());
+		}
+		return r;
 	}
 
 	

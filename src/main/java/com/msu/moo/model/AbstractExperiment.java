@@ -5,107 +5,84 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.fonseca.EmpiricalAttainmentFunction;
-import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.model.interfaces.IAlgorithm;
+import com.msu.moo.model.interfaces.IExperiment;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.Range;
-import com.msu.moo.visualization.BoxPlot;
+import com.msu.moo.util.FrontUtil;
 import com.msu.moo.visualization.ScatterPlot;
 
-public abstract class AbstractExperiment<P extends IProblem> {
-	
-	
-	//! default amount of iterations
-	protected int iterations = 100;
-	
-	//! maximal evaluations of each algorithm
-	protected long maxEvaluations = 100000L;
-	
-	protected String pathToEAF = "vendor/aft-0.95/eaf";
-	protected String pathToHV = "vendor/hv-1.3-src/hv";
-	
-	
-	/**
-	 * @return all algorithms that should be evaluated for this experiment
-	 */
+public abstract class AbstractExperiment<P extends IProblem> implements IExperiment {
+
+	// ! all algorithms that should be evaluated for this experiment
 	protected abstract List<IAlgorithm<P>> getAlgorithms();
-	
-	/**
-	 * @return all problem instances that should be solved
-	 */
+
+	// ! all problem instances that should be solved
 	protected abstract List<P> getProblems();
+
+	// ! number of iterations for each algorithm
+	abstract public int getIterations();
+
+	// ! number of evaluations as stopping criterion
+	abstract public long getMaxEvaluations();
+
 	
-	
-	
+	protected Map<IAlgorithm<P>, NonDominatedSolutionSet> medianFronts = new HashMap<>();
+	protected Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> allFronts = new HashMap<>();
+	protected Map<IAlgorithm<P>, List<Double>> hvs = new HashMap<>();
+
 	public void run() {
 		
+		List<P> problems = getProblems();
 		List<IAlgorithm<P>> algorithms = getAlgorithms();
 		
+		Map<IProblem, NonDominatedSolutionSet> trueFronts = getTrueFronts(problems);
+		allFronts.clear();
 		
-		for(P problem : getProblems()) {
-			
-			ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
-			
-			Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> detail = new HashMap<>();	
-			Map<IAlgorithm<P>, NonDominatedSolutionSet> median = new HashMap<>();	
-			
-			Range<Double> range = new Range<>();
-			
+		for (P problem : problems) {
+
+			// calculate the result for each algorithm
 			for (IAlgorithm<P> algorithm : algorithms) {
-				algorithm.setMaxEvaluations(maxEvaluations);
-				
-				// calculate for each algorithm the sets in n runs
+				algorithm.setMaxEvaluations(getMaxEvaluations());
 				List<NonDominatedSolutionSet> sets = new ArrayList<>();
-				for (int i = 0; i < iterations; i++) {
-					NonDominatedSolutionSet set = algorithm.run(problem);
-					
-					// update the range for the normalization
-					for(Solution s : set.getSolutions()) range.add(s.getObjectives());
-					
-					sets.add(set);
+				for (int i = 0; i < getIterations(); i++) {
+					sets.add(algorithm.run(problem));
 				}
-				
-				detail.put(algorithm, sets);
-				
-				NonDominatedSolutionSet medianFront = new EmpiricalAttainmentFunction(pathToEAF).calculate(sets);
-				sp.add(medianFront.getSolutions(), algorithm.getName());
-				median.put(algorithm, medianFront);
-				
+				allFronts.put(algorithm, sets);
 			}
+
+			// if the true front is given take this. otherwise estimate it by having a look
+			// all calculate fronts from all algorithm and create from that results the best front
+			NonDominatedSolutionSet trueFront = null;
+			if (trueFronts != null) trueFront = trueFronts.get(problem);
+			// if there is not true pareto front
+			if (trueFront == null) trueFront =  FrontUtil.estimateTrueFront(allFronts);
 			
-			//sp.save(String.format("experiment/%s.png", problem));
+			// show the scatter plot of median fronts
+			medianFronts = FrontUtil.calcMedianFronts(allFronts, getPathToEAF());
+			ScatterPlot sp = FrontUtil.createScatterPlot(problem.toString(), medianFronts);
+			sp.add(trueFront.getSolutions(), "TrueFront");
 			sp.show();
 			
+			// calculate hypervolume of all the fronts using normalization
+			hvs = FrontUtil.calcHypervolume(trueFront, allFronts, getPathToHV());
+			FrontUtil.createBoxPlot(problem.toString(), hvs).show();
 			
-			BoxPlot bp = new BoxPlot(problem.toString());
-			List<Double> referencePoint = new ArrayList<>();
-			for (int i = 0; i < problem.getNumberOfObjectives(); i++) {
-				referencePoint.add(1.0);
-			}
-			System.out.println("problem,algorithm,hv");
 			
-			// normalize all the fronts according to the maximal range
-			for (IAlgorithm<P> algorithm : algorithms)
-			{
-				List<NonDominatedSolutionSet> sets = detail.get(algorithm);
-				List<Double> hvs = new ArrayList<>();
-				for (NonDominatedSolutionSet set : sets) {
-					SolutionSet norm = set.getSolutions().normalize(range.get());
-					Double hv = new Hypervolume(pathToHV).calculate(new NonDominatedSolutionSet(norm), referencePoint);
-
-					
-					hvs.add(hv);
-				}
-				bp.add(hvs, algorithm.getName());
-			}
-			bp.show();
-			//bp.save(String.format("experiment/%s_hv.png", problem));
+			// sp.save(String.format("experiment/%s.png", problem));
+			// bp.save(String.format("experiment/%s_hv.png", problem));
 		}
-		
+
 	}
 	
+
+	public String getPathToEAF() {
+		return "vendor/aft-0.95/eaf";
+	};
+
+	public String getPathToHV() {
+		return "vendor/hv-1.3-src/hv";
+	}
+	
+
 }

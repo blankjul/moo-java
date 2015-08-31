@@ -23,7 +23,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.msu.moo.operators.AbstractCrossover;
+import com.msu.moo.operators.AbstractListCrossover;
 import com.msu.moo.util.Random;
 
 /**
@@ -35,12 +35,12 @@ import com.msu.moo.util.Random;
  * [0] + [3,2,1,0] = [0,3,2,1,0] and [4] + [1,2,3,4] = [4,1,2,3,4]
  * 
  */
-public class CycleCrossover<T> extends AbstractCrossover<List<T>> {
+public class CycleCrossover<T> extends AbstractListCrossover<T> {
 
 	
 	
 	@Override
-	protected List<List<T>> crossover_(List<T> a, List<T> b) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
 		return crossover_(a, b, Random.getInstance().nextInt(0, a.size() - 1));
 	}
 

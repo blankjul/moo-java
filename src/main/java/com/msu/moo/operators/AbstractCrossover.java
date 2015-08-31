@@ -17,30 +17,33 @@ import com.msu.moo.model.solution.Solution;
  */
 public abstract class AbstractCrossover<T> {
 
+	@SuppressWarnings("unchecked")
 	public List<IVariable> crossover(IVariable a, IVariable b) {
 
 		// TODO: This solution is very ugly. could be improved but all crossover
 		// subclasses has to be changed.
+		T first = null;
+		T second = null;
+		
 		try {
 			
-			@SuppressWarnings("unchecked")
-			T first = (T) a.get();
-			@SuppressWarnings("unchecked")
-			T second = (T) b.get();
-			List<T> offspring = crossover_(first,second);
-			
-			List<IVariable> result = new ArrayList<>();
-			for (T o : offspring) {
-				IVariable prototype = a.copy();
-				prototype.set(o);
-				result.add(prototype);
-			}
-
-			return result;
+			first = (T) a.get();
+		    second = (T) b.get();
 			
 		} catch (Exception e){
 			throw new RuntimeException("Crossover could not be performed. Wrong IVariable types!");
 		}
+		
+		List<T> offspring = crossover_(first,second);
+		
+		List<IVariable> result = new ArrayList<>();
+		for (T o : offspring) {
+			IVariable prototype = a.copy();
+			prototype.set(o);
+			result.add(prototype);
+		}
+
+		return result;
 
 	}
 
@@ -57,6 +60,8 @@ public abstract class AbstractCrossover<T> {
 
 		return result;
 	}
+	
+	
 	
 
 	abstract protected List<T> crossover_(T a, T b);
