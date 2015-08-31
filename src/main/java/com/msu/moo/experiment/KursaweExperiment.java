@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.BasicConfigurator;
+
 import com.msu.moo.algorithms.NSGAII;
 import com.msu.moo.algorithms.RandomSearch;
 import com.msu.moo.model.AbstractExperiment;
@@ -19,8 +21,9 @@ import com.msu.moo.problems.Kursawe;
 
 public class KursaweExperiment extends AbstractExperiment<Kursawe> {
 
-
+	
 	public static void main(String[] args) {
+		BasicConfigurator.configure();
 		new KursaweExperiment().run();
 	}
 

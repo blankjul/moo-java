@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
+
 import com.msu.moo.model.interfaces.IAlgorithm;
 import com.msu.moo.model.interfaces.IExperiment;
 import com.msu.moo.model.interfaces.IProblem;
@@ -14,6 +16,8 @@ import com.msu.moo.visualization.ScatterPlot;
 
 public abstract class AbstractExperiment<P extends IProblem> implements IExperiment {
 
+	static final Logger logger = Logger.getLogger(AbstractExperiment.class);
+	
 	// ! all algorithms that should be evaluated for this experiment
 	protected abstract List<IAlgorithm<P>> getAlgorithms();
 
@@ -33,17 +37,30 @@ public abstract class AbstractExperiment<P extends IProblem> implements IExperim
 
 	public void run() {
 		
+		logger.info("Running the experiment.");
+		
 		List<P> problems = getProblems();
+		logger.info("Problems to solv are " + problems.toString());
+		
 		List<IAlgorithm<P>> algorithms = getAlgorithms();
+		logger.info("Following Algorithms are used and compared: " + algorithms.toString());
 		
 		Map<IProblem, NonDominatedSolutionSet> trueFronts = getTrueFronts(problems);
+		logger.info(String.format("True Fronts are unknown: %s", trueFronts == null));
+		
 		allFronts.clear();
 		
 		for (P problem : problems) {
+			
+			logger.info(String.format("Running Experiment for: %s", problem));
+			
 
 			// calculate the result for each algorithm
 			for (IAlgorithm<P> algorithm : algorithms) {
+				
+				logger.info(String.format("Startings runs for [%s,%s]", problem, algorithm));
 				algorithm.setMaxEvaluations(getMaxEvaluations());
+				
 				List<NonDominatedSolutionSet> sets = new ArrayList<>();
 				for (int i = 0; i < getIterations(); i++) {
 					sets.add(algorithm.run(problem));

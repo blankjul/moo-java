@@ -41,6 +41,10 @@ public class Range<T extends Comparable<T>> {
 		return ranges.get(n).second;
 	}
 	
+	public int size() {
+		return ranges.size();
+	}
+	
 	
 	
 }
