@@ -27,6 +27,13 @@ public class Hypervolume {
 
 	public Double calculate(NonDominatedSolutionSet set, List<Double> referencePoint) {
 
+		// implementation for the one dimensional case
+		if (referencePoint.size() == 1) {
+			// for one dimension there is always only one point in the front -> if not exception
+			if (set.size() != 1) throw new RuntimeException("One Dimension is only allowed to have one NonDominatedPoint!");
+			return referencePoint.get(0) - set.getSolutions().get(0).getObjectives().get(0);
+		}
+		
 		Double hv = null;
 
 		String command = getCommand(set);

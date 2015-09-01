@@ -9,6 +9,7 @@ import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.model.interfaces.IAlgorithm;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.Range;
 
@@ -17,10 +18,6 @@ import com.msu.moo.util.Range;
  * to the same problem instance.
  */
 public class HypervolumeAnalyzer<P extends IProblem> extends Analyzer<P> {
-
-	
-	//! the true front for the problem (null if unknown)
-	protected NonDominatedSolutionSet trueFront = null;
 
 	// path to Fonseca's hypervolume implementation
 	protected String pathToHV = null;
@@ -32,12 +29,6 @@ public class HypervolumeAnalyzer<P extends IProblem> extends Analyzer<P> {
 		this.map = map;
 	}
 	
-	public HypervolumeAnalyzer(String pathToHV, Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> map, NonDominatedSolutionSet trueFront) {
-		super();
-		this.pathToHV = pathToHV;
-		this.map = map;
-		this.trueFront = trueFront;
-	}
 
 
 	/**
@@ -53,7 +44,16 @@ public class HypervolumeAnalyzer<P extends IProblem> extends Analyzer<P> {
 	 * @return hypervolume normalized to the estimated front
 	 */
 	public Map<IAlgorithm<P>, List<Double>> calcHypervolume() {
-		return calcHypervolume(estimateTrueFront());
+		// calculate the range for normalization
+		Range<Double> range = new Range<>();
+		for (IAlgorithm<P> algorithm : map.keySet()) {
+			for (NonDominatedSolutionSet set : map.get(algorithm)) {
+				for (Solution s : set.getSolutions()) {
+					range.add(s.getObjectives());
+				}
+			}
+		}
+		return calcHypervolume(range);
 	}
 	
 	

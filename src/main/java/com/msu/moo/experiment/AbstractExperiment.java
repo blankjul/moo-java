@@ -1,4 +1,4 @@
-package com.msu.moo.model;
+package com.msu.moo.experiment;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,12 +8,11 @@ import java.util.Map;
 import org.apache.log4j.Logger;
 
 import com.msu.moo.model.interfaces.IAlgorithm;
-import com.msu.moo.model.interfaces.IExperiment;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.Random;
 
-public abstract class AbstractExperiment<P extends IProblem> implements IExperiment {
+public abstract class AbstractExperiment<P extends IProblem>  {
 
 	static final Logger logger = Logger.getLogger(AbstractExperiment.class);
 
@@ -31,18 +30,14 @@ public abstract class AbstractExperiment<P extends IProblem> implements IExperim
 	// ! problem which should be solved
 	protected P problem = null;
 
-	// ! number of iterations for each algorithm
-	abstract public int getIterations();
 
-	// ! number of evaluations as stopping criterion
-	abstract public long getMaxEvaluations();
-
-	public Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> run() {
+	
+	public Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> run(long maxEvaluations, int iterations, long seed) {
 		
 		// initialize values
 		setProblem();
 		setAlgorithms();
-		Random.getInstance().setSeed(getSeed());
+		Random.getInstance().setSeed(seed);
 
 		if (problem == null || algorithms == null || algorithms.size() == 0)
 			throw new RuntimeException("Experiment could not be executed. Either problem or algorithms is null!");
@@ -52,7 +47,7 @@ public abstract class AbstractExperiment<P extends IProblem> implements IExperim
 
 		logger.info("Following Algorithms are used and compared: " + algorithms.toString());
 
-		NonDominatedSolutionSet trueFront = getTrueFront();
+		NonDominatedSolutionSet trueFront = getTrueFront(problem);
 		logger.info(String.format("True Front is known: %s", trueFront != null));
 
 		Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> fronts = new HashMap<>();
@@ -61,11 +56,14 @@ public abstract class AbstractExperiment<P extends IProblem> implements IExperim
 		for (IAlgorithm<P> algorithm : algorithms) {
 
 			logger.info(String.format("Startings runs for %s", algorithm));
-			algorithm.setMaxEvaluations(getMaxEvaluations());
+			algorithm.setMaxEvaluations(maxEvaluations);
 
 			List<NonDominatedSolutionSet> sets = new ArrayList<>();
-			for (int i = 0; i < getIterations(); i++) {
-				sets.add(algorithm.run(problem));
+			for (int i = 0; i < iterations; i++) {
+				NonDominatedSolutionSet set = algorithm.run(problem);
+				logger.info(String.format("[%s] Found %s non dominated solutions.", algorithm, set.size()));
+				logger.debug(set.toString());
+				sets.add(set);
 			}
 			fronts.put(algorithm, sets);
 		}
@@ -77,8 +75,7 @@ public abstract class AbstractExperiment<P extends IProblem> implements IExperim
 	 * If the true front is known you have to override this method. DEFAULT:
 	 * Front is not known and therefore this method returns null.
 	 */
-	@Override
-	public NonDominatedSolutionSet getTrueFront() {
+	public NonDominatedSolutionSet getTrueFront(P problem) {
 		return null;
 	}
 

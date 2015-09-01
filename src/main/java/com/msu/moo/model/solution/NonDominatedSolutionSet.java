@@ -72,7 +72,7 @@ public class NonDominatedSolutionSet {
 			sb.append(s.toString());
 			sb.append("\n");
 		}
-		return sb.toString();
+		return sb.substring(0, sb.length() - 1);
 	}
 	
 	public Range<Double> getRange() {
