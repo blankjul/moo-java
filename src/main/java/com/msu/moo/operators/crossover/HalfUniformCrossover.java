@@ -2,10 +2,10 @@ package com.msu.moo.operators.crossover;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import com.msu.moo.operators.AbstractListCrossover;
+import com.msu.moo.util.Random;
 
 public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 
@@ -35,7 +35,7 @@ public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 		int hammiltonDistance = indices.size();
 
 		// shuffle to ensure randomness
-		Collections.shuffle(indices);
+		Random.getInstance().shuffle(indices);
 
 		// swap half of the not equal positions 
 		// (for loop since shuffled before!)

@@ -1,24 +1,20 @@
 package com.msu.moo.fonseca;
 
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
+import com.msu.moo.util.BashExecutor;
+import com.msu.moo.util.Util;
 
 public class EmpiricalAttainmentFunction {
-	
-	//! default path to the EAF executable
-	protected String pathToEaf = "vendor/aft-0.95/eaf";
-	
-	public EmpiricalAttainmentFunction() {
-		super();
-	}
+
+	// ! default path to the EAF executable
+	protected String pathToEaf = null;
+
 
 	public EmpiricalAttainmentFunction(String pathToEaf) {
-		super();
 		this.pathToEaf = pathToEaf;
 	}
 
@@ -28,47 +24,28 @@ public class EmpiricalAttainmentFunction {
 
 	public NonDominatedSolutionSet calculate(List<NonDominatedSolutionSet> sets, int level) {
 
+		if (!Util.doesFileExist(pathToEaf)) throw new RuntimeException("Fonseca's Implementation not found!");
+		
 		// result where the value are added
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
 		String command = getCommand(sets, level);
-		Process p = null;
+		String out = BashExecutor.execute(command);
+		
+		if (out == null) return null;
 
-		try {
+		// for each line at the results
+		for (String line : out.split("\n")) {
 
-			ProcessBuilder builder = new ProcessBuilder("/bin/bash");
-			// builder.redirectErrorStream(true);
-			p = builder.start();
+			if (line.startsWith("#"))
+				continue;
 
-			BufferedWriter stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-			stdin.write(command);
-			stdin.flush();
-			stdin.close();
+			// parse the objective values from the line
+			List<Double> objectives = new ArrayList<>();
+			for (String value : line.split("\\s"))
+				objectives.add(Double.valueOf(value));
 
-			p.waitFor();
+			result.add(new Solution(null, objectives));
 
-			String out = FonsecaUtil.fromStream(p.getInputStream());
-
-			// for each line at the results
-			for (String line : out.split("\n")) {
-
-				if (line.startsWith("#"))
-					continue;
-
-				// parse the objective values from the line
-				List<Double> objectives = new ArrayList<>();
-				for (String value : line.split("\\s"))
-					objectives.add(Double.valueOf(value));
-
-				result.add(new Solution(null, objectives));
-
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			String err = FonsecaUtil.fromStream(p.getErrorStream());
-			System.out.println(err);
-			System.out.println(command);
-			throw new RuntimeException("Could not calculate Hypervolume!");
 		}
 
 		return result;

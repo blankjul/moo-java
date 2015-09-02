@@ -19,7 +19,6 @@ package com.msu.moo.operators.crossover.permutation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -77,7 +76,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 			// if there is no next node of the next one choose random!
 			if (nextList.isEmpty()) {
 				List<T> asList = new ArrayList<>(map.keySet());
-				Collections.shuffle(asList);
+				Random.getInstance().shuffle(asList);
 				next = asList.get(0);
 				
 			// else choose node with less spread of parents

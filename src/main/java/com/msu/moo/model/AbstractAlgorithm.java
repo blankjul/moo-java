@@ -1,9 +1,5 @@
 package com.msu.moo.model;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.msu.moo.fonseca.EmpiricalAttainmentFunction;
 import com.msu.moo.model.interfaces.IAlgorithm;
 import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.interfaces.IVariable;
@@ -36,17 +32,6 @@ public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem>
 		return run_(problem);
 	}
 	
-
-
-	public NonDominatedSolutionSet run(P problem, int n) {
-		List<NonDominatedSolutionSet> sets = new ArrayList<>();
-		for (int i = 0; i < n; i++) {
-			NonDominatedSolutionSet s = run(problem);
-			sets.add(s);
-		}
-		NonDominatedSolutionSet result = new EmpiricalAttainmentFunction().calculate(sets);
-		return result;
-	}
 
 	@Override
 	public void setMaxEvaluations(long n) {

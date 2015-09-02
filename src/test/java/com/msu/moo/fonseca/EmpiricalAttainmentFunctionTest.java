@@ -13,7 +13,7 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
 public class EmpiricalAttainmentFunctionTest {
 
 	
-	private EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction();
+	private EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction("vendor/aft-0.95/eaf");
 	
 	@Test
 	public void testHVNoRef() {

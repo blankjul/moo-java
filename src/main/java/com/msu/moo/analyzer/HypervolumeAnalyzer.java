@@ -67,7 +67,7 @@ public class HypervolumeAnalyzer<P extends IProblem> extends Analyzer<P> {
 		Map<IAlgorithm<P>, List<Double>> hvs = new HashMap<>();
 		
 		List<Double> referencePoint = new ArrayList<>();
-		for (int i = 0; i < range.size(); i++) referencePoint.add(1.0);
+		for (int i = 0; i < range.size(); i++) referencePoint.add(1.0001);
 
 		for (IAlgorithm<P> algorithm : map.keySet())
 		{

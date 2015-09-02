@@ -1,6 +1,5 @@
 package com.msu.moo.operators.selection;
 
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -8,6 +7,7 @@ import java.util.Queue;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.AbstractSelection;
+import com.msu.moo.util.Random;
 
 
 /**
@@ -59,7 +59,7 @@ public class BinaryTournamentSelection extends AbstractSelection {
 	
 	protected void rndPool() {
 		LinkedList<Solution> tmp = new LinkedList<>(set);
-		Collections.shuffle(tmp);
+		Random.getInstance().shuffle(tmp);
 		q = new LinkedList<>(tmp);
 	}
 

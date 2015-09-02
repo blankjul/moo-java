@@ -16,28 +16,42 @@ public abstract class AbstractExperiment<P extends IProblem>  {
 
 	static final Logger logger = Logger.getLogger(AbstractExperiment.class);
 
+	/**
+	 * Visualize the results. The subclass or the experiment by itself has to
+	 * implement this method.
+	 */
+	public abstract void visualize();
+	
+	//! path to Fonseca's EAF C Implementation
+	protected String pathToEAF = "vendor/aft-0.95/eaf";
+	
+	//! path to Fonseca's Hypervolume C Implementation
+	protected String pathToHV = "vendor/hv-1.3-src/hv";
+	
 	// ! all algorithms that should be evaluated for this experiment
 	protected abstract void setAlgorithms();
 
 	// ! all problem instances that should be solved
 	protected abstract void setProblem();
 
-	
-	
 	// algorithm that should be compared in this experiment
 	protected List<IAlgorithm<P>> algorithms = new ArrayList<>();
 
 	// ! problem which should be solved
 	protected P problem = null;
-
+	
+	protected Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> fronts = null;
+	
+	protected NonDominatedSolutionSet trueFront = null;
 
 	
 	public Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> run(long maxEvaluations, int iterations, long seed) {
 		
 		// initialize values
+		Random.getInstance().setSeed(seed);
 		setProblem();
 		setAlgorithms();
-		Random.getInstance().setSeed(seed);
+		setTrueFront(problem);
 
 		if (problem == null || algorithms == null || algorithms.size() == 0)
 			throw new RuntimeException("Experiment could not be executed. Either problem or algorithms is null!");
@@ -46,11 +60,9 @@ public abstract class AbstractExperiment<P extends IProblem>  {
 		logger.info("Execute Problem: " + problem.toString());
 
 		logger.info("Following Algorithms are used and compared: " + algorithms.toString());
-
-		NonDominatedSolutionSet trueFront = getTrueFront(problem);
 		logger.info(String.format("True Front is known: %s", trueFront != null));
 
-		Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> fronts = new HashMap<>();
+		fronts = new HashMap<>();
 
 		// calculate the result for each algorithm
 		for (IAlgorithm<P> algorithm : algorithms) {
@@ -75,9 +87,7 @@ public abstract class AbstractExperiment<P extends IProblem>  {
 	 * If the true front is known you have to override this method. DEFAULT:
 	 * Front is not known and therefore this method returns null.
 	 */
-	public NonDominatedSolutionSet getTrueFront(P problem) {
-		return null;
-	}
+	public void setTrueFront(P problem) {}
 
 	public List<IAlgorithm<P>> getAlgorithms() {
 		return algorithms;
@@ -86,6 +96,24 @@ public abstract class AbstractExperiment<P extends IProblem>  {
 	public P getProblem() {
 		return problem;
 	}
+
+	public String getPathToEAF() {
+		return pathToEAF;
+	}
+
+	public void setPathToEAF(String pathToEAF) {
+		this.pathToEAF = pathToEAF;
+	}
+
+	public String getPathToHV() {
+		return pathToHV;
+	}
+
+	public void setPathToHV(String pathToHV) {
+		this.pathToHV = pathToHV;
+	}
+	
+	
 	
 	
 	

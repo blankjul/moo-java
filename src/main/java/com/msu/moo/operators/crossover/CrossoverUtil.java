@@ -1,10 +1,9 @@
 package com.msu.moo.operators.crossover;
 
-import org.apache.commons.math3.genetics.GeneticAlgorithm;
-import org.apache.commons.math3.random.RandomGenerator;
 import org.apache.commons.math3.util.FastMath;
 
 import com.msu.moo.util.Pair;
+import com.msu.moo.util.Random;
 
 public class CrossoverUtil {
 	
@@ -14,13 +13,13 @@ public class CrossoverUtil {
 	 * @return pair of integer. lb and ub.
 	 */
 	public static Pair<Integer, Integer> getSection(int length) {
-        final RandomGenerator random = GeneticAlgorithm.getRandomGenerator();
+        final Random r = Random.getInstance();
         
         // choose random points, making sure that lb < ub.
-        int rnd1 = random.nextInt(length);
+        int rnd1 = r.nextInt(length);
         int rnd2;
         do {
-            rnd2 = random.nextInt(length);
+            rnd2 = r.nextInt(length);
         } while (rnd1 == rnd2);
         
         // determine the lower and upper bounds

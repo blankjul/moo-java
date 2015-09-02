@@ -1,5 +1,8 @@
 package com.msu.moo.util;
 
+import java.util.Collections;
+import java.util.List;
+
 /**
  * This is a random generator which provides some advanced random methods 
  * and uses the SinglePattern to be created.
@@ -67,6 +70,7 @@ public class Random {
 	 */
 	public void setSeed(long seed) {
 		this.seed = seed;
+		if (r == null) getInstance();
 		r.setSeed(seed);
 	}
 
@@ -76,6 +80,11 @@ public class Random {
 	 */
 	public long getSeed() {
 		return seed;
+	}
+	
+	
+	public void shuffle(List<?> c) {
+		Collections.shuffle(c, r);
 	}
 	
 	

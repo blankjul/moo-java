@@ -1,13 +1,11 @@
-package com.msu.moo;
+package com.msu.moo.experiment.impl;
 
-import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.OutputStreamWriter;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.algorithms.NSGAIIBuilder;
-import com.msu.moo.fonseca.FonsecaUtil;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variables.DoubleListVariable;
@@ -16,9 +14,10 @@ import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.moo.operators.crossover.SinglePointCrossover;
 import com.msu.moo.operators.mutation.PolynomialMutation;
 import com.msu.moo.problems.ZDT1;
+import com.msu.moo.util.BashExecutor;
 import com.msu.moo.visualization.ScatterPlot;
 
-public class ZDTExperiment {
+public class ZDT1Experiment {
 	
 	public static void main(String[] args) {
 
@@ -33,7 +32,9 @@ public class ZDTExperiment {
 		
 		
 		ScatterPlot sp = new ScatterPlot("ZDT1", "X", "Y");
-		sp.add(ZDTExperiment.execute(0.1).getSolutions(), "C Implementation");
+		
+		
+		sp.add(ZDT1Experiment.execute(0.1).getSolutions(), "C Implementation");
 		sp.add(builder.create().run(new ZDT1()).getSolutions(), "My Implementation SPX");
 		
 		builder.setCrossover(new SimulatedBinaryCrossover(new double[]{0d, 1d}));
@@ -41,7 +42,6 @@ public class ZDTExperiment {
 		
 		
 		sp.show();
-		System.out.println();
 	}
 	
 	
@@ -52,21 +52,18 @@ public class ZDTExperiment {
 		
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
 		String command = String.format("vendor/nsga2-gnuplot-v1.1.6/nsga2r %s <vendor/nsga2-gnuplot-v1.1.6/input_data/zdt1.in", seed);
-		Process p = null;
-		
-		try {
 
-			ProcessBuilder builder = new ProcessBuilder("/bin/bash");
-			p = builder.start();
-
-			BufferedWriter stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-			stdin.write(command);
-			stdin.flush();
-			stdin.close();
-			p.waitFor();
+			BashExecutor.execute(command);
+			FileInputStream fis;
 			
-			FileInputStream fis = new FileInputStream("plot.out");
-			String out = FonsecaUtil.fromStream(fis);
+			try {
+				fis = new FileInputStream("plot.out");
+			} catch (FileNotFoundException e) {
+				e.printStackTrace();
+				return null;
+			}
+			
+			String out = BashExecutor.fromStream(fis);
 
 			// for each line at the results
 			for (String line : out.split("\n")) {
@@ -82,24 +79,8 @@ public class ZDTExperiment {
 				result.add(new Solution(null, objectives));
 
 			}
+			BashExecutor.execute("rm *.out");
 			
-			fis.close();
-			
-			builder = new ProcessBuilder("/bin/bash");
-			p = builder.start();
-			stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-			stdin.write("rm *.out");
-			stdin.flush();
-			stdin.close();
-			
-
-		} catch (Exception e) {
-			e.printStackTrace();
-			String err = FonsecaUtil.fromStream(p.getErrorStream());
-			System.out.println(err);
-			System.out.println(command);
-			throw new RuntimeException("Could not execute the C implemenation of NSGAII!");
-		}
 		return result;
 	}
 	

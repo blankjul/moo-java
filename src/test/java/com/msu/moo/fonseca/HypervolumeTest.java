@@ -14,7 +14,7 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
 public class HypervolumeTest {
 
 	
-	private Hypervolume hv = new Hypervolume();
+	private Hypervolume hv = new Hypervolume("vendor/hv-1.3-src/hv");
 	
 	@Test
 	public void testHVNoRef() {
