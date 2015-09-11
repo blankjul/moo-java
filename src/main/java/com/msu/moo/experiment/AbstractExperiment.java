@@ -20,7 +20,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 	protected abstract Map<P, NonDominatedSolutionSet> getProblems();
 	
 	// ! visualize the results of the experiment - depends on the experiment itself
-	protected abstract void visualize();
+	public abstract void report();
 
 	
 	static final Logger logger = Logger.getLogger(AbstractExperiment.class);
@@ -32,7 +32,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 	protected Map<P, NonDominatedSolutionSet> problems = null;
 
 	// ! all the calculated fronts are saved there
-	protected ParetoFrontStorage storage = null;
+	protected ExperimentResult expResult = null;
 	
 	
 	public void run(long maxEvaluations, int iterations, long seed) {
@@ -41,7 +41,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 		Random.getInstance().setSeed(seed);
 		
 		// initialize the algorithms and experiments
-		storage = new ParetoFrontStorage();
+		expResult = new ExperimentResult();
 		algorithms = getAlgorithms();
 		problems = getProblems();
 
@@ -56,7 +56,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 			
 			
 			// store the true front even if it's null
-			storage.addTrueFront(problem, entry.getValue());
+			expResult.addTrueFront(problem, entry.getValue());
 
 			if (problems == null || algorithms == null || algorithms.size() == 0)
 				throw new RuntimeException("Experiment could not be executed. Either problem or algorithms is null!");
@@ -64,7 +64,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 
 			logger.info("Following Algorithms are used and compared: " + algorithms.toString());
 
-			storage = new ParetoFrontStorage();
+			expResult = new ExperimentResult();
 
 			// calculate the result for each algorithm
 			for (IAlgorithm<P> algorithm : algorithms) {
@@ -75,8 +75,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 				for (int i = 0; i < iterations; i++) {
 					NonDominatedSolutionSet set = algorithm.run(problem);
 					logger.info(String.format("[%s] Found %s non dominated solutions.", algorithm, set.size()));
-					logger.debug(set.toString());
-					storage.add(problem, algorithm, i, set);
+					expResult.add(problem, algorithm, i, set);
 				}
 			}
 			logger.info("All fronts were calculate and experiment is finished.");
@@ -87,8 +86,8 @@ public abstract class AbstractExperiment<P extends IProblem> {
 	 * @return the result of the experiment.
 	 * if not executed it will be null.
 	 */
-	public ParetoFrontStorage getResult() {
-		return storage;
+	public ExperimentResult getResult() {
+		return expResult;
 	}
 	
 	public static NonDominatedSolutionSet estimateTrueFront(Collection<NonDominatedSolutionSet> sets) {

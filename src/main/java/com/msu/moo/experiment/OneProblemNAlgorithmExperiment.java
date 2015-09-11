@@ -27,9 +27,9 @@ public abstract class OneProblemNAlgorithmExperiment<P extends IProblem> extends
 		return map;
 	}
 
-
+	
 	@Override
-	protected void visualize() {
+	public void report() {
 		super.visualize(problem);
 	}
 	

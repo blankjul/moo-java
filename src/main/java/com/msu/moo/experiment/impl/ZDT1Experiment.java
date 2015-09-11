@@ -25,7 +25,7 @@ public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 		BasicConfigurator.configure();
 		ZDT1Experiment exp = new ZDT1Experiment();
 		exp.run(20000, 1, 346365);
-		exp.visualize();
+		exp.report();
 	}
 
 	

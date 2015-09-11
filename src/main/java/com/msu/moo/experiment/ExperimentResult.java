@@ -14,7 +14,7 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
  * during the maxEvaluations time.
  *
  */
-public class ParetoFrontStorage {
+public class ExperimentResult {
 
 	// ! algorithm mapped to Map with has for each state the evaluation data
 	protected Map<String, NonDominatedSolutionSet> map = new HashMap<>();

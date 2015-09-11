@@ -23,7 +23,7 @@ public class KursaweExperiment extends OneProblemNAlgorithmExperiment<Kursawe> {
 		BasicConfigurator.configure();
 		KursaweExperiment exp = new KursaweExperiment();
 		exp.run(50000, 10, 1234);
-		exp.visualize();
+		exp.report();
 	}
 
 	@Override

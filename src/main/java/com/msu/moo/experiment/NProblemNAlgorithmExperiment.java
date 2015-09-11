@@ -15,7 +15,7 @@ import com.msu.moo.visualization.ScatterPlot;
 public abstract class NProblemNAlgorithmExperiment<P extends IProblem> extends AbstractExperiment<P>{
 
 	@Override
-	protected void visualize() {
+	public void report() {
 		for(P p : problems.keySet()) {
 			visualize(p);
 		}
@@ -32,12 +32,10 @@ public abstract class NProblemNAlgorithmExperiment<P extends IProblem> extends A
 		
 		ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
 		for(IAlgorithm<?> algorithm : algorithms) {
-			NonDominatedSolutionSet median = eaf.calculate(storage.get(problem, algorithm));
+			NonDominatedSolutionSet median = eaf.calculate(expResult.get(problem, algorithm));
 			sp.add(median, algorithm.toString());
 		}
 		sp.show();
-		
-		
 		
 		// plot the hypervolume
 		Hypervolume calcHV = new Hypervolume(Configuration.pathToHV);
@@ -47,14 +45,14 @@ public abstract class NProblemNAlgorithmExperiment<P extends IProblem> extends A
 		for (int i = 0; i < problem.getNumberOfObjectives(); i++) referencePoint.add(1.0001);
 		
 		// estimate true front if not given and calculate the range for normalization
-		if (trueFront == null) trueFront = AbstractExperiment.estimateTrueFront(storage.get().values());
+		if (trueFront == null) trueFront = AbstractExperiment.estimateTrueFront(expResult.get().values());
 		Range<Double> range = trueFront.getRange();
 		
 		
 		BoxPlot bp = new BoxPlot(problem.toString());
 		for (IAlgorithm<?> algorithm : algorithms) {
 			List<Double> hvs = new ArrayList<>();
-			for(NonDominatedSolutionSet set : storage.get(problem, algorithm)) {
+			for(NonDominatedSolutionSet set : expResult.get(problem, algorithm)) {
 				SolutionSet norm = set.getSolutions().normalize(range.get());
 				Double hv = calcHV.calculate(new NonDominatedSolutionSet(norm), referencePoint);
 				hvs.add(hv);

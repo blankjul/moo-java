@@ -2,7 +2,7 @@ package com.msu.moo.util;
 
 
 
-public class Factory {
+public class ObjectFactory {
 
 	public static Object create(String fullType) {
 		Class<?> c;

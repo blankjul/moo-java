@@ -51,8 +51,8 @@ public abstract class OneProblemOneAlgorithmExperiment<P extends IProblem> exten
 
 	
 	@Override
-	protected void visualize() {
-		for (Entry<String, NonDominatedSolutionSet> entry : storage.map.entrySet()) {
+	public void report() {
+		for (Entry<String, NonDominatedSolutionSet> entry : expResult.map.entrySet()) {
 			ScatterPlot sp = new ScatterPlot();
 			if (trueFront != null) sp.add(trueFront, "trueFront");
 			sp.add(entry.getValue(), entry.getKey());

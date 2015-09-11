@@ -25,6 +25,11 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	// ! random generator for this crossover
 	protected Random r = Random.getInstance();
 
+	
+	public SimulatedBinaryCrossover() {
+		super();
+	}
+	
 	public SimulatedBinaryCrossover(double[] range) {
 		super();
 		this.range = range;
