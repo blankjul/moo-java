@@ -13,21 +13,53 @@ import com.msu.moo.model.solution.Solution;
  */
 public class ExhaustiveSolver<V extends IVariable, P extends IProblem> extends AbstractAlgorithm<V,P>{
 
-
+	//! the final result set
+	protected NonDominatedSolutionSet set;
+	
+	//! how many evaluations per next
+	protected int evalsPerNext = 100;
+	
+	protected boolean hasFinished = false;
+	
+	
 	public ExhaustiveSolver(VariableFactory<V, P> factory) {
 		super(factory);
+		maxEvaluations = Long.MAX_VALUE;
+	}
+
+
+	@Override
+	protected void initialize() {
+		set = new NonDominatedSolutionSet();
 	}
 
 	@Override
-	public NonDominatedSolutionSet run_(P problem) {
-		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
-		V var = null;
-		while ((var = factory.create(problem)) != null) {
+	protected void next() {
+		if (hasFinished) return;
+		for (int i = 0; i < evalsPerNext; i++) {
+			V var = factory.create(problem);
+			if (var == null) {
+				hasFinished = true;
+				return;
+			}
 			Solution s = problem.evaluate(var);
 			set.add(s);
 		}
+	}
+
+	@Override
+	protected NonDominatedSolutionSet getResult() {
 		return set;
 	}
+
+
+	@Override
+	public boolean hasFinished() {
+		return hasFinished;
+	}
+	
+	
+	
 
 
 

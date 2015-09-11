@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
@@ -40,9 +41,14 @@ public abstract class AbstractExperiment<P extends IProblem>  {
 	// ! problem which should be solved
 	protected P problem = null;
 	
+	//! all the calculated fronts
 	protected Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> fronts = null;
 	
+	//! the true front for the problem
 	protected NonDominatedSolutionSet trueFront = null;
+	
+	//! history for saving data
+	protected ParetoFrontStorage history = new ParetoFrontStorage();
 
 	
 	public Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> run(long maxEvaluations, int iterations, long seed) {
@@ -66,7 +72,7 @@ public abstract class AbstractExperiment<P extends IProblem>  {
 
 		// calculate the result for each algorithm
 		for (IAlgorithm<P> algorithm : algorithms) {
-
+			
 			logger.info(String.format("Startings runs for %s", algorithm));
 			algorithm.setMaxEvaluations(maxEvaluations);
 
@@ -76,6 +82,14 @@ public abstract class AbstractExperiment<P extends IProblem>  {
 				logger.info(String.format("[%s] Found %s non dominated solutions.", algorithm, set.size()));
 				logger.debug(set.toString());
 				sets.add(set);
+				
+				
+				// add history data of algorithm
+				for(Entry<Long, NonDominatedSolutionSet> entry : algorithm.getHistory().entrySet()) {
+					history.add(algorithm, entry.getKey(), entry.getValue());
+				}
+				
+				
 			}
 			fronts.put(algorithm, sets);
 		}

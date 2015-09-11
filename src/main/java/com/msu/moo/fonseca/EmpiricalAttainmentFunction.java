@@ -1,6 +1,7 @@
 package com.msu.moo.fonseca;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
@@ -18,11 +19,11 @@ public class EmpiricalAttainmentFunction {
 		this.pathToEaf = pathToEaf;
 	}
 
-	public NonDominatedSolutionSet calculate(List<NonDominatedSolutionSet> sets) {
+	public NonDominatedSolutionSet calculate(Collection<NonDominatedSolutionSet> sets) {
 		return calculate(sets, (sets.size() / 2) + 1);
 	}
 
-	public NonDominatedSolutionSet calculate(List<NonDominatedSolutionSet> sets, int level) {
+	public NonDominatedSolutionSet calculate(Collection<NonDominatedSolutionSet> sets, int level) {
 
 		if (!Util.doesFileExist(pathToEaf)) throw new RuntimeException("Fonseca's Implementation not found!");
 		
@@ -51,7 +52,7 @@ public class EmpiricalAttainmentFunction {
 		return result;
 	}
 
-	protected String getCommand(List<NonDominatedSolutionSet> sets, int level) {
+	protected String getCommand(Collection<NonDominatedSolutionSet> sets, int level) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("echo -e \"");
 		for (NonDominatedSolutionSet set : sets) {

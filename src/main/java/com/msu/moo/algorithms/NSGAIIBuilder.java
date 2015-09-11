@@ -10,7 +10,7 @@ public class NSGAIIBuilder<V extends IVariable, P extends IProblem> {
 
 	protected int populationSize = 100;
 
-	protected double probMutation = 0.2;
+	protected double probMutation = 0.3;
 
 	protected AbstractCrossover<?> crossover;
 

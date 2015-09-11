@@ -25,20 +25,24 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlg
 	// ! size of the whole Population
 	protected int populationSize = 100;
 
-	protected double probMutation = 0.2;
+	//! default mutation probability
+	protected double probMutation = 0.3;
 
+	//! operator for crossover
 	protected AbstractCrossover<?> crossover;
 
+	//! operator for mutation
 	protected AbstractMutation<?> mutation;
 
-	protected NonDominatedRankIndicator rankInd = new NonDominatedRankIndicator();
-	protected CrowdingIndicator crowdInd = new CrowdingIndicator();
-
+	//! current population
+	protected SolutionSet population = null;
 	
-	P problem;
-	SolutionSet population = null;
-	Map<Solution, Integer> rank;
-	Map<Solution, Double> crowding;
+	//! rank for the whole population
+	protected Map<Solution, Integer> rank;
+	
+	//! crowding distance for the whole population
+	protected Map<Solution, Double> crowding;
+	
 
 	public NSGAII(VariableFactory<V, P> factory, AbstractCrossover<?> crossover, AbstractMutation<?> mutation) {
 		super(factory);
@@ -46,58 +50,19 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlg
 		this.crossover = crossover;
 	}
 
-	
+
+	protected void calcRankAndCrowding(SolutionSet population) {
+		NonDominatedRankIndicator rankInd = new NonDominatedRankIndicator();
+		rank = rankInd.calculate(population);
+		crowding = new HashMap<>();
+		for (NonDominatedSolutionSet set : rankInd.getNonDominatedSets()) {
+			CrowdingIndicator crowdInd = new CrowdingIndicator();
+			crowdInd.calculate(crowding, set.getSolutions());
+		}
+	}
 
 	@Override
-	public NonDominatedSolutionSet run_(P problem) {
-
-		this.problem = problem;
-		
-		// create structures and initialize the population 
-		initizalize();
-		
-		// calculate Rank and Crowding for the initial population
-		// it is necessary for the BinaryTournamentSelection
-		calcRankAndCrowding(population);
-
-
-		// if stopping condition false -> more evaluations -> next generation
-		while (maxEvaluations > problem.getNumOfEvaluations()) {
-
-			// binary tournament selection for mating
-			BinaryTournamentSelection bts = new BinaryTournamentSelection(population,
-					new RankAndCrowdingComparator(rank, crowding));
-
-			// create offspring population until size two times
-			SolutionSet offsprings = new SolutionSet(populationSize);
-			while (offsprings.size() < populationSize) {
-				// crossover
-				List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable());
-				// mutation
-				for (IVariable offspring : off) {
-					if (Random.getInstance().nextDouble() < this.probMutation) offspring = mutation.mutate(offspring);
-					offsprings.add(problem.evaluate(offspring));
-				}
-			}
-
-			// merge population and offsprings
-			population.addAll(offsprings);
-
-			// survival of the best population
-			calcRankAndCrowding(population);
-			population.sort(new RankAndCrowdingComparator(rank, crowding));
-			Collections.reverse(population);
-
-			population = new SolutionSet(population.subList(0, populationSize));
-			
-		}
-
-		return new NonDominatedSolutionSet(population);
-	}
-	
-	
-	
-	protected void initizalize() {
+	protected void initialize() {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();
@@ -106,15 +71,58 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlg
 		for (int i = 0; i < populationSize; i++) {
 			population.add(problem.evaluate(factory.create(problem)));
 		}
+
+		// calculate Rank and Crowding for the initial population
+		// it is necessary for the BinaryTournamentSelection
+		calcRankAndCrowding(population);
+
+	}
+
+	@Override
+	protected void next() {
+		// binary tournament selection for mating
+		BinaryTournamentSelection bts = new BinaryTournamentSelection(population, new RankAndCrowdingComparator(rank, crowding));
+
+		// create offspring population until size two times
+		SolutionSet offsprings = new SolutionSet(populationSize);
+		while (offsprings.size() < populationSize) {
+			// crossover
+			List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable());
+			// mutation
+			for (IVariable offspring : off) {
+				if (Random.getInstance().nextDouble() < this.probMutation)
+					offspring = mutation.mutate(offspring);
+				offsprings.add(problem.evaluate(offspring));
+			}
+		}
+
+		// merge population and offsprings
+		population.addAll(offsprings);
+
+		// survival of the best population
+		calcRankAndCrowding(population);
+		population.sort(new RankAndCrowdingComparator(rank, crowding));
+		Collections.reverse(population);
+
+		population = new SolutionSet(population.subList(0, populationSize));
+
+	}
+
+	@Override
+	protected NonDominatedSolutionSet getResult() {
+		return new NonDominatedSolutionSet(population);
+	}
+
+
+	public int getPopulationSize() {
+		return populationSize;
+	}
+
+
+	public void setPopulationSize(int populationSize) {
+		this.populationSize = populationSize;
 	}
 	
-	protected void calcRankAndCrowding(SolutionSet population) {
-		rank = rankInd.calculate(population);
-		crowding = new HashMap<>();
-		for (NonDominatedSolutionSet set : rankInd.getNonDominatedSets()) {
-			crowdInd.calculate(crowding, set.getSolutions());
-		}
-	}
 	
 
 }

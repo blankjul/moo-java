@@ -54,10 +54,9 @@ public class Solution {
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (Double obj : getObjectives()) {
-			sb.append(obj);
-			sb.append(" ");
-		}
+		sb.append(variable);
+		sb.append(" -> ");
+		sb.append(objectives);
 		return sb.toString();
 	}
 

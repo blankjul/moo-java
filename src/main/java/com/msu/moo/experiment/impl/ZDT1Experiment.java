@@ -12,7 +12,7 @@ import com.msu.moo.model.variables.DoubleListVariable;
 import com.msu.moo.model.variables.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.moo.operators.crossover.SinglePointCrossover;
-import com.msu.moo.operators.mutation.PolynomialMutation;
+import com.msu.moo.operators.mutation.RealMutation;
 import com.msu.moo.problems.ZDT1;
 import com.msu.moo.util.BashExecutor;
 import com.msu.moo.visualization.ScatterPlot;
@@ -27,15 +27,15 @@ public class ZDT1Experiment {
 		builder
 		.setFactory(fac)
 		.setCrossover(new SinglePointCrossover<>())
-		.setMutation(new PolynomialMutation(new Double[] { 0d, 1d }))
+		.setMutation(new RealMutation(new Double[] { 0d, 1d }))
 		.setMaxEvaluations(20000);
 		
 		
 		ScatterPlot sp = new ScatterPlot("ZDT1", "X", "Y");
 		
 		
-		sp.add(ZDT1Experiment.execute(0.1).getSolutions(), "C Implementation");
-		sp.add(builder.create().run(new ZDT1()).getSolutions(), "My Implementation SPX");
+		sp.add(ZDT1Experiment.execute(0.6).getSolutions(), "C Implementation");
+		//sp.add(builder.create().run(new ZDT1()).getSolutions(), "My Implementation SPX");
 		
 		builder.setCrossover(new SimulatedBinaryCrossover(new double[]{0d, 1d}));
 		sp.add(builder.create().run(new ZDT1()).getSolutions(), "My Implementation SBX");

@@ -36,6 +36,8 @@ public class MedianFrontAnalyzer<P extends IProblem> extends Analyzer<P>{
 		return medianFronts;
 	}
 	
+
+	
 	
 
 }

@@ -17,7 +17,10 @@ public class NonDominatedSolutionSet {
 	public NonDominatedSolutionSet() {
 		super();
 	}
-
+	
+	public NonDominatedSolutionSet(NonDominatedSolutionSet set) {
+		for(Solution s : set.solutions) solutions.add(s);
+	}
 
 	public NonDominatedSolutionSet(List<Solution> solutions) {
 		for (Solution s : solutions) add(s);
@@ -72,6 +75,7 @@ public class NonDominatedSolutionSet {
 			sb.append(s.toString());
 			sb.append("\n");
 		}
+		if (sb.length() == 0) return "";
 		return sb.substring(0, sb.length() - 1);
 	}
 	

@@ -1,5 +1,7 @@
 package com.msu.moo.model.interfaces;
 
+import java.util.Map;
+
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public interface IAlgorithm<P extends IProblem> {
@@ -18,6 +20,13 @@ public interface IAlgorithm<P extends IProblem> {
 	 * @return maximal number of evaluations that should be allowed
 	 */
 	public void setMaxEvaluations(long n);
+	
+	
+	/**
+	 * @return all the history values of the algorithms
+	 */
+	public Map<Long, NonDominatedSolutionSet> getHistory(); 
+	
 
 	/**
 	 * @return the name of this algorithm or instance with different parameters

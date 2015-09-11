@@ -28,10 +28,7 @@ public abstract class SingeĺeObjectiveExperiment<P extends IProblem> extends Ab
 				System.out.println(String.format("%s,%s", values, algorithm));
 			}
 			bp.show();
-		
-		
-		
-		
+
 	}
 
 }

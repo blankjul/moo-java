@@ -34,7 +34,7 @@ public class KursaweExperiment extends MultiObjectiveExperiment<Kursawe> {
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		KursaweExperiment exp = new KursaweExperiment();
-		exp.run(50000, 10, 12337657);
+		exp.run(5000, 10, 1234);
 		exp.visualize();
 	}
 

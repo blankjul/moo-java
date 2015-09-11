@@ -80,7 +80,7 @@ public class SolutionSet extends ArrayList<Solution>{
 			double max = boundaries.get(i).second;
 			
 			//if (min == max) throw new RuntimeException("Error when normalizing: Min is equal to Max!");
-			if (min == max) min = min - 0.00001;
+			if (min == max) min = min - 0.0001;
 			
 			for (int k = 0; k < size(); k++) {
 				double value = this.get(k).getObjectives().get(i);

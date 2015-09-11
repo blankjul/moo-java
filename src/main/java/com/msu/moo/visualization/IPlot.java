@@ -9,5 +9,6 @@ public interface IPlot {
 	 * @return chart frame to make it visible
 	 */
 	public JFreeChart getChart();
+	
 
 }

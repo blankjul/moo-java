@@ -15,6 +15,10 @@ public class ScatterPlot extends Abstract2DPlot {
 	public ScatterPlot() {
 		super();
 	}
+	
+	public ScatterPlot(String title) {
+		super(title);
+	}
 
 	public ScatterPlot(String title, String xLabel, String yLabel) {
 		super(title, xLabel, yLabel);

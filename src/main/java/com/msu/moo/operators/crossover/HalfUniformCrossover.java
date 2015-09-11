@@ -19,7 +19,6 @@ public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 		for (int i = 0; i < a.size(); i++) {
 			if (!a.get(i).equals(b.get(i)))
 				l.add(i);
-			;
 		}
 		return l;
 	}
@@ -41,8 +40,8 @@ public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 		// (for loop since shuffled before!)
 		for (int i = 0; i < hammiltonDistance / 2.0; i++) {
 			int idx = indices.get(i);
-			c1.set(i, b.get(idx));
-			c2.set(i, a.get(idx));
+			c1.set(idx, b.get(idx));
+			c2.set(idx, a.get(idx));
 		}
 
 		return new ArrayList<>(Arrays.asList(c1, c2));
