@@ -6,6 +6,7 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 
@@ -41,6 +42,11 @@ public class ScatterPlot extends Abstract2DPlot {
 		for (Solution s : set) series.add(s.getObjectives().get(0), s.getObjectives().get(1));
 		collection.addSeries(series);
 	}
+	
+	public void add(NonDominatedSolutionSet set, String name) {
+		add(set.getSolutions(), name);
+	}
+	
 	
 
 	@Override

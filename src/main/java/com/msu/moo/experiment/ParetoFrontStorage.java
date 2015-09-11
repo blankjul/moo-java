@@ -1,40 +1,64 @@
 package com.msu.moo.experiment;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.Multimap;
 import com.msu.moo.model.interfaces.IAlgorithm;
+import com.msu.moo.model.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 /**
- * This class is responsible to store all the fronts from the algorithms.
- * Also during the maxEvaluations time.
+ * This class is responsible to store all the fronts from the algorithms. Also
+ * during the maxEvaluations time.
  *
  */
 public class ParetoFrontStorage {
-	
-	//! algorithm mapped to Map with has for each state the evaluation data
-	protected Map<IAlgorithm<?>, Multimap<Long, NonDominatedSolutionSet>> map = new HashMap<>();
-	
-	
-	public void add(IAlgorithm<?> algorithm, long evaluations, NonDominatedSolutionSet set) {
-		
-		if (map.get(algorithm) == null) {
-			Multimap<Long,NonDominatedSolutionSet> res = HashMultimap.create();
-			map.put(algorithm, res);
+
+	// ! algorithm mapped to Map with has for each state the evaluation data
+	protected Map<String, NonDominatedSolutionSet> map = new HashMap<>();
+
+	public void add(IProblem problem, IAlgorithm<?> algorithm, int iteration, NonDominatedSolutionSet set) {
+		String key = String.format("p%s_a%s_i%s", problem, algorithm, iteration);
+		map.put(key, set);
+	}
+
+	public void addTrueFront(IProblem problem, NonDominatedSolutionSet set) {
+		String key = String.format("p%s", problem);
+		map.put(key, set);
+	}
+
+	public NonDominatedSolutionSet get(IProblem problem, IAlgorithm<?> algorithm, int iteration) {
+		String key = String.format("p%s_a%s_i%s", problem, algorithm, iteration);
+		return map.get(key);
+	}
+
+	public NonDominatedSolutionSet getTrueFront(IProblem problem) {
+		String key = String.format("p%s", problem);
+		return map.get(key);
+	}
+
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Map.Entry<String, NonDominatedSolutionSet> entry : map.entrySet()) {
+			sb.append(entry);
 		}
-		Multimap<Long,NonDominatedSolutionSet> multiMap = map.get(algorithm);
-		multiMap.put(evaluations, set);
+		return sb.toString();
 	}
-	
-	public Multimap<Long, NonDominatedSolutionSet> get(IAlgorithm<?> a) {
-		return map.get(a);
+
+	public Map<String, NonDominatedSolutionSet> get() {
+		return map;
 	}
-	
-	
-	
-	
+
+	public List<NonDominatedSolutionSet> get(IProblem problem, IAlgorithm<?> algorithm) {
+		List<NonDominatedSolutionSet> result = new ArrayList<>();
+		for(String key : map.keySet()) {
+			if (key.startsWith(String.format("p%s_a%s_i", problem, algorithm))) {
+				result.add(map.get(key));
+			}
+		}
+		return result;
+	}
 
 }

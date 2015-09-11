@@ -48,7 +48,6 @@ public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem>
 		
 		initialize();
 		
-		
 		while (!hasFinished()) {
 			next();
 			if (recordHistory) history.put(problem.getNumOfEvaluations(), getResult());

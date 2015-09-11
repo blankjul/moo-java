@@ -5,49 +5,55 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.BasicConfigurator;
+
 import com.msu.moo.algorithms.NSGAIIBuilder;
+import com.msu.moo.experiment.OneProblemOneAlgorithmExperiment;
+import com.msu.moo.model.interfaces.IAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variables.DoubleListVariable;
 import com.msu.moo.model.variables.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
-import com.msu.moo.operators.crossover.SinglePointCrossover;
 import com.msu.moo.operators.mutation.RealMutation;
 import com.msu.moo.problems.ZDT1;
 import com.msu.moo.util.BashExecutor;
-import com.msu.moo.visualization.ScatterPlot;
 
-public class ZDT1Experiment {
+public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 	
 	public static void main(String[] args) {
+		BasicConfigurator.configure();
+		ZDT1Experiment exp = new ZDT1Experiment();
+		exp.run(20000, 1, 346365);
+		exp.visualize();
+	}
 
+	
+	@Override
+	protected IAlgorithm<ZDT1> getAlgorithm() {
 		DoubleListVariableFactory<ZDT1> fac = new DoubleListVariableFactory<ZDT1>(30, new double[] { 0d, 1d });
-		
 		NSGAIIBuilder<DoubleListVariable, ZDT1> builder = new NSGAIIBuilder<>();
+		
 		builder
 		.setFactory(fac)
-		.setCrossover(new SinglePointCrossover<>())
-		.setMutation(new RealMutation(new Double[] { 0d, 1d }))
-		.setMaxEvaluations(20000);
+		.setCrossover(new SimulatedBinaryCrossover(new double[]{0.0, 1.0}))
+		.setMutation(new RealMutation(new Double[] { 0d, 1d }));
 		
-		
-		ScatterPlot sp = new ScatterPlot("ZDT1", "X", "Y");
-		
-		
-		sp.add(ZDT1Experiment.execute(0.6).getSolutions(), "C Implementation");
-		//sp.add(builder.create().run(new ZDT1()).getSolutions(), "My Implementation SPX");
-		
-		builder.setCrossover(new SimulatedBinaryCrossover(new double[]{0d, 1d}));
-		sp.add(builder.create().run(new ZDT1()).getSolutions(), "My Implementation SBX");
-		
-		
-		sp.show();
+		return builder.create();
 	}
-	
-	
 
-	public static NonDominatedSolutionSet execute(double seed) {
-		
+
+
+	@Override
+	protected ZDT1 getProblem() {
+		return new ZDT1();
+	}
+
+
+
+	@Override
+	protected NonDominatedSolutionSet getTrueFront() {
+		double seed = 0.8;
 		if (seed <= 0 || seed >= 1) throw new RuntimeException("Seed is out of bounds!");
 		
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
