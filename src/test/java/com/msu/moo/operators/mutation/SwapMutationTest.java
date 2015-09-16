@@ -1,6 +1,5 @@
 package com.msu.moo.operators.mutation;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 import java.util.ArrayList;
@@ -16,9 +15,6 @@ public class SwapMutationTest {
 		
 		public SwapMutationMock() {
 			super();
-		}
-		public SwapMutationMock(Integer minIndex) {
-			super(minIndex);
 		}
 		public void mutate_(List<T> l) {
 			super.mutate_(l);
@@ -42,16 +38,6 @@ public class SwapMutationTest {
 		assertNotEquals(l, org);
 	}
 	
-	@Test
-	public void testSwapNotTheFirstPosition() {
-		swapMutation = new SwapMutationMock<>(1);
-		for (int i = 0; i < 20; i++) {
-			l = new ArrayList<>(org);
-			swapMutation.mutate_(l);
-			assertEquals(l.get(0), new Integer(0));
-		}
-
-	}
 	
 	
 

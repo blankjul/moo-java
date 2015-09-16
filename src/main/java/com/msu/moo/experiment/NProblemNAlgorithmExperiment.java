@@ -1,4 +1,5 @@
 package com.msu.moo.experiment;import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.msu.moo.Configuration;
@@ -14,15 +15,7 @@ import com.msu.moo.visualization.ScatterPlot;
 
 public abstract class NProblemNAlgorithmExperiment<P extends IProblem> extends AbstractExperiment<P>{
 
-	@Override
-	public void report() {
-		for(P p : problems.keySet()) {
-			visualize(p);
-		}
-		
-	}
 
-	
 	protected void visualize(P problem) {
 		
 		NonDominatedSolutionSet trueFront = problems.get(problem);
@@ -32,7 +25,8 @@ public abstract class NProblemNAlgorithmExperiment<P extends IProblem> extends A
 		
 		ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
 		for(IAlgorithm<?> algorithm : algorithms) {
-			NonDominatedSolutionSet median = eaf.calculate(expResult.get(problem, algorithm));
+			Collection<NonDominatedSolutionSet> set = expResult.get(problem, algorithm);
+			NonDominatedSolutionSet median = eaf.calculate(set);
 			sp.add(median, algorithm.toString());
 		}
 		sp.show();
@@ -63,6 +57,15 @@ public abstract class NProblemNAlgorithmExperiment<P extends IProblem> extends A
 		
 	
 	}
+	
+	@Override
+	public void report() {
+		for(P p : problems.keySet()) {
+			visualize(p);
+		}
+	}
+
+	
 
 
 }

@@ -1,0 +1,45 @@
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult}{\section{com.\-msu.\-moo.\-experiment.\-Experiment\-Result Class Reference}
+\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult}\index{com.\-msu.\-moo.\-experiment.\-Experiment\-Result@{com.\-msu.\-moo.\-experiment.\-Experiment\-Result}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_a225f98f23ab87253bd91f037517aa43d}{void {\bfseries add} (\hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem}{I\-Problem} problem, I\-Algorithm$<$?$>$ algorithm, \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} set)}\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_a225f98f23ab87253bd91f037517aa43d}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_ad5e42824165c0405debca2182e9cd8a6}{void {\bfseries add\-True\-Front} (\hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem}{I\-Problem} problem, \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} set)}\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_ad5e42824165c0405debca2182e9cd8a6}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_afb01e5643dd559c8e8d59fa96d691572}{\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} {\bfseries get\-True\-Front} (\hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem}{I\-Problem} problem)}\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_afb01e5643dd559c8e8d59fa96d691572}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_a4d691c059cd70f300640f4d25000e906}{String {\bfseries to\-String} ()}\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_a4d691c059cd70f300640f4d25000e906}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_a194d3ea8a71e110c658aed14854e1aad}{Multimap$<$ String, \\*
+\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} $>$ {\bfseries get} ()}\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_a194d3ea8a71e110c658aed14854e1aad}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_a3a4d41e0bf3f059631ebab864b53b436}{Collection\\*
+$<$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} $>$ {\bfseries get} (\hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem}{I\-Problem} problem, I\-Algorithm$<$?$>$ algorithm)}\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_a3a4d41e0bf3f059631ebab864b53b436}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_afaccbbdd221d2fbbe9f2d7d7915b26c8}{Multimap$<$ String, \\*
+\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} $>$ {\bfseries map} = Hash\-Multimap.\-create()}\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_afaccbbdd221d2fbbe9f2d7d7915b26c8}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_aa617707bfa9f7eb1766276a7cdd22413}{Map$<$ \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem}{I\-Problem}, \\*
+\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} $>$ {\bfseries m\-True\-Fronts} = new Hash\-Map$<$$>$()}\label{classcom_1_1msu_1_1moo_1_1experiment_1_1ExperimentResult_aa617707bfa9f7eb1766276a7cdd22413}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class is responsible to store all the fronts from the algorithms. Also during the max\-Evaluations time. 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/msu/moo/experiment/Experiment\-Result.\-java\end{DoxyCompactItemize}

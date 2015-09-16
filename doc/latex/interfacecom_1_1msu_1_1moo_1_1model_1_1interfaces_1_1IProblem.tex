@@ -1,0 +1,94 @@
+\hypertarget{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem}{\section{com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem Interface Reference}
+\label{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem}\index{com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem@{com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem}}
+}
+Inheritance diagram for com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_a1ac7c52476b19b10a1e167551b9ead19}{evaluate} (\hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IVariable}{I\-Variable} variable)
+\item 
+long \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_ad7dba60e3a3412017890543d3a0250b8}{get\-Num\-Of\-Evaluations} ()
+\item 
+void \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_aca88ee486dcb7d96a218e76ea5034522}{reset} ()
+\item 
+int \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_a3cac50c0c388545d9c70ac6893911c9f}{get\-Number\-Of\-Objectives} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This interface defines the values of a problem.
+
+Each problem needs to have a evaluation method that has a predefined input I and output o
+
+
+\begin{DoxyParams}{Parameters}
+{\em $<$\-T$>$} & variable as input \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_a1ac7c52476b19b10a1e167551b9ead19}{\index{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem@{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!com::msu::moo::model::interfaces::IProblem@{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem}}
+\subsubsection[{evaluate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Solution} com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem.\-evaluate (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Variable}}]{variable}
+\end{DoxyParamCaption}
+)}}\label{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_a1ac7c52476b19b10a1e167551b9ead19}
+Returns the result of the problem according to the variable 
+\begin{DoxyParams}{Parameters}
+{\em variable} & extends \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IVariable}{I\-Variable} and could be problem specific. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Solution object which contains the result. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a9ed0a86fb3bb92cda13cd331013dcc00}{com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends I\-Variable $>$}.
+
+\hypertarget{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_a3cac50c0c388545d9c70ac6893911c9f}{\index{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem@{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem}!get\-Number\-Of\-Objectives@{get\-Number\-Of\-Objectives}}
+\index{get\-Number\-Of\-Objectives@{get\-Number\-Of\-Objectives}!com::msu::moo::model::interfaces::IProblem@{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem}}
+\subsubsection[{get\-Number\-Of\-Objectives}]{\setlength{\rightskip}{0pt plus 5cm}int com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem.\-get\-Number\-Of\-Objectives (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_a3cac50c0c388545d9c70ac6893911c9f}
+\begin{DoxyReturn}{Returns}
+number of objectives that should be optimized! 
+\end{DoxyReturn}
+\hypertarget{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_ad7dba60e3a3412017890543d3a0250b8}{\index{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem@{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem}!get\-Num\-Of\-Evaluations@{get\-Num\-Of\-Evaluations}}
+\index{get\-Num\-Of\-Evaluations@{get\-Num\-Of\-Evaluations}!com::msu::moo::model::interfaces::IProblem@{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem}}
+\subsubsection[{get\-Num\-Of\-Evaluations}]{\setlength{\rightskip}{0pt plus 5cm}long com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem.\-get\-Num\-Of\-Evaluations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_ad7dba60e3a3412017890543d3a0250b8}
+\begin{DoxyReturn}{Returns}
+number of evaluations so far. 
+\end{DoxyReturn}
+
+
+Implemented in \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a6d774087779671d0478dcc5beb25c7b9}{com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends I\-Variable $>$}.
+
+\hypertarget{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_aca88ee486dcb7d96a218e76ea5034522}{\index{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem@{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem}!reset@{reset}}
+\index{reset@{reset}!com::msu::moo::model::interfaces::IProblem@{com\-::msu\-::moo\-::model\-::interfaces\-::\-I\-Problem}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem.\-reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}}\label{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_aca88ee486dcb7d96a218e76ea5034522}
+Reset all evaluations, hashes and so on! 
+
+Implemented in \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_ae3d2d54f9ada94985968dc96a03d22df}{com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends I\-Variable $>$}.
+
+
+
+The documentation for this interface was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/msu/moo/model/interfaces/I\-Problem.\-java\end{DoxyCompactItemize}

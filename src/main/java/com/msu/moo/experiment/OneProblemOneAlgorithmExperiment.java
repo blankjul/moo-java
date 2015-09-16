@@ -27,9 +27,6 @@ public abstract class OneProblemOneAlgorithmExperiment<P extends IProblem> exten
 	// return the problem instance
 	protected abstract P getProblem();
 
-	// return the true front - null if unknown
-	protected abstract NonDominatedSolutionSet getTrueFront();
-
 	protected P problem = null;
 	protected NonDominatedSolutionSet trueFront = null;
 	protected IAlgorithm<P> algorithm = null;
@@ -52,7 +49,7 @@ public abstract class OneProblemOneAlgorithmExperiment<P extends IProblem> exten
 	
 	@Override
 	public void report() {
-		for (Entry<String, NonDominatedSolutionSet> entry : expResult.map.entrySet()) {
+		for (Entry<String, NonDominatedSolutionSet> entry : expResult.map.entries()) {
 			ScatterPlot sp = new ScatterPlot();
 			if (trueFront != null) sp.add(trueFront, "trueFront");
 			sp.add(entry.getValue(), entry.getKey());

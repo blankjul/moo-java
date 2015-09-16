@@ -1,0 +1,99 @@
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4}{\section{com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends I\-Variable $>$ Class Reference}
+\label{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4}\index{com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends I\-Variable $>$@{com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends I\-Variable $>$}}
+}
+Inheritance diagram for com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends I\-Variable $>$\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+long \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a6d774087779671d0478dcc5beb25c7b9}{get\-Num\-Of\-Evaluations} ()
+\item 
+void \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_ae3d2d54f9ada94985968dc96a03d22df}{reset} ()
+\item 
+\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a9ed0a86fb3bb92cda13cd331013dcc00}{evaluate} (\hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IVariable}{I\-Variable} variable)
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a5574c3ea3a28a568915c01ca05e8f01d}{String {\bfseries to\-String} ()}\label{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a5574c3ea3a28a568915c01ca05e8f01d}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+abstract List$<$ Double $>$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_ae71651f19f19117959d846be540d9331}{evaluate\-\_\-} (V variable)
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a55efd9266ee5e7e6affa618ba532e7ce}{long {\bfseries num\-Of\-Evaluations} = 0}\label{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a55efd9266ee5e7e6affa618ba532e7ce}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a9ed0a86fb3bb92cda13cd331013dcc00}{\index{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$@{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$}!evaluate@{evaluate}}
+\index{evaluate@{evaluate}!com::msu::moo::model::AbstractProblem< V extends IVariable >@{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$}}
+\subsubsection[{evaluate}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Solution} com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends {\bf I\-Variable} $>$.evaluate (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Variable}}]{variable}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a9ed0a86fb3bb92cda13cd331013dcc00}
+Returns the result of the problem according to the variable 
+\begin{DoxyParams}{Parameters}
+{\em variable} & extends I\-Variable and could be problem specific. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Solution object which contains the result. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_a1ac7c52476b19b10a1e167551b9ead19}{com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem}.
+
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_ae71651f19f19117959d846be540d9331}{\index{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$@{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$}!evaluate\-\_\-@{evaluate\-\_\-}}
+\index{evaluate\-\_\-@{evaluate\-\_\-}!com::msu::moo::model::AbstractProblem< V extends IVariable >@{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$}}
+\subsubsection[{evaluate\-\_\-}]{\setlength{\rightskip}{0pt plus 5cm}abstract List$<$Double$>$ com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends {\bf I\-Variable} $>$.evaluate\-\_\- (
+\begin{DoxyParamCaption}
+\item[{V}]{variable}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [abstract]}, {\ttfamily [protected]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_ae71651f19f19117959d846be540d9331}
+Evaluation method that must be implemented by all subclasses. 
+\begin{DoxyParams}{Parameters}
+{\em variable} & input value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+objective results 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a6d774087779671d0478dcc5beb25c7b9}{\index{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$@{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$}!get\-Num\-Of\-Evaluations@{get\-Num\-Of\-Evaluations}}
+\index{get\-Num\-Of\-Evaluations@{get\-Num\-Of\-Evaluations}!com::msu::moo::model::AbstractProblem< V extends IVariable >@{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$}}
+\subsubsection[{get\-Num\-Of\-Evaluations}]{\setlength{\rightskip}{0pt plus 5cm}long com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends {\bf I\-Variable} $>$.get\-Num\-Of\-Evaluations (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_a6d774087779671d0478dcc5beb25c7b9}
+\begin{DoxyReturn}{Returns}
+number of evaluations so far. 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_ad7dba60e3a3412017890543d3a0250b8}{com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem}.
+
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_ae3d2d54f9ada94985968dc96a03d22df}{\index{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$@{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$}!reset@{reset}}
+\index{reset@{reset}!com::msu::moo::model::AbstractProblem< V extends IVariable >@{com\-::msu\-::moo\-::model\-::\-Abstract\-Problem$<$ V extends I\-Variable $>$}}
+\subsubsection[{reset}]{\setlength{\rightskip}{0pt plus 5cm}void com.\-msu.\-moo.\-model.\-Abstract\-Problem$<$ V extends {\bf I\-Variable} $>$.reset (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1AbstractProblem_3_01V_01extends_01IVariable_01_4_ae3d2d54f9ada94985968dc96a03d22df}
+Reset all evaluations, hashes and so on! 
+
+Implements \hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IProblem_aca88ee486dcb7d96a218e76ea5034522}{com.\-msu.\-moo.\-model.\-interfaces.\-I\-Problem}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/msu/moo/model/Abstract\-Problem.\-java\end{DoxyCompactItemize}

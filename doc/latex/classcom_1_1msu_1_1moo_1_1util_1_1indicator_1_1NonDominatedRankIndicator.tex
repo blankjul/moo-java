@@ -1,0 +1,47 @@
+\hypertarget{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator}{\section{com.\-msu.\-moo.\-util.\-indicator.\-Non\-Dominated\-Rank\-Indicator Class Reference}
+\label{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator}\index{com.\-msu.\-moo.\-util.\-indicator.\-Non\-Dominated\-Rank\-Indicator@{com.\-msu.\-moo.\-util.\-indicator.\-Non\-Dominated\-Rank\-Indicator}}
+}
+Inheritance diagram for com.\-msu.\-moo.\-util.\-indicator.\-Non\-Dominated\-Rank\-Indicator\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_a04eacae8ef154e5593e09c7555e1fbaf}{{\bfseries Non\-Dominated\-Rank\-Indicator} (\hyperlink{interfacecom_1_1msu_1_1moo_1_1util_1_1sorting_1_1NonDominatedSorting}{Non\-Dominated\-Sorting} sort)}\label{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_a04eacae8ef154e5593e09c7555e1fbaf}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_ac8b518291937a08166a49ddf378f4d25}{void {\bfseries calculate} (Map$<$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution}, Integer $>$ map, \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionSet}{Solution\-Set} solutions)}\label{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_ac8b518291937a08166a49ddf378f4d25}
+
+\item 
+List$<$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} $>$ \hyperlink{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_a01b03eefb37e8b671fb00ef0a605d340}{get\-Non\-Dominated\-Sets} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_af6ad2ed42de0ccdb8a9c13b54a9ff0a1}{\hyperlink{interfacecom_1_1msu_1_1moo_1_1util_1_1sorting_1_1NonDominatedSorting}{Non\-Dominated\-Sorting} {\bfseries sort} = new \hyperlink{classcom_1_1msu_1_1moo_1_1util_1_1sorting_1_1NaiveNonDominatedSorting}{Naive\-Non\-Dominated\-Sorting}()}\label{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_af6ad2ed42de0ccdb8a9c13b54a9ff0a1}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_abc1e889225e500ab0b5e3478b4521c32}{List$<$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} $>$ \hyperlink{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_abc1e889225e500ab0b5e3478b4521c32}{sets} = null}\label{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_abc1e889225e500ab0b5e3478b4521c32}
+
+\begin{DoxyCompactList}\small\item\em when you have calculated the fronts you have access to the list of fronts. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_a01b03eefb37e8b671fb00ef0a605d340}{\index{com\-::msu\-::moo\-::util\-::indicator\-::\-Non\-Dominated\-Rank\-Indicator@{com\-::msu\-::moo\-::util\-::indicator\-::\-Non\-Dominated\-Rank\-Indicator}!get\-Non\-Dominated\-Sets@{get\-Non\-Dominated\-Sets}}
+\index{get\-Non\-Dominated\-Sets@{get\-Non\-Dominated\-Sets}!com::msu::moo::util::indicator::NonDominatedRankIndicator@{com\-::msu\-::moo\-::util\-::indicator\-::\-Non\-Dominated\-Rank\-Indicator}}
+\subsubsection[{get\-Non\-Dominated\-Sets}]{\setlength{\rightskip}{0pt plus 5cm}List$<${\bf Non\-Dominated\-Solution\-Set}$>$ com.\-msu.\-moo.\-util.\-indicator.\-Non\-Dominated\-Rank\-Indicator.\-get\-Non\-Dominated\-Sets (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1util_1_1indicator_1_1NonDominatedRankIndicator_a01b03eefb37e8b671fb00ef0a605d340}
+\begin{DoxyReturn}{Returns}
+all the fronts that were used to determine the rank of each solution 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/msu/moo/util/indicator/Non\-Dominated\-Rank\-Indicator.\-java\end{DoxyCompactItemize}

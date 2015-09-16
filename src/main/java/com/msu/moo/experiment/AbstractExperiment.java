@@ -64,8 +64,6 @@ public abstract class AbstractExperiment<P extends IProblem> {
 
 			logger.info("Following Algorithms are used and compared: " + algorithms.toString());
 
-			expResult = new ExperimentResult();
-
 			// calculate the result for each algorithm
 			for (IAlgorithm<P> algorithm : algorithms) {
 
@@ -75,7 +73,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 				for (int i = 0; i < iterations; i++) {
 					NonDominatedSolutionSet set = algorithm.run(problem);
 					logger.info(String.format("[%s] Found %s non dominated solutions.", algorithm, set.size()));
-					expResult.add(problem, algorithm, i, set);
+					expResult.add(problem, algorithm, set);
 				}
 			}
 			logger.info("All fronts were calculate and experiment is finished.");
@@ -98,6 +96,13 @@ public abstract class AbstractExperiment<P extends IProblem> {
 		return estimatedFront;
 	}
 	
+	
+	
+	// return the true front - null if unknown
+	protected NonDominatedSolutionSet getTrueFront() {
+		return null;
+	}
+
 	
 
 }

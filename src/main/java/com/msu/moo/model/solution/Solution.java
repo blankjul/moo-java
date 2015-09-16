@@ -29,6 +29,13 @@ public class Solution {
 	}
 
 	/**
+	 * @return nth objective
+	 */
+	public Double getObjectives(int n) {
+		return objectives.get(n);
+	}
+	
+	/**
 	 * @return all objectives
 	 */
 	public List<Double> getObjectives() {

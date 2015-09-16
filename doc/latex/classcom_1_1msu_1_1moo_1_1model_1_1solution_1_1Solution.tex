@@ -1,0 +1,68 @@
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{\section{com.\-msu.\-moo.\-model.\-solution.\-Solution Class Reference}
+\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}\index{com.\-msu.\-moo.\-model.\-solution.\-Solution@{com.\-msu.\-moo.\-model.\-solution.\-Solution}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a759abac5dda1b043f5b0e6eda2326fc9}{Solution} (\hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IVariable}{I\-Variable} variable, List$<$ Double $>$ objectives)
+\item 
+List$<$ Double $>$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a82ad1dc142a62508d5c18dd17d3eaf1c}{get\-Objectives} ()
+\item 
+\hyperlink{interfacecom_1_1msu_1_1moo_1_1model_1_1interfaces_1_1IVariable}{I\-Variable} \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_ad5bb8160a7db2be6a161683362a13e33}{get\-Variable} ()
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a72a3ed4642fd006574ed1790464cfc53}{int {\bfseries count\-Objectives} ()}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a72a3ed4642fd006574ed1790464cfc53}
+
+\item 
+String \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a4e9941d11c66d5bf0288c867540b1b19}{to\-String} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This class combines the variable with the result in the objective space. Each instance is I\-M\-M\-U\-T\-A\-B\-L\-E which means a solution that is calculate could not be altered anymore.
+
+This concept ensure to forget to reevaluate a solution which means result and variables does not fit anymore. 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a759abac5dda1b043f5b0e6eda2326fc9}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution}!Solution@{Solution}}
+\index{Solution@{Solution}!com::msu::moo::model::solution::Solution@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution}}
+\subsubsection[{Solution}]{\setlength{\rightskip}{0pt plus 5cm}com.\-msu.\-moo.\-model.\-solution.\-Solution.\-Solution (
+\begin{DoxyParamCaption}
+\item[{{\bf I\-Variable}}]{variable, }
+\item[{List$<$ Double $>$}]{objectives}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a759abac5dda1b043f5b0e6eda2326fc9}
+Construct an immutable solution object 
+
+\subsection{Member Function Documentation}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a82ad1dc142a62508d5c18dd17d3eaf1c}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution}!get\-Objectives@{get\-Objectives}}
+\index{get\-Objectives@{get\-Objectives}!com::msu::moo::model::solution::Solution@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution}}
+\subsubsection[{get\-Objectives}]{\setlength{\rightskip}{0pt plus 5cm}List$<$Double$>$ com.\-msu.\-moo.\-model.\-solution.\-Solution.\-get\-Objectives (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a82ad1dc142a62508d5c18dd17d3eaf1c}
+\begin{DoxyReturn}{Returns}
+all objectives 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_ad5bb8160a7db2be6a161683362a13e33}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution}!get\-Variable@{get\-Variable}}
+\index{get\-Variable@{get\-Variable}!com::msu::moo::model::solution::Solution@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution}}
+\subsubsection[{get\-Variable}]{\setlength{\rightskip}{0pt plus 5cm}{\bf I\-Variable} com.\-msu.\-moo.\-model.\-solution.\-Solution.\-get\-Variable (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_ad5bb8160a7db2be6a161683362a13e33}
+\begin{DoxyReturn}{Returns}
+all variables 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a4e9941d11c66d5bf0288c867540b1b19}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution}!to\-String@{to\-String}}
+\index{to\-String@{to\-String}!com::msu::moo::model::solution::Solution@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution}}
+\subsubsection[{to\-String}]{\setlength{\rightskip}{0pt plus 5cm}String com.\-msu.\-moo.\-model.\-solution.\-Solution.\-to\-String (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution_a4e9941d11c66d5bf0288c867540b1b19}
+Print only the objectives 
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/msu/moo/model/solution/Solution.\-java\end{DoxyCompactItemize}

@@ -1,0 +1,68 @@
+\hypertarget{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot}{\section{com.\-msu.\-moo.\-visualization.\-Scatter\-Plot Class Reference}
+\label{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot}\index{com.\-msu.\-moo.\-visualization.\-Scatter\-Plot@{com.\-msu.\-moo.\-visualization.\-Scatter\-Plot}}
+}
+Inheritance diagram for com.\-msu.\-moo.\-visualization.\-Scatter\-Plot\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_ae1641035e865ac60aa17ec5be881fdf6}{{\bfseries Scatter\-Plot} (String title)}\label{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_ae1641035e865ac60aa17ec5be881fdf6}
+
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_ad4155b5893e37944768a35b90ede23e4}{{\bfseries Scatter\-Plot} (String title, String x\-Label, String y\-Label)}\label{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_ad4155b5893e37944768a35b90ede23e4}
+
+\item 
+void \hyperlink{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_abf7740669f9017367f5ac05899179854}{add} (\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionSet}{Solution\-Set} set, String name)
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_a00d6f928daa34c96950eb780c8bff4b8}{void {\bfseries add} (\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1NonDominatedSolutionSet}{Non\-Dominated\-Solution\-Set} set, String name)}\label{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_a00d6f928daa34c96950eb780c8bff4b8}
+
+\item 
+J\-Free\-Chart \hyperlink{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_a1c5117bd94b91e9ae2f59c1c025b243b}{get\-Chart} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_aa1dbce1c6b6c7a1a98eca2df5f871d44}{X\-Y\-Series\-Collection {\bfseries collection} = new X\-Y\-Series\-Collection()}\label{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_aa1dbce1c6b6c7a1a98eca2df5f871d44}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_abf7740669f9017367f5ac05899179854}{\index{com\-::msu\-::moo\-::visualization\-::\-Scatter\-Plot@{com\-::msu\-::moo\-::visualization\-::\-Scatter\-Plot}!add@{add}}
+\index{add@{add}!com::msu::moo::visualization::ScatterPlot@{com\-::msu\-::moo\-::visualization\-::\-Scatter\-Plot}}
+\subsubsection[{add}]{\setlength{\rightskip}{0pt plus 5cm}void com.\-msu.\-moo.\-visualization.\-Scatter\-Plot.\-add (
+\begin{DoxyParamCaption}
+\item[{{\bf Solution\-Set}}]{set, }
+\item[{String}]{name}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_abf7740669f9017367f5ac05899179854}
+Add a solution set to scatter plot! 
+\begin{DoxyParams}{Parameters}
+{\em set} & with the data points. Must be 2\-D in objective space!! \\
+\hline
+{\em name} & of the data set \\
+\hline
+\end{DoxyParams}
+\hypertarget{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_a1c5117bd94b91e9ae2f59c1c025b243b}{\index{com\-::msu\-::moo\-::visualization\-::\-Scatter\-Plot@{com\-::msu\-::moo\-::visualization\-::\-Scatter\-Plot}!get\-Chart@{get\-Chart}}
+\index{get\-Chart@{get\-Chart}!com::msu::moo::visualization::ScatterPlot@{com\-::msu\-::moo\-::visualization\-::\-Scatter\-Plot}}
+\subsubsection[{get\-Chart}]{\setlength{\rightskip}{0pt plus 5cm}J\-Free\-Chart com.\-msu.\-moo.\-visualization.\-Scatter\-Plot.\-get\-Chart (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1visualization_1_1ScatterPlot_a1c5117bd94b91e9ae2f59c1c025b243b}
+Every Plot needs the chart frame to visualize the results \begin{DoxyReturn}{Returns}
+chart frame to make it visible 
+\end{DoxyReturn}
+
+
+Implements \hyperlink{interfacecom_1_1msu_1_1moo_1_1visualization_1_1IPlot_ae45c2987d112fbf5bc5af7864fb50ecd}{com.\-msu.\-moo.\-visualization.\-I\-Plot}.
+
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/msu/moo/visualization/Scatter\-Plot.\-java\end{DoxyCompactItemize}

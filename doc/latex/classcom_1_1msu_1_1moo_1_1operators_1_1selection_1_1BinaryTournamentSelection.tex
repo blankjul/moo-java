@@ -1,0 +1,70 @@
+\hypertarget{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection}{\section{com.\-msu.\-moo.\-operators.\-selection.\-Binary\-Tournament\-Selection Class Reference}
+\label{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection}\index{com.\-msu.\-moo.\-operators.\-selection.\-Binary\-Tournament\-Selection@{com.\-msu.\-moo.\-operators.\-selection.\-Binary\-Tournament\-Selection}}
+}
+Inheritance diagram for com.\-msu.\-moo.\-operators.\-selection.\-Binary\-Tournament\-Selection\-:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection}
+\end{center}
+\end{figure}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a278003df852eb1ec89e0b41d313fcd01}{Binary\-Tournament\-Selection} (\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionSet}{Solution\-Set} \hyperlink{classcom_1_1msu_1_1moo_1_1operators_1_1AbstractSelection_ade84bd57f9d26c9d9b2e90bb6591b79c}{set}, Comparator$<$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} $>$ \hyperlink{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_ad167c5ef80c4ad0a0f1741bea8be5117}{cmp})
+\item 
+\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} \hyperlink{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a061f5f41208fcecb04a559e7ed6e32d7}{next} ()
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a05157f4022e4c1785b25f8028a7e3e79}{void {\bfseries rnd\-Pool} ()}\label{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a05157f4022e4c1785b25f8028a7e3e79}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_ad167c5ef80c4ad0a0f1741bea8be5117}{Comparator$<$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} $>$ \hyperlink{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_ad167c5ef80c4ad0a0f1741bea8be5117}{cmp}}\label{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_ad167c5ef80c4ad0a0f1741bea8be5117}
+
+\begin{DoxyCompactList}\small\item\em Comparator for choosing which solution is better. \end{DoxyCompactList}\item 
+\hypertarget{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a1df311edb47efc73fc8401436c821168}{Queue$<$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} $>$ \hyperlink{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a1df311edb47efc73fc8401436c821168}{q} = null}\label{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a1df311edb47efc73fc8401436c821168}
+
+\begin{DoxyCompactList}\small\item\em current pool which is used for the selection \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This is a binary tournament select which could be used for sending always to individuals to a tournament and choose the winner by using a comparator! 
+
+\subsection{Constructor \& Destructor Documentation}
+\hypertarget{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a278003df852eb1ec89e0b41d313fcd01}{\index{com\-::msu\-::moo\-::operators\-::selection\-::\-Binary\-Tournament\-Selection@{com\-::msu\-::moo\-::operators\-::selection\-::\-Binary\-Tournament\-Selection}!Binary\-Tournament\-Selection@{Binary\-Tournament\-Selection}}
+\index{Binary\-Tournament\-Selection@{Binary\-Tournament\-Selection}!com::msu::moo::operators::selection::BinaryTournamentSelection@{com\-::msu\-::moo\-::operators\-::selection\-::\-Binary\-Tournament\-Selection}}
+\subsubsection[{Binary\-Tournament\-Selection}]{\setlength{\rightskip}{0pt plus 5cm}com.\-msu.\-moo.\-operators.\-selection.\-Binary\-Tournament\-Selection.\-Binary\-Tournament\-Selection (
+\begin{DoxyParamCaption}
+\item[{{\bf Solution\-Set}}]{set, }
+\item[{Comparator$<$ {\bf Solution} $>$}]{cmp}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a278003df852eb1ec89e0b41d313fcd01}
+Construct a binary tournament selector 
+\begin{DoxyParams}{Parameters}
+{\em set} & which should be used for selection \\
+\hline
+{\em cmp} & comparator which defines the winner of the tournament \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\hypertarget{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a061f5f41208fcecb04a559e7ed6e32d7}{\index{com\-::msu\-::moo\-::operators\-::selection\-::\-Binary\-Tournament\-Selection@{com\-::msu\-::moo\-::operators\-::selection\-::\-Binary\-Tournament\-Selection}!next@{next}}
+\index{next@{next}!com::msu::moo::operators::selection::BinaryTournamentSelection@{com\-::msu\-::moo\-::operators\-::selection\-::\-Binary\-Tournament\-Selection}}
+\subsubsection[{next}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Solution} com.\-msu.\-moo.\-operators.\-selection.\-Binary\-Tournament\-Selection.\-next (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection_a061f5f41208fcecb04a559e7ed6e32d7}
+Create a binary tournament, choose the winner. If the pool is empty there is created a new one! \begin{DoxyReturn}{Returns}
+winner of the tournament 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/msu/moo/operators/selection/Binary\-Tournament\-Selection.\-java\end{DoxyCompactItemize}

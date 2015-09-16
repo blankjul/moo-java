@@ -24,6 +24,9 @@ public abstract class AbstractMutation<T> {
 			return result;
 			
 		} catch (Exception e){
+			System.out.println(a.getClass().getName());
+			System.out.println(a);
+			e.printStackTrace();
 			throw new RuntimeException("Mutation could not be performed. Wrong IVariable types!");
 		}
 

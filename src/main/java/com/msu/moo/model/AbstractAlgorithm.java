@@ -12,8 +12,7 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
 public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem> implements IAlgorithm<P> {
 
 
-	// ! initialize the algorithm
-	protected abstract void initialize();
+
 
 	// ! execute the next iteration step
 	protected abstract void next();
@@ -37,11 +36,23 @@ public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem>
 	protected boolean recordHistory = true;
 	protected Map<Long, NonDominatedSolutionSet> history = new TreeMap<>();
 
+	
+
+	
+	public AbstractAlgorithm() {
+		super();
+	}
+
 	public AbstractAlgorithm(VariableFactory<V, P> factory) {
 		super();
 		this.factory = factory;
 	}
-
+	
+	// ! initialize the algorithm shoud be overridden if needed
+	protected void initialize() {
+	};
+	
+	
 	public NonDominatedSolutionSet run(P problem) {
 		this.problem = problem;
 		this.problem.reset();

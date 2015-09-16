@@ -20,51 +20,13 @@ import com.msu.moo.util.Util;
  */
 public class SwapMutation<T> extends AbstractMutation<List<T>>{
 
-	
-	//! minimal index to swap
-	protected Integer minIndex = 0;
-	
-	//! maximal index to swap
-	protected Integer maxIndex = null;
-	
-	
-	/**
-	 * Create a standard swap mutation
-	 */
-	public SwapMutation() {
-		super();
-	}
-	
-	
-	/**
-	 * Constructor for only set the minimal index
-	 */
-	public SwapMutation(Integer minIndex) {
-		super();
-		this.minIndex = minIndex;
-	}
-
-	
-	/**
-	 * Constructor for setting the whole range of swapping
-	 */
-	public SwapMutation(Integer minIndex, Integer maxIndex) {
-		super();
-		this.minIndex = minIndex;
-		this.maxIndex = maxIndex;
-	}
-
-
 
 	@Override
 	protected void mutate_(List<T> obj) {
 		
-		if (maxIndex == null) maxIndex = obj.size()-1;
-		
 		// search for two random positions
-		
-		int a = Random.getInstance().nextInt(minIndex, maxIndex);
-		int b = Random.getInstance().nextInt(minIndex, maxIndex);
+		int a = Random.getInstance().nextInt(0, obj.size()-1);
+		int b = Random.getInstance().nextInt(0, obj.size()-1);
 		
 		// swap this two!
 		Util.swap(obj, a, b);

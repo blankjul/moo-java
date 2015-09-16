@@ -1,0 +1,83 @@
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator}{\section{com.\-msu.\-moo.\-model.\-solution.\-Solution\-Dominator Class Reference}
+\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator}\index{com.\-msu.\-moo.\-model.\-solution.\-Solution\-Dominator@{com.\-msu.\-moo.\-model.\-solution.\-Solution\-Dominator}}
+}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+boolean \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_acd28c6c22e3049f8a92faf5011921603}{is\-Dominating} (\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s1, \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s2)
+\item 
+boolean \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_ad946cb0ebc46915b52be8437ed3cf0cb}{is\-Dominated\-By} (\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s1, \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s2)
+\item 
+boolean \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_a89704420da7d4b13392e11dfc6fa25f7}{is\-Equal} (\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s1, \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s2)
+\item 
+boolean \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_aec7ffa1eadc2b9f2c5102f33eed4be9c}{is\-Indifferent} (\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s1, \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s2)
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+Pair$<$ List$<$ Double $>$, List\\*
+$<$ Double $>$ $>$ \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_a99dc57e590efafd86490f85bb7d2beb9}{get\-Objectives} (\hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s1, \hyperlink{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1Solution}{Solution} s2)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+This interface compares different solutions regarding their domination. Basically, there are the three methods which defines domination, non-\/domination or equality. 
+
+\subsection{Member Function Documentation}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_a99dc57e590efafd86490f85bb7d2beb9}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}!get\-Objectives@{get\-Objectives}}
+\index{get\-Objectives@{get\-Objectives}!com::msu::moo::model::solution::SolutionDominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}}
+\subsubsection[{get\-Objectives}]{\setlength{\rightskip}{0pt plus 5cm}Pair$<$List$<$Double$>$, List$<$Double$>$ $>$ com.\-msu.\-moo.\-model.\-solution.\-Solution\-Dominator.\-get\-Objectives (
+\begin{DoxyParamCaption}
+\item[{{\bf Solution}}]{s1, }
+\item[{{\bf Solution}}]{s2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_a99dc57e590efafd86490f85bb7d2beb9}
+Check if the objective space is the same \hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_ad946cb0ebc46915b52be8437ed3cf0cb}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}!is\-Dominated\-By@{is\-Dominated\-By}}
+\index{is\-Dominated\-By@{is\-Dominated\-By}!com::msu::moo::model::solution::SolutionDominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}}
+\subsubsection[{is\-Dominated\-By}]{\setlength{\rightskip}{0pt plus 5cm}boolean com.\-msu.\-moo.\-model.\-solution.\-Solution\-Dominator.\-is\-Dominated\-By (
+\begin{DoxyParamCaption}
+\item[{{\bf Solution}}]{s1, }
+\item[{{\bf Solution}}]{s2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_ad946cb0ebc46915b52be8437ed3cf0cb}
+\begin{DoxyReturn}{Returns}
+true if s2 dominates s1 (false when equal) 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_acd28c6c22e3049f8a92faf5011921603}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}!is\-Dominating@{is\-Dominating}}
+\index{is\-Dominating@{is\-Dominating}!com::msu::moo::model::solution::SolutionDominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}}
+\subsubsection[{is\-Dominating}]{\setlength{\rightskip}{0pt plus 5cm}boolean com.\-msu.\-moo.\-model.\-solution.\-Solution\-Dominator.\-is\-Dominating (
+\begin{DoxyParamCaption}
+\item[{{\bf Solution}}]{s1, }
+\item[{{\bf Solution}}]{s2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_acd28c6c22e3049f8a92faf5011921603}
+\begin{DoxyReturn}{Returns}
+true if s1 dominates s2 (false when equal) 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_a89704420da7d4b13392e11dfc6fa25f7}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}!is\-Equal@{is\-Equal}}
+\index{is\-Equal@{is\-Equal}!com::msu::moo::model::solution::SolutionDominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}}
+\subsubsection[{is\-Equal}]{\setlength{\rightskip}{0pt plus 5cm}boolean com.\-msu.\-moo.\-model.\-solution.\-Solution\-Dominator.\-is\-Equal (
+\begin{DoxyParamCaption}
+\item[{{\bf Solution}}]{s1, }
+\item[{{\bf Solution}}]{s2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_a89704420da7d4b13392e11dfc6fa25f7}
+\begin{DoxyReturn}{Returns}
+true if both objectives vectors are equal. the variable is not checked for equality! 
+\end{DoxyReturn}
+\hypertarget{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_aec7ffa1eadc2b9f2c5102f33eed4be9c}{\index{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}!is\-Indifferent@{is\-Indifferent}}
+\index{is\-Indifferent@{is\-Indifferent}!com::msu::moo::model::solution::SolutionDominator@{com\-::msu\-::moo\-::model\-::solution\-::\-Solution\-Dominator}}
+\subsubsection[{is\-Indifferent}]{\setlength{\rightskip}{0pt plus 5cm}boolean com.\-msu.\-moo.\-model.\-solution.\-Solution\-Dominator.\-is\-Indifferent (
+\begin{DoxyParamCaption}
+\item[{{\bf Solution}}]{s1, }
+\item[{{\bf Solution}}]{s2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [inline]}}}\label{classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionDominator_aec7ffa1eadc2b9f2c5102f33eed4be9c}
+\begin{DoxyReturn}{Returns}
+true if both solutions are indifferent to each other, which means no solution dominates the other one or is dominated by. The solution are not allowed to be equal! 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\-:\begin{DoxyCompactItemize}
+\item 
+src/main/java/com/msu/moo/model/solution/Solution\-Dominator.\-java\end{DoxyCompactItemize}

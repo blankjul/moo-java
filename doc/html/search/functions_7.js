@@ -1,0 +1,7 @@
+var searchData=
+[
+  ['next',['next',['../classcom_1_1msu_1_1moo_1_1operators_1_1AbstractSelection.html#aa76e453252464eaca1d9337a41e4ade0',1,'com.msu.moo.operators.AbstractSelection.next()'],['../classcom_1_1msu_1_1moo_1_1operators_1_1AbstractSelection.html#a5b460b6d8320e9dd02fa8f12bd2e1e75',1,'com.msu.moo.operators.AbstractSelection.next(int n)'],['../classcom_1_1msu_1_1moo_1_1operators_1_1selection_1_1BinaryTournamentSelection.html#a061f5f41208fcecb04a559e7ed6e32d7',1,'com.msu.moo.operators.selection.BinaryTournamentSelection.next()']]],
+  ['nextdouble',['nextDouble',['../classcom_1_1msu_1_1moo_1_1util_1_1Random.html#a32a22b76a2c1daad772e43957dd6dd7a',1,'com.msu.moo.util.Random.nextDouble()'],['../classcom_1_1msu_1_1moo_1_1util_1_1Random.html#ab5d98f443d08e6809931e62a5fcf83ae',1,'com.msu.moo.util.Random.nextDouble(double min, double max)']]],
+  ['nextint',['nextInt',['../classcom_1_1msu_1_1moo_1_1util_1_1Random.html#af3b71ad155c4513eaaa8b1556767ff26',1,'com.msu.moo.util.Random.nextInt(int max)'],['../classcom_1_1msu_1_1moo_1_1util_1_1Random.html#ac9e121017e7630611ecfbc7e440cf7a9',1,'com.msu.moo.util.Random.nextInt(int min, int max)']]],
+  ['normalize',['normalize',['../classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionSet.html#aebb7c5bcbf150314a27655b2947aa7c2',1,'com.msu.moo.model.solution.SolutionSet.normalize()'],['../classcom_1_1msu_1_1moo_1_1model_1_1solution_1_1SolutionSet.html#ae807e94a6e92b9e61de2794d50172d08',1,'com.msu.moo.model.solution.SolutionSet.normalize(List&lt; Pair&lt; Double, Double &gt;&gt; boundaries)']]]
+];
