@@ -22,9 +22,9 @@ public class RandomSearch<V extends IVariable, P extends IProblem> extends Abstr
 	}
 
 	@Override
-	public NonDominatedSolutionSet run(Evaluator<P> evaluator, long maxEvaluations) {
+	public NonDominatedSolutionSet run(Evaluator<P> evaluator) {
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
-		while (factory.hasNext() && evaluator.getEvaluations() < maxEvaluations) {
+		while (factory.hasNext() && evaluator.hasNext()) {
 			V var = factory.next(evaluator.getProblem());
 			Solution s = evaluator.evaluate(var);
 			set.add(s);

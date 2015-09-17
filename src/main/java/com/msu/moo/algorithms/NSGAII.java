@@ -60,13 +60,13 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlg
 	}
 
 	@Override
-	public NonDominatedSolutionSet run(Evaluator<P> evaluator, long maxEvaluations) {
+	public NonDominatedSolutionSet run(Evaluator<P> evaluator) {
 
 		// initialize the population and calculate also rank and crowding
 		P problem = evaluator.getProblem();
 		initialize(problem);
 
-		while (evaluator.getEvaluations() < maxEvaluations) {
+		while (evaluator.hasNext()) {
 
 			// binary tournament selection for mating
 			BinaryTournamentSelection bts = new BinaryTournamentSelection(population, new RankAndCrowdingComparator(rank, crowding));

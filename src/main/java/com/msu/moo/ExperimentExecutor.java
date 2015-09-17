@@ -20,7 +20,7 @@ public class ExperimentExecutor {
 	protected final static int ITERATIONS = 1;
 	
 	//! max evaluations per run
-	protected final static long MAX_EVALUATIONS = 10000;
+	protected final static int MAX_EVALUATIONS = 10000;
 	
 	//! random seed for experiment execution
 	protected final static long SEED = 8979654;		

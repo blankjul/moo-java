@@ -21,7 +21,7 @@ public class ExhaustiveSolver<V extends IVariable, P extends IProblem> extends R
 	}
 
 	@Override
-	public NonDominatedSolutionSet run(Evaluator<P> evaluator, long maxEvaluations) {
+	public NonDominatedSolutionSet run(Evaluator<P> evaluator) {
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		while (factory.hasNext()) {
 			V var = factory.next(evaluator.getProblem());

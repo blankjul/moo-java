@@ -36,7 +36,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 	protected ExperimentResult expResult = null;
 	
 	
-	public void run(long maxEvaluations, int iterations, long seed) {
+	public void run(int maxEvaluations, int iterations, long seed) {
 
 		// set the random seed that the results will be comparable 
 		Random.getInstance().setSeed(seed);
@@ -71,7 +71,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 				logger.info(String.format("Startings runs for %s", algorithm));
 
 				for (int i = 0; i < iterations; i++) {
-					NonDominatedSolutionSet set = algorithm.run(new Evaluator<P>(problem), maxEvaluations);
+					NonDominatedSolutionSet set = algorithm.run(new Evaluator<P>(problem, maxEvaluations));
 					logger.info(String.format("[%s] Found %s non dominated solutions.", algorithm, set.size()));
 					expResult.add(problem, algorithm, set);
 				}

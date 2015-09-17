@@ -21,9 +21,16 @@ public class Evaluator<P extends IProblem> {
 	// ! current amount of evaluations
 	protected int evaluations = 0;
 
+	// ! current amount of evaluations
+	protected Integer maxEvaluations = null;
+
 	public Evaluator(P problem) {
-		super();
 		this.problem = problem;
+	}
+
+	public Evaluator(P problem, int maxEvaluations) {
+		this.problem = problem;
+		this.maxEvaluations = maxEvaluations;
 	}
 
 	public Solution evaluate(IVariable variable) {
@@ -37,6 +44,20 @@ public class Evaluator<P extends IProblem> {
 
 	public int getEvaluations() {
 		return evaluations;
+	}
+
+	public Evaluator<P> setEvaluations(int maxEvaluations) {
+		this.maxEvaluations = maxEvaluations;
+		return this;
+	}
+
+	/**
+	 * @return whether further evaluations are allowed or not
+	 */
+	public boolean hasNext() {
+		if (maxEvaluations == null)
+			return true;
+		return evaluations < maxEvaluations;
 	}
 
 }
