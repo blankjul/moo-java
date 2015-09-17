@@ -1,7 +1,6 @@
 package com.msu.moo.experiment;
 
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.common.collect.HashMultimap;
@@ -16,24 +15,26 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
  *
  */
 public class ExperimentResult {
+	
+	protected ExperimetSettings<?> settings;
 
 	// ! algorithm mapped to Map with has for each state the evaluation data
 	protected Multimap<String, NonDominatedSolutionSet> map = HashMultimap.create();
 	
-	protected Map<IProblem, NonDominatedSolutionSet> mTrueFronts = new HashMap<>();
 	
-	
+	public ExperimentResult(ExperimetSettings<?> settings) {
+		super();
+		this.settings = settings;
+	}
+
 	public void add(IProblem problem, IAlgorithm<?> algorithm, NonDominatedSolutionSet set) {
 		String key = String.format("p%s_a%s", problem, algorithm);
 		map.put(key, set);
 	}
 
-	public void addTrueFront(IProblem problem, NonDominatedSolutionSet set) {
-		mTrueFronts.put(problem, set);
-	}
 
 	public NonDominatedSolutionSet getTrueFront(IProblem problem) {
-		return mTrueFronts.get(problem);
+		return settings.mFronts.get(problem);
 	}
 
 	public String toString() {
@@ -51,6 +52,10 @@ public class ExperimentResult {
 	public Collection<NonDominatedSolutionSet> get(IProblem problem, IAlgorithm<?> algorithm) {
 		String key = String.format("p%s_a%s", problem, algorithm);
 		return map.get(key);
+	}
+
+	public ExperimetSettings<?> getSettings() {
+		return settings;
 	}
 
 

@@ -11,8 +11,8 @@ import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.visualization.BoxPlot;
-import com.msu.moo.visualization.ScatterPlot;
+import com.msu.moo.util.plots.BoxPlot;
+import com.msu.moo.util.plots.ScatterPlot;
 
 public class FrontUtil {
 

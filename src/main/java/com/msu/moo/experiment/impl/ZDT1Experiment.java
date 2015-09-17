@@ -38,10 +38,10 @@ public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 	protected ZDT1 getProblem() {
 		return new ZDT1();
 	}
+	
 
-
-	@Override
 	protected NonDominatedSolutionSet getTrueFront() {
+		
 		double seed = 0.8;
 		if (seed <= 0 || seed >= 1) throw new RuntimeException("Seed is out of bounds!");
 		
@@ -75,7 +75,6 @@ public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 
 			}
 			BashExecutor.execute("rm *.out");
-			
 		return result;
 	}
 	

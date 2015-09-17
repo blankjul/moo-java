@@ -51,10 +51,13 @@ public class NSGAIIBuilder<V extends IVariable, P extends IProblem> {
 	}
 	
 	public NSGAII<V, P> create() {
-		NSGAII<V, P> nsgaII = new NSGAII<>(factory, crossover, mutation);
+		NSGAII<V, P> nsgaII = new NSGAII<>();
 		if (name != null) nsgaII.setName(name);
 		nsgaII.populationSize = populationSize;
 		nsgaII.probMutation = probMutation;
+		nsgaII.factory = factory;
+		nsgaII.crossover = crossover; 
+		nsgaII.mutation = mutation;
 		return nsgaII;
 	}
 

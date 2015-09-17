@@ -1,12 +1,11 @@
 package com.msu.moo.experiment.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.algorithms.NSGAII;
+import com.msu.moo.algorithms.NSGAIIBuilder;
 import com.msu.moo.algorithms.RandomSearch;
+import com.msu.moo.experiment.ExperimetSettings;
 import com.msu.moo.experiment.OneProblemNAlgorithmExperiment;
-import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.model.variables.DoubleListVariable;
 import com.msu.moo.model.variables.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SinglePointCrossover;
@@ -15,7 +14,6 @@ import com.msu.moo.problems.Kursawe;
 
 public class KursaweExperiment extends OneProblemNAlgorithmExperiment<Kursawe> {
 
-
 	@Override
 	protected Kursawe getProblem() {
 		return new Kursawe();
@@ -23,19 +21,20 @@ public class KursaweExperiment extends OneProblemNAlgorithmExperiment<Kursawe> {
 
 
 	@Override
-	protected List<IAlgorithm<Kursawe>> getAlgorithms() {
-		List<IAlgorithm<Kursawe>> result= new ArrayList<>();
+	protected void setAlgorithms(ExperimetSettings<Kursawe> settings) {
 		
 		DoubleListVariableFactory<Kursawe> fac = new DoubleListVariableFactory<Kursawe>(3, new double[] { -5, 5 });
-		NSGAII<DoubleListVariable, Kursawe> nsgaII = new NSGAII<DoubleListVariable, Kursawe>(fac, new SinglePointCrossover<List<Double>>(),
-				new PolynomialMutation(new Double[] { -5.0, 5.0 }));
-		result.add(nsgaII);
+		NSGAIIBuilder<DoubleListVariable, Kursawe> builder = new NSGAIIBuilder<>();
+		builder .setFactory(fac)
+				.setCrossover(new SinglePointCrossover<List<Double>>())
+				.setMutation(new PolynomialMutation(new Double[] { -5.0, 5.0 }));
+		settings.addAlgorithm(builder.create());
 		
-		RandomSearch<DoubleListVariable, Kursawe> s = new RandomSearch<>(fac);
-		result.add(s);
 		
-		return result;
+		settings.addAlgorithm(new RandomSearch<>(fac));
+		
 	}
+
 
 	
 

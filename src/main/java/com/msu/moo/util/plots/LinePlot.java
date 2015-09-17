@@ -1,4 +1,4 @@
-package com.msu.moo.visualization;
+package com.msu.moo.util.plots;
 
 import java.awt.Color;
 import java.util.List;

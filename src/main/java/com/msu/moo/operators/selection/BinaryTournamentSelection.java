@@ -31,7 +31,7 @@ public class BinaryTournamentSelection extends AbstractSelection {
 	public BinaryTournamentSelection(SolutionSet set, Comparator<Solution> cmp) {
 		super(set);
 		if (set.size() < 2) {
-			throw new RuntimeException("For the tournament selection the solultion set has to be higher than 2!");
+			throw new RuntimeException("For the tournament selection the SolutionSet has to be larger than 2!");
 		}
 		this.cmp = cmp;
 	}

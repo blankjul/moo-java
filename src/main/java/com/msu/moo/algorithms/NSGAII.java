@@ -53,23 +53,20 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlg
 	// ! current population
 	protected SolutionSet population = null;
 
-	public NSGAII(IVariableFactory<V, P> factory, AbstractCrossover<?> crossover, AbstractMutation<?> mutation) {
-		this.factory = factory;
-		this.mutation = mutation;
-		this.crossover = crossover;
-	}
+	//! private constructor! use the builder!
+	protected NSGAII() {}
 
 	@Override
 	public NonDominatedSolutionSet run(Evaluator<P> evaluator) {
 
 		// initialize the population and calculate also rank and crowding
-		P problem = evaluator.getProblem();
-		initialize(problem);
+		initialize(evaluator);
 
 		while (evaluator.hasNext()) {
 
 			// binary tournament selection for mating
-			BinaryTournamentSelection bts = new BinaryTournamentSelection(population, new RankAndCrowdingComparator(rank, crowding));
+			BinaryTournamentSelection bts = new BinaryTournamentSelection(population, 
+					new RankAndCrowdingComparator(rank, crowding));
 
 			// create offspring population until size two times
 			SolutionSet offsprings = new SolutionSet(populationSize);
@@ -97,14 +94,14 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlg
 		return new NonDominatedSolutionSet(population);
 	}
 
-	protected void initialize(P problem) {
+	protected void initialize(Evaluator<P> evaluator) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();
 		// initialize the population with populationSize
 		population = new SolutionSet(populationSize * 2);
 		for (int i = 0; i < populationSize; i++) {
-			population.add(problem.evaluate(factory.next(problem)));
+			population.add(evaluator.evaluate(factory.next(evaluator.getProblem())));
 		}
 
 		// calculate Rank and Crowding for the initial population
