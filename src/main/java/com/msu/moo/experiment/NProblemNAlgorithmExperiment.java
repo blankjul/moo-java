@@ -5,8 +5,8 @@ import java.util.List;
 import com.msu.moo.Configuration;
 import com.msu.moo.fonseca.EmpiricalAttainmentFunction;
 import com.msu.moo.fonseca.Hypervolume;
-import com.msu.moo.model.interfaces.IAlgorithm;
-import com.msu.moo.model.interfaces.IProblem;
+import com.msu.moo.interfaces.IAlgorithm;
+import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.Range;
@@ -21,7 +21,7 @@ public abstract class NProblemNAlgorithmExperiment<P extends IProblem> extends A
 		NonDominatedSolutionSet trueFront = problems.get(problem);
 		
 		// plot all the median fronts
-		EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction(Configuration.pathToEAF);
+		EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction(Configuration.PATH_TO_EAF);
 		
 		ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
 		for(IAlgorithm<?> algorithm : algorithms) {
@@ -32,7 +32,7 @@ public abstract class NProblemNAlgorithmExperiment<P extends IProblem> extends A
 		sp.show();
 		
 		// plot the hypervolume
-		Hypervolume calcHV = new Hypervolume(Configuration.pathToHV);
+		Hypervolume calcHV = new Hypervolume(Configuration.PATH_TO_HYPERVOLUME);
 		
 		// create reference point for normalized values
 		List<Double> referencePoint = new ArrayList<>();

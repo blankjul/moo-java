@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.msu.moo.model.interfaces.IAlgorithm;
-import com.msu.moo.model.interfaces.IProblem;
+import com.msu.moo.interfaces.IAlgorithm;
+import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.Random;
 
@@ -68,12 +68,12 @@ public abstract class AbstractExperiment<P extends IProblem> {
 			for (IAlgorithm<P> algorithm : algorithms) {
 
 				logger.info(String.format("Startings runs for %s", algorithm));
-				algorithm.setMaxEvaluations(maxEvaluations);
 
 				for (int i = 0; i < iterations; i++) {
-					NonDominatedSolutionSet set = algorithm.run(problem);
+					NonDominatedSolutionSet set = algorithm.run(problem, maxEvaluations);
 					logger.info(String.format("[%s] Found %s non dominated solutions.", algorithm, set.size()));
 					expResult.add(problem, algorithm, set);
+					problem.reset();
 				}
 			}
 			logger.info("All fronts were calculate and experiment is finished.");

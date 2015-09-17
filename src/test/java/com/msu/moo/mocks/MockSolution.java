@@ -3,7 +3,7 @@ package com.msu.moo.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.model.interfaces.IVariable;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 

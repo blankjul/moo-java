@@ -1,7 +1,7 @@
 package com.msu.moo.operators;
 
-import com.msu.moo.model.interfaces.IProblem;
-import com.msu.moo.model.interfaces.IVariable;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
 
 /**

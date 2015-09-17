@@ -3,7 +3,7 @@ package com.msu.moo.experiment;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.msu.moo.model.interfaces.IProblem;
+import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public abstract class OneProblemNAlgorithmExperiment<P extends IProblem> extends NProblemNAlgorithmExperiment<P> {

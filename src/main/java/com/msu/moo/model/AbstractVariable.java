@@ -1,6 +1,6 @@
 package com.msu.moo.model;
 
-import com.msu.moo.model.interfaces.IVariable;
+import com.msu.moo.interfaces.IVariable;
 
 public abstract class AbstractVariable<T> implements IVariable {
 

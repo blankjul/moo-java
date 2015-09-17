@@ -1,43 +1,33 @@
 package com.msu.moo.algorithms;
 
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
+import com.msu.moo.interfaces.IVariableFactory;
 import com.msu.moo.model.AbstractAlgorithm;
-import com.msu.moo.model.interfaces.IProblem;
-import com.msu.moo.model.interfaces.IVariable;
-import com.msu.moo.model.interfaces.VariableFactory;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 
+/**
+ * The RandomSearch just creates randomly new instances until there are no evaluations left.
+ */
 public class RandomSearch<V extends IVariable, P extends IProblem> extends AbstractAlgorithm<V,P>{
 
+	//! variable factory to create new solutions
+	protected IVariableFactory<V, P> factory;
 
-	public RandomSearch(VariableFactory<V, P> factory) {
-		super(factory);
-	}
-	
-	//! the final result set
-	protected NonDominatedSolutionSet set;
-	
-	//! how many evaluations per next
-	protected int evalsPerNext = 100;
-	
-
-	@Override
-	protected void initialize() {
-		set = new NonDominatedSolutionSet();
+	public RandomSearch(IVariableFactory<V, P> factory) {
+		this.factory = factory;
 	}
 
 	@Override
-	protected void next() {
-		for (int i = 0; i < evalsPerNext; i++) {
-			V var = factory.create(problem);
+	public NonDominatedSolutionSet run(P problem, long maxEvaluations) {
+		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
+		while (factory.hasNext() && problem.getNumOfEvaluations() < maxEvaluations) {
+			V var = factory.next(problem);
 			Solution s = problem.evaluate(var);
 			set.add(s);
 		}
-	}
-
-	@Override
-	protected NonDominatedSolutionSet getResult() {
-		return new NonDominatedSolutionSet(set);
+		return set;
 	}
 
 

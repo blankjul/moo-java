@@ -1,4 +1,4 @@
-package com.msu.moo.model.interfaces;
+package com.msu.moo.interfaces;
 
 import com.msu.moo.model.solution.Solution;
 

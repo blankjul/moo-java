@@ -7,8 +7,8 @@ import java.util.Map;
 
 import com.msu.moo.fonseca.EmpiricalAttainmentFunction;
 import com.msu.moo.fonseca.Hypervolume;
-import com.msu.moo.model.interfaces.IAlgorithm;
-import com.msu.moo.model.interfaces.IProblem;
+import com.msu.moo.interfaces.IAlgorithm;
+import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.visualization.BoxPlot;

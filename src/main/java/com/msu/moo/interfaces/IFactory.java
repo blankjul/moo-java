@@ -1,4 +1,4 @@
-package com.msu.moo.model.interfaces;
+package com.msu.moo.interfaces;
 
 /**
  * This class represents a factory class that could construct new

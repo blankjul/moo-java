@@ -8,8 +8,7 @@ import org.apache.log4j.BasicConfigurator;
 import com.msu.moo.algorithms.NSGAII;
 import com.msu.moo.algorithms.RandomSearch;
 import com.msu.moo.experiment.OneProblemNAlgorithmExperiment;
-import com.msu.moo.model.interfaces.IAlgorithm;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.model.variables.DoubleListVariable;
 import com.msu.moo.model.variables.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SinglePointCrossover;
@@ -31,10 +30,6 @@ public class KursaweExperiment extends OneProblemNAlgorithmExperiment<Kursawe> {
 		return new Kursawe();
 	}
 
-	@Override
-	protected NonDominatedSolutionSet getTrueFront() {
-		return null;
-	}
 
 	@Override
 	protected List<IAlgorithm<Kursawe>> getAlgorithms() {

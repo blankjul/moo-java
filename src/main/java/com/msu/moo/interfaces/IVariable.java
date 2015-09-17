@@ -1,4 +1,4 @@
-package com.msu.moo.model.interfaces;
+package com.msu.moo.interfaces;
 
 /**
  * Interface for any variable that could be used. 

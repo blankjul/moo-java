@@ -3,11 +3,11 @@ package com.msu.moo.model.variables;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.model.interfaces.IProblem;
-import com.msu.moo.model.interfaces.VariableFactory;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.model.AbstractVariableFactory;
 import com.msu.moo.util.Random;
 
-public class DoubleListVariableFactory<P extends IProblem> implements VariableFactory<DoubleListVariable, P> {
+public class DoubleListVariableFactory<P extends IProblem> extends AbstractVariableFactory<DoubleListVariable, P> {
 	
 	//! length of the vector
 	protected int length;
@@ -29,15 +29,16 @@ public class DoubleListVariableFactory<P extends IProblem> implements VariableFa
 	}
 
 
-
 	@Override
-	public DoubleListVariable create(P problem) {
+	public DoubleListVariable next(P problem) {
 		List<Double> l = new ArrayList<>();
 		for (int i = 0; i < length; i++) {
 			l.add(Random.getInstance().nextDouble(range[0], range[1]));
 		}
 		return new DoubleListVariable(l);
 	}
-	
+
+
+
 
 }

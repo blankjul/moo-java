@@ -9,7 +9,7 @@ import org.apache.log4j.BasicConfigurator;
 
 import com.msu.moo.algorithms.NSGAIIBuilder;
 import com.msu.moo.experiment.OneProblemOneAlgorithmExperiment;
-import com.msu.moo.model.interfaces.IAlgorithm;
+import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variables.DoubleListVariable;
@@ -31,7 +31,7 @@ public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 	
 	@Override
 	protected IAlgorithm<ZDT1> getAlgorithm() {
-		DoubleListVariableFactory<ZDT1> fac = new DoubleListVariableFactory<ZDT1>(30, new double[] { 0d, 1d });
+		DoubleListVariableFactory<ZDT1> fac = new DoubleListVariableFactory<>(30, new double[] { 0d, 1d });
 		NSGAIIBuilder<DoubleListVariable, ZDT1> builder = new NSGAIIBuilder<>();
 		
 		builder

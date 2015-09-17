@@ -1,4 +1,4 @@
-package com.msu.moo.visualization;
+package com.msu.moo.interfaces;
 
 import org.jfree.chart.JFreeChart;
 
