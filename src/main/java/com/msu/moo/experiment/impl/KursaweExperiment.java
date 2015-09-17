@@ -3,8 +3,6 @@ package com.msu.moo.experiment.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.BasicConfigurator;
-
 import com.msu.moo.algorithms.NSGAII;
 import com.msu.moo.algorithms.RandomSearch;
 import com.msu.moo.experiment.OneProblemNAlgorithmExperiment;
@@ -17,13 +15,6 @@ import com.msu.moo.problems.Kursawe;
 
 public class KursaweExperiment extends OneProblemNAlgorithmExperiment<Kursawe> {
 
-
-	public static void main(String[] args) {
-		BasicConfigurator.configure();
-		KursaweExperiment exp = new KursaweExperiment();
-		exp.run(50000, 10, 1234);
-		exp.report();
-	}
 
 	@Override
 	protected Kursawe getProblem() {

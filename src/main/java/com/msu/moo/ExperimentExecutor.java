@@ -14,13 +14,13 @@ public class ExperimentExecutor {
 	 */
 	
 	//! experiment that should be executed
-	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.KursaweExperiment";
+	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.ZDT1Experiment";
 	
 	//! number of iterations per experiment
 	protected final static int ITERATIONS = 1;
 	
 	//! max evaluations per run
-	protected final static long MAX_EVALUATIONS = 100000;
+	protected final static long MAX_EVALUATIONS = 10000;
 	
 	//! random seed for experiment execution
 	protected final static long SEED = 8979654;		

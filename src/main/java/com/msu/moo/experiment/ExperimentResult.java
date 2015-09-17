@@ -32,7 +32,6 @@ public class ExperimentResult {
 		mTrueFronts.put(problem, set);
 	}
 
-
 	public NonDominatedSolutionSet getTrueFront(IProblem problem) {
 		return mTrueFronts.get(problem);
 	}

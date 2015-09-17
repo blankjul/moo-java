@@ -1,5 +1,6 @@
 package com.msu.moo.interfaces;
 
+import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 /**
@@ -22,7 +23,7 @@ public interface IAlgorithm<P extends IProblem> {
 	 *            for calculating the front
 	 * @return NonDominatedSolutionSet
 	 */
-	public NonDominatedSolutionSet run(P problem, long maxEvaluations);
+	public NonDominatedSolutionSet run(Evaluator<P> problem, long maxEvaluations);
 
 	/**
 	 * Every algorithm should have a name which is used to execute the toStrin()

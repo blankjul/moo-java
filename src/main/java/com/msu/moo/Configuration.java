@@ -12,6 +12,8 @@ package com.msu.moo;
  * performance of stochastic multiobjective optimisers such as multiobjective
  * evolutionary algorithms
  * 
+ * https://eden.dei.uc.pt/~cmfonsec/software.html
+ * 
  * 
  * -----------------------------------------------------------------------------
  * Computation of the Hypervolume from Fonseca
@@ -19,6 +21,8 @@ package com.msu.moo;
  * This program implements a recursive, dimension-sweep algorithm for computing
  * the hypervolume indicator of the quality of a set of n non-dominated points
  * in d dimensions
+ * 
+ * http://iridia.ulb.ac.be/~manuel/hypervolume
  *
  * -----------------------------------------------------------------------------
  *

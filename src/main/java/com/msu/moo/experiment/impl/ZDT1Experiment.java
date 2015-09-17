@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.BasicConfigurator;
-
 import com.msu.moo.algorithms.NSGAIIBuilder;
 import com.msu.moo.experiment.OneProblemOneAlgorithmExperiment;
 import com.msu.moo.interfaces.IAlgorithm;
@@ -21,13 +19,6 @@ import com.msu.moo.util.BashExecutor;
 
 public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 	
-	public static void main(String[] args) {
-		BasicConfigurator.configure();
-		ZDT1Experiment exp = new ZDT1Experiment();
-		exp.run(20000, 1, 346365);
-		exp.report();
-	}
-
 	
 	@Override
 	protected IAlgorithm<ZDT1> getAlgorithm() {
@@ -43,12 +34,10 @@ public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 	}
 
 
-
 	@Override
 	protected ZDT1 getProblem() {
 		return new ZDT1();
 	}
-
 
 
 	@Override

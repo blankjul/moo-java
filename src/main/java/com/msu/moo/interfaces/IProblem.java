@@ -20,18 +20,7 @@ public interface IProblem {
 	 */
 	public Solution evaluate(IVariable variable);
 
-	/**
-	 * @return number of evaluations so far.
-	 */
-	public long getNumOfEvaluations();
-	
-	
-	/**
-	 * Reset all evaluations, hashes and so on!
-	 */
-	public void reset();
-	
-	
+
 	/**
 	 * @return number of objectives that should be optimized!
 	 */

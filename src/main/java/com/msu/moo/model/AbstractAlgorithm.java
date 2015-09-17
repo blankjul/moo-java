@@ -12,7 +12,6 @@ import com.msu.moo.interfaces.IVariable;
  */
 public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem> implements IAlgorithm<P> {
 
-
 	// ! name for this algorithm
 	protected String name = getClass().getSimpleName();
 

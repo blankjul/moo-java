@@ -15,26 +15,10 @@ public abstract class AbstractProblem<V extends IVariable> implements IProblem {
 	 */
 	protected abstract List<Double> evaluate_(V variable);
 	
-	
-	// ! number of evaluations so far
-	protected long numOfEvaluations = 0;
 
-	@Override
-	public long getNumOfEvaluations() {
-		return numOfEvaluations;
-	}
-
-	@Override
-	public void reset() {
-		this.numOfEvaluations = 0;
-	}
 
 	@Override
 	public Solution evaluate(IVariable variable) {
-		// TODO: Hash the result value and return it directly if it fits!
-
-		// increase amount of evaluations
-		++numOfEvaluations;
 
 		@SuppressWarnings("unchecked")
 		V v = (V) variable;

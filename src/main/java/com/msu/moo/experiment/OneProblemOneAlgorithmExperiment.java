@@ -50,7 +50,7 @@ public abstract class OneProblemOneAlgorithmExperiment<P extends IProblem> exten
 	@Override
 	public void report() {
 		for (Entry<String, NonDominatedSolutionSet> entry : expResult.map.entries()) {
-			ScatterPlot sp = new ScatterPlot();
+			ScatterPlot sp = new ScatterPlot(this.getClass().getSimpleName());
 			if (trueFront != null) sp.add(trueFront, "trueFront");
 			sp.add(entry.getValue(), entry.getKey());
 			sp.show();
