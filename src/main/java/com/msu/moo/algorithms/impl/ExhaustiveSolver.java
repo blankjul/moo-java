@@ -14,7 +14,7 @@ import com.msu.moo.model.solution.MultiObjectiveSolution;
  * The Factory needs to be design as a exhaustive factory as well, to iterate
  * over all solutions.
  */
-public class ExhaustiveSolver<V extends IVariable, P extends IProblem> extends RandomSearch<V, P> {
+public class ExhaustiveSolver<V extends IVariable, P extends IProblem> extends RandomSearch<V,P> {
 
 	public ExhaustiveSolver(IVariableFactory<V, P> factory) {
 		super(factory);

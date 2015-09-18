@@ -27,7 +27,7 @@ import com.msu.moo.util.indicator.NonDominatedRankIndicator;
  * 
  *
  */
-public class NSGAII<V extends IVariable, P extends IProblem> extends AMultiObjectiveAlgorithm<V, P> {
+public class NSGAII<V extends IVariable, P extends IProblem> extends AMultiObjectiveAlgorithm<P> {
 
 	// ! size of the whole Population
 	protected int populationSize;

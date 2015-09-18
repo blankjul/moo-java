@@ -1,7 +1,6 @@
 package com.msu.moo.algorithms;
 
 import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.interfaces.IVariable;
 
 /**
  * An AbstractAlgorithm implements the IAlgorithm interface 
@@ -9,7 +8,7 @@ import com.msu.moo.interfaces.IVariable;
  * @param <V>
  * @param <P>
  */
-public abstract class AbstractAlgorithm<V extends IVariable, P extends IProblem, S> implements IAlgorithm<S,P> {
+public abstract class AbstractAlgorithm<P extends IProblem, S> implements IAlgorithm<S,P> {
 
 	// ! name for this algorithm
 	protected String name = getClass().getSimpleName();
