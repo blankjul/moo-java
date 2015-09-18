@@ -5,7 +5,8 @@ import java.util.List;
 import com.msu.moo.util.Pair;
 
 /**
- * This interface compares different solutions regarding their domination.
+ * This class compares different solutions regarding their domination.
+ * 
  * Basically, there are the three methods which defines domination,
  * non-domination or equality.
  *

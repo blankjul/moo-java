@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.model.AbstractVariableFactory;
+import com.msu.moo.model.AVariableFactory;
 import com.msu.moo.util.Random;
 
-public class DoubleListVariableFactory<P extends IProblem> extends AbstractVariableFactory<DoubleListVariable, P> {
+public class DoubleListVariableFactory<P extends IProblem> extends AVariableFactory<DoubleListVariable, P> {
 	
 	//! length of the vector
 	protected int length;

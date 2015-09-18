@@ -2,7 +2,7 @@ package com.msu.moo;
 
 import org.apache.log4j.BasicConfigurator;
 
-import com.msu.moo.experiment.AbstractExperiment;
+import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.util.ObjectFactory;
 
 public class ExperimentExecutor {
@@ -14,10 +14,10 @@ public class ExperimentExecutor {
 	 */
 	
 	//! experiment that should be executed
-	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.ZDT1Experiment";
+	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.KursaweExperiment";
 	
 	//! number of iterations per experiment
-	protected final static int ITERATIONS = 3;
+	protected final static int ITERATIONS = 1;
 	
 	//! max evaluations per run
 	protected final static int MAX_EVALUATIONS = 50000;
@@ -28,7 +28,7 @@ public class ExperimentExecutor {
 	
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
-		AbstractExperiment<?> experiment = ObjectFactory.create(AbstractExperiment.class,  EXPERIMENT);
+		AExperiment<?,?> experiment = ObjectFactory.create(AExperiment.class,  EXPERIMENT);
 		experiment.run(MAX_EVALUATIONS, ITERATIONS, SEED);
 		experiment.visualize();
 	}

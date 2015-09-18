@@ -1,4 +1,4 @@
-package com.msu.moo.exception;
+package com.msu.moo.util.exceptions;
 
 public class EvaluationException extends RuntimeException{
 

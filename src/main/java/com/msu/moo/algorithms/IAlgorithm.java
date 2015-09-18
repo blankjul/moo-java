@@ -1,7 +1,7 @@
-package com.msu.moo.interfaces;
+package com.msu.moo.algorithms;
 
+import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.Evaluator;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 /**
  * This interface provides all methods which should be implemented by any
@@ -12,7 +12,7 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
  * 			<P>
  *            Type of problem instance. This is n
  */
-public interface IAlgorithm<P extends IProblem> {
+public interface IAlgorithm<P extends IProblem, S> {
 
 	/**
 	 * Execute the implementation of the algorithm.
@@ -21,10 +21,11 @@ public interface IAlgorithm<P extends IProblem> {
 	 *            instance which should be solved
 	 * @param maxEvaluations
 	 *            for calculating the front
-	 * @return NonDominatedSolutionSet
+	 * @return S any result that should be calculated (Solution, Front, ....)
 	 */
-	public NonDominatedSolutionSet run(Evaluator<P> problem);
+	public S run(Evaluator<P> problem);
 
+	
 	/**
 	 * Every algorithm should have a name which is used to execute the toStrin()
 	 * method.

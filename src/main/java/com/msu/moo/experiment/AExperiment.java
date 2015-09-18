@@ -1,25 +1,23 @@
 package com.msu.moo.experiment;
 
-import java.util.ArrayList;
 import java.util.Collection;
 
 import org.apache.log4j.Logger;
 
-import com.msu.moo.interfaces.IAlgorithm;
+import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.interfaces.IVisualize;
 import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.Random;
 
-public abstract class AbstractExperiment<P extends IProblem> {
+public abstract class AExperiment<P extends IProblem, S> {
 
-	static final Logger logger = Logger.getLogger(AbstractExperiment.class);
+	static final Logger logger = Logger.getLogger(AExperiment.class);
 
 
 	// ! all the calculated fronts are saved there
-	protected ExperimetSettings<P> settings = null;
-	protected ExperimentResult result = null;
+	protected ExperimetSettings<P, S> settings = null;
+	protected ExperimentResult<S> result = null;
 
 	public void run(int maxEvaluations, int iterations, long seed) {
 
@@ -30,10 +28,10 @@ public abstract class AbstractExperiment<P extends IProblem> {
 		settings = new ExperimetSettings<>();
 		setProblems(settings);
 		setAlgorithms(settings);
-		setTrueFronts(settings);
+		setOptima(settings);
 		
 		//! result with all the fronts
-		result = new ExperimentResult(settings);
+		result = new ExperimentResult<>(settings);
 
 
 		logger.info("Running the experiment.");
@@ -45,20 +43,24 @@ public abstract class AbstractExperiment<P extends IProblem> {
 
 
 			// check if run makes sense
-			if (settings.problems == null || settings.algorithms == null)
+			if (settings.getProblems() == null || settings.getAlgorithms() == null)
 				throw new RuntimeException("Experiment could not be executed. Either problem or algorithms is null!");
 
-			logger.info("Following Algorithms are used and compared: " + settings.algorithms.toString());
+			logger.info("Following Algorithms are used and compared: " + settings.getAlgorithms().toString());
 
 			// calculate the result for each algorithm
-			for (IAlgorithm<P> algorithm : settings.algorithms) {
+			for (IAlgorithm<P,S> algorithm : settings.getAlgorithms()) {
 
 				logger.info(String.format("Startings runs for %s", algorithm));
 
 				for (int i = 0; i < iterations; i++) {
-					NonDominatedSolutionSet set = algorithm.run(new Evaluator<P>(problem, maxEvaluations));
-					logger.info(String.format("[%s] Found %s non dominated solutions.", algorithm, set.size()));
+					long startTime = System.currentTimeMillis();
+					S set = algorithm.run(new Evaluator<P>(problem, maxEvaluations));
+					double elapsedTime = (System.currentTimeMillis() - startTime);
+	
+					logger.info(String.format("Run of %s in %f seconds", algorithm, elapsedTime / 1000.0));
 					result.add(problem, algorithm, set);
+					
 				}
 			}
 			logger.info("All fronts were calculate and experiment is finished.");
@@ -70,7 +72,7 @@ public abstract class AbstractExperiment<P extends IProblem> {
 	/**
 	 * @return the result of the experiment. if not executed it will be null.
 	 */
-	public ExperimentResult getResult() {
+	public ExperimentResult<S> getResult() {
 		return result;
 	}
 
@@ -84,35 +86,24 @@ public abstract class AbstractExperiment<P extends IProblem> {
 
 	
 	// ! all algorithms that should be evaluated for this experiment
-	protected abstract void setAlgorithms(ExperimetSettings<P> settings);
+	protected abstract void setAlgorithms(ExperimetSettings<P, S> settings);
 
 	// ! all problem instances that should be solved
-	protected abstract void setProblems(ExperimetSettings<P> settings);
+	protected abstract void setProblems(ExperimetSettings<P, S> settings);
 
+	//! visualizes the result of the experiment
+	public abstract void visualize();
 	
 	/**
 	 * Standard method no pareto front for the problem is given. If this method
 	 * is overridden, for EVERY problem should be an value even if null!
 	 */
-	protected void setTrueFronts(ExperimetSettings<P> settings) {
+	protected void setOptima(ExperimetSettings<P, S> settings) {
 		for (P p : settings.getProblems()) {
-			settings.mFronts.put(p, null);
+			settings.getOptima().put(p, null);
 		}
 	}
 	
-	public void visualize() {
-		for(IVisualize<P> v : getVisualizer()) {
-			v.show(settings, result);
-		}
-	}
-	
-	
-	/**
-	 * Standard means no visualization.
-	 */
-	protected Collection<IVisualize<P>> getVisualizer() {
-		return new ArrayList<IVisualize<P>>();
-	}
 
 	
 

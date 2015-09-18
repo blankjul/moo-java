@@ -5,9 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.algorithms.NSGAIIBuilder;
-import com.msu.moo.experiment.OneProblemOneAlgorithmExperiment;
-import com.msu.moo.interfaces.IAlgorithm;
+import com.msu.moo.algorithms.impl.NSGAIIBuilder;
+import com.msu.moo.experiment.AMultiObjectiveExperiment;
+import com.msu.moo.experiment.ExperimetSettings;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variables.DoubleListVariable;
@@ -17,11 +17,12 @@ import com.msu.moo.operators.mutation.RealMutation;
 import com.msu.moo.problems.ZDT1;
 import com.msu.moo.util.BashExecutor;
 
-public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
+public class ZDT1Experiment extends AMultiObjectiveExperiment<ZDT1>{
 	
 	
 	@Override
-	protected IAlgorithm<ZDT1> getAlgorithm() {
+	protected void setAlgorithms(ExperimetSettings<ZDT1, NonDominatedSolutionSet> settings) {
+		
 		DoubleListVariableFactory<ZDT1> fac = new DoubleListVariableFactory<>(30, new double[] { 0d, 1d });
 		NSGAIIBuilder<DoubleListVariable, ZDT1> builder = new NSGAIIBuilder<>();
 		
@@ -30,17 +31,20 @@ public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 		.setCrossover(new SimulatedBinaryCrossover(new double[]{0.0, 1.0}))
 		.setMutation(new RealMutation(new Double[] { 0d, 1d }));
 		
-		return builder.create();
+		settings.addAlgorithm(builder.create());
+		
 	}
 
 
 	@Override
-	protected ZDT1 getProblem() {
-		return new ZDT1();
+	protected void setProblems(ExperimetSettings<ZDT1, NonDominatedSolutionSet> settings) {
+		settings.addProblem(new ZDT1());
 	}
 	
 
-	protected NonDominatedSolutionSet getTrueFront() {
+
+	@Override
+	protected void setOptima(ExperimetSettings<ZDT1, NonDominatedSolutionSet> settings) {
 		
 		double seed = 0.8;
 		if (seed <= 0 || seed >= 1) throw new RuntimeException("Seed is out of bounds!");
@@ -49,13 +53,12 @@ public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 		String command = String.format("vendor/nsga2-gnuplot-v1.1.6/nsga2r %s <vendor/nsga2-gnuplot-v1.1.6/input_data/zdt1.in", seed);
 
 			BashExecutor.execute(command);
-			FileInputStream fis;
+			FileInputStream fis = null;
 			
 			try {
 				fis = new FileInputStream("plot.out");
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
-				return null;
 			}
 			
 			String out = BashExecutor.fromStream(fis);
@@ -75,9 +78,11 @@ public class ZDT1Experiment extends OneProblemOneAlgorithmExperiment<ZDT1>{
 
 			}
 			BashExecutor.execute("rm *.out");
-		return result;
+			settings.addOptima(settings.getProblems().get(0), result);;
 	}
-	
+
+
+
 	
 	
 	

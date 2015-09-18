@@ -5,32 +5,31 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.interfaces.IAlgorithm;
+import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
-public class ExperimetSettings<P extends IProblem> {
+public class ExperimetSettings<P extends IProblem, S> {
 
 	protected List<P> problems = null;
-	protected List<IAlgorithm<P>> algorithms = null;
-	protected Map<P, NonDominatedSolutionSet> mFronts = null;
+	protected List<IAlgorithm<P, S>> algorithms = null;
+	protected Map<P, S> mOptima = null;
 	
 	
 	public ExperimetSettings() {
 		this.problems = new ArrayList<>();
 		this.algorithms = new ArrayList<>();
-		this.mFronts = new HashMap<>();
+		this.mOptima = new HashMap<>();
 	}
 
 
-	public ExperimetSettings(List<P> problems, List<IAlgorithm<P>> algorithms, Map<P, NonDominatedSolutionSet> mFronts) {
+	public ExperimetSettings(List<P> problems, List<IAlgorithm<P, S>> algorithms, Map<P, S> mOptima) {
 		this.problems = problems;
 		this.algorithms = algorithms;
-		this.mFronts = mFronts;
+		this.mOptima = mOptima;
 	}
 
 	
-	public void addAlgorithm(IAlgorithm<P> algorithm) {
+	public void addAlgorithm(IAlgorithm<P, S> algorithm) {
 		algorithms.add(algorithm);
 	}
 	
@@ -38,8 +37,8 @@ public class ExperimetSettings<P extends IProblem> {
 		problems.add(problem);
 	}
 	
-	public void addTrueFront(P problem, NonDominatedSolutionSet trueFront) {
-		mFronts.put(problem, trueFront);
+	public void addOptima(P problem, S optima) {
+		mOptima.put(problem, optima);
 	}
 
 	public List<P> getProblems() {
@@ -52,23 +51,23 @@ public class ExperimetSettings<P extends IProblem> {
 	}
 
 
-	public List<IAlgorithm<P>> getAlgorithms() {
+	public List<IAlgorithm<P, S>> getAlgorithms() {
 		return algorithms;
 	}
 
 
-	public void setAlgorithms(List<IAlgorithm<P>> algorithms) {
+	public void setAlgorithms(List<IAlgorithm<P, S>> algorithms) {
 		this.algorithms = algorithms;
 	}
 
 
-	public Map<P, NonDominatedSolutionSet> getmFronts() {
-		return mFronts;
+	public Map<P, S> getOptima() {
+		return mOptima;
 	}
 
 
-	public void setmFronts(Map<P, NonDominatedSolutionSet> mFronts) {
-		this.mFronts = mFronts;
+	public void setOptima(Map<P, S> mFronts) {
+		this.mOptima = mFronts;
 	}
 	
 	

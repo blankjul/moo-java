@@ -3,10 +3,10 @@ package com.msu.moo.visualization;
 import java.util.Collection;
 
 import com.msu.moo.Configuration;
+import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.experiment.ExperimentResult;
 import com.msu.moo.experiment.ExperimetSettings;
 import com.msu.moo.fonseca.EmpiricalAttainmentFunction;
-import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.plots.ScatterPlot;
@@ -25,12 +25,11 @@ public class AttainmentSurfacePlot<P extends IProblem> extends ObjectiveSpacePlo
 		this.showTrueFront = showTrueFront;
 	}
 
-	@Override
-	public void show(ExperimetSettings<P> settings, ExperimentResult result) {
+	public void show(ExperimetSettings<P, NonDominatedSolutionSet> settings, ExperimentResult<NonDominatedSolutionSet> result) {
 		for (IProblem problem : settings.getProblems()) {
 			EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction(Configuration.PATH_TO_EAF);
 			ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
-			for (IAlgorithm<?> algorithm : settings.getAlgorithms()) {
+			for (IAlgorithm<?, NonDominatedSolutionSet> algorithm : settings.getAlgorithms()) {
 				Collection<NonDominatedSolutionSet> set = result.get(problem, algorithm);
 				NonDominatedSolutionSet median = eaf.calculate(set);
 				sp.add(median, algorithm.toString());

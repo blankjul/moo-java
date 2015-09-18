@@ -2,14 +2,14 @@ package com.msu.moo.model;
 
 import com.msu.moo.interfaces.IVariable;
 
-public abstract class AbstractVariable<T> implements IVariable {
+public abstract class AVariable<T> implements IVariable {
 
 	//! list that contains all the values
 	protected T obj;
 	
 	abstract public IVariable copy();
 	
-	public AbstractVariable(T obj) {
+	public AVariable(T obj) {
 		super();
 		this.obj = obj;
 	}

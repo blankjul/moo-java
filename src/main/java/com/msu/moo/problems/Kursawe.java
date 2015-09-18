@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.model.AbstractProblem;
+import com.msu.moo.model.AProblem;
 import com.msu.moo.model.variables.DoubleListVariable;
 
-public class Kursawe extends AbstractProblem<DoubleListVariable> {
+public class Kursawe extends AProblem<DoubleListVariable> {
 
 	@Override
 	protected List<Double> evaluate_(DoubleListVariable var) {

@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.msu.moo.algorithms.IMultiObjectiveAlgorithm;
 import com.msu.moo.fonseca.EmpiricalAttainmentFunction;
 import com.msu.moo.fonseca.Hypervolume;
-import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;
@@ -16,9 +16,9 @@ import com.msu.moo.util.plots.ScatterPlot;
 
 public class FrontUtil {
 
-	public static <P extends IProblem> NonDominatedSolutionSet estimateTrueFront(Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> fronts) {
+	public static <P extends IProblem> NonDominatedSolutionSet estimateTrueFront(Map<IMultiObjectiveAlgorithm<P>, List<NonDominatedSolutionSet>> fronts) {
 		NonDominatedSolutionSet front = new NonDominatedSolutionSet();
-		for (IAlgorithm<P> algorithm : fronts.keySet()) {
+		for (IMultiObjectiveAlgorithm<P> algorithm : fronts.keySet()) {
 			for (NonDominatedSolutionSet set : fronts.get(algorithm)) {
 				front.addAll(set.getSolutions());
 			}
@@ -26,17 +26,17 @@ public class FrontUtil {
 		return front;
 	}
 
-	public static <P extends IProblem> ScatterPlot createScatterPlot(String title, Map<IAlgorithm<P>, NonDominatedSolutionSet> fronts) {
+	public static <P extends IProblem> ScatterPlot createScatterPlot(String title, Map<IMultiObjectiveAlgorithm<P>, NonDominatedSolutionSet> fronts) {
 		ScatterPlot sp = new ScatterPlot(title, "time", "profit");
-		for (IAlgorithm<P> algorithm : fronts.keySet()) {
+		for (IMultiObjectiveAlgorithm<P> algorithm : fronts.keySet()) {
 			sp.add(fronts.get(algorithm).getSolutions(), algorithm.toString());
 		}
 		return sp;
 	}
 
-	public static <P extends IProblem> BoxPlot createBoxPlot(String title, Map<IAlgorithm<P>, List<Double>> hvMap) {
+	public static <P extends IProblem> BoxPlot createBoxPlot(String title, Map<IMultiObjectiveAlgorithm<P>, List<Double>> hvMap) {
 		BoxPlot bp = new BoxPlot(title);
-		for(IAlgorithm<P> algorithm : hvMap.keySet()) {
+		for(IMultiObjectiveAlgorithm<P> algorithm : hvMap.keySet()) {
 			bp.add(hvMap.get(algorithm), algorithm.toString());
 		}
 		return bp;
@@ -45,24 +45,24 @@ public class FrontUtil {
 
 
 	
-	public static <P extends IProblem> Map<IAlgorithm<P>, NonDominatedSolutionSet> calcMedianFronts(Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> fronts,
+	public static <P extends IProblem> Map<IMultiObjectiveAlgorithm<P>, NonDominatedSolutionSet> calcMedianFronts(Map<IMultiObjectiveAlgorithm<P>, List<NonDominatedSolutionSet>> fronts,
 			String pathToEAF) {
-		Map<IAlgorithm<P>, NonDominatedSolutionSet> medianFronts = new HashMap<>();
-		for (IAlgorithm<P> algorithm : fronts.keySet()) {
+		Map<IMultiObjectiveAlgorithm<P>, NonDominatedSolutionSet> medianFronts = new HashMap<>();
+		for (IMultiObjectiveAlgorithm<P> algorithm : fronts.keySet()) {
 			NonDominatedSolutionSet medianFront = new EmpiricalAttainmentFunction(pathToEAF).calculate(fronts.get(algorithm));
 			medianFronts.put(algorithm, medianFront);
 		}
 		return medianFronts;
 	}
 
-	public static <P extends IProblem> Map<IAlgorithm<P>, List<Double>> calcHypervolume(NonDominatedSolutionSet trueFront,
-			Map<IAlgorithm<P>, List<NonDominatedSolutionSet>> allFronts, String pathToHV) {
+	public static <P extends IProblem> Map<IMultiObjectiveAlgorithm<P>, List<Double>> calcHypervolume(NonDominatedSolutionSet trueFront,
+			Map<IMultiObjectiveAlgorithm<P>, List<NonDominatedSolutionSet>> allFronts, String pathToHV) {
 
 		if (trueFront.size() == 0)
 			throw new RuntimeException("trueFront is empty!");
 		int numOfObjectives = trueFront.getSolutions().get(0).getObjectives().size();
 
-		Map<IAlgorithm<P>, List<Double>> hvs = new HashMap<>();
+		Map<IMultiObjectiveAlgorithm<P>, List<Double>> hvs = new HashMap<>();
 		
 		// create reference point for normalized front and get range for
 		// normalization
@@ -71,7 +71,7 @@ public class FrontUtil {
 			referencePoint.add(1.0);
 		Range<Double> range = trueFront.getRange();
 
-		for (IAlgorithm<P> algorithm : allFronts.keySet())
+		for (IMultiObjectiveAlgorithm<P> algorithm : allFronts.keySet())
 		{
 			List<NonDominatedSolutionSet> sets = allFronts.get(algorithm);
 			List<Double> l = new ArrayList<>();

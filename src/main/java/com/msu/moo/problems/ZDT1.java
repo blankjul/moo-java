@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.model.AbstractProblem;
+import com.msu.moo.model.AProblem;
 import com.msu.moo.model.variables.DoubleListVariable;
 
 /**
  * Class representing problem ZDT1
  */
-public class ZDT1 extends AbstractProblem<DoubleListVariable> {
+public class ZDT1 extends AProblem<DoubleListVariable> {
 
 	/**
 	 * Returns the value of the ZDT1 function G.

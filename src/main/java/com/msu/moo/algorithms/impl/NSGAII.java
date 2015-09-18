@@ -1,4 +1,4 @@
-package com.msu.moo.algorithms;
+package com.msu.moo.algorithms.impl;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,7 +8,7 @@ import java.util.Map;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.AbstractAlgorithm;
+import com.msu.moo.model.Algorithm;
 import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
@@ -27,7 +27,7 @@ import com.msu.moo.util.indicator.NonDominatedRankIndicator;
  * 
  *
  */
-public class NSGAII<V extends IVariable, P extends IProblem> extends AbstractAlgorithm<V, P> {
+public class NSGAII<V extends IVariable, P extends IProblem> extends Algorithm<V, P> {
 
 	// ! size of the whole Population
 	protected int populationSize;
