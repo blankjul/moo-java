@@ -1,18 +1,18 @@
 package com.msu.moo.algorithms.impl;
 
+import com.msu.moo.algorithms.AMultiObjectiveAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.Algorithm;
 import com.msu.moo.model.Evaluator;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 /**
  * The RandomSearch just creates randomly new instances and evaluates them until
  * there are no evaluations left.
  */
-public class RandomSearch<V extends IVariable, P extends IProblem> extends Algorithm<V, P> {
+public class RandomSearch<V extends IVariable, P extends IProblem> extends AMultiObjectiveAlgorithm<V, P> {
 
 	// ! variable factory to create new solutions
 	protected IVariableFactory<V, P> factory;

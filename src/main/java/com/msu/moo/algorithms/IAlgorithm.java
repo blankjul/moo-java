@@ -12,7 +12,7 @@ import com.msu.moo.model.Evaluator;
  * 			<P>
  *            Type of problem instance. This is n
  */
-public interface IAlgorithm<P extends IProblem, S> {
+public interface IAlgorithm<R, P extends IProblem> {
 
 	/**
 	 * Execute the implementation of the algorithm.
@@ -23,7 +23,7 @@ public interface IAlgorithm<P extends IProblem, S> {
 	 *            for calculating the front
 	 * @return S any result that should be calculated (Solution, Front, ....)
 	 */
-	public S run(Evaluator<P> problem);
+	public R run(Evaluator<P> problem);
 
 	
 	/**

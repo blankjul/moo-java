@@ -5,13 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.msu.moo.algorithms.AMultiObjectiveAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.Algorithm;
 import com.msu.moo.model.Evaluator;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.AbstractCrossover;
 import com.msu.moo.operators.AbstractMutation;
@@ -27,7 +27,7 @@ import com.msu.moo.util.indicator.NonDominatedRankIndicator;
  * 
  *
  */
-public class NSGAII<V extends IVariable, P extends IProblem> extends Algorithm<V, P> {
+public class NSGAII<V extends IVariable, P extends IProblem> extends AMultiObjectiveAlgorithm<V, P> {
 
 	// ! size of the whole Population
 	protected int populationSize;

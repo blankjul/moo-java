@@ -39,7 +39,7 @@ public class HypervolumeBoxPlot<P extends IProblem> implements IVisualize<P, Non
 			Range<Double> range = trueFront.getRange();
 
 			BoxPlot bp = new BoxPlot(problem.toString());
-			for (IAlgorithm<?, NonDominatedSolutionSet> algorithm : settings.getAlgorithms()) {
+			for (IAlgorithm<NonDominatedSolutionSet, ?> algorithm : settings.getAlgorithms()) {
 				List<Double> hvs = new ArrayList<>();
 				for (NonDominatedSolutionSet set : result.get(problem, algorithm)) {
 					SolutionSet norm = set.getSolutions().normalize(range.get());

@@ -49,7 +49,7 @@ public abstract class AExperiment<P extends IProblem, S> {
 			logger.info("Following Algorithms are used and compared: " + settings.getAlgorithms().toString());
 
 			// calculate the result for each algorithm
-			for (IAlgorithm<P,S> algorithm : settings.getAlgorithms()) {
+			for (IAlgorithm<S,P> algorithm : settings.getAlgorithms()) {
 
 				logger.info(String.format("Startings runs for %s", algorithm));
 

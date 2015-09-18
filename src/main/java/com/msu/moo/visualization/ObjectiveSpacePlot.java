@@ -25,7 +25,7 @@ public class ObjectiveSpacePlot<P extends IProblem> implements IVisualize<P, Non
 	@Override
 	public void show(ExperimetSettings<P, NonDominatedSolutionSet> settings, ExperimentResult<NonDominatedSolutionSet> result) {
 		for (IProblem problem : settings.getProblems()) {
-			for (IAlgorithm<?, NonDominatedSolutionSet> algorithm : settings.getAlgorithms()) {
+			for (IAlgorithm<NonDominatedSolutionSet, ?> algorithm : settings.getAlgorithms()) {
 				for (NonDominatedSolutionSet set : result.get(problem, algorithm)) {
 					ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
 					sp.add(set, algorithm.toString());

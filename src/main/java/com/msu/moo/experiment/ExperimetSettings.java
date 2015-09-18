@@ -11,7 +11,7 @@ import com.msu.moo.interfaces.IProblem;
 public class ExperimetSettings<P extends IProblem, S> {
 
 	protected List<P> problems = null;
-	protected List<IAlgorithm<P, S>> algorithms = null;
+	protected List<IAlgorithm<S,P>> algorithms = null;
 	protected Map<P, S> mOptima = null;
 	
 	
@@ -22,14 +22,14 @@ public class ExperimetSettings<P extends IProblem, S> {
 	}
 
 
-	public ExperimetSettings(List<P> problems, List<IAlgorithm<P, S>> algorithms, Map<P, S> mOptima) {
+	public ExperimetSettings(List<P> problems, List<IAlgorithm<S,P>> algorithms, Map<P, S> mOptima) {
 		this.problems = problems;
 		this.algorithms = algorithms;
 		this.mOptima = mOptima;
 	}
 
 	
-	public void addAlgorithm(IAlgorithm<P, S> algorithm) {
+	public void addAlgorithm(IAlgorithm<S,P> algorithm) {
 		algorithms.add(algorithm);
 	}
 	
@@ -51,12 +51,12 @@ public class ExperimetSettings<P extends IProblem, S> {
 	}
 
 
-	public List<IAlgorithm<P, S>> getAlgorithms() {
+	public List<IAlgorithm<S,P>> getAlgorithms() {
 		return algorithms;
 	}
 
 
-	public void setAlgorithms(List<IAlgorithm<P, S>> algorithms) {
+	public void setAlgorithms(List<IAlgorithm<S,P>> algorithms) {
 		this.algorithms = algorithms;
 	}
 

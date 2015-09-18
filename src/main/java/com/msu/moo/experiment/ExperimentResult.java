@@ -14,22 +14,20 @@ import com.msu.moo.interfaces.IProblem;
  *
  */
 public class ExperimentResult<S> {
-	
+
 	protected ExperimetSettings<?, S> settings;
 
 	// ! algorithm mapped to Map with has for each state the evaluation data
 	protected Multimap<String, S> map = HashMultimap.create();
-	
-	
+
 	public ExperimentResult(ExperimetSettings<?, S> settings) {
 		this.settings = settings;
 	}
 
-	public void add(IProblem problem, IAlgorithm<?, S> algorithm, S set) {
+	public void add(IProblem problem, IAlgorithm<S, ?> algorithm, S set) {
 		String key = String.format("p%s_a%s", problem, algorithm);
 		map.put(key, set);
 	}
-
 
 	public S getTrueFront(IProblem problem) {
 		return settings.mOptima.get(problem);
@@ -46,8 +44,8 @@ public class ExperimentResult<S> {
 	public Multimap<String, S> get() {
 		return map;
 	}
-	
-	public Collection<S> get(IProblem problem, IAlgorithm<?, S> algorithm) {
+
+	public Collection<S> get(IProblem problem, IAlgorithm<S, ?> algorithm) {
 		String key = String.format("p%s_a%s", problem, algorithm);
 		return map.get(key);
 	}
@@ -55,7 +53,5 @@ public class ExperimentResult<S> {
 	public ExperimetSettings<?, S> getSettings() {
 		return settings;
 	}
-
-
 
 }
