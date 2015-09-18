@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 
 /**
  * This is an abstract Crossover of an object. This class which inherits from
@@ -47,14 +47,14 @@ public abstract class AbstractCrossover<T> {
 
 	}
 
-	public <V extends IVariable, P extends IProblem> List<Solution> crossover(P problem, Solution a,
-			Solution b) {
+	public <V extends IVariable, P extends IProblem> List<MultiObjectiveSolution> crossover(P problem, MultiObjectiveSolution a,
+			MultiObjectiveSolution b) {
 
 		List<IVariable> vars = crossover(a.getVariable(), b.getVariable());
-		List<Solution> result = new ArrayList<>();
+		List<MultiObjectiveSolution> result = new ArrayList<>();
 
 		for (IVariable var : vars) {
-			Solution s = problem.evaluate(var);
+			MultiObjectiveSolution s = problem.evaluate(var);
 			result.add(s);
 		}
 

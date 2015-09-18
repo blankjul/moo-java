@@ -1,6 +1,6 @@
 package com.msu.moo.interfaces;
 
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 
 /**
  * This interface defines the values of a problem.
@@ -18,7 +18,7 @@ public interface IProblem {
 	 * @param variable extends IVariable and could be problem specific.
 	 * @return Solution object which contains the result.
 	 */
-	public Solution evaluate(IVariable variable);
+	public MultiObjectiveSolution evaluate(IVariable variable);
 
 
 	/**

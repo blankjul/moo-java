@@ -26,7 +26,6 @@ public class KursaweExperiment extends AMultiObjectiveExperiment<Kursawe> {
 				.setMutation(new PolynomialMutation(new Double[] { -5.0, 5.0 }));
 		settings.addAlgorithm(builder.create());
 		
-		
 		settings.addAlgorithm(new RandomSearch<>(fac));
 		
 	}

@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 import com.msu.moo.util.BashExecutor;
 import com.msu.moo.util.Util;
 
@@ -45,7 +45,7 @@ public class EmpiricalAttainmentFunction {
 			for (String value : line.split("\\s"))
 				objectives.add(Double.valueOf(value));
 
-			result.add(new Solution(null, objectives));
+			result.add(new MultiObjectiveSolution(null, objectives));
 
 		}
 

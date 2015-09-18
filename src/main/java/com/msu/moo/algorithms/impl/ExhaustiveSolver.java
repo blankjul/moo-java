@@ -5,7 +5,7 @@ import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
 import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 
 /**
  * ExhaustiveSolver ignores the maxEvaluations completely and tries to find new
@@ -25,7 +25,7 @@ public class ExhaustiveSolver<V extends IVariable, P extends IProblem> extends R
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		while (factory.hasNext()) {
 			V var = factory.next(evaluator.getProblem());
-			Solution s = evaluator.evaluate(var);
+			MultiObjectiveSolution s = evaluator.evaluate(var);
 			set.add(s);
 		}
 		return set;

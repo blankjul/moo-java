@@ -2,7 +2,7 @@ package com.msu.moo.util.indicator;
 
 import java.util.Map;
 
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 import com.msu.moo.model.solution.SolutionSet;
 
 public class CrowdingIndicator extends Indicator<Double>{
@@ -10,14 +10,14 @@ public class CrowdingIndicator extends Indicator<Double>{
 	
 	//! helping method for fast access to objective values
 	private Double get(SolutionSet solutions, int index, int objective) {
-		return solutions.get(index).getObjectives().get(objective);
+		return solutions.get(index).getObjective().get(objective);
 	}
 	
 	@Override
-	public void calculate(Map<Solution, Double> map, SolutionSet solutions) {
+	public void calculate(Map<MultiObjectiveSolution, Double> map, SolutionSet solutions) {
 		
 		// the result
-		for (Solution s : solutions) {
+		for (MultiObjectiveSolution s : solutions) {
 			map.put(s, 0d);
 		}
 		
@@ -26,7 +26,7 @@ public class CrowdingIndicator extends Indicator<Double>{
 		
 		// the resulting set is also empty
 		if (solutions.size() <= 2) {
-			for (Solution s : solutions) map.put(s, Double.POSITIVE_INFINITY);
+			for (MultiObjectiveSolution s : solutions) map.put(s, Double.POSITIVE_INFINITY);
 		}
 		
 		// create a copy of the input because they must be sorted 

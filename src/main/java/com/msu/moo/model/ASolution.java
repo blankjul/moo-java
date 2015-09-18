@@ -1,6 +1,4 @@
-package com.msu.moo.model.solution;
-
-import java.util.List;
+package com.msu.moo.model;
 
 import com.msu.moo.interfaces.IVariable;
 
@@ -12,34 +10,30 @@ import com.msu.moo.interfaces.IVariable;
  * This concept ensure to forget to reevaluate a solution which means result and
  * variables does not fit anymore.
  */
-public class Solution {
+public abstract class ASolution<T> {
 
 	// ! objectives immutable
-	final private List<Double> objectives;
+	final protected T objective;
 
 	// ! variable immutable
-	final private IVariable variable;
+	final protected IVariable variable;
+
+	// ! returns the number of objectives
+	public abstract int countObjectives();
 
 	/**
 	 * Construct an immutable solution object
 	 */
-	public Solution(IVariable variable, List<Double> objectives) {
+	public ASolution(IVariable variable, T objectives) {
 		this.variable = variable;
-		this.objectives = objectives;
+		this.objective = objectives;
 	}
 
 	/**
-	 * @return nth objective
-	 */
-	public Double getObjectives(int n) {
-		return objectives.get(n);
-	}
-	
-	/**
 	 * @return all objectives
 	 */
-	public List<Double> getObjectives() {
-		return objectives;
+	public T getObjective() {
+		return objective;
 	}
 
 	/**
@@ -49,13 +43,6 @@ public class Solution {
 		return variable;
 	}
 
-	public int countObjectives() {
-		if (objectives == null)
-			throw new RuntimeException("objectives are null. no count possible!");
-		return objectives.size();
-	}
-
-	
 	/**
 	 * Print only the objectives
 	 */
@@ -63,7 +50,7 @@ public class Solution {
 		StringBuilder sb = new StringBuilder();
 		sb.append(variable);
 		sb.append(" -> ");
-		sb.append(objectives);
+		sb.append(objective);
 		return sb.toString();
 	}
 

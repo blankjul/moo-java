@@ -2,7 +2,7 @@ package com.msu.moo.model;
 
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 
 /**
  * The Evaluator class should be used for each algorithm to evaluate the result
@@ -33,7 +33,7 @@ public class Evaluator<P extends IProblem> {
 		this.maxEvaluations = maxEvaluations;
 	}
 
-	public Solution evaluate(IVariable variable) {
+	public MultiObjectiveSolution evaluate(IVariable variable) {
 		++evaluations;
 		return problem.evaluate(variable);
 	}

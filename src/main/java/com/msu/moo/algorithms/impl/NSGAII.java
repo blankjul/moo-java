@@ -11,7 +11,7 @@ import com.msu.moo.interfaces.IVariableFactory;
 import com.msu.moo.model.Algorithm;
 import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.AbstractCrossover;
 import com.msu.moo.operators.AbstractMutation;
@@ -42,10 +42,10 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends Algorithm<V
 	protected AbstractMutation<?> mutation;
 
 	// ! rank for the whole population
-	protected Map<Solution, Integer> rank;
+	protected Map<MultiObjectiveSolution, Integer> rank;
 
 	// ! crowding distance for the whole population
-	protected Map<Solution, Double> crowding;
+	protected Map<MultiObjectiveSolution, Double> crowding;
 
 	// ! factory for creating new instances
 	protected IVariableFactory<V, P> factory;

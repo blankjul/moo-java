@@ -60,7 +60,7 @@ public class FrontUtil {
 
 		if (trueFront.size() == 0)
 			throw new RuntimeException("trueFront is empty!");
-		int numOfObjectives = trueFront.getSolutions().get(0).getObjectives().size();
+		int numOfObjectives = trueFront.getSolutions().get(0).getObjective().size();
 
 		Map<IMultiObjectiveAlgorithm<P>, List<Double>> hvs = new HashMap<>();
 		

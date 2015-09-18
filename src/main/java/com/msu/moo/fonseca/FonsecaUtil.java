@@ -2,7 +2,7 @@ package com.msu.moo.fonseca;
 
 import java.util.List;
 
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 import com.msu.moo.model.solution.SolutionSet;
 
 public class FonsecaUtil {
@@ -19,8 +19,8 @@ public class FonsecaUtil {
 	
 	public static String toString(SolutionSet set) {
 		StringBuilder sb = new StringBuilder();
-		for (Solution s : set) {
-			sb.append(FonsecaUtil.toString(s.getObjectives()));
+		for (MultiObjectiveSolution s : set) {
+			sb.append(FonsecaUtil.toString(s.getObjective()));
 			sb.append("\n");
 		}
 		return sb.toString();

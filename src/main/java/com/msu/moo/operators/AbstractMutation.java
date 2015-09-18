@@ -2,7 +2,7 @@ package com.msu.moo.operators;
 
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 
 /**
  * This is an abstract Mutation of an object. This class which inherits from this one
@@ -32,7 +32,7 @@ public abstract class AbstractMutation<T> {
 
 	}
 
-	public <V extends IVariable, P extends IProblem> Solution mutate(P problem, Solution a) {
+	public <V extends IVariable, P extends IProblem> MultiObjectiveSolution mutate(P problem, MultiObjectiveSolution a) {
 		IVariable var = mutate(a.getVariable());
 		return problem.evaluate(var);
 	}

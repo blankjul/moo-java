@@ -6,7 +6,7 @@ import com.msu.moo.interfaces.IVariableFactory;
 import com.msu.moo.model.Algorithm;
 import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 
 /**
  * The RandomSearch just creates randomly new instances and evaluates them until
@@ -26,7 +26,7 @@ public class RandomSearch<V extends IVariable, P extends IProblem> extends Algor
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		while (factory.hasNext() && evaluator.hasNext()) {
 			V var = factory.next(evaluator.getProblem());
-			Solution s = evaluator.evaluate(var);
+			MultiObjectiveSolution s = evaluator.evaluate(var);
 			set.add(s);
 		}
 		return set;

@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.MultiObjectiveSolution;
 
 public abstract class AProblem<V extends IVariable> implements IProblem {
 
@@ -17,13 +17,13 @@ public abstract class AProblem<V extends IVariable> implements IProblem {
 	
 
 	@Override
-	public Solution evaluate(IVariable variable) {
+	public MultiObjectiveSolution evaluate(IVariable variable) {
 
 		@SuppressWarnings("unchecked")
 		V v = (V) variable;
 
 		List<Double> objectives = evaluate_(v);
-		return new Solution(variable, objectives);
+		return new MultiObjectiveSolution(variable, objectives);
 	}
 	
 	@Override
