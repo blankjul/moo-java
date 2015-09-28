@@ -14,10 +14,10 @@ public class ExperimentExecutor {
 	 */
 	
 	//! experiment that should be executed
-	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.KursaweExperiment";
+	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.ZDT1Experiment";
 	
 	//! number of iterations per experiment
-	protected final static int ITERATIONS = 1;
+	protected final static int ITERATIONS = 10;
 	
 	//! max evaluations per run
 	protected final static int MAX_EVALUATIONS = 50000;
@@ -28,9 +28,8 @@ public class ExperimentExecutor {
 	
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
-		AExperiment<?,?> experiment = ObjectFactory.create(AExperiment.class,  EXPERIMENT);
+		AExperiment experiment = ObjectFactory.create(AExperiment.class,  EXPERIMENT);
 		experiment.run(MAX_EVALUATIONS, ITERATIONS, SEED);
-		experiment.visualize();
 	}
 	
 

@@ -4,9 +4,9 @@ import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
 
-public abstract class AVariableFactory<V extends IVariable, P extends IProblem>  implements IVariableFactory<V, P>{
+public abstract class AVariableFactory implements IVariableFactory{
 
-	public abstract V next(P problem);
+	public abstract IVariable next(IProblem problem);
 
 	@Override
 	public boolean hasNext() {

@@ -7,7 +7,7 @@ import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.AVariableFactory;
 import com.msu.moo.util.Random;
 
-public class DoubleListVariableFactory<P extends IProblem> extends AVariableFactory<DoubleListVariable, P> {
+public class DoubleListVariableFactory extends AVariableFactory {
 	
 	//! length of the vector
 	protected int length;
@@ -30,7 +30,7 @@ public class DoubleListVariableFactory<P extends IProblem> extends AVariableFact
 
 
 	@Override
-	public DoubleListVariable next(P problem) {
+	public DoubleListVariable next(IProblem problem) {
 		List<Double> l = new ArrayList<>();
 		for (int i = 0; i < length; i++) {
 			l.add(Random.getInstance().nextDouble(range[0], range[1]));

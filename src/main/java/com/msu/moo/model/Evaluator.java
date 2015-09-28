@@ -14,10 +14,10 @@ import com.msu.moo.model.solution.Solution;
  * might be implemented.
  *
  */
-public class Evaluator<P extends IProblem> implements IEvaluator<P>{
+public class Evaluator implements IEvaluator{
 
 	// ! the problem which should be solved
-	protected P problem;
+	protected IProblem problem;
 
 	// ! current amount of evaluations
 	protected int evaluations = 0;
@@ -25,11 +25,11 @@ public class Evaluator<P extends IProblem> implements IEvaluator<P>{
 	// ! current amount of evaluations
 	protected Integer maxEvaluations = null;
 
-	public Evaluator(P problem) {
+	public Evaluator(IProblem problem) {
 		this.problem = problem;
 	}
 
-	public Evaluator(P problem, int maxEvaluations) {
+	public Evaluator(IProblem problem, int maxEvaluations) {
 		this.problem = problem;
 		this.maxEvaluations = maxEvaluations;
 	}
@@ -39,7 +39,7 @@ public class Evaluator<P extends IProblem> implements IEvaluator<P>{
 		return problem.evaluate(variable);
 	}
 
-	public P getProblem() {
+	public IProblem getProblem() {
 		return problem;
 	}
 
@@ -47,10 +47,6 @@ public class Evaluator<P extends IProblem> implements IEvaluator<P>{
 		return evaluations;
 	}
 
-	public Evaluator<P> setEvaluations(int maxEvaluations) {
-		this.maxEvaluations = maxEvaluations;
-		return this;
-	}
 
 	/**
 	 * @return whether further evaluations are allowed or not

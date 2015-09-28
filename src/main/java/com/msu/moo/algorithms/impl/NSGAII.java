@@ -5,13 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.algorithms.AMultiObjectiveAlgorithm;
-import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.algorithms.AbstractAlgorithm;
+import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.Evaluator;
-import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.AbstractCrossover;
 import com.msu.moo.operators.AbstractMutation;
@@ -27,7 +26,7 @@ import com.msu.moo.util.indicator.NonDominatedRankIndicator;
  * 
  *
  */
-public class NSGAII<V extends IVariable, P extends IProblem> extends AMultiObjectiveAlgorithm<P> {
+public class NSGAII extends AbstractAlgorithm {
 
 	// ! size of the whole Population
 	protected int populationSize;
@@ -48,7 +47,7 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AMultiObjec
 	protected Map<Solution, Double> crowding;
 
 	// ! factory for creating new instances
-	protected IVariableFactory<V, P> factory;
+	protected IVariableFactory factory;
 
 	// ! current population
 	protected SolutionSet population = null;
@@ -57,7 +56,7 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AMultiObjec
 	protected NSGAII() {}
 
 	@Override
-	public NonDominatedSolutionSet run(Evaluator<P> evaluator) {
+	public NonDominatedSolutionSet run(IEvaluator evaluator) {
 
 		// initialize the population and calculate also rank and crowding
 		initialize(evaluator);
@@ -94,7 +93,7 @@ public class NSGAII<V extends IVariable, P extends IProblem> extends AMultiObjec
 		return new NonDominatedSolutionSet(population);
 	}
 
-	protected void initialize(Evaluator<P> evaluator) {
+	protected void initialize(IEvaluator evaluator) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();

@@ -7,7 +7,6 @@ import com.msu.moo.Configuration;
 import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.experiment.ExperimentResult;
-import com.msu.moo.experiment.ExperimetSettings;
 import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVisualize;
@@ -16,13 +15,17 @@ import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.Range;
 import com.msu.moo.util.plots.BoxPlot;
 
-public class HypervolumeBoxPlot<P extends IProblem> implements IVisualize<P, NonDominatedSolutionSet> {
+public class HypervolumeBoxPlot implements IVisualize {
+
 
 	@Override
-	public void show(ExperimetSettings<P, NonDominatedSolutionSet> settings, ExperimentResult<NonDominatedSolutionSet> result) {
-		for (IProblem problem : settings.getProblems()) {
+	public void show(AExperiment experiment) {
+		
+		ExperimentResult result = experiment.getResult();
+		
+		for (IProblem problem : experiment.getProblems()) {
 
-			NonDominatedSolutionSet trueFront = settings.getOptima().get(problem);
+			NonDominatedSolutionSet trueFront = experiment.getOptima().get(problem);
 
 			// plot the hypervolume
 			Hypervolume calcHV = new Hypervolume(Configuration.PATH_TO_HYPERVOLUME);
@@ -39,7 +42,7 @@ public class HypervolumeBoxPlot<P extends IProblem> implements IVisualize<P, Non
 			Range<Double> range = trueFront.getRange();
 
 			BoxPlot bp = new BoxPlot(problem.toString());
-			for (IAlgorithm<NonDominatedSolutionSet, ?> algorithm : settings.getAlgorithms()) {
+			for (IAlgorithm algorithm : experiment.getAlgorithms()) {
 				List<Double> hvs = new ArrayList<>();
 				for (NonDominatedSolutionSet set : result.get(problem, algorithm)) {
 					SolutionSet norm = set.getSolutions().normalize(range.get());
@@ -50,7 +53,7 @@ public class HypervolumeBoxPlot<P extends IProblem> implements IVisualize<P, Non
 			}
 			bp.show();
 		}
-
+		
 	}
 
 }

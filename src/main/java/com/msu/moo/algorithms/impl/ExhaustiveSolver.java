@@ -1,9 +1,8 @@
 package com.msu.moo.algorithms.impl;
 
-import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 
@@ -14,17 +13,17 @@ import com.msu.moo.model.solution.Solution;
  * The Factory needs to be design as a exhaustive factory as well, to iterate
  * over all solutions.
  */
-public class ExhaustiveSolver<V extends IVariable, P extends IProblem> extends RandomSearch<V,P> {
+public class ExhaustiveSolver extends RandomSearch {
 
-	public ExhaustiveSolver(IVariableFactory<V, P> factory) {
+	public ExhaustiveSolver(IVariableFactory factory) {
 		super(factory);
 	}
 
 	@Override
-	public NonDominatedSolutionSet run(Evaluator<P> evaluator) {
+	public NonDominatedSolutionSet run(IEvaluator evaluator) {
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		while (factory.hasNext()) {
-			V var = factory.next(evaluator.getProblem());
+			IVariable var = factory.next(evaluator.getProblem());
 			Solution s = evaluator.evaluate(var);
 			set.add(s);
 		}

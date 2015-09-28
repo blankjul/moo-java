@@ -4,47 +4,50 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.algorithms.impl.NSGAIIBuilder;
-import com.msu.moo.experiment.AMultiObjectiveExperiment;
-import com.msu.moo.experiment.ExperimetSettings;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.experiment.AExperiment;
+import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.variables.DoubleListVariable;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variables.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.moo.operators.mutation.RealMutation;
 import com.msu.moo.problems.ZDT1;
 import com.msu.moo.util.BashExecutor;
+import com.msu.moo.visualization.AttainmentSurfacePlot;
 
-public class ZDT1Experiment extends AMultiObjectiveExperiment<ZDT1>{
-	
+public class ZDT1Experiment extends AExperiment {
 	
 	@Override
-	protected void setAlgorithms(ExperimetSettings<ZDT1, NonDominatedSolutionSet> settings) {
-		
-		DoubleListVariableFactory<ZDT1> fac = new DoubleListVariableFactory<>(30, new double[] { 0d, 1d });
-		NSGAIIBuilder<DoubleListVariable, ZDT1> builder = new NSGAIIBuilder<>();
+	protected void setAlgorithms(List<IAlgorithm> algorithms) {
+		DoubleListVariableFactory fac = new DoubleListVariableFactory(30, new double[] { 0d, 1d });
+		NSGAIIBuilder builder = new NSGAIIBuilder();
 		
 		builder
 		.setFactory(fac)
 		.setCrossover(new SimulatedBinaryCrossover(new double[]{0.0, 1.0}))
 		.setMutation(new RealMutation(new Double[] { 0d, 1d }));
 		
-		settings.addAlgorithm(builder.create());
-		
+		algorithms.add(builder.create());
 	}
 
 
 	@Override
-	protected void setProblems(ExperimetSettings<ZDT1, NonDominatedSolutionSet> settings) {
-		settings.addProblem(new ZDT1());
+	protected void setProblems(List<IProblem> problems) {
+		problems.add(new ZDT1());
 	}
+
 	
-
+	@Override
+	protected void finalize() {
+		new AttainmentSurfacePlot().show(this);
+	}
 
 	@Override
-	protected void setOptima(ExperimetSettings<ZDT1, NonDominatedSolutionSet> settings) {
+	protected void setOptima(List<IProblem> problems, Map<IProblem, NonDominatedSolutionSet> mOptima) {
 		
 		double seed = 0.8;
 		if (seed <= 0 || seed >= 1) throw new RuntimeException("Seed is out of bounds!");
@@ -78,8 +81,10 @@ public class ZDT1Experiment extends AMultiObjectiveExperiment<ZDT1>{
 
 			}
 			BashExecutor.execute("rm *.out");
-			settings.addOptima(settings.getProblems().get(0), result);;
+			mOptima.put(problems.get(0), result);;
 	}
+
+
 
 
 

@@ -2,7 +2,7 @@ package com.msu.moo.interfaces;
 
 import com.msu.moo.model.solution.Solution;
 
-public interface IEvaluator<P extends IProblem> {
+public interface IEvaluator {
 	
 	/**
 	 * Evaluate the variable using the problem
@@ -13,11 +13,13 @@ public interface IEvaluator<P extends IProblem> {
 	/**
 	 * @return the problem instance itself
 	 */
-	public P getProblem();
+	public IProblem getProblem();
+	
 
 	/**
 	 * @return whether further evaluations are allowed or not
 	 */
 	public boolean hasNext();
+	
 
 }

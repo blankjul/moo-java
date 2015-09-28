@@ -1,12 +1,10 @@
 package com.msu.moo.algorithms.impl;
 
-import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
 import com.msu.moo.operators.AbstractCrossover;
 import com.msu.moo.operators.AbstractMutation;
 
-public class NSGAIIBuilder<V extends IVariable, P extends IProblem> {
+public class NSGAIIBuilder {
 
 	protected int populationSize = 100;
 
@@ -16,47 +14,48 @@ public class NSGAIIBuilder<V extends IVariable, P extends IProblem> {
 
 	protected AbstractMutation<?> mutation;
 
-	protected IVariableFactory<V, P> factory;
-	
+	protected IVariableFactory factory;
+
 	protected String name;
 
-	public NSGAIIBuilder<V, P> setPopulationSize(int populationSize) {
+	public NSGAIIBuilder setPopulationSize(int populationSize) {
 		this.populationSize = populationSize;
 		return this;
 	}
 
-	public NSGAIIBuilder<V, P> setProbMutation(double probMutation) {
+	public NSGAIIBuilder setProbMutation(double probMutation) {
 		this.probMutation = probMutation;
 		return this;
 	}
 
-	public NSGAIIBuilder<V, P> setCrossover(AbstractCrossover<?> crossover) {
+	public NSGAIIBuilder setCrossover(AbstractCrossover<?> crossover) {
 		this.crossover = crossover;
 		return this;
 	}
 
-	public NSGAIIBuilder<V, P> setMutation(AbstractMutation<?> mutation) {
+	public NSGAIIBuilder setMutation(AbstractMutation<?> mutation) {
 		this.mutation = mutation;
 		return this;
 	}
 
-	public NSGAIIBuilder<V, P> setFactory(IVariableFactory<V, P> factory) {
+	public NSGAIIBuilder setFactory(IVariableFactory factory) {
 		this.factory = factory;
 		return this;
 	}
 
-	public NSGAIIBuilder<V, P> setName(String name) {
+	public NSGAIIBuilder setName(String name) {
 		this.name = name;
 		return this;
 	}
-	
-	public NSGAII<V, P> create() {
-		NSGAII<V, P> nsgaII = new NSGAII<>();
-		if (name != null) nsgaII.setName(name);
+
+	public NSGAII create() {
+		NSGAII nsgaII = new NSGAII();
+		if (name != null)
+			nsgaII.setName(name);
 		nsgaII.populationSize = populationSize;
 		nsgaII.probMutation = probMutation;
 		nsgaII.factory = factory;
-		nsgaII.crossover = crossover; 
+		nsgaII.crossover = crossover;
 		nsgaII.mutation = mutation;
 		return nsgaII;
 	}
