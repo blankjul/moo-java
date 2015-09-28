@@ -1,14 +1,14 @@
-package com.msu.moo.algorithms.impl;
+package com.msu.moo.algorithms;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.algorithms.AbstractAlgorithm;
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
+import com.msu.moo.model.AbstractAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;

@@ -1,4 +1,6 @@
-package com.msu.moo.algorithms;
+package com.msu.moo.model;
+
+import com.msu.moo.interfaces.IAlgorithm;
 
 /**
  * An AbstractAlgorithm implements the IAlgorithm interface 

@@ -1,6 +1,5 @@
-package com.msu.moo.algorithms;
+package com.msu.moo.interfaces;
 
-import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 /**

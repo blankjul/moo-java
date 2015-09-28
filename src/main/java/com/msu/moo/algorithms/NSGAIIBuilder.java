@@ -1,4 +1,4 @@
-package com.msu.moo.algorithms.impl;
+package com.msu.moo.algorithms;
 
 import com.msu.moo.interfaces.IVariableFactory;
 import com.msu.moo.operators.AbstractCrossover;

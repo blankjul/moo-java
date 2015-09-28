@@ -1,7 +1,7 @@
 package com.msu.moo.visualization;
 
-import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.experiment.AExperiment;
+import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVisualize;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;

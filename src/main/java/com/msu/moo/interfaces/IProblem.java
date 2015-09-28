@@ -26,5 +26,5 @@ public interface IProblem {
 	 */
 	public int getNumberOfObjectives();
 	
-
+	
 }

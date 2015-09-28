@@ -3,9 +3,9 @@ package com.msu.moo.visualization;
 import java.util.Collection;
 
 import com.msu.moo.Configuration;
-import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.fonseca.EmpiricalAttainmentFunction;
+import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.plots.ScatterPlot;

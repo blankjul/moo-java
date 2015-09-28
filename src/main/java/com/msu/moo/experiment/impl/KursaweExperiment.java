@@ -2,10 +2,10 @@ package com.msu.moo.experiment.impl;
 
 import java.util.List;
 
-import com.msu.moo.algorithms.IAlgorithm;
-import com.msu.moo.algorithms.impl.NSGAIIBuilder;
-import com.msu.moo.algorithms.impl.RandomSearch;
+import com.msu.moo.algorithms.NSGAIIBuilder;
+import com.msu.moo.algorithms.RandomSearch;
 import com.msu.moo.experiment.AExperiment;
+import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.variables.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SinglePointCrossover;

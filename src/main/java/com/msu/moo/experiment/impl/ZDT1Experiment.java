@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.algorithms.IAlgorithm;
-import com.msu.moo.algorithms.impl.NSGAIIBuilder;
+import com.msu.moo.algorithms.NSGAIIBuilder;
 import com.msu.moo.experiment.AExperiment;
+import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
@@ -81,7 +81,7 @@ public class ZDT1Experiment extends AExperiment {
 
 			}
 			BashExecutor.execute("rm *.out");
-			mOptima.put(problems.get(0), result);;
+			mOptima.put(problems.get(0), result);
 	}
 
 
