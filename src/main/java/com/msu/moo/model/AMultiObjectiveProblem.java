@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 
 public abstract class AMultiObjectiveProblem<V extends IVariable> implements IProblem {
 
@@ -15,21 +15,35 @@ public abstract class AMultiObjectiveProblem<V extends IVariable> implements IPr
 	 */
 	protected abstract List<Double> evaluate_(V variable);
 	
+	// ! name of this problem instance
+	protected String name = this.getClass().getSimpleName();
 
 	@Override
-	public MultiObjectiveSolution evaluate(IVariable variable) {
+	public Solution evaluate(IVariable variable) {
 
 		@SuppressWarnings("unchecked")
 		V v = (V) variable;
 
 		List<Double> objectives = evaluate_(v);
-		return new MultiObjectiveSolution(variable, objectives);
+		return new Solution(variable, objectives);
 	}
 	
 	@Override
 	public String toString() {
-		return this.getClass().getSimpleName();
+		return name;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
+	
+	
 
 
 }

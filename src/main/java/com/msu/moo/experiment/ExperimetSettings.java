@@ -13,6 +13,7 @@ public class ExperimetSettings<P extends IProblem, S> {
 	protected List<P> problems = null;
 	protected List<IAlgorithm<S,P>> algorithms = null;
 	protected Map<P, S> mOptima = null;
+	protected int maxEvaluations = 0;
 	
 	
 	public ExperimetSettings() {
@@ -68,6 +69,16 @@ public class ExperimetSettings<P extends IProblem, S> {
 
 	public void setOptima(Map<P, S> mFronts) {
 		this.mOptima = mFronts;
+	}
+
+
+	public int getMaxEvaluations() {
+		return maxEvaluations;
+	}
+
+
+	public void setMaxEvaluations(int maxEvaluations) {
+		this.maxEvaluations = maxEvaluations;
 	}
 	
 	

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.sorting.NaiveNonDominatedSorting;
 import com.msu.moo.util.sorting.NonDominatedSorting;
@@ -28,13 +28,13 @@ public class NonDominatedRankIndicator extends Indicator<Integer> {
 	}
 
 	@Override
-	public void calculate(Map<MultiObjectiveSolution, Integer> map, SolutionSet solutions) {
+	public void calculate(Map<Solution, Integer> map, SolutionSet solutions) {
 		// sort the population
 		sets = sort.run(solutions);
 
 		// assign integer according to result list
 		for (int i = 0; i < sets.size(); i++) {
-			for (MultiObjectiveSolution s : sets.get(i).getSolutions())
+			for (Solution s : sets.get(i).getSolutions())
 				map.put(s, i);
 		}
 	}

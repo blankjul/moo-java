@@ -13,13 +13,20 @@ import com.msu.moo.interfaces.IVariable;
 public abstract class ASolution<T> {
 
 	// ! objectives immutable
-	final protected T objective;
+	protected T objective;
 
 	// ! variable immutable
-	final protected IVariable variable;
+	protected IVariable variable;
 
 	// ! returns the number of objectives
 	public abstract int countObjectives();
+
+	
+	
+	public ASolution() {
+		super();
+	}
+
 
 	/**
 	 * Construct an immutable solution object

@@ -3,7 +3,7 @@ package com.msu.moo.util.indicator;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 
 /**
@@ -17,8 +17,8 @@ public abstract class Indicator<T> {
 	/**
 	 * Calculate indicator values and return a map with with result.
 	 */
-	public Map<MultiObjectiveSolution, T> calculate(SolutionSet solutions) {
-		Map<MultiObjectiveSolution, T> m = new HashMap<>();
+	public Map<Solution, T> calculate(SolutionSet solutions) {
+		Map<Solution, T> m = new HashMap<>();
 		calculate(m, solutions);
 		return m;
 	}
@@ -26,7 +26,7 @@ public abstract class Indicator<T> {
 	/**
 	 * Add the result to the given map.
 	 */
-	public abstract void calculate(Map<MultiObjectiveSolution, T> map, SolutionSet solutions);
+	public abstract void calculate(Map<Solution, T> map, SolutionSet solutions);
  
 	
 }

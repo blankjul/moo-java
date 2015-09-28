@@ -7,7 +7,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 
 public class ScatterPlot extends Abstract2DPlot {
@@ -35,12 +35,20 @@ public class ScatterPlot extends Abstract2DPlot {
 	 */
 	public void add(SolutionSet set, String name) {
 		if (set.isEmpty()) return;
-		if (set.get(0).getObjective().size() != 2) {
-				throw new RuntimeException("Only plotting of 2D objective space is allowed!");
-		}
-		XYSeries series = new XYSeries(name);
-		for (MultiObjectiveSolution s : set) series.add(s.getObjective().get(0), s.getObjective().get(1));
-		collection.addSeries(series);
+		
+		final int dimension = set.get(0).getObjective().size();
+		
+		if (dimension <= 0 || dimension > 2) {
+			throw new RuntimeException("Only plotting of 2D objective space is allowed!");
+		} else {
+			XYSeries series = new XYSeries(name);
+			for (Solution s : set) {
+				double first = s.getObjective().get(0);
+				double second = (dimension == 1) ? 0 : s.getObjective().get(1);
+				series.add(first,second );
+			}
+			collection.addSeries(series);
+		} 
 	}
 	
 	public void add(NonDominatedSolutionSet set, String name) {

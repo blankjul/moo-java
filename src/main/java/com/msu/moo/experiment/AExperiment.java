@@ -21,14 +21,13 @@ public abstract class AExperiment<P extends IProblem, S> {
 
 	public void run(int maxEvaluations, int iterations, long seed) {
 
-		// set the random seed that the results will be comparable
-		Random.getInstance().setSeed(seed);
 
 		// initialize the algorithms and experiments
 		settings = new ExperimetSettings<>();
 		setProblems(settings);
 		setAlgorithms(settings);
 		setOptima(settings);
+		settings.setMaxEvaluations(maxEvaluations);
 		
 		//! result with all the fronts
 		result = new ExperimentResult<>(settings);
@@ -47,13 +46,19 @@ public abstract class AExperiment<P extends IProblem, S> {
 				throw new RuntimeException("Experiment could not be executed. Either problem or algorithms is null!");
 
 			logger.info("Following Algorithms are used and compared: " + settings.getAlgorithms().toString());
+			
 
 			// calculate the result for each algorithm
 			for (IAlgorithm<S,P> algorithm : settings.getAlgorithms()) {
+				
 
 				logger.info(String.format("Startings runs for %s", algorithm));
 
 				for (int i = 0; i < iterations; i++) {
+					
+					// set the random seed that the results will be comparable
+					Random.getInstance().setSeed(seed + i);
+					
 					long startTime = System.currentTimeMillis();
 					S set = algorithm.run(new Evaluator<P>(problem, maxEvaluations));
 					double elapsedTime = (System.currentTimeMillis() - startTime);
@@ -94,6 +99,21 @@ public abstract class AExperiment<P extends IProblem, S> {
 	//! visualizes the result of the experiment
 	public abstract void visualize();
 	
+	
+	//! prints the result of the experiment
+	public void report() {
+		for (P problem : settings.getProblems()) {
+			for (IAlgorithm<S, P> algorithm : settings.getAlgorithms()) {
+				for(S set : result.get(problem, algorithm)) {
+					report_(problem, algorithm, set);
+				}
+			}
+		}
+	}
+	
+	protected void report_(P problem, IAlgorithm<S, P> algorithm, S set) {
+	}
+	
 	/**
 	 * Standard method no pareto front for the problem is given. If this method
 	 * is overridden, for EVERY problem should be an value even if null!
@@ -103,6 +123,8 @@ public abstract class AExperiment<P extends IProblem, S> {
 			settings.getOptima().put(p, null);
 		}
 	}
+	
+	
 	
 
 	

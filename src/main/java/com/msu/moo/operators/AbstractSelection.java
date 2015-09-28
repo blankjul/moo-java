@@ -1,6 +1,6 @@
 package com.msu.moo.operators;
 
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 
 public abstract class AbstractSelection{
@@ -18,7 +18,7 @@ public abstract class AbstractSelection{
 	/**
 	 * @return next solution by selection implementation
 	 */
-	abstract public MultiObjectiveSolution next();
+	abstract public Solution next();
 
 	
 	/**

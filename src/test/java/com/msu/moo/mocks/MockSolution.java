@@ -5,9 +5,9 @@ import java.util.List;
 
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 
-public class MockSolution extends MultiObjectiveSolution {
+public class MockSolution extends Solution {
 
 	public MockSolution(List<Double> objectives) {
 		super(null, objectives);

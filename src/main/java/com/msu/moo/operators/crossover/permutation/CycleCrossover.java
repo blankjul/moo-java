@@ -26,25 +26,13 @@ import java.util.Set;
 import com.msu.moo.operators.AbstractListCrossover;
 import com.msu.moo.util.Random;
 
-/**
- * This is the single point crossover where a list with any type could but cut
- * in a half and recombined with another half.
- * 
- * [0,1,2,3,4] and [4,3,2,1,0] and point is one leads to
- * 
- * [0] + [3,2,1,0] = [0,3,2,1,0] and [4] + [1,2,3,4] = [4,1,2,3,4]
- * 
- */
+
 public class CycleCrossover<T> extends AbstractListCrossover<T> {
 
-	
-	
 	@Override
 	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
 		return crossover_(a, b, Random.getInstance().nextInt(0, a.size() - 1));
 	}
-
-
 	
 	protected List<List<T>> crossover_(List<T> a, List<T> b, int idx) {
 

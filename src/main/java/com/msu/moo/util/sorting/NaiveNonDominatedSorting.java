@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 
 /**
  * Implementation of a naive approach which searching for the current front off
@@ -15,19 +15,19 @@ import com.msu.moo.model.solution.MultiObjectiveSolution;
 public class NaiveNonDominatedSorting implements NonDominatedSorting {
 
 	@Override
-	public List<NonDominatedSolutionSet> run(List<MultiObjectiveSolution> solutions) {
+	public List<NonDominatedSolutionSet> run(List<Solution> solutions) {
 		
 		// resulting list
 		List<NonDominatedSolutionSet> result = new ArrayList<>();
 		
-		List<MultiObjectiveSolution> copy = new ArrayList<MultiObjectiveSolution>(solutions);
+		List<Solution> copy = new ArrayList<Solution>(solutions);
 		
 		// there are solution to sort
 		while (!copy.isEmpty()) {
 			
 			// empty set and search for all non dominated one
 			NonDominatedSolutionSet set = new NonDominatedSolutionSet();
-			for(MultiObjectiveSolution s : copy) {
+			for(Solution s : copy) {
 				set.add(s);
 			}
 			

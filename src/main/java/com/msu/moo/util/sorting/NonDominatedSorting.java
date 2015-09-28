@@ -3,7 +3,7 @@ package com.msu.moo.util.sorting;
 import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 
 /**
  * This interface provides general sorting approach which means to
@@ -12,6 +12,6 @@ import com.msu.moo.model.solution.MultiObjectiveSolution;
  */
 public interface NonDominatedSorting {
 	
-	List<NonDominatedSolutionSet> run(List<MultiObjectiveSolution> solutions);
+	List<NonDominatedSolutionSet> run(List<Solution> solutions);
 
 }

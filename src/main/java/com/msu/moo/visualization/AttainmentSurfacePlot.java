@@ -27,16 +27,20 @@ public class AttainmentSurfacePlot<P extends IProblem> extends ObjectiveSpacePlo
 
 	public void show(ExperimetSettings<P, NonDominatedSolutionSet> settings, ExperimentResult<NonDominatedSolutionSet> result) {
 		for (IProblem problem : settings.getProblems()) {
+
 			EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction(Configuration.PATH_TO_EAF);
 			ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
+			
+			if (showTrueFront && result.getTrueFront(problem) != null) 
+				sp.add(result.getTrueFront(problem), "TrueFront");
+			
+			
 			for (IAlgorithm<NonDominatedSolutionSet, ?> algorithm : settings.getAlgorithms()) {
 				Collection<NonDominatedSolutionSet> set = result.get(problem, algorithm);
 				NonDominatedSolutionSet median = eaf.calculate(set);
 				sp.add(median, algorithm.toString());
 			}
 			
-			if (showTrueFront && result.getTrueFront(problem) != null) 
-				sp.add(result.getTrueFront(problem), "TrueFront");
 			
 			sp.show();
 		}

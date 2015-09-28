@@ -8,7 +8,7 @@ import java.util.List;
 import com.msu.moo.algorithms.impl.NSGAIIBuilder;
 import com.msu.moo.experiment.AMultiObjectiveExperiment;
 import com.msu.moo.experiment.ExperimetSettings;
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.variables.DoubleListVariable;
 import com.msu.moo.model.variables.DoubleListVariableFactory;
@@ -74,7 +74,7 @@ public class ZDT1Experiment extends AMultiObjectiveExperiment<ZDT1>{
 				String[] values = line.split("\\t");
 				objectives.add(Double.valueOf(values[0]));
 				objectives.add(Double.valueOf(values[1]));
-				result.add(new MultiObjectiveSolution(null, objectives));
+				result.add(new Solution(null, objectives));
 
 			}
 			BashExecutor.execute("rm *.out");

@@ -19,24 +19,28 @@ public class NonDominatedSolutionSet {
 	}
 	
 	public NonDominatedSolutionSet(NonDominatedSolutionSet set) {
-		for(MultiObjectiveSolution s : set.solutions) solutions.add(s);
+		for(Solution s : set.solutions) solutions.add(s);
 	}
 
-	public NonDominatedSolutionSet(List<MultiObjectiveSolution> solutions) {
-		for (MultiObjectiveSolution s : solutions) add(s);
+	public NonDominatedSolutionSet(List<Solution> solutions) {
+		for (Solution s : solutions) add(s);
 	}
 	
-	public <T extends List<MultiObjectiveSolution>> void addAll(T solutions) {
-		for (MultiObjectiveSolution entry : solutions) add(entry);
+	public <T extends List<Solution>> void addAll(T solutions) {
+		for (Solution entry : solutions) add(entry);
+	}
+	
+	public Solution get(int index) {
+		return solutions.get(index);
 	}
 
 
-	public boolean add(MultiObjectiveSolution solutionToAdd) {
+	public boolean add(Solution solutionToAdd) {
 		
 		// all the solutions which are dominated by new one
-		List<MultiObjectiveSolution> areDominated = new ArrayList<>();
+		List<Solution> areDominated = new ArrayList<>();
 		
-		for(MultiObjectiveSolution s : solutions) {
+		for(Solution s : solutions) {
 			
 			// if one solution dominates the new one 
 			if (cmp.isDominating(s, solutionToAdd) || cmp.isEqual(s, solutionToAdd)) return false;
@@ -71,7 +75,7 @@ public class NonDominatedSolutionSet {
 	
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (MultiObjectiveSolution s : solutions) {
+		for (Solution s : solutions) {
 			sb.append(s.toString());
 			sb.append("\n");
 		}

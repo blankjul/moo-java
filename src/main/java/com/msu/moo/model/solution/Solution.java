@@ -1,18 +1,26 @@
 package com.msu.moo.model.solution;
 
+import java.util.Arrays;
 import java.util.List;
 
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.ASolution;
 
 
-public class MultiObjectiveSolution extends ASolution<List<Double>>{
+public class Solution extends ASolution<List<Double>>{
 
+	
 	/**
 	 * Construct an immutable solution object
 	 */
-	public MultiObjectiveSolution(IVariable variable, List<Double> objectives) {
+	public Solution(IVariable variable, List<Double> objectives) {
 		super(variable, objectives);
+	}
+	
+	
+	public Solution(SingleObjectiveSolution solution) {
+		this.variable = solution.getVariable();
+		this.objective = Arrays.asList(solution.getObjective());
 	}
 	
 	

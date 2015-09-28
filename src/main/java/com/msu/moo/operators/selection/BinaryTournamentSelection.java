@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.AbstractSelection;
 import com.msu.moo.util.Random;
@@ -18,17 +18,17 @@ import com.msu.moo.util.Random;
 public class BinaryTournamentSelection extends AbstractSelection {
 
 	//! Comparator for choosing which solution is better.
-	protected Comparator<MultiObjectiveSolution> cmp;
+	protected Comparator<Solution> cmp;
 	
 	//! current pool which is used for the selection
-	protected Queue<MultiObjectiveSolution> q = null;
+	protected Queue<Solution> q = null;
 	
 	/**
 	 * Construct a binary tournament selector
 	 * @param set which should be used for selection
 	 * @param cmp comparator which defines the winner of the tournament
 	 */
-	public BinaryTournamentSelection(SolutionSet set, Comparator<MultiObjectiveSolution> cmp) {
+	public BinaryTournamentSelection(SolutionSet set, Comparator<Solution> cmp) {
 		super(set);
 		if (set.size() < 2) {
 			throw new RuntimeException("For the tournament selection the SolutionSet has to be larger than 2!");
@@ -43,22 +43,22 @@ public class BinaryTournamentSelection extends AbstractSelection {
 	 * @return winner of the tournament
 	 */
 	@Override
-	public MultiObjectiveSolution next() {
+	public Solution next() {
 		
 		// get two solutions. if pool is empty just create a new one!
 		if (q == null || q.isEmpty()) rndPool();
-		MultiObjectiveSolution a = q.poll();
+		Solution a = q.poll();
 		if (q == null || q.isEmpty()) rndPool();
-		MultiObjectiveSolution b = q.poll();
+		Solution b = q.poll();
 		
 		// tournament of this two solution
-		MultiObjectiveSolution winner = cmp.compare(a, b) == 1 ? a : b;
+		Solution winner = cmp.compare(a, b) == 1 ? a : b;
 		
 		return winner;
 	}
 	
 	protected void rndPool() {
-		LinkedList<MultiObjectiveSolution> tmp = new LinkedList<>(set);
+		LinkedList<Solution> tmp = new LinkedList<>(set);
 		Random.getInstance().shuffle(tmp);
 		q = new LinkedList<>(tmp);
 	}

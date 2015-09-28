@@ -3,24 +3,24 @@ package com.msu.moo.util.comparator;
 import java.util.Comparator;
 import java.util.Map;
 
-import com.msu.moo.model.solution.MultiObjectiveSolution;
+import com.msu.moo.model.solution.Solution;
 
-public class RankAndCrowdingComparator implements Comparator<MultiObjectiveSolution> {
+public class RankAndCrowdingComparator implements Comparator<Solution> {
 
 	// ! mapping for the current non dominated rank
-	protected Map<MultiObjectiveSolution, Integer> rank;
+	protected Map<Solution, Integer> rank;
 
 	// ! mapping of the crowding distance
-	protected Map<MultiObjectiveSolution, Double> crowding;
+	protected Map<Solution, Double> crowding;
 
-	public RankAndCrowdingComparator(Map<MultiObjectiveSolution, Integer> rank, Map<MultiObjectiveSolution, Double> crowding) {
+	public RankAndCrowdingComparator(Map<Solution, Integer> rank, Map<Solution, Double> crowding) {
 		super();
 		this.rank = rank;
 		this.crowding = crowding;
 	}
 
 	@Override
-	public int compare(MultiObjectiveSolution o1, MultiObjectiveSolution o2) {
+	public int compare(Solution o1, Solution o2) {
 		
 		// check if rank for both exists
 		if (!rank.containsKey(o1) || !rank.containsKey(o2))

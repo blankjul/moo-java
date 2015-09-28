@@ -9,14 +9,14 @@ import java.util.Map;
 import com.msu.moo.util.Pair;
 import com.msu.moo.util.Range;
 
-public class SolutionSet extends ArrayList<MultiObjectiveSolution>{
+public class SolutionSet extends ArrayList<Solution>{
 	
 
 	public SolutionSet() {
 		super();
 	}
 
-	public SolutionSet(Collection<? extends MultiObjectiveSolution> c) {
+	public SolutionSet(Collection<? extends Solution> c) {
 		super(c);
 	}
 
@@ -30,7 +30,7 @@ public class SolutionSet extends ArrayList<MultiObjectiveSolution>{
 	 * @param obj number of objective
 	 */
 	public void sortByObjective(int obj) {
-		Collections.sort(this, (MultiObjectiveSolution s1, MultiObjectiveSolution s2) -> s1.getObjective().get(obj).compareTo(s2.getObjective().get(obj)));
+		Collections.sort(this, (Solution s1, Solution s2) -> s1.getObjective().get(obj).compareTo(s2.getObjective().get(obj)));
 	}
 	
 	/**
@@ -39,8 +39,8 @@ public class SolutionSet extends ArrayList<MultiObjectiveSolution>{
 	 * @param <T>
 	 * @param obj number of objective
 	 */
-	public <T extends Comparable<T>> void sortByIndicator(Map<MultiObjectiveSolution, T> m) {
-		Collections.sort(this, (MultiObjectiveSolution s1, MultiObjectiveSolution s2) -> m.get(s1).compareTo(m.get(s2)));
+	public <T extends Comparable<T>> void sortByIndicator(Map<Solution, T> m) {
+		Collections.sort(this, (Solution s1, Solution s2) -> m.get(s1).compareTo(m.get(s2)));
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class SolutionSet extends ArrayList<MultiObjectiveSolution>{
 	 */
 	public List<Double> getVector(int objective) {
 		List<Double> l = new ArrayList<>();
-		for (MultiObjectiveSolution s : this) {
+		for (Solution s : this) {
 			l.add(s.getObjective().get(objective));
 		}
 		return l;
@@ -60,7 +60,7 @@ public class SolutionSet extends ArrayList<MultiObjectiveSolution>{
 	 */
 	public SolutionSet normalize() {
 		Range<Double> range = new Range<Double>();
-		for (MultiObjectiveSolution s : this) range.add(s.getObjective());
+		for (Solution s : this) range.add(s.getObjective());
 		return normalize(range.get());
 	}
 	
@@ -98,7 +98,7 @@ public class SolutionSet extends ArrayList<MultiObjectiveSolution>{
 			for (int i = 0; i < dimensions; i++) {
 				obj.add((Double)points[i][k]);
 			}
-			result.add(new MultiObjectiveSolution(this.get(k).getVariable(), obj));
+			result.add(new Solution(this.get(k).getVariable(), obj));
 		}
 		
 		return result;
@@ -125,7 +125,7 @@ public class SolutionSet extends ArrayList<MultiObjectiveSolution>{
 				if (value > max) value = max;
 				obj.add(value);
 			}
-			result.add(new MultiObjectiveSolution(this.get(k).getVariable(), obj));
+			result.add(new Solution(this.get(k).getVariable(), obj));
 		}
 		return result;
 	}
@@ -133,7 +133,7 @@ public class SolutionSet extends ArrayList<MultiObjectiveSolution>{
 	
 	public Range<Double> getRange() {
 		Range<Double> r = new Range<>();
-		for (MultiObjectiveSolution s : this) {
+		for (Solution s : this) {
 			r.add(s.getObjective());
 		}
 		return r;
