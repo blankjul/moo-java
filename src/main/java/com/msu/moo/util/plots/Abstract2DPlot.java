@@ -40,6 +40,8 @@ public abstract class Abstract2DPlot implements IPlot {
 			File file = new File(name);
 			FileOutputStream fop = new FileOutputStream(file);
 			ChartUtilities.writeChartAsPNG(fop, getChart(), 800, 600);
+			fop.flush();
+			fop.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

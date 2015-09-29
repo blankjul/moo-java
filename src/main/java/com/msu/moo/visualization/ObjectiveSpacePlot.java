@@ -29,10 +29,12 @@ public class ObjectiveSpacePlot implements IVisualize {
 				for (NonDominatedSolutionSet set : experiment.getResult().get(problem, algorithm)) {
 					ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
 					sp.add(set, algorithm.toString());
-					NonDominatedSolutionSet front = experiment.getOptima().get(problem);
+					NonDominatedSolutionSet front = problem.getOptimum();
 					if (showTrueFront &&  front != null)
 						sp.add(front, "TrueFront");
-					sp.show();
+					
+					if (experiment.hasOutputDirectory()) sp.save(String.format("%s/space_%s.png", experiment.getOutputDir(), problem));
+					if (experiment.isVisualize()) sp.show();
 				}
 			}
 		}

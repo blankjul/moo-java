@@ -9,5 +9,6 @@ import com.msu.moo.experiment.AExperiment;
 public interface IVisualize {
 
 	public void show(AExperiment experiment);
+	
 
 }

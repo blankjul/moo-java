@@ -8,6 +8,6 @@ import com.msu.moo.experiment.AExperiment;
  */
 public interface IReport {
 
-	public void print(AExperiment experiment);
+	public StringBuffer print(AExperiment experiment);
 
 }

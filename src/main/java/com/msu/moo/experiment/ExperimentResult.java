@@ -19,9 +19,15 @@ public class ExperimentResult {
 	// ! algorithm mapped to Map with has for each state the evaluation data
 	protected Multimap<String, NonDominatedSolutionSet> map = HashMultimap.create();
 
-
+	
 	public void add(IProblem problem, IAlgorithm algorithm, NonDominatedSolutionSet set) {
+		add(problem, algorithm, set, null);
+	}
+	
+	
+	public void add(IProblem problem, IAlgorithm algorithm, NonDominatedSolutionSet set, String prefix) {
 		String key = String.format("p%s_a%s", problem, algorithm);
+		if (prefix != null) key += prefix;
 		map.put(key, set);
 	}
 
@@ -39,8 +45,29 @@ public class ExperimentResult {
 	}
 
 	public Collection<NonDominatedSolutionSet> get(IProblem problem, IAlgorithm algorithm) {
+		return get(problem, algorithm, null);
+	}
+	
+	public Collection<NonDominatedSolutionSet> get(IProblem problem, IAlgorithm algorithm, String prefix) {
 		String key = String.format("p%s_a%s", problem, algorithm);
+		if (prefix != null) key += prefix;
 		return map.get(key);
+	}
+	
+	public NonDominatedSolutionSet getFirst(IProblem problem, IAlgorithm algorithm, String prefix) {
+		Collection<NonDominatedSolutionSet> collection = get(problem, algorithm, prefix);
+		try {
+			return collection.iterator().next();
+		} catch (Exception e) {
+			throw new RuntimeException(String.format("No Element saved for %s %s.", problem, algorithm));
+		}
+	}
+	
+
+	public void set(IProblem problem, IAlgorithm algorithm, Collection<NonDominatedSolutionSet> sets) {
+		String key = String.format("p%s_a%s", problem, algorithm);
+		map.removeAll(key);
+		for(NonDominatedSolutionSet set : sets) map.put(key, set);
 	}
 
 

@@ -10,18 +10,20 @@ public class SolutionSetReport implements IReport {
 
 
 	@Override
-	public void print(AExperiment experiment) {
+	public StringBuffer print(AExperiment experiment) {
+		StringBuffer sb = new StringBuffer();
 		for (IProblem problem : experiment.getProblems()) {
 			for (IAlgorithm algorithm : experiment.getAlgorithms()) {
 				int counter = 0;
 				for (NonDominatedSolutionSet set : experiment.getResult().get(problem, algorithm)) {
-					System.out.println("---------------------------------------------");
-					System.out.println(String.format("Problem: %s | Algorithm: | %s | Run: %s ", problem, algorithm, counter++));
-					System.out.println("---------------------------------------------");
-					System.out.println(set);
+					sb.append("---------------------------------------------\n");
+					sb.append(String.format("Problem: %s | Algorithm: | %s | Run: %s \n", problem, algorithm, counter++));
+					sb.append("---------------------------------------------\n");
+					sb.append(set.toString());
 				}
 			}
 		}
+		return sb;
 	}
 
 }

@@ -4,7 +4,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.msu.moo.algorithms.NSGAIIBuilder;
 import com.msu.moo.experiment.AExperiment;
@@ -37,6 +36,8 @@ public class ZDT1Experiment extends AExperiment {
 
 	@Override
 	protected void setProblems(List<IProblem> problems) {
+		ZDT1 problem = new ZDT1();
+		problem.setOptimum(calcFront(problem));
 		problems.add(new ZDT1());
 	}
 
@@ -46,8 +47,11 @@ public class ZDT1Experiment extends AExperiment {
 		new AttainmentSurfacePlot().show(this);
 	}
 
-	@Override
-	protected void setOptima(List<IProblem> problems, Map<IProblem, NonDominatedSolutionSet> mOptima) {
+	
+	
+	
+	
+	protected NonDominatedSolutionSet calcFront(IProblem problem) {
 		
 		double seed = 0.8;
 		if (seed <= 0 || seed >= 1) throw new RuntimeException("Seed is out of bounds!");
@@ -81,7 +85,7 @@ public class ZDT1Experiment extends AExperiment {
 
 			}
 			BashExecutor.execute("rm *.out");
-			mOptima.put(problems.get(0), result);
+			return result;
 	}
 
 

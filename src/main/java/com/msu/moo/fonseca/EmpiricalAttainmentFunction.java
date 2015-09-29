@@ -32,7 +32,10 @@ public class EmpiricalAttainmentFunction {
 		String command = getCommand(sets, level);
 		String out = BashExecutor.execute(command);
 		
-		if (out == null) return null;
+		if (out == null) {
+			System.out.println(command);
+			return null;
+		}
 
 		// for each line at the results
 		for (String line : out.split("\n")) {

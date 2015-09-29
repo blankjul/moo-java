@@ -27,24 +27,20 @@ public class SingleObjectiveReport implements IReport {
 
 
 	@Override
-	public void print(AExperiment experiment) {
+	public StringBuffer print(AExperiment experiment) {
+		StringBuffer sb = new StringBuffer();
+		sb.append(String.format("%s,%s,%s,%s\n", "problem", "algorithm", "objective", "variable"));
 		for (IProblem problem : experiment.getProblems()) {
 			for (IAlgorithm algorithm : experiment.getAlgorithms()) {
 				for (NonDominatedSolutionSet set : experiment.getResult().get(problem, algorithm)) {
 					if (set.size() != 1)
 						throw new RuntimeException("Single Objective problem only one solution allowed.");
 					Solution best = set.get(0);
-					System.out.println(String.format("%s,%s,%s,\"%s\"", problem, algorithm, best.getObjectives(objective), best.getVariable()));
+					sb.append(String.format("%s,%s,%s,\"%s\"\n", problem, algorithm, best.getObjectives(objective), best.getVariable()));
 				}
 			}
 		}
-		System.out.println("---------------------------------------------------------------");
-		for (IProblem problem : experiment.getProblems()) {
-			NonDominatedSolutionSet optima = experiment.getOptima().get(problem);
-			if(optima != null) {
-				System.out.println(String.format("%s,%s", problem, optima.get(0).getObjectives(objective)));
-			}
-		}
+		return sb;
 	}
 
 }

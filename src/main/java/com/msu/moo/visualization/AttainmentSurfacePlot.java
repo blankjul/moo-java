@@ -31,17 +31,20 @@ public class AttainmentSurfacePlot extends ObjectiveSpacePlot {
 			EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction(Configuration.PATH_TO_EAF);
 			ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
 			
-			NonDominatedSolutionSet front = experiment.getOptima().get(problem);
+			NonDominatedSolutionSet front = problem.getOptimum();
 			if (showTrueFront &&  front != null)
 				sp.add(front, "TrueFront");
 			
 			for (IAlgorithm algorithm : experiment.getAlgorithms()) {
 				Collection<NonDominatedSolutionSet> set = experiment.getResult().get(problem, algorithm);
 				NonDominatedSolutionSet median = eaf.calculate(set);
+				experiment.getResult().add(problem, algorithm, median, "median");
 				sp.add(median, algorithm.toString());
 			}
 			
-			sp.show();
+			if (experiment.hasOutputDirectory()) sp.save(String.format("%s/attainment_%s.png", experiment.getOutputDir(), problem));
+			if (experiment.isVisualize()) sp.show();
+			
 		}
 	}
 	

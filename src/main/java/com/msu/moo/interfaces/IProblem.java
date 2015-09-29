@@ -1,5 +1,6 @@
 package com.msu.moo.interfaces;
 
+import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 
 /**
@@ -25,6 +26,13 @@ public interface IProblem {
 	 * @return number of objectives that should be optimized!
 	 */
 	public int getNumberOfObjectives();
+	
+	
+	/**
+	 * @return optimum solution for this problem instance
+	 */
+	public NonDominatedSolutionSet getOptimum();
+	
 	
 	
 }

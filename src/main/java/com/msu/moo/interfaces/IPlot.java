@@ -10,5 +10,5 @@ public interface IPlot {
 	 */
 	public JFreeChart getChart();
 	
-
+	
 }
