@@ -1,42 +1,36 @@
 package com.msu.moo.visualization;
 
-import com.msu.moo.experiment.AExperiment;
-import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.interfaces.IVisualize;
+import com.msu.moo.model.AVisualize;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.util.events.EventDispatcher;
+import com.msu.moo.util.events.IListener;
+import com.msu.moo.util.events.RunFinishedEvent;
 import com.msu.moo.util.plots.ScatterPlot;
 
-public class ObjectiveSpacePlot implements IVisualize {
+public class ObjectiveSpacePlot extends AVisualize implements IListener<RunFinishedEvent>{
 
 	// ! also plot the true front if it exists
 	protected boolean showTrueFront = true;
 
+	
 	public ObjectiveSpacePlot() {
 		super();
+		EventDispatcher.getInstance().register(RunFinishedEvent.class, this);
 	}
 
 	public ObjectiveSpacePlot(boolean showTrueFront) {
-		super();
+		this();
 		this.showTrueFront = showTrueFront;
 	}
 
-
 	@Override
-	public void show(AExperiment experiment) {
-		for (IProblem problem : experiment.getProblems()) {
-			for (IAlgorithm algorithm : experiment.getAlgorithms()) {
-				for (NonDominatedSolutionSet set : experiment.getResult().get(problem, algorithm)) {
-					ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
-					sp.add(set, algorithm.toString());
-					NonDominatedSolutionSet front = problem.getOptimum();
-					if (showTrueFront &&  front != null)
-						sp.add(front, "TrueFront");
-					
-					if (experiment.hasOutputDirectory()) sp.save(String.format("%s/space_%s.png", experiment.getOutputDir(), problem));
-					if (experiment.isVisualize()) sp.show();
-				}
-			}
-		}
+	public void update(RunFinishedEvent event) {
+		IProblem problem = event.getProblem();
+		ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
+		sp.add(event.getNonDominatedSolutionSet(), event.getAlgorithm().toString());
+		NonDominatedSolutionSet front = problem.getOptimum();
+		if (showTrueFront &&  front != null) sp.add(front, "TrueFront");
+		showOrPrint(sp, String.format("%s-%s-%s-objspace", problem, event.getAlgorithm(), event.getRun()));
 	}
 }

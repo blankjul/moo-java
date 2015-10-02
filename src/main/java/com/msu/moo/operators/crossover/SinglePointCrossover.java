@@ -18,7 +18,7 @@ import com.msu.moo.util.Random;
  */
 public class SinglePointCrossover<T> extends AbstractListCrossover<T> {
 
-	protected List<List<T>> crossover_(List<T> a, List<T> b, int point) {
+	public List<List<T>> crossover_(List<T> a, List<T> b, int point) {
 
 		// copy the both list and change values
 		List<T> c1 = new ArrayList<T>(a);

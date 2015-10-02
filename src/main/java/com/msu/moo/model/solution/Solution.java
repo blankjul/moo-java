@@ -37,6 +37,18 @@ public class Solution extends ASolution<List<Double>>{
 			throw new RuntimeException("objectives are null. no count possible!");
 		return objective.size();
 	}
+	
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Double d : objective) {
+			sb.append(d);
+			sb.append(",");
+		}
+		sb.append("\"");
+		sb.append(variable);
+		sb.append("\"");
+		return sb.toString();
+	}
 
 	
 }

@@ -14,7 +14,7 @@ public class ExperimentExecutor {
 	 */
 	
 	//! experiment that should be executed
-	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.ZDT1Experiment";
+	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.KursaweExperiment";
 	
 	//! number of iterations per experiment
 	protected final static int ITERATIONS = 10;

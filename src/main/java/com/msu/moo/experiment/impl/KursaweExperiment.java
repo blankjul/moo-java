@@ -12,6 +12,8 @@ import com.msu.moo.operators.crossover.SinglePointCrossover;
 import com.msu.moo.operators.mutation.PolynomialMutation;
 import com.msu.moo.problems.Kursawe;
 import com.msu.moo.visualization.AttainmentSurfacePlot;
+import com.msu.moo.visualization.HypervolumeBoxPlot;
+import com.msu.moo.visualization.ObjectiveSpacePlot;
 
 public class KursaweExperiment extends AExperiment {
 
@@ -30,10 +32,11 @@ public class KursaweExperiment extends AExperiment {
 	}
 
 	@Override
-	protected void finalize() {
-		new AttainmentSurfacePlot().show(this);
+	protected void initialize() {
+		new AttainmentSurfacePlot().setVisibility(true);
+		new HypervolumeBoxPlot().setVisibility(true);
+		new ObjectiveSpacePlot().setOutputFolder(".");
 	}
-	
 	
 
 }

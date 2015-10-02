@@ -31,6 +31,7 @@ public class BashExecutor {
 	public static String fromStream(InputStream is) {
 		StringBuilder sb = new StringBuilder();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+		
 		String line = null;
 		try {
 			while ((line = reader.readLine()) != null) {

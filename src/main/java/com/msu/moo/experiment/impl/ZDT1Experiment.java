@@ -20,6 +20,8 @@ import com.msu.moo.visualization.AttainmentSurfacePlot;
 
 public class ZDT1Experiment extends AExperiment {
 	
+	protected static final double SEED = 0.8;
+	
 	@Override
 	protected void setAlgorithms(List<IAlgorithm> algorithms) {
 		DoubleListVariableFactory fac = new DoubleListVariableFactory(30, new double[] { 0d, 1d });
@@ -38,26 +40,21 @@ public class ZDT1Experiment extends AExperiment {
 	protected void setProblems(List<IProblem> problems) {
 		ZDT1 problem = new ZDT1();
 		problem.setOptimum(calcFront(problem));
-		problems.add(new ZDT1());
+		problems.add(problem);
 	}
 
 	
 	@Override
-	protected void finalize() {
-		new AttainmentSurfacePlot().show(this);
+	protected void initialize() {
+		new AttainmentSurfacePlot().setVisibility(true);
 	}
-
-	
 	
 	
 	
 	protected NonDominatedSolutionSet calcFront(IProblem problem) {
 		
-		double seed = 0.8;
-		if (seed <= 0 || seed >= 1) throw new RuntimeException("Seed is out of bounds!");
-		
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
-		String command = String.format("vendor/nsga2-gnuplot-v1.1.6/nsga2r %s <vendor/nsga2-gnuplot-v1.1.6/input_data/zdt1.in", seed);
+		String command = String.format("vendor/nsga2-gnuplot-v1.1.6/nsga2r %s <vendor/nsga2-gnuplot-v1.1.6/input_data/zdt1.in", SEED);
 
 			BashExecutor.execute(command);
 			FileInputStream fis = null;

@@ -55,9 +55,9 @@ public abstract class ASolution<T> {
 	 */
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(variable);
-		sb.append(" -> ");
 		sb.append(objective);
+		sb.append(",");
+		sb.append(variable);
 		return sb.toString();
 	}
 

@@ -1,29 +1,27 @@
 package com.msu.moo.report;
 
-import com.msu.moo.experiment.AExperiment;
-import com.msu.moo.interfaces.IAlgorithm;
-import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.interfaces.IReport;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.util.events.EventDispatcher;
+import com.msu.moo.util.events.IListener;
+import com.msu.moo.util.events.RunFinishedEvent;
 
-public class SolutionSetReport implements IReport {
+public class SolutionSetReport extends AReport {
 
-
-	@Override
-	public StringBuffer print(AExperiment experiment) {
-		StringBuffer sb = new StringBuffer();
-		for (IProblem problem : experiment.getProblems()) {
-			for (IAlgorithm algorithm : experiment.getAlgorithms()) {
-				int counter = 0;
-				for (NonDominatedSolutionSet set : experiment.getResult().get(problem, algorithm)) {
-					sb.append("---------------------------------------------\n");
-					sb.append(String.format("Problem: %s | Algorithm: | %s | Run: %s \n", problem, algorithm, counter++));
-					sb.append("---------------------------------------------\n");
-					sb.append(set.toString());
-				}
+	public SolutionSetReport() {
+		super();
+		EventDispatcher.getInstance().register(RunFinishedEvent.class, new IListener<RunFinishedEvent>() {
+			@Override
+			public void update(RunFinishedEvent event) {
+				pw.println("---------------------------------------------");
+				pw.format("Problem: %s | Algorithm: %s | Run: %s \n", event.getProblem(), event.getAlgorithm(), event.getRun());
+				pw.println("---------------------------------------------");
+				pw.print(event.getNonDominatedSolutionSet().toString());
+				pw.println();
 			}
-		}
-		return sb;
+		});
+
 	}
+
+
+
 
 }

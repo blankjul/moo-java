@@ -3,6 +3,7 @@ package com.msu.moo.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -58,5 +59,13 @@ public class Util {
 		File f = new File(path);
 		return f.exists() && !f.isDirectory();
 	}
+	
+	public static String getTimestamp() {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS") ;
+		String date = dateFormat.format(System.currentTimeMillis());
+		return date;
+	}
+	
+
 
 }
