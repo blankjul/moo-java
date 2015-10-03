@@ -4,19 +4,28 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
-import com.lowagie.text.pdf.codec.Base64.OutputStream;
 import com.msu.moo.interfaces.IReport;
+import com.msu.moo.util.Util;
 import com.msu.moo.util.events.EventDispatcher;
 import com.msu.moo.util.events.ExperimentFininshedEvent;
 import com.msu.moo.util.events.IListener;
 
 public abstract class AReport implements IReport {
 
-	//! printer to write the file
+	// ! printer to write the file
 	protected PrintWriter pw;
 	
+	protected String pathToFile = null;
+
+
 	public AReport() {
 		pw = new PrintWriter(System.out, true);
+	}
+	
+	public AReport(String pathToFile) {
+		
+		setPath(pathToFile);
+
 		// close the file when the experiment is finished
 		EventDispatcher.getInstance().register(ExperimentFininshedEvent.class, new IListener<ExperimentFininshedEvent>() {
 			@Override
@@ -25,23 +34,25 @@ public abstract class AReport implements IReport {
 			}
 		});
 	}
+
 	
-	public AReport set(String pathToFile) {
+	public AReport setPath(String pathToFile) {
 		try {
 			pw = new PrintWriter(new FileOutputStream(pathToFile), true);
+			this.pathToFile = pathToFile;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
 		return this;
 	}
+
 	
-	
-	public AReport set(OutputStream os) {
-		pw = new PrintWriter(os, true);
-		return this;
+	@Override
+	public String toString() {
+		 if (pathToFile != null) return Util.readFile(pathToFile);
+		 return "";
 	}
 	
-
-
-
+	
+	
 }

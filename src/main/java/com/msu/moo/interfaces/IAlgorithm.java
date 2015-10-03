@@ -21,6 +21,7 @@ public interface IAlgorithm {
 	 */
 	public NonDominatedSolutionSet run(IEvaluator evaluator);
 
+	public NonDominatedSolutionSet run(IProblem problem);
 	
 	/**
 	 * Every algorithm should have a name which is used to execute the toStrin()

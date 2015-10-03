@@ -86,8 +86,7 @@ public class NonDominatedSolutionSet {
 	public Range<Double> getRange() {
 		return this.solutions.getRange();
 	}
-	
-	
-	
+
+
 
 }

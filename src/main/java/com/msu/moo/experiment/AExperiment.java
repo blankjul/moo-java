@@ -1,7 +1,5 @@
 package com.msu.moo.experiment;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -16,8 +14,8 @@ import com.msu.moo.util.Random;
 import com.msu.moo.util.events.AlgorithmFinishedExecution;
 import com.msu.moo.util.events.EventDispatcher;
 import com.msu.moo.util.events.ExperimentFininshedEvent;
-import com.msu.moo.util.events.RunFinishedEvent;
 import com.msu.moo.util.events.ProblemFinishedEvent;
+import com.msu.moo.util.events.RunFinishedEvent;
 
 public abstract class AExperiment {
 
@@ -32,13 +30,6 @@ public abstract class AExperiment {
 	// ! result storage for the pareto fronts
 	protected ExperimentResult result = new ExperimentResult();
 
-	// ! output directory if results should be written
-	protected String outputDir = null;
-
-	// ! if true the windows are opened to show the plots
-	protected boolean visualize = true;
-
-	
 	public void run(int maxEvaluations, int iterations, long seed) {
 		
 		// set random seed to created problems for seed equally
@@ -139,26 +130,7 @@ public abstract class AExperiment {
 	public List<IAlgorithm> getAlgorithms() {
 		return algorithms;
 	}
-
-	public String getOutputDir() {
-		return outputDir;
-	}
-
-	public void setOutputDir(String outputDir) {
-		this.outputDir = outputDir;
-	}
-
-	public boolean hasOutputDirectory() {
-		return this.outputDir != null && Files.isDirectory(Paths.get(outputDir));
-	}
-
-	public boolean isVisualize() {
-		return visualize;
-	}
-
-	public void setVisualize(boolean visualize) {
-		this.visualize = visualize;
-	}
+	
 
 
 }

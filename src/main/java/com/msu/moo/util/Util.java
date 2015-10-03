@@ -1,6 +1,8 @@
 package com.msu.moo.util;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -66,6 +68,20 @@ public class Util {
 		return date;
 	}
 	
+	public static String readFile(String pathToFile) {
+		StringBuilder sb = new StringBuilder();
+		try {
+			BufferedReader in = new BufferedReader(new FileReader(pathToFile));
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				sb.append(line);
+			}
+			in.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return sb.toString();
+	}
 
 
 }

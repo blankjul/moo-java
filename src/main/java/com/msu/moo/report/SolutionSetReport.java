@@ -18,8 +18,8 @@ public class SolutionSetReport extends AReport {
 				pw.println();
 			}
 		});
-
 	}
+	
 
 
 
