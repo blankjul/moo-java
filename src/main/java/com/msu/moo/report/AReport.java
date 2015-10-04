@@ -29,7 +29,7 @@ public abstract class AReport implements IReport {
 		// close the file when the experiment is finished
 		EventDispatcher.getInstance().register(ExperimentFininshedEvent.class, new IListener<ExperimentFininshedEvent>() {
 			@Override
-			public void update(ExperimentFininshedEvent event) {
+			public void handle(ExperimentFininshedEvent event) {
 				pw.close();
 			}
 		});

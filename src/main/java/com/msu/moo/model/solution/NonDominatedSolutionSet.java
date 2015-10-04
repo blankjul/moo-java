@@ -17,6 +17,7 @@ public class NonDominatedSolutionSet {
 	public NonDominatedSolutionSet() {
 		super();
 	}
+
 	
 	public NonDominatedSolutionSet(NonDominatedSolutionSet set) {
 		for(Solution s : set.solutions) solutions.add(s);
@@ -87,6 +88,15 @@ public class NonDominatedSolutionSet {
 		return this.solutions.getRange();
 	}
 
+	public SolutionDominator getSolutionDominator() {
+		return cmp;
+	}
+
+	public void setSolutionDominator(SolutionDominator cmp) {
+		this.cmp = cmp;
+	}
+
+	
 
 
 }

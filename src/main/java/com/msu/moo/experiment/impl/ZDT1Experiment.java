@@ -50,7 +50,6 @@ public class ZDT1Experiment extends AExperiment {
 	}
 	
 	
-	
 	protected NonDominatedSolutionSet calcFront(IProblem problem) {
 		
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();

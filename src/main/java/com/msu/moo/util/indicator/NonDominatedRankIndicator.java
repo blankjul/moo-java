@@ -3,16 +3,18 @@ package com.msu.moo.util.indicator;
 import java.util.List;
 import java.util.Map;
 
+import com.msu.moo.model.AIndicator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.sorting.NaiveNonDominatedSorting;
 import com.msu.moo.util.sorting.NonDominatedSorting;
 
-public class NonDominatedRankIndicator extends Indicator<Integer> {
+public class NonDominatedRankIndicator extends AIndicator<Integer> {
 
 	// ! NonDominatedSorting that is used for calculating the rank
-	protected NonDominatedSorting sort = new NaiveNonDominatedSorting();
+	protected NonDominatedSorting sort = new NaiveNonDominatedSorting(new SolutionDominatorWithConstraints());
 	
 	//! when you have calculated the fronts you have access to the list of fronts.
 	protected List<NonDominatedSolutionSet> sets = null;

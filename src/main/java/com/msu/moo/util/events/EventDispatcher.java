@@ -104,7 +104,7 @@ public final class EventDispatcher {
 			if (logger.isTraceEnabled()) {
 				logger.trace(String.format("Delegating event of type %s to registered handler %s.", clazz, eL.getClass()));
 			}
-			eL.update(event);
+			eL.handle(event);
 		}
 	}
 

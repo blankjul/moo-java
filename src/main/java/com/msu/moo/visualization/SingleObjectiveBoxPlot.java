@@ -22,7 +22,7 @@ public class SingleObjectiveBoxPlot extends AVisualize implements IListener<Prob
 
 
 	@Override
-	public void update(ProblemFinishedEvent event) {
+	public void handle(ProblemFinishedEvent event) {
 		AExperiment experiment = event.getExperiment();
 		IProblem problem = event.getProblem();
 		

@@ -1,5 +1,7 @@
 package com.msu.moo.model;
 
+import java.util.List;
+
 import com.msu.moo.interfaces.IVariable;
 
 /**
@@ -12,6 +14,9 @@ import com.msu.moo.interfaces.IVariable;
  */
 public abstract class ASolution<T> {
 
+	//! this list of doubles allows to safe constraint violations for a solution
+	protected List<Double> constraintViolations = null;
+	
 	// ! objectives immutable
 	protected T objective;
 
@@ -22,11 +27,9 @@ public abstract class ASolution<T> {
 	public abstract int countObjectives();
 
 	
-	
 	public ASolution() {
 		super();
 	}
-
 
 	/**
 	 * Construct an immutable solution object
@@ -34,6 +37,11 @@ public abstract class ASolution<T> {
 	public ASolution(IVariable variable, T objectives) {
 		this.variable = variable;
 		this.objective = objectives;
+	}
+	
+	public ASolution(IVariable variable, T objectives, List<Double> constraintViolations) {
+		this(variable, objectives);
+		this.constraintViolations = constraintViolations;
 	}
 
 	/**
@@ -49,6 +57,12 @@ public abstract class ASolution<T> {
 	public IVariable getVariable() {
 		return variable;
 	}
+	
+
+	public List<Double> getConstraintViolations() {
+		return constraintViolations;
+	}
+
 
 	/**
 	 * Print only the objectives

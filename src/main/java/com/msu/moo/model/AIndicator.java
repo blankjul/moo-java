@@ -1,4 +1,4 @@
-package com.msu.moo.util.indicator;
+package com.msu.moo.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -12,7 +12,7 @@ import com.msu.moo.model.solution.SolutionSet;
  *
  * @param <T> type of the result of indicator
  */
-public abstract class Indicator<T> {
+public abstract class AIndicator<T> {
 	
 	/**
 	 * Calculate indicator values and return a map with with result.

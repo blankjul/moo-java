@@ -27,7 +27,7 @@ public class HypervolumeBoxPlot extends AVisualize implements IListener<ProblemF
 
 	
 	@Override
-	public void update(ProblemFinishedEvent event) {
+	public void handle(ProblemFinishedEvent event) {
 		
 		IProblem problem = event.getProblem();
 		AExperiment experiment = event.getExperiment();

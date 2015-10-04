@@ -12,6 +12,14 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public class NonDominatedSetTest {
 
+	@Test
+	public void testAddingSolutionsEqualObjectives() {
+		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
+		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
+		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
+		assertEquals(2, s.size());
+	}
+	
 
 	@Test
 	public void testAddingSolutionsThatAreDominatedAndNotAdded() {

@@ -10,7 +10,7 @@ import com.msu.moo.model.variables.DoubleListVariable;
 public class Kursawe extends AProblem<DoubleListVariable> {
 
 	@Override
-	protected List<Double> evaluate_(DoubleListVariable var) {
+	protected void evaluate_(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 
 		double aux, xi, xj;
 		double[] fx = new double[2];
@@ -37,13 +37,16 @@ public class Kursawe extends AProblem<DoubleListVariable> {
 			fx[1] += Math.pow(Math.abs(x[i]), 0.8) + 5.0 * Math.sin(Math.pow(x[i], 3.0));
 		}
 
-		return new ArrayList<Double>(Arrays.asList(fx[0], fx[1]));
+		objectives.add(fx[0]);
+		objectives.add(fx[1]);
 	}
 
 	@Override
 	public int getNumberOfObjectives() {
 		return 2;
 	}
+
+
 
 
 }

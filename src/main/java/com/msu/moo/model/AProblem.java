@@ -1,5 +1,6 @@
 package com.msu.moo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.interfaces.IProblem;
@@ -11,10 +12,10 @@ public abstract class AProblem<V extends IVariable> implements IProblem {
 
 	/**
 	 * Evaluation method that must be implemented by all subclasses.
-	 * @param variable input value
+	 * @param var input value
 	 * @return objective results
 	 */
-	protected abstract List<Double> evaluate_(V variable);
+	protected abstract void evaluate_(V var, List<Double> objectives, List<Double> constraintViolations);
 	
 	// ! name of this problem instance
 	protected String name = this.getClass().getSimpleName();
@@ -28,11 +29,28 @@ public abstract class AProblem<V extends IVariable> implements IProblem {
 		@SuppressWarnings("unchecked")
 		V v = (V) variable;
 
-		List<Double> objectives = evaluate_(v);
-		return new Solution(variable, objectives);
+		List<Double> objectives = new ArrayList<>();
+		List<Double> constraintViolations = new ArrayList<>();
+		
+		// use the function to evaluate
+		evaluate_(v, objectives, constraintViolations);
+		
+		if (objectives.size() != this.getNumberOfObjectives()) {
+			throw new RuntimeException(String.format("Problem %s should have %s objectives but evaluation function returned %s.", this, getNumberOfObjectives(), objectives.size()));
+		}
+		
+		if (constraintViolations.size() != this.getNumberOfConstraints()) {
+			throw new RuntimeException(String.format("Problem %s should have %s constraints but evaluation function returned %s.", this, getNumberOfConstraints(), constraintViolations.size()));
+		}
+		
+		return new Solution(variable, objectives, constraintViolations);
 	}
 	
 	
+	@Override
+	public int getNumberOfConstraints() {
+		return 0;
+	}
 
 	@Override
 	public String toString() {
@@ -46,7 +64,6 @@ public abstract class AProblem<V extends IVariable> implements IProblem {
 	public void setName(String name) {
 		this.name = name;
 	}
-
 
 	@Override
 	public NonDominatedSolutionSet getOptimum() {

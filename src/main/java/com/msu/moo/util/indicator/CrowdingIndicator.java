@@ -2,10 +2,11 @@ package com.msu.moo.util.indicator;
 
 import java.util.Map;
 
+import com.msu.moo.model.AIndicator;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 
-public class CrowdingIndicator extends Indicator<Double>{
+public class CrowdingIndicator extends AIndicator<Double>{
 
 	
 	//! helping method for fast access to objective values

@@ -41,20 +41,14 @@ public class SolutionDominator {
 		return !isEqual(s1, s2);
 	}
 
+	
 	/**
-	 * @return true if s2 dominates s1 (false when equal)
+	 * @return true if s1 is dominated s2 (false when equal)
 	 */
 	public boolean isDominatedBy(Solution s1, Solution s2) {
-		Pair<List<Double>, List<Double>> obj = getObjectives(s1, s2);
-		int length = obj.first.size();
-		for (int i = 0; i < length; i++) {
-			if (obj.second.get(i) > obj.first.get(i))
-				return false;
-		}
-		// return only true if they are not equal!
-		// because else it would not be a real domination
-		return !isEqual(s1, s2);
+		return isDominating(s2, s1);
 	}
+	
 
 	/**
 	 * @return true if both objectives vectors are equal. the variable is not
@@ -62,7 +56,7 @@ public class SolutionDominator {
 	 */
 	public boolean isEqual(Solution s1, Solution s2) {
 		Pair<List<Double>, List<Double>> obj = getObjectives(s1, s2);
-		int length = obj.first.size();
+		final int length = obj.first.size();
 		for (int i = 0; i < length; i++) {
 			// if one objective is different they are not equal
 			if (obj.first.get(i) != obj.second.get(i))

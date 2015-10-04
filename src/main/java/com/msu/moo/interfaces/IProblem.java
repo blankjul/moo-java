@@ -29,6 +29,12 @@ public interface IProblem {
 	
 	
 	/**
+	 * @return number of objectives that should be optimized!
+	 */
+	public int getNumberOfConstraints();
+	
+	
+	/**
 	 * @return optimum solution for this problem instance
 	 */
 	public NonDominatedSolutionSet getOptimum();

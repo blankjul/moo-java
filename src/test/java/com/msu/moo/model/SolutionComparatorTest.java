@@ -1,4 +1,4 @@
-package com.msu.moo.comparator;
+package com.msu.moo.model;
 
 import static org.junit.Assert.*;
 

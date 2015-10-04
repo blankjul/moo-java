@@ -1,7 +1,5 @@
 package com.msu.moo.problems;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.msu.moo.model.AProblem;
@@ -48,13 +46,14 @@ public class ZDT1 extends AProblem<DoubleListVariable> {
 	}
 
 	@Override
-	protected List<Double> evaluate_(DoubleListVariable variable) {
+	protected void evaluate_(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 		double[] f = new double[getNumberOfObjectives()];
-		f[0] = variable.get().get(0);
-		double g = this.evalG(variable.get());
+		f[0] = var.get().get(0);
+		double g = this.evalG(var.get());
 		double h = this.evalH(f[0], g);
 		f[1] = h * g;
-
-		return new ArrayList<Double>(Arrays.asList(f[0], f[1]));
+		
+		objectives.add(f[0]);
+		objectives.add(f[1]);
 	}
 }

@@ -9,18 +9,21 @@ import com.msu.moo.model.ASolution;
 
 public class Solution extends ASolution<List<Double>>{
 
-	
-	/**
-	 * Construct an immutable solution object
-	 */
+
 	public Solution(IVariable variable, List<Double> objectives) {
 		super(variable, objectives);
 	}
 	
-	
+	public Solution(IVariable variable, List<Double> objectives, List<Double> constraintViolations) {
+		super(variable, objectives, constraintViolations);
+	}
+
+
+
 	public Solution(SingleObjectiveSolution solution) {
 		this.variable = solution.getVariable();
 		this.objective = Arrays.asList(solution.getObjective());
+		this.constraintViolations = solution.getConstraintViolations();
 	}
 	
 	
@@ -41,6 +44,10 @@ public class Solution extends ASolution<List<Double>>{
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 		for (Double d : objective) {
+			sb.append(d);
+			sb.append(",");
+		}
+		for (Double d : constraintViolations) {
 			sb.append(d);
 			sb.append(",");
 		}

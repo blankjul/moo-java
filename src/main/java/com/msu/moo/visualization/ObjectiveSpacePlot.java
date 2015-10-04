@@ -25,7 +25,7 @@ public class ObjectiveSpacePlot extends AVisualize implements IListener<RunFinis
 	}
 
 	@Override
-	public void update(RunFinishedEvent event) {
+	public void handle(RunFinishedEvent event) {
 		IProblem problem = event.getProblem();
 		ScatterPlot sp = new ScatterPlot(problem.toString(), "X", "Y");
 		sp.add(event.getNonDominatedSolutionSet(), event.getAlgorithm().toString());

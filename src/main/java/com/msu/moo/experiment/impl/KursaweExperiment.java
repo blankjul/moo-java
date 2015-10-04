@@ -35,7 +35,7 @@ public class KursaweExperiment extends AExperiment {
 	protected void initialize() {
 		new AttainmentSurfacePlot().setVisibility(true);
 		new HypervolumeBoxPlot().setVisibility(true);
-		new ObjectiveSpacePlot().setOutputFolder(".");
+		new ObjectiveSpacePlot();
 	}
 	
 

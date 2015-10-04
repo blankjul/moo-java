@@ -18,7 +18,7 @@ public class SingleObjectiveReport extends AReport {
 		EventDispatcher.getInstance().register(ProblemFinishedEvent.class, new IListener<ProblemFinishedEvent>() {
 
 			@Override
-			public void update(ProblemFinishedEvent event) {
+			public void handle(ProblemFinishedEvent event) {
 				IProblem problem = event.getProblem();
 				AExperiment experiment = event.getExperiment();
 

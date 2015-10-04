@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.SolutionDominator;
 
 /**
  * Implementation of a naive approach which searching for the current front off
@@ -13,6 +14,20 @@ import com.msu.moo.model.solution.Solution;
  *
  */
 public class NaiveNonDominatedSorting implements NonDominatedSorting {
+
+	//! solution comparator for testing domination
+	protected SolutionDominator cmp = new SolutionDominator();
+	
+	
+	public NaiveNonDominatedSorting() {
+		this(new SolutionDominator());
+	}
+	
+	public NaiveNonDominatedSorting(SolutionDominator cmp) {
+		super();
+		this.cmp = cmp;
+	}
+
 
 	@Override
 	public List<NonDominatedSolutionSet> run(List<Solution> solutions) {
@@ -27,6 +42,8 @@ public class NaiveNonDominatedSorting implements NonDominatedSorting {
 			
 			// empty set and search for all non dominated one
 			NonDominatedSolutionSet set = new NonDominatedSolutionSet();
+			set.setSolutionDominator(cmp);
+			
 			for(Solution s : copy) {
 				set.add(s);
 			}

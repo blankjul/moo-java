@@ -10,7 +10,7 @@ public class SolutionSetReport extends AReport {
 		super();
 		EventDispatcher.getInstance().register(RunFinishedEvent.class, new IListener<RunFinishedEvent>() {
 			@Override
-			public void update(RunFinishedEvent event) {
+			public void handle(RunFinishedEvent event) {
 				pw.println("---------------------------------------------");
 				pw.format("Problem: %s | Algorithm: %s | Run: %s \n", event.getProblem(), event.getAlgorithm(), event.getRun());
 				pw.println("---------------------------------------------");
