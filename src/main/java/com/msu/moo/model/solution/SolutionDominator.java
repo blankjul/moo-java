@@ -59,7 +59,7 @@ public class SolutionDominator {
 		final int length = obj.first.size();
 		for (int i = 0; i < length; i++) {
 			// if one objective is different they are not equal
-			if (obj.first.get(i) != obj.second.get(i))
+			if (!obj.first.get(i).equals(obj.second.get(i)))
 				return false;
 		}
 		return true;

@@ -37,13 +37,7 @@ public class NonDominatedSetTest {
 		assertEquals(2, s.size());
 	}
 	
-	@Test
-	public void testAddingSolutionsEqualAndNotAdded() {
-		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
-		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
-		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
-		assertEquals(1, s.size());
-	}
+
 	
 	@Test
 	public void testAddingSolutionsThatDominatedCausesRemoving() {

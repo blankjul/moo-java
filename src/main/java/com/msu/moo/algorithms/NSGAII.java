@@ -11,6 +11,7 @@ import com.msu.moo.interfaces.IVariableFactory;
 import com.msu.moo.model.AbstractAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.AbstractCrossover;
 import com.msu.moo.operators.AbstractMutation;
@@ -90,7 +91,12 @@ public class NSGAII extends AbstractAlgorithm {
 
 			population = new SolutionSet(population.subList(0, populationSize));
 		}
-		return new NonDominatedSolutionSet(population);
+		
+		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
+		result.setSolutionDominator(new SolutionDominatorWithConstraints());
+		result.addAll(population);
+		return result;
+		
 	}
 
 	protected void initialize(IEvaluator evaluator) {

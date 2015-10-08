@@ -16,6 +16,7 @@ public class SolutionSetReport extends AReport {
 				pw.println("---------------------------------------------");
 				pw.print(event.getNonDominatedSolutionSet().toString());
 				pw.println();
+				pw.println("---------------------------------------------");
 			}
 		});
 	}

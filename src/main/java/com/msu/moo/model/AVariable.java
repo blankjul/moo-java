@@ -9,6 +9,7 @@ public abstract class AVariable<T> implements IVariable {
 	
 	abstract public IVariable copy();
 	
+	
 	public AVariable(T obj) {
 		super();
 		this.obj = obj;
@@ -30,13 +31,35 @@ public abstract class AVariable<T> implements IVariable {
 		}
 		
 	}
-	
 
 	
 	@Override
 	public String toString() {
 		return obj.toString();
 	}
+	
+
+	@Override
+	public boolean equals(Object other) {
+		if (other == null)
+			return false;
+		if (other == this)
+			return true;
+		
+		try {
+			@SuppressWarnings("unchecked")
+			T otherObject = (T) ((IVariable) other).get();
+			return isEqual(obj, otherObject);
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	
+	public boolean isEqual(T o1, T o2) {
+		return o1.equals(o2);
+	}
+	
 
 
 }

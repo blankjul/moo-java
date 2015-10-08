@@ -1,6 +1,7 @@
 package com.msu.moo.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import com.msu.moo.interfaces.IProblem;
@@ -43,8 +44,16 @@ public abstract class AProblem<V extends IVariable> implements IProblem {
 			throw new RuntimeException(String.format("Problem %s should have %s constraints but evaluation function returned %s.", this, getNumberOfConstraints(), constraintViolations.size()));
 		}
 		
+		if (!constraintViolations.isEmpty()) {
+			double min = Collections.min(constraintViolations);
+			if (min < 0) {
+				throw new RuntimeException(String.format("Contraints are not allowed to be lower than 0, but minimal values is %s.", min));
+			}
+		}
+		
 		return new Solution(variable, objectives, constraintViolations);
 	}
+	
 	
 	
 	@Override
@@ -56,11 +65,13 @@ public abstract class AProblem<V extends IVariable> implements IProblem {
 	public String toString() {
 		return name;
 	}
-
+	
+	
 	public String getName() {
 		return name;
 	}
-
+	
+	@Override
 	public void setName(String name) {
 		this.name = name;
 	}

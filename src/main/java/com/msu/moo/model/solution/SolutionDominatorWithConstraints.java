@@ -29,14 +29,6 @@ public class SolutionDominatorWithConstraints extends SolutionDominator {
 			return super.isDominating(s1, s2);
 	}
 
-	@Override
-	public boolean isDominatedBy(Solution s1, Solution s2) {
-		Pair<Double, Double> p = getConstraintViolations(s1, s2);
-		if (!p.first.equals(p.second))
-			return p.first > p.second;
-		else
-			return super.isDominating(s1, s2);
-	}
 
 	@Override
 	public boolean isEqual(Solution s1, Solution s2) {

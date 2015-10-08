@@ -1,5 +1,6 @@
 package com.msu.moo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.interfaces.IVariable;
@@ -15,7 +16,7 @@ import com.msu.moo.interfaces.IVariable;
 public abstract class ASolution<T> {
 
 	//! this list of doubles allows to safe constraint violations for a solution
-	protected List<Double> constraintViolations = null;
+	protected List<Double> constraintViolations = new ArrayList<Double>();
 	
 	// ! objectives immutable
 	protected T objective;
