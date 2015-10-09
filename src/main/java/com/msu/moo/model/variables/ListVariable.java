@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.AVariable;
+import com.msu.moo.model.Variable;
 
-public class ListVariable<T> extends AVariable<List<T>>{
+public class ListVariable<T> extends Variable<List<T>>{
 	
 
 	public ListVariable(List<T> obj) {

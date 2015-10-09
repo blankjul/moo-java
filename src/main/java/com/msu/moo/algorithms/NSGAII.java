@@ -57,13 +57,13 @@ public class NSGAII extends AbstractAlgorithm {
 	protected NSGAII() {}
 
 	@Override
-	public NonDominatedSolutionSet run(IEvaluator evaluator) {
+	public NonDominatedSolutionSet run_(IEvaluator evaluator) {
 
 		// initialize the population and calculate also rank and crowding
 		initialize(evaluator);
 
 		while (evaluator.hasNext()) {
-
+			
 			// binary tournament selection for mating
 			BinaryTournamentSelection bts = new BinaryTournamentSelection(population, 
 					new RankAndCrowdingComparator(rank, crowding));
@@ -83,13 +83,15 @@ public class NSGAII extends AbstractAlgorithm {
 
 			// merge population and offsprings
 			population.addAll(offsprings);
-
+			
 			// survival of the best population
 			calcRankAndCrowding(population);
 			population.sort(new RankAndCrowdingComparator(rank, crowding));
 			Collections.reverse(population);
 
 			population = new SolutionSet(population.subList(0, populationSize));
+			
+			
 		}
 		
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();

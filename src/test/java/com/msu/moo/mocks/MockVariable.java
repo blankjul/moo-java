@@ -3,9 +3,9 @@ package com.msu.moo.mocks;
 import java.util.List;
 
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.AVariable;
+import com.msu.moo.model.Variable;
 
-public class MockVariable extends AVariable<List<Integer>> {
+public class MockVariable extends Variable<List<Integer>> {
 
 	
 	public MockVariable() {

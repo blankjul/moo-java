@@ -26,6 +26,38 @@ public class HypervolumeBoxPlot extends AVisualize implements IListener<ProblemF
 	}
 
 	
+	public static List<Double> calc(List<NonDominatedSolutionSet> sets, NonDominatedSolutionSet trueFront) {
+
+		// if null estimate it
+		if (trueFront == null)
+			trueFront = AExperiment.estimateTrueFront(sets);
+
+		// plot the hypervolume
+		Hypervolume calcHV = new Hypervolume(Configuration.PATH_TO_HYPERVOLUME);
+
+		// TODO: Bad implemented
+		final int numOfObjectives = sets.get(0).get(0).countObjectives();
+
+		// create reference point for normalized values
+		List<Double> referencePoint = new ArrayList<>();
+		for (int i = 0; i < numOfObjectives; i++)
+			referencePoint.add(1.0001);
+
+		Range<Double> range = trueFront.getRange();
+
+		// calculate the hypervolumes from normalized fronts
+		List<Double> hvs = new ArrayList<>();
+		for (NonDominatedSolutionSet set : sets) {
+			SolutionSet norm = set.getSolutions().normalize(range.get());
+			Double hv = calcHV.calculate(new NonDominatedSolutionSet(norm), referencePoint);
+			hvs.add(hv);
+		}
+		
+		return hvs;
+		
+	}
+	
+	
 	@Override
 	public void handle(ProblemFinishedEvent event) {
 		

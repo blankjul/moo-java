@@ -34,6 +34,14 @@ public class Solution extends ASolution<List<Double>>{
 		return objective.get(n);
 	}
 	
+	
+	public boolean hasConstrainViolations() {
+		for (Double d : constraintViolations) {
+			if (!d.equals(0d)) return true;
+		}
+		return false;
+	}
+	
 
 	public int countObjectives() {
 		if (objective == null)

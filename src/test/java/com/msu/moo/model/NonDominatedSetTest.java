@@ -9,9 +9,21 @@ import org.junit.Test;
 
 import com.msu.moo.mocks.MockSolution;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.solution.Solution;
 
 public class NonDominatedSetTest {
 
+	@Test
+	public void testRemoveConstraintViolations() {
+		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
+		Solution s1 = new Solution(null, null, Arrays.asList(0d,0d));
+		s.add(s1);
+		s.add(new Solution(null, null, Arrays.asList(1d,0d)));
+		s.removeSolutionWithConstraintViolations();
+		assertEquals(1, s.size());
+		assertEquals(s.get(0), s1);
+	}
+	
 	@Test
 	public void testAddingSolutionsEqualObjectives() {
 		NonDominatedSolutionSet s = new NonDominatedSolutionSet();

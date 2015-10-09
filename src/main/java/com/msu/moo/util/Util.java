@@ -10,6 +10,8 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 
+import com.rits.cloning.Cloner;
+
 public class Util {
 
 	/**
@@ -82,6 +84,20 @@ public class Util {
 		}
 		return sb.toString();
 	}
+	
+	
+	public static <T> T cloneObject(T obj){
+		Cloner cloner=new Cloner();
+        try{
+        	T clone = cloner.deepClone(obj);
+            return clone;
+        }catch(Exception e){
+        	e.printStackTrace();
+        	throw new RuntimeException(String.format("Error while cloning object %s.", obj));
+        }
+    }
+
+
 
 
 }

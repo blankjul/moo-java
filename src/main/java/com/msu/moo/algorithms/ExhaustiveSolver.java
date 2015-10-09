@@ -20,7 +20,7 @@ public class ExhaustiveSolver extends RandomSearch {
 	}
 
 	@Override
-	public NonDominatedSolutionSet run(IEvaluator evaluator) {
+	public NonDominatedSolutionSet run_(IEvaluator evaluator) {
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		while (factory.hasNext()) {
 			IVariable var = factory.next(evaluator.getProblem());

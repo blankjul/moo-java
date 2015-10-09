@@ -1,17 +1,19 @@
 package com.msu.moo.model.solution;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.msu.moo.util.Range;
 
-public class NonDominatedSolutionSet {
+public class NonDominatedSolutionSet implements Iterable<Solution>{
 
 	// ! list which contains all the solutions
 	protected SolutionSet solutions = new SolutionSet();
 
 	// ! solution comparator for testing domination
-	protected SolutionDominator cmp = new SolutionDominator();
+	protected SolutionDominator cmp = new SolutionDominatorWithConstraints();
 
 	public NonDominatedSolutionSet() {
 		super();
@@ -109,6 +111,22 @@ public class NonDominatedSolutionSet {
 
 	public void setSolutionDominator(SolutionDominator cmp) {
 		this.cmp = cmp;
+	}
+	
+	/**
+	 * Remove INPLACE all solutions which have violated constraints
+	 * @return
+	 */
+	public NonDominatedSolutionSet removeSolutionWithConstraintViolations() {
+		List<Solution> l = solutions.stream().filter(s -> s.hasConstrainViolations() == false).collect(Collectors.toList());
+		solutions = new SolutionSet(l);
+		return this;
+	}
+
+	
+	@Override
+	public Iterator<Solution> iterator() {
+		return solutions.iterator();
 	}
 
 }
