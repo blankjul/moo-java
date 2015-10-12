@@ -52,6 +52,7 @@ public class Variable<T> implements IVariable {
 			T otherObject = (T) ((IVariable) other).get();
 			return isEqual(obj, otherObject);
 		} catch (Exception e) {
+			e.printStackTrace();
 			return false;
 		}
 	}

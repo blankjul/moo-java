@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 import com.msu.moo.util.Range;
 
-public class NonDominatedSolutionSet implements Iterable<Solution>{
+public class NonDominatedSolutionSet implements Iterable<Solution> {
 
 	// ! list which contains all the solutions
 	protected SolutionSet solutions = new SolutionSet();
@@ -44,18 +44,17 @@ public class NonDominatedSolutionSet implements Iterable<Solution>{
 		List<Solution> areDominated = new ArrayList<>();
 
 		for (Solution s : solutions) {
-			
+
 			// if the solution objectives are exactly equal
 			if (cmp.isEqual(s, solutionToAdd)) {
-				// if variable are also equal -> don't add it
-				if ((s.getVariable() != null && solutionToAdd.getVariable() != null) 
-						&& s.getVariable().equals(solutionToAdd.getVariable())) {
+				
+				// if variable is null (e.g. after calc median front) dont add it.
+				if (s.getVariable() == null || solutionToAdd.getVariable() == null) {
 					return false;
 					
-				// otherwise add it immediately
+				// otherwise test if this solution exists in set
 				} else {
-					solutions.add(solutionToAdd);
-					return true;
+					return addEqualSolution(solutionToAdd);
 				}
 			}
 
@@ -73,6 +72,16 @@ public class NonDominatedSolutionSet implements Iterable<Solution>{
 		solutions.removeAll(areDominated);
 		solutions.add(solutionToAdd);
 
+		return true;
+	}
+
+	protected boolean addEqualSolution(Solution solutionToAdd) {
+		for (Solution s : solutions) {
+			if (s.getVariable().equals(solutionToAdd.getVariable())) {
+				return false;
+			}
+		}
+		solutions.add(solutionToAdd);
 		return true;
 	}
 
@@ -112,9 +121,10 @@ public class NonDominatedSolutionSet implements Iterable<Solution>{
 	public void setSolutionDominator(SolutionDominator cmp) {
 		this.cmp = cmp;
 	}
-	
+
 	/**
 	 * Remove INPLACE all solutions which have violated constraints
+	 * 
 	 * @return
 	 */
 	public NonDominatedSolutionSet removeSolutionWithConstraintViolations() {
@@ -123,7 +133,6 @@ public class NonDominatedSolutionSet implements Iterable<Solution>{
 		return this;
 	}
 
-	
 	@Override
 	public Iterator<Solution> iterator() {
 		return solutions.iterator();

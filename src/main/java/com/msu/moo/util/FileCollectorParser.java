@@ -20,14 +20,14 @@ public class FileCollectorParser<T> {
 	static final Logger logger = Logger.getLogger(FileCollectorParser.class);
 	
 	// the map for all the files that should be loaded
-	protected Map<Pair<String, String>, Function<String, T>> map = new LinkedHashMap<>();
+	protected Map<Pair<String, String>, Function<String, ? extends T>> map = new LinkedHashMap<>();
 
-	public FileCollectorParser<T> add(String folder, String regex, Function<String, T> func) {
+	public FileCollectorParser<T> add(String folder, String regex, Function<String, ? extends T> func) {
 		map.put(Pair.create(folder, regex), func);
 		return this;
 	}
 
-	public FileCollectorParser<T> add(String folder, String regex, AReader<T> reader) {
+	public FileCollectorParser<T> add(String folder, String regex, AReader<? extends T> reader) {
 		return add(folder, regex, new Function<String, T>() {
 			@Override
 			public T apply(String t) {
@@ -44,7 +44,7 @@ public class FileCollectorParser<T> {
 
 			String folder = p.first;
 			String pattern = p.second;
-			Function<String, T> func = map.get(p);
+			Function<String, ? extends T> func = map.get(p);
 
 			DirectoryStream<Path> dirStream;
 			try {

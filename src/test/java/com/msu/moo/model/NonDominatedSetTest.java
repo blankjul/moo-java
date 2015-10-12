@@ -29,7 +29,7 @@ public class NonDominatedSetTest {
 		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
-		assertEquals(2, s.size());
+		assertEquals(1, s.size());
 	}
 	
 
@@ -62,6 +62,14 @@ public class NonDominatedSetTest {
 	}
 	
 	
+	@Test
+	public void testAddingSolutionsEqualObjective() {
+		NonDominatedSolutionSet s = new NonDominatedSolutionSet();
+		s.add(new MockSolution(new Variable<Integer>(1),  new ArrayList<Double>(Arrays.asList(1d,0d))));
+		s.add(new MockSolution(new Variable<Integer>(2),  new ArrayList<Double>(Arrays.asList(1d,0d))));
+		s.add(new MockSolution(new Variable<Integer>(2),  new ArrayList<Double>(Arrays.asList(1d,0d))));
+		assertEquals(2, s.size());
+	}
 	
 
 	
