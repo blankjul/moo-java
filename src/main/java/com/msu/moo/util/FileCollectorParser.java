@@ -6,6 +6,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,9 +52,14 @@ public class FileCollectorParser<T> {
 				dirStream = Files.newDirectoryStream(Paths.get(folder), pattern);
 				logger.info(String.format("Load files from folder %s with pattern %s.", folder, pattern));
 				
-				for (Path s : dirStream) {
-					logger.info(String.format("Loading file %s.", s.toString()));
-					list.add(func.apply(s.toString()));
+				// sort the files
+				List<String> files = new ArrayList<>();
+				dirStream.forEach(s -> files.add(s.toString()));
+				Collections.sort(files);
+				
+				for (String s : files) {
+					logger.info(String.format("Loading file %s.", s));
+					list.add(func.apply(s));
 				}
 				
 			} catch (IOException e) {

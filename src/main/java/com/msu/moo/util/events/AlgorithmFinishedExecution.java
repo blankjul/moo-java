@@ -27,4 +27,10 @@ public class AlgorithmFinishedExecution implements IEvent {
 		return problem;
 	}
 
+	public IAlgorithm getAlgorithm() {
+		return algorithm;
+	}
+	
+	
+
 }

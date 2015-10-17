@@ -24,12 +24,16 @@ public class SwapMutation<T> extends AbstractMutation<List<T>>{
 	@Override
 	protected void mutate_(List<T> obj) {
 		
-		// search for two random positions
-		int a = Random.getInstance().nextInt(0, obj.size()-1);
-		int b = Random.getInstance().nextInt(0, obj.size()-1);
+		Random rnd = Random.getInstance();
 		
-		// swap this two!
-		Util.swap(obj, a, b);
+		final double prob = 1 / obj.size();
+		
+		for (int i = 0; i < obj.size(); i++) {
+			if (rnd.nextDouble() < prob) {
+				int point = Random.getInstance().nextInt(0, obj.size()-1);
+				Util.swap(obj, i, point);
+			}
+		}
 		
 	}
 	

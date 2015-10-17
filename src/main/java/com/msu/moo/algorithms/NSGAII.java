@@ -101,14 +101,15 @@ public class NSGAII extends AbstractAlgorithm {
 		
 	}
 
-	protected void initialize(IEvaluator evaluator) {
+	protected void initialize(IEvaluator eval) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();
 		// initialize the population with populationSize
 		population = new SolutionSet(populationSize * 2);
-		for (int i = 0; i < populationSize; i++) {
-			population.add(evaluator.evaluate(factory.next(evaluator.getProblem())));
+		
+		for (IVariable variable : factory.next(eval.getProblem(), populationSize)) {
+			population.add(eval.evaluate(variable));
 		}
 
 		// calculate Rank and Crowding for the initial population
