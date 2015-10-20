@@ -61,7 +61,7 @@ public class NSGAII extends AbstractAlgorithm {
 
 		// initialize the population and calculate also rank and crowding
 		initialize(evaluator);
-
+		
 		while (evaluator.hasNext()) {
 			
 			// binary tournament selection for mating
