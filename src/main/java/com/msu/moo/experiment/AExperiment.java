@@ -3,11 +3,6 @@ package com.msu.moo.experiment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
@@ -36,15 +31,15 @@ public abstract class AExperiment {
 	protected ExperimentResult result = new ExperimentResult();
 
 	public void run(int maxEvaluations, int iterations, long seed) {
-
+		
 		// set random seed to created problems for seed equally
 		Random.getInstance().setSeed(seed);
-
+		
 		// execute the inherited methods
 		setProblems(problems);
 		setAlgorithms(algorithms);
 		run(problems, algorithms, maxEvaluations, iterations, seed);
-
+		
 	}
 
 	public void run(List<IProblem> problems, List<IAlgorithm> algorithms, int maxEvaluations, int iterations, long seed) {
@@ -64,8 +59,6 @@ public abstract class AExperiment {
 			logger.info("Execute Problem: " + problem.toString());
 			logger.info("Following Algorithms are used and compared: " + algorithms.toString());
 
-			List<Future<?>> futures = new ArrayList<>();
-
 			// calculate the result for each algorithm
 			for (int j = 0; j < algorithms.size(); j++) {
 				IAlgorithm algorithm = algorithms.get(j);
@@ -75,43 +68,25 @@ public abstract class AExperiment {
 					// set the random seed that the results will be comparable
 					Random.getInstance().setSeed(seed + k);
 
-					ExecutorService executor = Executors.newFixedThreadPool(4);
+					long startTime = System.currentTimeMillis();
+					NonDominatedSolutionSet set = algorithm.run(new Evaluator(problem, maxEvaluations));
+					double elapsedTime = (System.currentTimeMillis() - startTime);
 
-					Callable<NonDominatedSolutionSet> callable = () -> {
-						long startTime = System.currentTimeMillis();
-						NonDominatedSolutionSet set = algorithm.run(new Evaluator(problem, maxEvaluations));
-						double elapsedTime = (System.currentTimeMillis() - startTime);
-
-						result.add(problem, algorithm, set);
-						return set;
-					};
-
-					String prefix = String.format("[%s/%s | %s/%s | %s/%s]", i + 1, problems.size(), j + 1, algorithms.size(), k + 1, iterations);
-					logger.info(String.format("%s %s in %f s", prefix, algorithm, 1000.0));
-
-					Future<NonDominatedSolutionSet> future = executor.submit(callable);
-					futures.add(future);
-
-					try {
-						NonDominatedSolutionSet set = future.get();
-						System.out.println(set);
-					} catch (InterruptedException | ExecutionException e) {
-						e.printStackTrace();
-					}
-
-					// EventDispatcher.getInstance().notify(new
-					// RunFinishedEvent(this, problem, algorithm, k, set));
-
+					String prefix = String.format("[%s/%s | %s/%s | %s/%s]", i + 1, problems.size(), j + 1, algorithms.size(), k+1, iterations);
+					logger.info(String.format("%s %s in %f s", prefix, algorithm, elapsedTime / 1000.0));
+					result.add(problem, algorithm, set);
+					EventDispatcher.getInstance().notify(new RunFinishedEvent(this, problem, algorithm, k, set));
+					
 				}
 				EventDispatcher.getInstance().notify(new AlgorithmFinishedExecution(this, problem, algorithm));
 			}
-
+			
 			logger.info("All fronts were calculate and experiment is finished.");
 			EventDispatcher.getInstance().notify(new ProblemFinishedEvent(this, problem));
 
 		}
 
-		// EventDispatcher.getInstance().notify(new FinishedExperiment(this));
+		//EventDispatcher.getInstance().notify(new FinishedExperiment(this));
 		logger.info("Executing the finalize method of the experiment.");
 		EventDispatcher.getInstance().notify(new ExperimentFininshedEvent(this));
 		finalize();
@@ -155,5 +130,7 @@ public abstract class AExperiment {
 	public List<IAlgorithm> getAlgorithms() {
 		return algorithms;
 	}
+	
+
 
 }

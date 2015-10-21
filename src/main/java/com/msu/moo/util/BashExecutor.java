@@ -19,7 +19,9 @@ public class BashExecutor {
 			stdin.write(command);
 			stdin.flush();
 			stdin.close();
+
 			p.waitFor();
+
 			String out = BashExecutor.fromStream(p.getInputStream());
 			return out;
 		} catch (Exception e) {
@@ -31,7 +33,7 @@ public class BashExecutor {
 	public static String fromStream(InputStream is) {
 		StringBuilder sb = new StringBuilder();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-		
+
 		String line = null;
 		try {
 			while ((line = reader.readLine()) != null) {
