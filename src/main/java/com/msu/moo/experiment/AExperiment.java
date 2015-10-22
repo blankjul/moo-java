@@ -3,12 +3,15 @@ package com.msu.moo.experiment;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
 import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.Random;
 import com.msu.moo.util.events.AlgorithmFinishedExecution;
@@ -31,15 +34,15 @@ public abstract class AExperiment {
 	protected ExperimentResult result = new ExperimentResult();
 
 	public void run(int maxEvaluations, int iterations, long seed) {
-		
+
 		// set random seed to created problems for seed equally
 		Random.getInstance().setSeed(seed);
-		
+
 		// execute the inherited methods
 		setProblems(problems);
 		setAlgorithms(algorithms);
 		run(problems, algorithms, maxEvaluations, iterations, seed);
-		
+
 	}
 
 	public void run(List<IProblem> problems, List<IAlgorithm> algorithms, int maxEvaluations, int iterations, long seed) {
@@ -48,45 +51,69 @@ public abstract class AExperiment {
 		initialize();
 
 		logger.info("Running the experiment.");
-		logger.info("Problems count: " + problems.size());
-		logger.info("Algorithms count: " + algorithms.size());
+		logger.info("Problems: " + problems.size());
+		logger.info("Algorithms: " + algorithms.size());
+		logger.info("Iterations: " + iterations);
+		logger.info("MaxEvaluations: " + maxEvaluations);
+		
+		List<Future<ExperimentCallback>> futures = new ArrayList<>();
+		ExecutorService executor = Executors.newScheduledThreadPool(4);
 
+		
 		// for each problem. the true front could also be null!
 		for (int i = 0; i < problems.size(); i++) {
-			IProblem problem = problems.get(i);
-
-			// get the problem
-			logger.info("Execute Problem: " + problem.toString());
-			logger.info("Following Algorithms are used and compared: " + algorithms.toString());
-
+			
 			// calculate the result for each algorithm
 			for (int j = 0; j < algorithms.size(); j++) {
-				IAlgorithm algorithm = algorithms.get(j);
 
 				for (int k = 0; k < iterations; k++) {
 
 					// set the random seed that the results will be comparable
 					Random.getInstance().setSeed(seed + k);
-
-					long startTime = System.currentTimeMillis();
-					NonDominatedSolutionSet set = algorithm.run(new Evaluator(problem, maxEvaluations));
-					double elapsedTime = (System.currentTimeMillis() - startTime);
-
-					String prefix = String.format("[%s/%s | %s/%s | %s/%s]", i + 1, problems.size(), j + 1, algorithms.size(), k+1, iterations);
-					logger.info(String.format("%s %s in %f s", prefix, algorithm, elapsedTime / 1000.0));
-					result.add(problem, algorithm, set);
-					EventDispatcher.getInstance().notify(new RunFinishedEvent(this, problem, algorithm, k, set));
 					
-				}
-				EventDispatcher.getInstance().notify(new AlgorithmFinishedExecution(this, problem, algorithm));
-			}
-			
-			logger.info("All fronts were calculate and experiment is finished.");
-			EventDispatcher.getInstance().notify(new ProblemFinishedEvent(this, problem));
+					// add to the thread queue
+					Future<ExperimentCallback> future = executor.submit(new ExperimentCallback(this, maxEvaluations, iterations, i, j, k));
+					futures.add(future);
 
+				}
+			}
 		}
 
-		//EventDispatcher.getInstance().notify(new FinishedExperiment(this));
+		
+		
+		try {
+			for (Future<ExperimentCallback> f : futures) {
+				ExperimentCallback callback = f.get();
+				
+				IProblem problem = callback.getProblem();
+				IAlgorithm algorithm = callback.getAlgorithm();
+				NonDominatedSolutionSet set = callback.set;
+				
+				result.add(problem, algorithm, set);
+				
+				// always notify the RunFinishedExperiment
+				EventDispatcher.getInstance().notify(new RunFinishedEvent(this, problem, algorithm, callback.k, set));
+				
+				// check if all executions of algorithm is finished
+				if (result.get(callback.getProblem(), callback.getAlgorithm()).size() == iterations) {
+					EventDispatcher.getInstance().notify(new AlgorithmFinishedExecution(this, problem, algorithm));
+					
+					// check if all algorithms are executed for this problem
+					if (algorithm.equals(algorithms.get(algorithms.size()-1))) {
+						EventDispatcher.getInstance().notify(new ProblemFinishedEvent(this, problem));
+					}
+				}
+			}
+		} catch (InterruptedException | ExecutionException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		executor.shutdown();
+		
+
+		// EventDispatcher.getInstance().notify(new FinishedExperiment(this));
 		logger.info("Executing the finalize method of the experiment.");
 		EventDispatcher.getInstance().notify(new ExperimentFininshedEvent(this));
 		finalize();
@@ -130,7 +157,5 @@ public abstract class AExperiment {
 	public List<IAlgorithm> getAlgorithms() {
 		return algorithms;
 	}
-	
-
 
 }
