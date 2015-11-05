@@ -3,6 +3,7 @@ package com.msu.moo.operators;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
+import com.msu.moo.util.Random;
 
 /**
  * This is an abstract Mutation of an object. This class which inherits from this one
@@ -13,14 +14,14 @@ import com.msu.moo.model.solution.Solution;
 public abstract class AbstractMutation<T> {
 
 
-	public IVariable mutate(IVariable a) {
+	public IVariable mutate(IVariable a, Random rand) {
 
 		try {
 			
 			IVariable result = a.copy();
 			@SuppressWarnings("unchecked")
 			T entry = (T) result.get();
-			mutate_(entry);
+			mutate_(entry, rand);
 			return result;
 			
 		} catch (Exception e){
@@ -32,13 +33,13 @@ public abstract class AbstractMutation<T> {
 
 	}
 
-	public <V extends IVariable, P extends IProblem> Solution mutate(P problem, Solution a) {
-		IVariable var = mutate(a.getVariable());
+	public <V extends IVariable, P extends IProblem> Solution mutate(P problem, Solution a, Random rand) {
+		IVariable var = mutate(a.getVariable(), rand);
 		return problem.evaluate(var);
 	}
 	
 	
-	abstract protected void mutate_(T element);
+	abstract protected void mutate_(T element, Random rand);
 
 
 }

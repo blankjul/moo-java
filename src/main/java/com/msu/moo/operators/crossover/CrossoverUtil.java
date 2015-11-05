@@ -12,14 +12,12 @@ public class CrossoverUtil {
 	 * @param length maximal length
 	 * @return pair of integer. lb and ub.
 	 */
-	public static Pair<Integer, Integer> getSection(int length) {
-        final Random r = Random.getInstance();
-        
+	public static Pair<Integer, Integer> getSection(int length, Random rand) {
         // choose random points, making sure that lb < ub.
-        int rnd1 = r.nextInt(length);
+        int rnd1 = rand.nextInt(length);
         int rnd2;
         do {
-            rnd2 = r.nextInt(length);
+            rnd2 = rand.nextInt(length);
         } while (rnd1 == rnd2);
         
         // determine the lower and upper bounds

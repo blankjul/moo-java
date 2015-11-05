@@ -40,11 +40,11 @@ public class PolynomialMutation extends AbstractMutation<List<Double>> {
 
 
 	@Override
-	protected void mutate_(List<Double> b) {
+	protected void mutate_(List<Double> b, Random rand) {
 		if (probability == null) probability = 1 / (double) b.size();
 		for (int i = 0; i < b.size(); i++) {
-			if (Random.getInstance().nextDouble() < probability) {
-				b.set(i, Random.getInstance().nextDouble(range[0], range[1]));
+			if (rand.nextDouble() < probability) {
+				b.set(i, rand.nextDouble(range[0], range[1]));
 			}
 		}
 	}

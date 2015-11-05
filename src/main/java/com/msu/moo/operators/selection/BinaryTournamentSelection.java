@@ -28,12 +28,13 @@ public class BinaryTournamentSelection extends AbstractSelection {
 	 * @param set which should be used for selection
 	 * @param cmp comparator which defines the winner of the tournament
 	 */
-	public BinaryTournamentSelection(SolutionSet set, Comparator<Solution> cmp) {
-		super(set);
+	public BinaryTournamentSelection(SolutionSet set, Comparator<Solution> cmp, Random rand) {
+		super(set, rand);
 		if (set.size() < 2) {
 			throw new RuntimeException("For the tournament selection the SolutionSet has to be larger than 2!");
 		}
 		this.cmp = cmp;
+		
 	}
 	
 
@@ -59,7 +60,7 @@ public class BinaryTournamentSelection extends AbstractSelection {
 	
 	protected void rndPool() {
 		LinkedList<Solution> tmp = new LinkedList<>(set);
-		Random.getInstance().shuffle(tmp);
+		rand.shuffle(tmp);
 		q = new LinkedList<>(tmp);
 	}
 

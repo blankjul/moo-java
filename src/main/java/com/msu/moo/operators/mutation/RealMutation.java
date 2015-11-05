@@ -16,8 +16,6 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	//! distribution index
 	protected double eta_m = 20.0;
 
-	// ! random generator for this crossover
-	protected Random r = Random.getInstance();
 
 	/**
 	 * Normal constructor with dynamic probability
@@ -32,8 +30,7 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	}
 
 
-	protected Double sbxMutation(double p, double lowerBound, double upperBound) {
-		double u = r.nextDouble();
+	protected Double sbxMutation(double p, double u, double lowerBound, double upperBound) {
 		
 		Double offspring = null;
 		
@@ -53,11 +50,12 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	}
 
 	@Override
-	protected void mutate_(List<Double> b) {
+	protected void mutate_(List<Double> b, Random rand) {
 		mProbability = 1 / (double) b.size();
 		for (int j = 0; j < b.size(); j++) {
-			if (r.nextDouble() < mProbability) {
-				b.set(j, sbxMutation(b.get(j), range[0], range[1]));
+			if (rand.nextDouble() < mProbability) {
+				double u = rand.nextDouble();
+				b.set(j, sbxMutation(b.get(j), u, range[0], range[1]));
 			}
 		}
 	}

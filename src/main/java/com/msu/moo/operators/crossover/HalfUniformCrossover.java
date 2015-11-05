@@ -24,7 +24,7 @@ public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 	}
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b, Random rand) {
 		// copy the both list and change values
 		List<T> c1 = new ArrayList<T>(a);
 		List<T> c2 = new ArrayList<T>(b);
@@ -34,7 +34,7 @@ public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 		int hammiltonDistance = indices.size();
 
 		// shuffle to ensure randomness
-		Random.getInstance().shuffle(indices);
+		rand.shuffle(indices);
 
 		// swap half of the not equal positions 
 		// (for loop since shuffled before!)

@@ -21,5 +21,7 @@ public interface IEvaluator {
 	 */
 	public boolean hasNext();
 	
+	
+	public Integer getMaxEvaluations();
 
 }

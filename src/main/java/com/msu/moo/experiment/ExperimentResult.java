@@ -1,5 +1,6 @@
 package com.msu.moo.experiment;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
@@ -44,8 +45,21 @@ public class ExperimentResult {
 		return map;
 	}
 
+	public Collection<NonDominatedSolutionSet> get(IProblem problem, Collection<IAlgorithm> algorithms) {
+		Collection<NonDominatedSolutionSet> fronts = new ArrayList<>();
+		for( IAlgorithm a : algorithms) {
+			fronts.addAll(get(problem, a));
+		}
+		return fronts;
+	}
+	
+	
 	public Collection<NonDominatedSolutionSet> get(IProblem problem, IAlgorithm algorithm) {
 		return get(problem, algorithm, null);
+	}
+	
+	public NonDominatedSolutionSet get(IProblem problem, IAlgorithm algorithm, int n) {
+		return new ArrayList<>(get(problem, algorithm, null)).get(n);
 	}
 	
 	public Collection<NonDominatedSolutionSet> get(IProblem problem, IAlgorithm algorithm, String prefix) {

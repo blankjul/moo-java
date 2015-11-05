@@ -22,10 +22,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	//! crossover probability in the list
 	protected double cProbability = 0.5;
 
-	// ! random generator for this crossover
-	protected Random r = Random.getInstance();
 
-	
 	public SimulatedBinaryCrossover() {
 		super();
 	}
@@ -73,18 +70,18 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	 * SBX for two double variables
 	 * @return offspring values which are in [lowerBound,upperBound]
 	 */
-	protected Pair<Double, Double> SBX(double d1, double d2, double lowerBound, double upperBound) {
+	protected Pair<Double, Double> SBX(double d1, double d2, double lowerBound, double upperBound, Random rand) {
 
 		// p1 <= p2 is always true
 		double p1 = Math.min(d1, d2);
 		double p2 = Math.max(d1, d2);
 
 		// left child
-		double leftBeta = calcBeta(r.nextDouble(), calcAplhaLower(p1, p2, lowerBound), eta_c);
+		double leftBeta = calcBeta(rand.nextDouble(), calcAplhaLower(p1, p2, lowerBound), eta_c);
 		double c1 = (p1 + p2) / 2 - leftBeta * (p1 + p2) / 2;
 
 		// right child
-		double rightBeta = calcBeta(r.nextDouble(), calcAplhaUpper(p1, p2, upperBound), eta_c);
+		double rightBeta = calcBeta(rand.nextDouble(), calcAplhaUpper(p1, p2, upperBound), eta_c);
 		double c2 = (p1 + p2) / 2 + rightBeta * (p1 + p2) / 2;
 
 		// to avoid floating point problems set boundaries.
@@ -97,7 +94,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	}
 
 	@Override
-	protected List<List<Double>> crossoverLists(List<Double> parent1, List<Double> parent2) {
+	protected List<List<Double>> crossoverLists(List<Double> parent1, List<Double> parent2, Random rand) {
 
 		List<Double> child1 = new ArrayList<Double>(parent1);
 		List<Double> child2 = new ArrayList<Double>(parent2);
@@ -106,7 +103,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 		for (int i = 0; i < parent1.size(); i++) {
 
 			// perform crossover if sbxProbability is given
-			if (r.nextDouble() <= cProbability) {
+			if (rand.nextDouble() <= cProbability) {
 
 				// get the parent values
 				double p1 = parent1.get(i);
@@ -116,10 +113,10 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 				if (Math.abs(p1 - p2) <= EPS) continue;
 
 				// perform sbx for two double variables
-				Pair<Double, Double> children = SBX(p1, p2, range[0], range[1]);
+				Pair<Double, Double> children = SBX(p1, p2, range[0], range[1], rand);
 
 				// set the offspring randomly to the children vectors
-				if (r.nextDouble() <= 0.5) {
+				if (rand.nextDouble() <= 0.5) {
 					child1.set(i, children.first);
 					child2.set(i, children.second);
 				} else {

@@ -30,8 +30,8 @@ import com.msu.moo.util.Random;
 public class CycleCrossover<T> extends AbstractListCrossover<T> {
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
-		return crossover_(a, b, Random.getInstance().nextInt(0, a.size() - 1));
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b, Random rand) {
+		return crossover_(a, b, rand.nextInt(0, a.size() - 1));
 	}
 	
 	protected List<List<T>> crossover_(List<T> a, List<T> b, int idx) {

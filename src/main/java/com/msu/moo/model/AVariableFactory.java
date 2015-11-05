@@ -6,16 +6,15 @@ import java.util.Collection;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.IVariableFactory;
+import com.msu.moo.util.Random;
 
 public abstract class AVariableFactory implements IVariableFactory{
 
-	public abstract IVariable next(IProblem problem);
-
 	
-	public Collection<IVariable> next(IProblem problem, int n) {
+	public Collection<IVariable> next(IProblem problem, Random rand, int n) {
 		Collection<IVariable> l = new ArrayList<IVariable>(n);
 		for (int i = 0; i < n; i++) {
-			l.add(next(problem));
+			l.add(next(problem, rand));
 		}
 		return l;
 	};

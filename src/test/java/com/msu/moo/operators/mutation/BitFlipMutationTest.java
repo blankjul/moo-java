@@ -10,6 +10,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.msu.moo.util.Random;
+
 public class BitFlipMutationTest {
 	
 	private class BitFlipMutationMock extends BitFlipMutation {
@@ -20,7 +22,7 @@ public class BitFlipMutationTest {
 			super(probability);
 		}
 		public void mutate_(List<Boolean> l) {
-			super.mutate_(l);
+			super.mutate_(l, new Random());
 		}
 	}
 	

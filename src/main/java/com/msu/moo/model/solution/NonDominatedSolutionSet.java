@@ -1,6 +1,7 @@
 package com.msu.moo.model.solution;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +39,10 @@ public class NonDominatedSolutionSet implements Iterable<Solution> {
 		return solutions.get(index);
 	}
 
+	public void addAll(Collection<Solution> set) {
+		for (Solution s : set) add(s);
+	}
+	
 	public boolean add(Solution solutionToAdd) {
 
 		// all the solutions which are dominated by new one

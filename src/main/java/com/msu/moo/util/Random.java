@@ -3,39 +3,20 @@ package com.msu.moo.util;
 import java.util.Collections;
 import java.util.List;
 
-/**
- * This is a random generator which provides some advanced random methods 
- * and uses the SinglePattern to be created.
- *
- */
-public class Random {
 
-	//! current seed which is set to the random object
-	protected long seed;
-	
-	//! the current singleton instance
-	protected static Random instance;
+
+public class Random {
 
 	//! the current random object
 	protected java.util.Random r;
 
-	//! private constructor -> singleton
-	private Random() {
+	public Random() {
 		r = new java.util.Random();
 	}
-
 	
-	/**
-	 * Method to create or return the singleton object.
-	 * @return
-	 */
-	public static Random getInstance() {
-		if (instance == null) {
-			instance = new Random();
-		}
-		return instance;
+	public Random(long seed) {
+		r = new java.util.Random(seed);
 	}
-
 
 	/**
 	 * Create an Integer without range
@@ -65,23 +46,6 @@ public class Random {
 		return min + (max - min) * r.nextDouble();
 	}
 
-	/**
-	 * Set the seed of the object
-	 */
-	public void setSeed(long seed) {
-		this.seed = seed;
-		if (r == null) getInstance();
-		r.setSeed(seed);
-	}
-
-
-	/**
-	 * Return the seed which was previously set
-	 */
-	public long getSeed() {
-		return seed;
-	}
-	
 	
 	public void shuffle(List<?> c) {
 		Collections.shuffle(c, r);

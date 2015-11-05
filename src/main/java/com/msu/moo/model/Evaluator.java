@@ -57,4 +57,10 @@ public class Evaluator implements IEvaluator{
 		return evaluations < maxEvaluations;
 	}
 
+	public Integer getMaxEvaluations() {
+		return maxEvaluations;
+	}
+	
+	
+
 }

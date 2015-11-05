@@ -35,10 +35,10 @@ public class RestrictedPolynomialMutation extends AbstractMutation<List<Integer>
 
 
 	@Override
-	protected void mutate_(List<Integer> b) {
+	protected void mutate_(List<Integer> b, Random rand) {
 		if (probability == null) probability = 1 / (double) b.size();
 		for (int i = 0; i < b.size(); i++) {
-			if (Random.getInstance().nextDouble() < probability) b.set(i, Random.getInstance().nextInt(0, i));
+			if (rand.nextDouble() < probability) b.set(i, rand.nextInt(0, i));
 		}
 	}
 

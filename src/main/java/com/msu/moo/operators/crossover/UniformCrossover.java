@@ -12,14 +12,14 @@ public class UniformCrossover<T> extends AbstractListCrossover<T> {
 	
 	
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b, Random rand) {
 		// copy the both list and change values
 		List<T> c1 = new ArrayList<T>();
 		List<T> c2 = new ArrayList<T>();
 
 		for (int i = 0; i < a.size(); i++) {
 			
-			if (Random.getInstance().nextDouble() < 0.5) {
+			if (rand.nextDouble() < 0.5) {
 				c1.add(a.get(i));
 				c2.add(b.get(i));
 			} else {

@@ -30,13 +30,15 @@ public class DoubleListVariableFactory extends AVariableFactory {
 
 
 	@Override
-	public DoubleListVariable next(IProblem problem) {
+	public DoubleListVariable next(IProblem problem, Random rand) {
 		List<Double> l = new ArrayList<>();
 		for (int i = 0; i < length; i++) {
-			l.add(Random.getInstance().nextDouble(range[0], range[1]));
+			l.add(rand.nextDouble(range[0], range[1]));
 		}
 		return new DoubleListVariable(l);
 	}
+
+
 
 
 

@@ -1,4 +1,4 @@
-package com.msu.moo.algorithms;
+package com.msu.moo.algorithms.nsgaII;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -52,37 +52,45 @@ public class NSGAII extends AbstractAlgorithm {
 
 	// ! current population
 	protected SolutionSet population = null;
+	
+	//! function that allows to modify the population after mating
+	protected INSGAIIModifactor funcModify = null;
 
 	//! private constructor! use the builder!
 	protected NSGAII() {}
 
 	@Override
-	public NonDominatedSolutionSet run_(IEvaluator evaluator) {
+	public NonDominatedSolutionSet run_(IEvaluator evaluator, Random rand) {
 
 		// initialize the population and calculate also rank and crowding
-		initialize(evaluator);
+		initialize(evaluator, rand);
 		
 		while (evaluator.hasNext()) {
 			
 			// binary tournament selection for mating
 			BinaryTournamentSelection bts = new BinaryTournamentSelection(population, 
-					new RankAndCrowdingComparator(rank, crowding));
+					new RankAndCrowdingComparator(rank, crowding), rand);
 
 			// create offspring population until size two times
 			SolutionSet offsprings = new SolutionSet(populationSize);
 			while (offsprings.size() < populationSize) {
 				// crossover
-				List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable());
+				List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable(), rand);
 				// mutation
 				for (IVariable offspring : off) {
-					if (Random.getInstance().nextDouble() < this.probMutation)
-						offspring = mutation.mutate(offspring);
+					if (rand.nextDouble() < this.probMutation)
+						offspring = mutation.mutate(offspring, rand);
 					offsprings.add(evaluator.evaluate(offspring));
 				}
 			}
 
 			// merge population and offsprings
 			population.addAll(offsprings);
+			
+			// modify population with the given function
+			if (funcModify != null) {
+				funcModify.modify(evaluator, population, rand);
+			}
 			
 			// survival of the best population
 			calcRankAndCrowding(population);
@@ -101,14 +109,14 @@ public class NSGAII extends AbstractAlgorithm {
 		
 	}
 
-	protected void initialize(IEvaluator eval) {
+	protected void initialize(IEvaluator eval, Random rand) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();
 		// initialize the population with populationSize
 		population = new SolutionSet(populationSize * 2);
 		
-		for (IVariable variable : factory.next(eval.getProblem(), populationSize)) {
+		for (IVariable variable : factory.next(eval.getProblem(), rand, populationSize)) {
 			population.add(eval.evaluate(variable));
 		}
 
@@ -127,5 +135,8 @@ public class NSGAII extends AbstractAlgorithm {
 			crowdInd.calculate(crowding, set.getSolutions());
 		}
 	}
+
+	
+	
 
 }

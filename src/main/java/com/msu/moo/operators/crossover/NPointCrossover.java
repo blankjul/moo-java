@@ -19,7 +19,7 @@ public class NPointCrossover<T> extends AbstractListCrossover<T> {
 
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> p1, List<T> p2) {
+	protected List<List<T>> crossoverLists(List<T> p1, List<T> p2, Random rand) {
 		
 	      final int length = p1.size();
 	        if (crossoverPoints >= length) {
@@ -32,7 +32,6 @@ public class NPointCrossover<T> extends AbstractListCrossover<T> {
         final ArrayList<T> child1Rep = new ArrayList<T>(p1.size());
         final ArrayList<T> child2Rep = new ArrayList<T>(p2.size());
 
-        final Random random = Random.getInstance();
 
         ArrayList<T> c1 = child1Rep;
         ArrayList<T> c2 = child2Rep;
@@ -41,7 +40,7 @@ public class NPointCrossover<T> extends AbstractListCrossover<T> {
         int lastIndex = 0;
         for (int i = 0; i < crossoverPoints; i++, remainingPoints--) {
             // select the next crossover point at random
-            final int crossoverIndex = 1 + lastIndex + random.nextInt(length - lastIndex - remainingPoints);
+            final int crossoverIndex = 1 + lastIndex + rand.nextInt(length - lastIndex - remainingPoints);
 
             // copy the current segment
             for (int j = lastIndex; j < crossoverIndex; j++) {

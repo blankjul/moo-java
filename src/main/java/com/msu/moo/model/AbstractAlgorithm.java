@@ -2,8 +2,8 @@ package com.msu.moo.model;
 
 import com.msu.moo.interfaces.IAlgorithm;
 import com.msu.moo.interfaces.IEvaluator;
-import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.util.Random;
 
 /**
  * An AbstractAlgorithm implements the IAlgorithm interface 
@@ -13,21 +13,19 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
  */
 public abstract class AbstractAlgorithm implements IAlgorithm {
 
-	public abstract NonDominatedSolutionSet run_(IEvaluator evaluator);
+	public abstract NonDominatedSolutionSet run_(IEvaluator evaluator, Random rand);
 	
 	// ! name for this algorithm
 	protected String name = getClass().getSimpleName();
 
 	
-	@Override
-	public NonDominatedSolutionSet run(IProblem problem) {
-		return run(new Evaluator(problem));
+	final public NonDominatedSolutionSet run(IEvaluator evaluator) {
+		return run(evaluator, new Random());
 	}
 	
-	
 	@Override
-	final public NonDominatedSolutionSet run(IEvaluator evaluator) {
-		return run_(evaluator).removeSolutionWithConstraintViolations();
+	final public NonDominatedSolutionSet run(IEvaluator evaluator, Random rand) {
+		return run_(evaluator, rand).removeSolutionWithConstraintViolations();
 	}
 
 

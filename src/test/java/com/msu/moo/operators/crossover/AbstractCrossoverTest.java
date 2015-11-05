@@ -16,6 +16,7 @@ import com.msu.moo.operators.crossover.permutation.CycleCrossover;
 import com.msu.moo.operators.crossover.permutation.EdgeRecombinationCrossover;
 import com.msu.moo.operators.crossover.permutation.OrderedCrossover;
 import com.msu.moo.operators.crossover.permutation.PMXCrossover;
+import com.msu.moo.util.Random;
 
 @RunWith(Parameterized.class)
 public class AbstractCrossoverTest {
@@ -56,7 +57,7 @@ public class AbstractCrossoverTest {
 
 	@Test
 	public void test() {
-		c.crossover(new MockVariable(a), new MockVariable(b));
+		c.crossover(new MockVariable(a), new MockVariable(b), new Random());
 	}
 
 }

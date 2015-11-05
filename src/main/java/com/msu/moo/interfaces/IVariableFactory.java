@@ -2,6 +2,8 @@ package com.msu.moo.interfaces;
 
 import java.util.Collection;
 
+import com.msu.moo.util.Random;
+
 /**
  * This class represents a factory class that should create a IVariable or
  */
@@ -13,7 +15,7 @@ public interface IVariableFactory {
 	 * 
 	 * @return new random instance.
 	 */
-	public IVariable next(IProblem problem);
+	public IVariable next(IProblem problem, Random rand);
 	
 	
 	/**
@@ -22,7 +24,7 @@ public interface IVariableFactory {
 	 * 
 	 * @return new random instance.
 	 */
-	public Collection<IVariable> next(IProblem problem, int n);
+	public Collection<IVariable> next(IProblem problem, Random rand, int n);
 
 	/**
 	 * @return true if a new solution could be created

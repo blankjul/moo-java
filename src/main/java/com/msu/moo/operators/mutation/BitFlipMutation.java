@@ -36,10 +36,10 @@ public class BitFlipMutation extends AbstractMutation<List<Boolean>> {
 
 
 	@Override
-	protected void mutate_(List<Boolean> b) {
+	protected void mutate_(List<Boolean> b, Random rand) {
 		if (probability == null) probability = 1 / (double) b.size();
 		for (int i = 0; i < b.size(); i++) {
-			if (Random.getInstance().nextDouble() < probability)
+			if (rand.nextDouble() < probability)
 				b.set(i, !b.get(i));
 		}
 

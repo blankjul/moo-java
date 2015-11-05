@@ -1,4 +1,4 @@
-package com.msu.moo.algorithms;
+package com.msu.moo.algorithms.nsgaII;
 
 import com.msu.moo.interfaces.IVariableFactory;
 import com.msu.moo.operators.AbstractCrossover;
@@ -18,6 +18,9 @@ public class NSGAIIBuilder {
 
 	protected String name;
 
+	protected INSGAIIModifactor funcModify = null;
+
+	
 	public NSGAIIBuilder setPopulationSize(int populationSize) {
 		this.populationSize = populationSize;
 		return this;
@@ -48,6 +51,11 @@ public class NSGAIIBuilder {
 		return this;
 	}
 
+	public NSGAIIBuilder setFuncModify(INSGAIIModifactor funcModify) {
+		this.funcModify = funcModify;
+		return this;
+	}
+
 	public NSGAII create() {
 		NSGAII nsgaII = new NSGAII();
 		if (name != null)
@@ -57,6 +65,7 @@ public class NSGAIIBuilder {
 		nsgaII.factory = factory;
 		nsgaII.crossover = crossover;
 		nsgaII.mutation = mutation;
+		nsgaII.funcModify = funcModify;
 		return nsgaII;
 	}
 

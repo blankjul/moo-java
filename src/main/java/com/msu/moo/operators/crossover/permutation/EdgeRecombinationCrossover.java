@@ -54,7 +54,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 		}
 	}
 
-	protected List<T> crossover_(Map<T, HashSet<T>> map, List<T> l, int point) {
+	protected List<T> crossover_(Map<T, HashSet<T>> map, List<T> l, int point, Random rand) {
 
 		List<T> child = new ArrayList<>();
 		T next = l.get(point);
@@ -76,7 +76,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 			// if there is no next node of the next one choose random!
 			if (nextList.isEmpty()) {
 				List<T> asList = new ArrayList<>(map.keySet());
-				Random.getInstance().shuffle(asList);
+				rand.shuffle(asList);
 				next = asList.get(0);
 				
 			// else choose node with less spread of parents
@@ -99,7 +99,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 						choice.add(item);
 				}
 				
-				int idx = Random.getInstance().nextInt(choice.size());
+				int idx = rand.nextInt(choice.size());
 				next = choice.get(idx);
 
 			}
@@ -114,7 +114,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 	}
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b, Random rand) {
 
 		// create combined edge map
 		Map<T, HashSet<T>> map = new HashMap<>();
@@ -124,8 +124,8 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 		// for creating a deep clone
 		Cloner cloner=new Cloner();
 
-		return new ArrayList<>(Arrays.asList(crossover_(cloner.deepClone(map), a, 0),
-				crossover_(cloner.deepClone(map), b, 0)));
+		return new ArrayList<>(Arrays.asList(crossover_(cloner.deepClone(map), a, 0, rand),
+				crossover_(cloner.deepClone(map), b, 0, rand)));
 
 	}
 

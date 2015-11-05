@@ -32,8 +32,8 @@ public class SinglePointCrossover<T> extends AbstractListCrossover<T> {
 	
 	
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
-		return crossover_(a, b, Random.getInstance().nextInt(1, a.size() - 2));
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b, Random rand) {
+		return crossover_(a, b, rand.nextInt(1, a.size() - 2));
 
 	}
 

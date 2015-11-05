@@ -9,6 +9,8 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.msu.moo.util.Random;
+
 public class SwapMutationTest {
 	
 	private class SwapMutationMock<T> extends SwapMutation<T> {
@@ -17,7 +19,7 @@ public class SwapMutationTest {
 			super();
 		}
 		public void mutate_(List<T> l) {
-			super.mutate_(l);
+			super.mutate_(l, new Random());
 		}
 	}
 	
