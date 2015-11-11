@@ -71,36 +71,10 @@ public class SolutionSet extends ArrayList<Solution>{
 	 */
 	public SolutionSet normalize(List<Pair<Double,Double>> boundaries) {
 		if (this.isEmpty()) return new SolutionSet();
-		int dimensions = this.get(0).getObjective().size();
-		
-		double[][] points = new double[dimensions][this.size()];
-		
-		for (int i = 0; i < dimensions; i++) {
-			double min = boundaries.get(i).first;
-			double max = boundaries.get(i).second;
-			
-			//if (min == max) throw new RuntimeException("Error when normalizing: Min is equal to Max!");
-			if (min == max) min = min - 0.0001;
-			
-			for (int k = 0; k < size(); k++) {
-				double value = this.get(k).getObjective().get(i);
-				points[i][k] = (value - min) / (max - min);
-				
-				// even if max or min are not fitting get the values in range
-				if (points[i][k] > 1) points[i][k] = 1;
-				if (points[i][k] < 0) points[i][k] = 0;
-			}
-		}
-		
 		SolutionSet result = new SolutionSet();
-		for (int k = 0; k < size(); k++) {
-			List<Double> obj = new ArrayList<>();
-			for (int i = 0; i < dimensions; i++) {
-				obj.add((Double)points[i][k]);
-			}
-			result.add(new Solution(this.get(k).getVariable(), obj));
+		for (Solution s : this) {
+			result.add(s.normalize(boundaries));
 		}
-		
 		return result;
 	}
 	

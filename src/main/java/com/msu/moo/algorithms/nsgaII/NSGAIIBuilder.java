@@ -60,11 +60,11 @@ public class NSGAIIBuilder {
 		NSGAII nsgaII = new NSGAII();
 		if (name != null)
 			nsgaII.setName(name);
-		nsgaII.populationSize = populationSize;
-		nsgaII.probMutation = probMutation;
-		nsgaII.factory = factory;
-		nsgaII.crossover = crossover;
-		nsgaII.mutation = mutation;
+		nsgaII.setPopulationSize(populationSize);
+		nsgaII.setProbMutation(probMutation);
+		nsgaII.setFactory(factory);
+		nsgaII.setCrossover(crossover);
+		nsgaII.setMutation(mutation);
 		nsgaII.funcModify = funcModify;
 		return nsgaII;
 	}

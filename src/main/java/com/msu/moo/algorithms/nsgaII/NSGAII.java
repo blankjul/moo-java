@@ -5,16 +5,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.msu.moo.algorithms.EvolutionaryAlgorithms;
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.AbstractAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.operators.AbstractCrossover;
-import com.msu.moo.operators.AbstractMutation;
 import com.msu.moo.operators.selection.BinaryTournamentSelection;
 import com.msu.moo.util.Random;
 import com.msu.moo.util.comparator.RankAndCrowdingComparator;
@@ -27,19 +24,7 @@ import com.msu.moo.util.indicator.NonDominatedRankIndicator;
  * 
  *
  */
-public class NSGAII extends AbstractAlgorithm {
-
-	// ! size of the whole Population
-	protected int populationSize;
-
-	// ! default mutation probability
-	protected double probMutation;
-
-	// ! operator for crossover
-	protected AbstractCrossover<?> crossover;
-
-	// ! operator for mutation
-	protected AbstractMutation<?> mutation;
+public class NSGAII extends EvolutionaryAlgorithms {
 
 	// ! rank for the whole population
 	protected Map<Solution, Integer> rank;
@@ -47,18 +32,13 @@ public class NSGAII extends AbstractAlgorithm {
 	// ! crowding distance for the whole population
 	protected Map<Solution, Double> crowding;
 
-	// ! factory for creating new instances
-	protected IVariableFactory factory;
-
-	// ! current population
-	protected SolutionSet population = null;
-	
 	//! function that allows to modify the population after mating
 	protected INSGAIIModifactor funcModify = null;
 
 	//! private constructor! use the builder!
 	protected NSGAII() {}
 
+	
 	@Override
 	public NonDominatedSolutionSet run_(IEvaluator evaluator, Random rand) {
 

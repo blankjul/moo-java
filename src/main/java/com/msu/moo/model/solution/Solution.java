@@ -1,7 +1,7 @@
 package com.msu.moo.model.solution;
 
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.msu.moo.interfaces.IVariable;
@@ -18,11 +18,6 @@ public class Solution extends ASolution<List<Double>> {
 		super(variable, objectives, constraintViolations);
 	}
 
-	public Solution(SingleObjectiveSolution solution) {
-		this.variable = solution.getVariable();
-		this.objective = Arrays.asList(solution.getObjective());
-		this.constraintViolations = solution.getConstraintViolations();
-	}
 
 	/**
 	 * @return nth objective
@@ -91,6 +86,16 @@ public class Solution extends ASolution<List<Double>> {
 		}
 		return new Solution(getVariable(), obj, constraintViolations);
 		
+	}
+	
+	public Double getMaxConstraintViolation() {
+		if (constraintViolations.isEmpty()) return 0d;
+		return Collections.max(constraintViolations);
+	}
+	
+	public Double getSumOfConstraintViolation() {
+		if (constraintViolations.isEmpty()) return 0d;
+		return constraintViolations.stream().mapToDouble(Double::doubleValue).sum();
 	}
 
 }

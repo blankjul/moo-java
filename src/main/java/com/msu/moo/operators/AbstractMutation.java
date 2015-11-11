@@ -19,8 +19,10 @@ public abstract class AbstractMutation<T> {
 		try {
 			
 			IVariable result = a.copy();
+			
 			@SuppressWarnings("unchecked")
 			T entry = (T) result.get();
+			
 			mutate_(entry, rand);
 			return result;
 			

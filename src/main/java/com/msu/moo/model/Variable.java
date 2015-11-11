@@ -10,7 +10,6 @@ public class Variable<T> implements IVariable {
 	//! list that contains all the values
 	protected T obj;
 	
-
 	
 	public Variable(T obj) {
 		super();

@@ -52,7 +52,6 @@ public class AbstractCrossoverTest {
 		this.a = a;
 		this.b = b;
 		this.c = c;
-		System.out.println(c);
 	}
 
 	@Test

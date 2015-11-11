@@ -10,6 +10,7 @@ import org.junit.Test;
 import com.msu.moo.mocks.MockVariable;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionDominator;
+import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 
 
 /**
@@ -18,12 +19,12 @@ import com.msu.moo.model.solution.SolutionDominator;
  */
 public class SolutionComparatorWithConstraintsTest {
 
-	private SolutionDominator cmp = new SolutionDominator();
+	private SolutionDominator cmp = new SolutionDominatorWithConstraints();
 	
 	@Test
 	public void testDominationBiObjectiveBoth() {
-		Solution s1 = new Solution(new MockVariable(), Arrays.asList(1d,1d), Arrays.asList(0d));
-		Solution s2 = new Solution(new MockVariable(), Arrays.asList(1d,1d), Arrays.asList(1d));
+		Solution s1 = new Solution(new Variable<Object>(null), Arrays.asList(1d,1d), Arrays.asList(0d));
+		Solution s2 = new Solution(new Variable<Object>(null), Arrays.asList(1d,1d), Arrays.asList(1d));
 		assertTrue(cmp.isDominating(s1, s2));
 		assertTrue(cmp.isDominatedBy(s2, s1));
 	}

@@ -6,6 +6,10 @@ import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.AbstractCrossover;
 import com.msu.moo.operators.AbstractMutation;
 
+/**
+ * This class should be used as a template for all evolutionary algorithms that
+ * are used. 
+ */
 public abstract class EvolutionaryAlgorithms extends AbstractAlgorithm {
 
 	// ! size of the whole Population
@@ -73,8 +77,5 @@ public abstract class EvolutionaryAlgorithms extends AbstractAlgorithm {
 	public void setPopulation(SolutionSet population) {
 		this.population = population;
 	}
-	
-	
-	
 
 }

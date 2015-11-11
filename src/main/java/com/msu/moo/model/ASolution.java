@@ -16,7 +16,7 @@ import com.msu.moo.interfaces.IVariable;
 public abstract class ASolution<T> {
 
 	//! this list of doubles allows to safe constraint violations for a solution
-	protected List<Double> constraintViolations = new ArrayList<Double>();
+	protected List<Double> constraintViolations;
 	
 	// ! objectives immutable
 	protected T objective;
@@ -38,6 +38,7 @@ public abstract class ASolution<T> {
 	public ASolution(IVariable variable, T objectives) {
 		this.variable = variable;
 		this.objective = objectives;
+		constraintViolations = new ArrayList<Double>();
 	}
 	
 	public ASolution(IVariable variable, T objectives, List<Double> constraintViolations) {

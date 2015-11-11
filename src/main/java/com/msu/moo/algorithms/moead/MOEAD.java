@@ -69,11 +69,8 @@ public class MOEAD extends EvolutionaryAlgorithms {
 			//fitness.add(MOEADUtil.calcWeightedSum(population.get(i).getObjective(), weights.get(i)));
 		}
 
-		int gen = 0;
 
 		while (eval.hasNext()) {
-
-			int counter = 0;
 
 			for (int i = 0; i < populationSize; i++) {
 
@@ -108,7 +105,6 @@ public class MOEAD extends EvolutionaryAlgorithms {
 							if (singleObjValue < fitness.get(j)) {
 								population.set(j, s);
 								fitness.set(j, singleObjValue);
-								counter++;
 							}
 						}
 					}

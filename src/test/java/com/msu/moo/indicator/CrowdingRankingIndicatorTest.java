@@ -38,8 +38,7 @@ public class CrowdingRankingIndicatorTest {
 		l.add(new MockSolution(new Variable<Integer>(1), new ArrayList<Double>(Arrays.asList(1.0, 1.0))));
 		l.add(new MockSolution(new Variable<Integer>(2), new ArrayList<Double>(Arrays.asList(2.0, 2.0))));
 		Map<Solution, Double> result = new CrowdingIndicator().calculate(l);
-		//assertEquals(Double.POSITIVE_INFINITY, result.get(l.get(1)), 0.01);
-		assertEquals(Double.POSITIVE_INFINITY, result.get(l.get(2)), 0.01);
+		assertEquals(0, result.get(l.get(2)), 0.01);
 	}
 
 	

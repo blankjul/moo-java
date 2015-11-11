@@ -26,7 +26,7 @@ public class KursaweExperiment extends AExperiment {
 		DoubleListVariableFactory fac = new DoubleListVariableFactory(3, new double[] { -5, 5 });
 		
 		MOEADBuilder builder = new MOEADBuilder();
-		builder.setPopulationSize(100);
+		builder.setPopulationSize(200);
 		builder.setFactory(fac).setT(20).setCrossover(new MOEASimulatedBinaryCrossover(new double[] { -5, 5 })).setMutation(new MOEADRealMutation(new Double[] { -5.0, 5.0 }, 20));
 		algorithms.add(builder.create());
 		
