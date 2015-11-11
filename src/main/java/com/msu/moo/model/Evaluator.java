@@ -54,7 +54,7 @@ public class Evaluator implements IEvaluator{
 	public boolean hasNext() {
 		if (maxEvaluations == null)
 			return true;
-		return evaluations < maxEvaluations;
+		return evaluations <= maxEvaluations;
 	}
 
 	public Integer getMaxEvaluations() {

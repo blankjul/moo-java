@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.moo.algorithms.moead.MOEADBuilder;
 import com.msu.moo.algorithms.nsgaII.NSGAIIBuilder;
 import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.interfaces.IAlgorithm;
@@ -33,6 +34,12 @@ public class ZDT1Experiment extends AExperiment {
 		.setMutation(new RealMutation(new Double[] { 0d, 1d }));
 		
 		algorithms.add(builder.create());
+		
+		
+		MOEADBuilder builder2 = new MOEADBuilder();
+		builder2.setFactory(fac).setT(5).setCrossover(new SimulatedBinaryCrossover(new double[]{0.0, 1.0})).setMutation(new RealMutation(new Double[] { 0d, 1d }));
+		algorithms.add(builder2.create());
+		
 	}
 
 

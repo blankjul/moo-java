@@ -55,5 +55,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry combineaccessrules="false" kind="src" path="/MOEAFramework-2.6"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

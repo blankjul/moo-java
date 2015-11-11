@@ -3,17 +3,15 @@ package com.msu.moo.util;
 import java.util.Collections;
 import java.util.List;
 
-
-
 public class Random {
 
-	//! the current random object
+	// ! the current random object
 	protected java.util.Random r;
 
 	public Random() {
 		r = new java.util.Random();
 	}
-	
+
 	public Random(long seed) {
 		r = new java.util.Random(seed);
 	}
@@ -24,7 +22,7 @@ public class Random {
 	public Integer nextInt(int max) {
 		return r.nextInt(max);
 	}
-	
+
 	/**
 	 * Create an Integer in range
 	 */
@@ -46,11 +44,12 @@ public class Random {
 		return min + (max - min) * r.nextDouble();
 	}
 
-	
 	public void shuffle(List<?> c) {
 		Collections.shuffle(c, r);
 	}
-	
-	
+
+	public <T> T select(List<T> l) {
+		return l.get(r.nextInt(l.size()));
+	}
 
 }

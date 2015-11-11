@@ -28,6 +28,11 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 		super();
 		this.range = range;
 	}
+	
+	public RealMutation(Double[] range, double eta_m) {
+		this(range);
+		this.eta_m = eta_m;
+	}
 
 
 	protected Double sbxMutation(double p, double u, double lowerBound, double upperBound) {
