@@ -6,8 +6,8 @@ import java.util.Queue;
 
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractSelection;
+import com.msu.util.Random;
 
 
 /**

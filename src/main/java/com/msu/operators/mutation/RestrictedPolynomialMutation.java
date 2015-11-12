@@ -2,8 +2,8 @@ package com.msu.operators.mutation;
 
 import java.util.List;
 
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractMutation;
+import com.msu.util.Random;
 
 /**
  * This is a basic BitFlipMutation which is allowed on all List<Boolean> objects.

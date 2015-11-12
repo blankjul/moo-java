@@ -8,8 +8,8 @@ import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.util.Random;
-import com.msu.moo.util.Util;
+import com.msu.util.Random;
+import com.msu.util.Util;
 
 public class ExperimentCallback implements Callable<ExperimentCallback> {
 
@@ -51,7 +51,7 @@ public class ExperimentCallback implements Callable<ExperimentCallback> {
 		IProblem p = Util.cloneObject(getProblem());
 
 		long startTime = System.currentTimeMillis();
-		set = a.run(new Evaluator(p, maxEvaluations), rand);
+		set = a.run(p, new Evaluator(maxEvaluations), rand);
 		duration = ((System.currentTimeMillis() - startTime) / 1000.0);
 
 		String prefix = String.format("[%s/%s | %s/%s | %s/%s ]", i + 1, experiment.problems.size(), j + 1, experiment.algorithms.size(), k + 1, iterations);

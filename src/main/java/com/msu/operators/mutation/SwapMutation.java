@@ -3,9 +3,9 @@ package com.msu.operators.mutation;
 
 import java.util.List;
 
-import com.msu.moo.util.Random;
-import com.msu.moo.util.Util;
 import com.msu.operators.AbstractMutation;
+import com.msu.util.Random;
+import com.msu.util.Util;
 
 /**
  * This is a SwapMutation which allows to define the range of the mutation. It

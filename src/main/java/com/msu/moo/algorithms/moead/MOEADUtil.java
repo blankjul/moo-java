@@ -6,7 +6,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 public class MOEADUtil {
 

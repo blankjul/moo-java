@@ -6,7 +6,7 @@ import java.util.List;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 /**
  * This is an abstract Crossover of an object. This class which inherits from

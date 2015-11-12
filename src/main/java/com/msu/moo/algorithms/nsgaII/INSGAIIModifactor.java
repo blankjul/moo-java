@@ -2,7 +2,7 @@ package com.msu.moo.algorithms.nsgaII;
 
 import com.msu.interfaces.IEvaluator;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 /**
  * Different ideas that should be performed every generation could be injected

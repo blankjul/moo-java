@@ -1,7 +1,7 @@
 package com.msu.interfaces;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 /**
  * This interface provides all methods which should be implemented by any
@@ -14,18 +14,14 @@ import com.msu.moo.util.Random;
  */
 public interface IAlgorithm {
 
-	public NonDominatedSolutionSet run(IEvaluator evaluator);
-	
-	
 	/**
 	 * Execute the implementation of the algorithm.
+	 * @param problem to solve
 	 * @param evaluator which counts the evaluations
 	 * @return Front of non dominated points
 	 */
-	public NonDominatedSolutionSet run(IEvaluator evaluator, Random rand);
+	public NonDominatedSolutionSet run(IProblem problem, IEvaluator evaluator, Random rand);
 	
-	
-
 	
 	/**
 	 * Every algorithm should have a name which is used to execute the toStrin()

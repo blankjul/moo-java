@@ -3,10 +3,10 @@ package com.msu.moo.visualization;
 import com.msu.interfaces.IProblem;
 import com.msu.model.AVisualize;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.util.events.IListener;
-import com.msu.moo.util.events.impl.EventDispatcher;
-import com.msu.moo.util.events.impl.RunFinishedEvent;
-import com.msu.moo.util.plots.ScatterPlot;
+import com.msu.util.events.IListener;
+import com.msu.util.events.impl.EventDispatcher;
+import com.msu.util.events.impl.RunFinishedEvent;
+import com.msu.util.plots.ScatterPlot;
 
 public class ObjectiveSpacePlot extends AVisualize implements IListener<RunFinishedEvent>{
 

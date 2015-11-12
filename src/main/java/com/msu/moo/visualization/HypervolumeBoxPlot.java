@@ -3,20 +3,20 @@ package com.msu.moo.visualization;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.Configuration;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.AVisualize;
-import com.msu.moo.Configuration;
 import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.experiment.ExperimentResult;
 import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.Range;
-import com.msu.moo.util.events.IListener;
-import com.msu.moo.util.events.impl.EventDispatcher;
-import com.msu.moo.util.events.impl.ProblemFinishedEvent;
-import com.msu.moo.util.plots.BoxPlot;
+import com.msu.util.Range;
+import com.msu.util.events.IListener;
+import com.msu.util.events.impl.EventDispatcher;
+import com.msu.util.events.impl.ProblemFinishedEvent;
+import com.msu.util.plots.BoxPlot;
 
 public class HypervolumeBoxPlot extends AVisualize implements IListener<ProblemFinishedEvent> {
 

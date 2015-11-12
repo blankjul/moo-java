@@ -3,7 +3,7 @@ package com.msu.operators;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 /**
  * This is an abstract Mutation of an object. This class which inherits from this one

@@ -5,8 +5,8 @@ import java.util.List;
 import org.moeaframework.core.operator.real.PM;
 import org.moeaframework.core.variable.RealVariable;
 
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractMutation;
+import com.msu.util.Random;
 
 public class MOEADRealMutation extends AbstractMutation<List<Double>> {
 

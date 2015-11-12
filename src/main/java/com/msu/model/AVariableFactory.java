@@ -6,7 +6,7 @@ import java.util.Collection;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.interfaces.IVariableFactory;
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 public abstract class AVariableFactory implements IVariableFactory{
 

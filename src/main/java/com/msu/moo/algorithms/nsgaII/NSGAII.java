@@ -6,14 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 import com.msu.interfaces.IEvaluator;
+import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.moo.algorithms.EvolutionaryAlgorithms;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.Random;
 import com.msu.operators.selection.BinaryTournamentSelection;
+import com.msu.util.Random;
 
 /**
  * This algorithm is implemented in the base of NSGAII proposed by Professor
@@ -37,10 +38,10 @@ public class NSGAII extends EvolutionaryAlgorithms {
 
 	
 	@Override
-	public NonDominatedSolutionSet run_(IEvaluator evaluator, Random rand) {
+	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, Random rand) {
 
 		// initialize the population and calculate also rank and crowding
-		initialize(evaluator, rand);
+		initialize(problem, evaluator, rand);
 		
 		while (evaluator.hasNext()) {
 			
@@ -57,7 +58,7 @@ public class NSGAII extends EvolutionaryAlgorithms {
 				for (IVariable offspring : off) {
 					if (rand.nextDouble() < this.probMutation)
 						offspring = mutation.mutate(offspring, rand);
-					offsprings.add(evaluator.evaluate(offspring));
+					offsprings.add(evaluator.evaluate(problem, offspring));
 				}
 			}
 
@@ -86,15 +87,15 @@ public class NSGAII extends EvolutionaryAlgorithms {
 		
 	}
 
-	protected void initialize(IEvaluator eval, Random rand) {
+	protected void initialize(IProblem problem, IEvaluator eval, Random rand) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();
 		// initialize the population with populationSize
 		population = new SolutionSet(populationSize * 2);
 		
-		for (IVariable variable : factory.next(eval.getProblem(), rand, populationSize)) {
-			population.add(eval.evaluate(variable));
+		for (IVariable variable : factory.next(problem, rand, populationSize)) {
+			population.add(eval.evaluate(problem, variable));
 		}
 
 		// calculate Rank and Crowding for the initial population

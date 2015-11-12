@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractListCrossover;
+import com.msu.util.Random;
 
 /**
  * This is the single point crossover where a list with any type could but cut

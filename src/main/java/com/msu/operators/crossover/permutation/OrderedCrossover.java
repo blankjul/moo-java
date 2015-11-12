@@ -24,10 +24,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.msu.moo.util.Pair;
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractListCrossover;
 import com.msu.operators.crossover.CrossoverUtil;
+import com.msu.util.Pair;
+import com.msu.util.Random;
 
 
 public class OrderedCrossover<T> extends AbstractListCrossover<T> {

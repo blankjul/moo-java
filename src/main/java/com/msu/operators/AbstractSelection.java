@@ -2,7 +2,7 @@ package com.msu.operators;
 
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 public abstract class AbstractSelection{
 

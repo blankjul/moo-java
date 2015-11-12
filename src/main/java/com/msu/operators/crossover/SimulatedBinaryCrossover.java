@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.util.Pair;
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractListCrossover;
+import com.msu.util.Pair;
+import com.msu.util.Random;
 
 public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 

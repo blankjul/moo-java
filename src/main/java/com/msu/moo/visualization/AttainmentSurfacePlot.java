@@ -2,17 +2,17 @@ package com.msu.moo.visualization;
 
 import java.util.Collection;
 
+import com.msu.Configuration;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.AVisualize;
-import com.msu.moo.Configuration;
 import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.fonseca.EmpiricalAttainmentFunction;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.util.events.IListener;
-import com.msu.moo.util.events.impl.EventDispatcher;
-import com.msu.moo.util.events.impl.ProblemFinishedEvent;
-import com.msu.moo.util.plots.ScatterPlot;
+import com.msu.util.events.IListener;
+import com.msu.util.events.impl.EventDispatcher;
+import com.msu.util.events.impl.ProblemFinishedEvent;
+import com.msu.util.plots.ScatterPlot;
 
 public class AttainmentSurfacePlot extends AVisualize implements IListener<ProblemFinishedEvent>{
 

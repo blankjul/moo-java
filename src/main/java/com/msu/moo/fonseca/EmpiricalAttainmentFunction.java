@@ -6,8 +6,8 @@ import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.util.BashExecutor;
-import com.msu.moo.util.Util;
+import com.msu.util.BashExecutor;
+import com.msu.util.Util;
 
 public class EmpiricalAttainmentFunction {
 

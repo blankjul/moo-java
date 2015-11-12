@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.msu.interfaces.IProblem;
 import com.msu.model.AVariableFactory;
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 public class DoubleListVariableFactory extends AVariableFactory {
 	

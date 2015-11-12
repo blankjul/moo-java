@@ -1,12 +1,13 @@
 package com.msu.moo.algorithms;
 
 import com.msu.interfaces.IEvaluator;
+import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.interfaces.IVariableFactory;
 import com.msu.model.AbstractAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 /**
  * The RandomSearch just creates randomly new instances and evaluates them until
@@ -22,11 +23,11 @@ public class RandomSearch extends AbstractAlgorithm {
 	}
 
 	@Override
-	public NonDominatedSolutionSet run_(IEvaluator evaluator, Random rand) {
+	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, Random rand) {
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		while (factory.hasNext() && evaluator.hasNext()) {
-			IVariable var = factory.next(evaluator.getProblem(), rand);
-			Solution s = evaluator.evaluate(var);
+			IVariable var = factory.next(problem, rand);
+			Solution s = evaluator.evaluate(problem, var);
 			set.add(s);
 		}
 		return set;

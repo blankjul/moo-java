@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.msu.moo.algorithms.nsgaII.NaiveNonDominatedSorting;
 import com.msu.moo.mocks.MockVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;

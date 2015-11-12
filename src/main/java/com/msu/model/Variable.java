@@ -3,7 +3,7 @@ package com.msu.model;
 
 
 import com.msu.interfaces.IVariable;
-import com.msu.moo.util.Util;
+import com.msu.util.Util;
 
 public class Variable<T> implements IVariable {
 
@@ -30,7 +30,6 @@ public class Variable<T> implements IVariable {
 		} catch (Exception e){
 			throw new RuntimeException("Object could not be set for variable");
 		}
-		
 	}
 
 	
@@ -60,6 +59,7 @@ public class Variable<T> implements IVariable {
 	public boolean isEqual(T o1, T o2) {
 		return o1.equals(o2);
 	}
+	
 	
 	public IVariable copy() {
 		return new Variable<T>(Util.cloneObject(obj));

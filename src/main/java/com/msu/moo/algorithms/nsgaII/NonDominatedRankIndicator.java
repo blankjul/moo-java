@@ -8,8 +8,6 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.sorting.NaiveNonDominatedSorting;
-import com.msu.moo.util.sorting.NonDominatedSorting;
 
 public class NonDominatedRankIndicator extends AIndicator<Integer> {
 

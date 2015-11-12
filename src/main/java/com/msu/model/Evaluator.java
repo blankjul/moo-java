@@ -16,31 +16,20 @@ import com.msu.moo.model.solution.Solution;
  */
 public class Evaluator implements IEvaluator{
 
-	// ! the problem which should be solved
-	protected IProblem problem;
-
 	// ! current amount of evaluations
 	protected int evaluations = 0;
 
 	// ! current amount of evaluations
 	protected Integer maxEvaluations = null;
 
-	public Evaluator(IProblem problem) {
-		this.problem = problem;
-	}
-
-	public Evaluator(IProblem problem, int maxEvaluations) {
-		this.problem = problem;
+	
+	public Evaluator(int maxEvaluations) {
 		this.maxEvaluations = maxEvaluations;
 	}
 
-	public Solution evaluate(IVariable variable) {
+	public Solution evaluate(IProblem problem, IVariable variable) {
 		++evaluations;
 		return problem.evaluate(variable);
-	}
-
-	public IProblem getProblem() {
-		return problem;
 	}
 
 	public int getEvaluations() {

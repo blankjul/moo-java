@@ -39,11 +39,11 @@ public interface IProblem {
 	 */
 	public NonDominatedSolutionSet getOptimum();
 	
+	
 	/**
 	 * Set a name for the problem. should be used for the toString() method.
 	 */
 	public void setName(String name);
-	
 	
 	
 	

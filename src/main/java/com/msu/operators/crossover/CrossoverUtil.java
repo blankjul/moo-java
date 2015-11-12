@@ -2,8 +2,8 @@ package com.msu.operators.crossover;
 
 import org.apache.commons.math3.util.FastMath;
 
-import com.msu.moo.util.Pair;
-import com.msu.moo.util.Random;
+import com.msu.util.Pair;
+import com.msu.util.Random;
 
 public class CrossoverUtil {
 	

@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.msu.interfaces.IVariable;
 import com.msu.model.ASolution;
-import com.msu.moo.util.Pair;
+import com.msu.util.Pair;
 
 public class Solution extends ASolution<List<Double>> {
 

@@ -7,8 +7,8 @@ import java.util.List;
 import org.moeaframework.core.operator.real.SBX;
 import org.moeaframework.core.variable.RealVariable;
 
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractListCrossover;
+import com.msu.util.Random;
 
 public class MOEASimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 

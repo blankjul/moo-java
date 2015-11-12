@@ -14,10 +14,10 @@ import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.problems.ZDT1;
-import com.msu.moo.util.BashExecutor;
 import com.msu.moo.visualization.AttainmentSurfacePlot;
 import com.msu.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.operators.mutation.RealMutation;
+import com.msu.util.BashExecutor;
 
 public class ZDT1Experiment extends AExperiment {
 	

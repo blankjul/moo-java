@@ -24,8 +24,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractListCrossover;
+import com.msu.util.Random;
 import com.rits.cloning.Cloner;
 
 public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {

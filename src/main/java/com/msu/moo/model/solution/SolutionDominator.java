@@ -2,7 +2,7 @@ package com.msu.moo.model.solution;
 
 import java.util.List;
 
-import com.msu.moo.util.Pair;
+import com.msu.util.Pair;
 
 /**
  * This class compares different solutions regarding their domination.

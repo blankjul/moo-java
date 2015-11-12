@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 public abstract class AbstractListCrossover<T> extends AbstractCrossover<List<T>> {
 

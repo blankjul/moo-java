@@ -13,12 +13,12 @@ import org.apache.log4j.Logger;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.util.Random;
-import com.msu.moo.util.events.impl.AlgorithmFinishedExecution;
-import com.msu.moo.util.events.impl.EventDispatcher;
-import com.msu.moo.util.events.impl.ExperimentFininshedEvent;
-import com.msu.moo.util.events.impl.ProblemFinishedEvent;
-import com.msu.moo.util.events.impl.RunFinishedEvent;
+import com.msu.util.Random;
+import com.msu.util.events.impl.AlgorithmFinishedExecution;
+import com.msu.util.events.impl.EventDispatcher;
+import com.msu.util.events.impl.ExperimentFininshedEvent;
+import com.msu.util.events.impl.ProblemFinishedEvent;
+import com.msu.util.events.impl.RunFinishedEvent;
 
 public abstract class AExperiment {
 

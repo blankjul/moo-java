@@ -6,7 +6,7 @@ import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.moo.algorithms.moead.MOEADUtil;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.util.Range;
+import com.msu.util.Range;
 
 public class SingleObjectiveDecomposedProblem<V extends IVariable> extends AProblem<V>{
 	
@@ -31,7 +31,7 @@ public class SingleObjectiveDecomposedProblem<V extends IVariable> extends AProb
 
 	@Override
 	protected void evaluate_(V var, List<Double> objectives, List<Double> constraintViolations) {
-		Solution s = new Evaluator(problem).evaluate(var);
+		Solution s = problem.evaluate(var);
 		if (range != null) s = s.normalize(range.get());
 		objectives.add(MOEADUtil.calcWeightedSum(s.getObjective(), weights));
 		constraintViolations.addAll(s.getConstraintViolations());

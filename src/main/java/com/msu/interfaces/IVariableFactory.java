@@ -2,7 +2,7 @@ package com.msu.interfaces;
 
 import java.util.Collection;
 
-import com.msu.moo.util.Random;
+import com.msu.util.Random;
 
 /**
  * This class represents a factory class that should create a IVariable or

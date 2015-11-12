@@ -1,7 +1,7 @@
 package com.msu.operators.mutation;
 
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractMutation;
+import com.msu.util.Random;
 
 public class NoMutation<T>  extends AbstractMutation<T>{
 

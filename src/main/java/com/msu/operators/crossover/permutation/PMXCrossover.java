@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.moo.util.Pair;
-import com.msu.moo.util.Random;
 import com.msu.operators.AbstractListCrossover;
 import com.msu.operators.crossover.CrossoverUtil;
+import com.msu.util.Pair;
+import com.msu.util.Random;
 
 
 public class PMXCrossover<T> extends AbstractListCrossover<T> {
