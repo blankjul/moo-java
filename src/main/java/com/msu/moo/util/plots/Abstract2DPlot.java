@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartUtilities;
 
-import com.msu.moo.interfaces.IPlot;
+import com.msu.interfaces.IPlot;
 
 public abstract class Abstract2DPlot implements IPlot {
 	

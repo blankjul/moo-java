@@ -1,6 +1,6 @@
 package com.msu.moo.algorithms.nsgaII;
 
-import com.msu.moo.interfaces.IEvaluator;
+import com.msu.interfaces.IEvaluator;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.Random;
 

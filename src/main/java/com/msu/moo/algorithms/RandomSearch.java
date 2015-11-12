@@ -1,9 +1,9 @@
 package com.msu.moo.algorithms;
 
-import com.msu.moo.interfaces.IEvaluator;
-import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.AbstractAlgorithm;
+import com.msu.interfaces.IEvaluator;
+import com.msu.interfaces.IVariable;
+import com.msu.interfaces.IVariableFactory;
+import com.msu.model.AbstractAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.util.Random;

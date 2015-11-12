@@ -2,21 +2,21 @@ package com.msu.moo.experiment.impl;
 
 import java.util.List;
 
+import com.msu.interfaces.IAlgorithm;
+import com.msu.interfaces.IProblem;
+import com.msu.model.variables.DoubleListVariableFactory;
 import com.msu.moo.algorithms.RandomSearch;
 import com.msu.moo.algorithms.moead.MOEADBuilder;
 import com.msu.moo.algorithms.nsgaII.NSGAIIBuilder;
 import com.msu.moo.experiment.AExperiment;
-import com.msu.moo.interfaces.IAlgorithm;
-import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.model.variables.DoubleListVariableFactory;
-import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
-import com.msu.moo.operators.moea.MOEADRealMutation;
-import com.msu.moo.operators.moea.MOEASimulatedBinaryCrossover;
-import com.msu.moo.operators.mutation.RealMutation;
 import com.msu.moo.problems.Kursawe;
 import com.msu.moo.visualization.AttainmentSurfacePlot;
 import com.msu.moo.visualization.HypervolumeBoxPlot;
 import com.msu.moo.visualization.ObjectiveSpacePlot;
+import com.msu.operators.crossover.SimulatedBinaryCrossover;
+import com.msu.operators.moea.MOEADRealMutation;
+import com.msu.operators.moea.MOEASimulatedBinaryCrossover;
+import com.msu.operators.mutation.RealMutation;
 
 public class KursaweExperiment extends AExperiment {
 

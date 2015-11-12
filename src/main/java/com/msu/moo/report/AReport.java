@@ -4,11 +4,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.PrintWriter;
 
-import com.msu.moo.interfaces.IReport;
+import com.msu.interfaces.IReport;
 import com.msu.moo.util.Util;
-import com.msu.moo.util.events.EventDispatcher;
-import com.msu.moo.util.events.ExperimentFininshedEvent;
 import com.msu.moo.util.events.IListener;
+import com.msu.moo.util.events.impl.EventDispatcher;
+import com.msu.moo.util.events.impl.ExperimentFininshedEvent;
 
 public abstract class AReport implements IReport {
 

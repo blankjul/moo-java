@@ -6,9 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.msu.moo.ExampleSolutionSet;
+import com.msu.moo.algorithms.nsgaII.CrowdingIndicator;
+import com.msu.moo.algorithms.nsgaII.NonDominatedRankIndicator;
+import com.msu.moo.algorithms.nsgaII.RankAndCrowdingComparator;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.indicator.CrowdingIndicator;
-import com.msu.moo.util.indicator.NonDominatedRankIndicator;
 
 public class RankAndCrowdingComparatorTest {
 

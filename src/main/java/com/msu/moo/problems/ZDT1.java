@@ -2,8 +2,8 @@ package com.msu.moo.problems;
 
 import java.util.List;
 
-import com.msu.moo.model.AProblem;
-import com.msu.moo.model.variables.DoubleListVariable;
+import com.msu.model.AProblem;
+import com.msu.model.variables.DoubleListVariable;
 
 /**
  * Class representing problem ZDT1

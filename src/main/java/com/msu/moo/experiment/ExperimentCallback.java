@@ -4,9 +4,9 @@ import java.util.concurrent.Callable;
 
 import org.apache.log4j.Logger;
 
-import com.msu.moo.interfaces.IAlgorithm;
-import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.model.Evaluator;
+import com.msu.interfaces.IAlgorithm;
+import com.msu.interfaces.IProblem;
+import com.msu.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.Random;
 import com.msu.moo.util.Util;

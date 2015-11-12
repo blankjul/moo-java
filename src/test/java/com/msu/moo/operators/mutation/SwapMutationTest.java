@@ -9,9 +9,10 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.Variable;
+import com.msu.interfaces.IVariable;
+import com.msu.model.Variable;
 import com.msu.moo.util.Random;
+import com.msu.operators.mutation.SwapMutation;
 
 public class SwapMutationTest {
 

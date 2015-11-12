@@ -9,7 +9,7 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.msu.moo.operators.crossover.SinglePointCrossover;
+import com.msu.operators.crossover.SinglePointCrossover;
 
 public class SinglePointCrossoverTest {
 

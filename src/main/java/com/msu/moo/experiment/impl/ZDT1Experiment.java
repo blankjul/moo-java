@@ -5,19 +5,19 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.interfaces.IAlgorithm;
+import com.msu.interfaces.IProblem;
+import com.msu.model.variables.DoubleListVariableFactory;
 import com.msu.moo.algorithms.moead.MOEADBuilder;
 import com.msu.moo.algorithms.nsgaII.NSGAIIBuilder;
 import com.msu.moo.experiment.AExperiment;
-import com.msu.moo.interfaces.IAlgorithm;
-import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.variables.DoubleListVariableFactory;
-import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
-import com.msu.moo.operators.mutation.RealMutation;
 import com.msu.moo.problems.ZDT1;
 import com.msu.moo.util.BashExecutor;
 import com.msu.moo.visualization.AttainmentSurfacePlot;
+import com.msu.operators.crossover.SimulatedBinaryCrossover;
+import com.msu.operators.mutation.RealMutation;
 
 public class ZDT1Experiment extends AExperiment {
 	

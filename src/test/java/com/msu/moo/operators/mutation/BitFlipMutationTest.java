@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.msu.moo.util.Random;
+import com.msu.operators.mutation.BitFlipMutation;
 
 public class BitFlipMutationTest {
 	

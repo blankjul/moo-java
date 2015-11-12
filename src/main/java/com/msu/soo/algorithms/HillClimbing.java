@@ -1,16 +1,18 @@
 package com.msu.soo.algorithms;
 
-import com.msu.moo.interfaces.IEvaluator;
-import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.AbstractAlgorithm;
-import com.msu.moo.model.Evaluator;
+import com.msu.interfaces.IEvaluator;
+import com.msu.interfaces.IVariable;
+import com.msu.interfaces.IVariableFactory;
+import com.msu.model.AbstractAlgorithm;
+import com.msu.model.Evaluator;
+import com.msu.model.SingleObjectiveDecomposedProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.operators.AbstractMutation;
 import com.msu.moo.util.Random;
+import com.msu.moo.util.Range;
+import com.msu.operators.AbstractMutation;
 
-public class HillClimbing extends AbstractAlgorithm{
+public class HillClimbing extends AbstractAlgorithm {
 
 	protected IVariable var = null;
 	protected IVariableFactory factory = null;
@@ -38,14 +40,24 @@ public class HillClimbing extends AbstractAlgorithm{
 			s = eval.evaluate(var);
 		}
 		
+		SingleObjectiveDecomposedProblem<?> decomposed = (SingleObjectiveDecomposedProblem<?>) eval.getProblem();
+		Range<Double> range = new Range<Double>();
+		range.add(new Evaluator(decomposed.getProblem()).evaluate(s.getVariable()).getObjective());
+		decomposed.setRange(range);
+		
+		
 		if (s.getObjective().size() != 1) throw new RuntimeException("Only for single-objectives problems!");
 		
 		while (eval.hasNext()) {
 			
 			IVariable nextVar = mutation.mutate(s.getVariable().copy(), rand);
-			Solution next = eval.evaluate(nextVar);
 			
-			s = new Evaluator(eval.getProblem()).evaluate(s.getVariable());
+			range.add(new Evaluator(decomposed.getProblem()).evaluate(nextVar).getObjective());
+			decomposed.setRange(range);
+			
+			Solution next = eval.evaluate(nextVar);
+			s = eval.evaluate(s.getVariable());
+			
 			
 			if (next.getSumOfConstraintViolation() < s.getSumOfConstraintViolation()) {
 				s = next;
@@ -55,7 +67,6 @@ public class HillClimbing extends AbstractAlgorithm{
 					s = next;
 				}
 			}
-			
 		}
 		
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();

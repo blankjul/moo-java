@@ -1,8 +1,8 @@
 package com.msu.moo.report;
 
-import com.msu.moo.util.events.EventDispatcher;
 import com.msu.moo.util.events.IListener;
-import com.msu.moo.util.events.RunFinishedEvent;
+import com.msu.moo.util.events.impl.EventDispatcher;
+import com.msu.moo.util.events.impl.RunFinishedEvent;
 
 public class SolutionSetReport extends AReport {
 

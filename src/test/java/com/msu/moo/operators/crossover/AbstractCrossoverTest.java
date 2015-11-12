@@ -11,12 +11,15 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import com.msu.moo.mocks.MockVariable;
-import com.msu.moo.operators.AbstractCrossover;
-import com.msu.moo.operators.crossover.permutation.CycleCrossover;
-import com.msu.moo.operators.crossover.permutation.EdgeRecombinationCrossover;
-import com.msu.moo.operators.crossover.permutation.OrderedCrossover;
-import com.msu.moo.operators.crossover.permutation.PMXCrossover;
 import com.msu.moo.util.Random;
+import com.msu.operators.AbstractCrossover;
+import com.msu.operators.crossover.HalfUniformCrossover;
+import com.msu.operators.crossover.SinglePointCrossover;
+import com.msu.operators.crossover.UniformCrossover;
+import com.msu.operators.crossover.permutation.CycleCrossover;
+import com.msu.operators.crossover.permutation.EdgeRecombinationCrossover;
+import com.msu.operators.crossover.permutation.OrderedCrossover;
+import com.msu.operators.crossover.permutation.PMXCrossover;
 
 @RunWith(Parameterized.class)
 public class AbstractCrossoverTest {

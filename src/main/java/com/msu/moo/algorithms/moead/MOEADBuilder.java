@@ -1,8 +1,8 @@
 package com.msu.moo.algorithms.moead;
 
-import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.operators.AbstractCrossover;
-import com.msu.moo.operators.AbstractMutation;
+import com.msu.interfaces.IVariableFactory;
+import com.msu.operators.AbstractCrossover;
+import com.msu.operators.AbstractMutation;
 
 public class MOEADBuilder {
 

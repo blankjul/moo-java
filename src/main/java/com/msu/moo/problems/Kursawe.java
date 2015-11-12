@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.model.AProblem;
-import com.msu.moo.model.variables.DoubleListVariable;
+import com.msu.model.AProblem;
+import com.msu.model.variables.DoubleListVariable;
 
 public class Kursawe extends AProblem<DoubleListVariable> {
 

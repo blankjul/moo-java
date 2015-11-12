@@ -10,15 +10,15 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
-import com.msu.moo.interfaces.IAlgorithm;
-import com.msu.moo.interfaces.IProblem;
+import com.msu.interfaces.IAlgorithm;
+import com.msu.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.Random;
-import com.msu.moo.util.events.AlgorithmFinishedExecution;
-import com.msu.moo.util.events.EventDispatcher;
-import com.msu.moo.util.events.ExperimentFininshedEvent;
-import com.msu.moo.util.events.ProblemFinishedEvent;
-import com.msu.moo.util.events.RunFinishedEvent;
+import com.msu.moo.util.events.impl.AlgorithmFinishedExecution;
+import com.msu.moo.util.events.impl.EventDispatcher;
+import com.msu.moo.util.events.impl.ExperimentFininshedEvent;
+import com.msu.moo.util.events.impl.ProblemFinishedEvent;
+import com.msu.moo.util.events.impl.RunFinishedEvent;
 
 public abstract class AExperiment {
 

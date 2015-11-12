@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.moo.operators.crossover.permutation.CycleCrossover;
+import com.msu.operators.crossover.permutation.CycleCrossover;
 
 public class CycleCrossoverTest {
 

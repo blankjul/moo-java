@@ -3,18 +3,18 @@ package com.msu.moo.report;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.interfaces.IAlgorithm;
+import com.msu.interfaces.IProblem;
 import com.msu.moo.Configuration;
 import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.experiment.ExperimentResult;
 import com.msu.moo.fonseca.Hypervolume;
-import com.msu.moo.interfaces.IAlgorithm;
-import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.Range;
-import com.msu.moo.util.events.EventDispatcher;
 import com.msu.moo.util.events.IListener;
-import com.msu.moo.util.events.ProblemFinishedEvent;
+import com.msu.moo.util.events.impl.EventDispatcher;
+import com.msu.moo.util.events.impl.ProblemFinishedEvent;
 
 public class HypervolumeReport extends AReport {
 

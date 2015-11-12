@@ -1,10 +1,10 @@
 package com.msu.moo.algorithms;
 
-import com.msu.moo.interfaces.IVariableFactory;
-import com.msu.moo.model.AbstractAlgorithm;
+import com.msu.interfaces.IVariableFactory;
+import com.msu.model.AbstractAlgorithm;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.operators.AbstractCrossover;
-import com.msu.moo.operators.AbstractMutation;
+import com.msu.operators.AbstractCrossover;
+import com.msu.operators.AbstractMutation;
 
 /**
  * This class should be used as a template for all evolutionary algorithms that

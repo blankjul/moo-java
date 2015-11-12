@@ -5,18 +5,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.msu.interfaces.IEvaluator;
+import com.msu.interfaces.IVariable;
 import com.msu.moo.algorithms.EvolutionaryAlgorithms;
-import com.msu.moo.interfaces.IEvaluator;
-import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.operators.selection.BinaryTournamentSelection;
 import com.msu.moo.util.Random;
-import com.msu.moo.util.comparator.RankAndCrowdingComparator;
-import com.msu.moo.util.indicator.CrowdingIndicator;
-import com.msu.moo.util.indicator.NonDominatedRankIndicator;
+import com.msu.operators.selection.BinaryTournamentSelection;
 
 /**
  * This algorithm is implemented in the base of NSGAII proposed by Professor

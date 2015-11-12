@@ -8,6 +8,8 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.msu.operators.crossover.HalfUniformCrossover;
+
 public class HalfUniformCrossoverTest {
 
 	private class HalfUniformCrossoverMock extends HalfUniformCrossover<Boolean> {

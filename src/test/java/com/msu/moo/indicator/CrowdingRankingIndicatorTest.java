@@ -8,12 +8,12 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import com.msu.model.Variable;
 import com.msu.moo.ExampleSolutionSet;
+import com.msu.moo.algorithms.nsgaII.CrowdingIndicator;
 import com.msu.moo.mocks.MockSolution;
-import com.msu.moo.model.Variable;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.util.indicator.CrowdingIndicator;
 
 public class CrowdingRankingIndicatorTest {
 	

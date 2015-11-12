@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.ASolution;
+import com.msu.interfaces.IVariable;
+import com.msu.model.ASolution;
 import com.msu.moo.util.Pair;
 
 public class Solution extends ASolution<List<Double>> {

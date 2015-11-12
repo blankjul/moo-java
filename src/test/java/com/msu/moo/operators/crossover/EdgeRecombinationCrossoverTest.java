@@ -6,8 +6,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.moo.operators.crossover.permutation.EdgeRecombinationCrossover;
 import com.msu.moo.util.Random;
+import com.msu.operators.crossover.permutation.EdgeRecombinationCrossover;
 
 public class EdgeRecombinationCrossoverTest {
 
