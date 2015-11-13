@@ -8,6 +8,9 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.moo.FakeRandom;
+import com.msu.interfaces.IVariable;
+import com.msu.model.Variable;
 import com.msu.operators.crossover.permutation.CycleCrossover;
 
 public class CycleCrossoverTest {
@@ -37,6 +40,24 @@ public class CycleCrossoverTest {
 		List<Integer> a = new ArrayList<>(Arrays.asList(1,2,3));
 		List<Integer> b = new ArrayList<>(Arrays.asList(3,2,1));
 		c.crossover_(a, b, 0);
+	}
+	
+	
+	
+	@Test
+	public void testOfPublication() {
+		List<Integer> a = new ArrayList<>(Arrays.asList(6,0,1,2,5,3,4));
+		List<Integer> b = new ArrayList<>(Arrays.asList(2,6,3,0,5,4,1));
+		
+		ArrayList<Object> l = new ArrayList<Object>();
+		l.add(2);
+		
+		List<IVariable> var = new CycleCrossover<>().crossover(new Variable<List<Integer>>(a), new Variable<List<Integer>>(b), new FakeRandom(l));
+		@SuppressWarnings("unchecked")
+		Variable<List<Integer>> tmp =  (Variable<List<Integer>>)var.get(0);
+		assertEquals(Arrays.asList(6,0,3,2,5,4,1), tmp.get());
+	
+	
 	}
 
 

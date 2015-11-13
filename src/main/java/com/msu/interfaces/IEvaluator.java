@@ -23,5 +23,6 @@ public interface IEvaluator {
 	 * @return maximal allowed evaluations
 	 */
 	public Integer getMaxEvaluations();
+	
 
 }

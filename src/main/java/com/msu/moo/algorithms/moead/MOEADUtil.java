@@ -10,7 +10,10 @@ import com.msu.util.Random;
 
 public class MOEADUtil {
 
-	public static List<List<Double>> getUniformDistributedWeights(Random r, int n) {
+	public static List<List<Double>> getUniformDistributedWeights(Random r, int n, int length) {
+		
+		if (length != 2) throw new RuntimeException("This implemenation works so far only with 2 objectives!");
+		
 		List<List<Double>> result = new ArrayList<>(n);
 		
 		result.add(Arrays.asList(0.0, 1.0));

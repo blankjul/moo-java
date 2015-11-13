@@ -36,7 +36,7 @@ public class CycleCrossover<T> extends AbstractListCrossover<T> {
 	
 	protected List<List<T>> crossover_(List<T> a, List<T> b, int idx) {
 
-		int length = a.size();
+		final int length = a.size();
 
 		// and of the children: do a crossover copy to simplify the later
 		// processing

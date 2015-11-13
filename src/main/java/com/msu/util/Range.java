@@ -12,7 +12,9 @@ public class Range<T extends Comparable<T>> {
 	
 	protected List<Pair<T,T>> ranges = null;
 	
-	public void add(List<T> l) {
+	public boolean add(List<T> l) {
+		
+		boolean change = false;
 		
 		// if we have no boundaries yet -> initialize
 		if (ranges == null) {
@@ -20,13 +22,21 @@ public class Range<T extends Comparable<T>> {
 			for (int i = 0; i < l.size(); i++) {
 				ranges.add(Pair.create(l.get(i), l.get(i)));
 			}
+			change = true;
 		// update all the points
 		} else {
 			for (int i = 0; i < l.size(); i++) {
-				if (l.get(i).compareTo(ranges.get(i).first) == -1) ranges.get(i).first = l.get(i);
-				if (l.get(i).compareTo(ranges.get(i).second) == 1) ranges.get(i).second = l.get(i);
+				if (l.get(i).compareTo(ranges.get(i).first) == -1) {
+					ranges.get(i).first = l.get(i);
+					change = true;
+				}
+				if (l.get(i).compareTo(ranges.get(i).second) == 1) {
+					ranges.get(i).second = l.get(i);
+					change = true;
+				}
 			}
 		}
+		return change;
 	}
 	
 	public List<Pair<T,T>> get() {

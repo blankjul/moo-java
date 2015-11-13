@@ -67,7 +67,7 @@ public class NSGAII extends EvolutionaryAlgorithms {
 			
 			// modify population with the given function
 			if (funcModify != null) {
-				funcModify.modify(evaluator, population, rand);
+				funcModify.modify(problem, evaluator, population, rand);
 			}
 			
 			// survival of the best population

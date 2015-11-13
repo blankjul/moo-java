@@ -14,16 +14,17 @@ import com.msu.util.Random;
  */
 public abstract class AbstractAlgorithm implements IAlgorithm {
 
-	public abstract NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, Random rand);
 	
-	// ! name for this algorithm
-	protected String name = getClass().getSimpleName();
-
-
+public abstract NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, Random rand);
+	
 	@Override
 	final public NonDominatedSolutionSet run(IProblem problem, IEvaluator evaluator, Random rand) {
 		return run_(problem, evaluator, rand).removeSolutionWithConstraintViolations();
 	}
+	
+	// ! name for this algorithm
+	protected String name = getClass().getSimpleName();
+
 
 	@Override
 	public void setName(String name) {
