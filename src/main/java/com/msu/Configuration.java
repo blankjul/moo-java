@@ -30,10 +30,10 @@ package com.msu;
 public class Configuration {
 
 	// ! path to Fonseca's EAF C Implementation
-	public static String PATH_TO_EAF = "vendor/aft-0.95/eaf";
+	public static String PATH_TO_EAF = "vendor/bin/eaf";
 
 	// ! path to Fonseca's Hypervolume C Implementation
-	public static String PATH_TO_HYPERVOLUME = "vendor/hv-1.3-src/hv";
+	public static String PATH_TO_HYPERVOLUME = "vendor/bin/hv";
 	
 	//! number of threads for executing the experiment
 	public static int NUM_OF_THREADS = 8;

@@ -1,4 +1,4 @@
-package com.msu.moo.experiment;
+package com.msu.experiment;
 
 import java.util.ArrayList;
 import java.util.Collection;

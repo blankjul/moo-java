@@ -1,7 +1,7 @@
 package com.msu.util.events.impl;
 
+import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IProblem;
-import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.util.events.IEvent;
 

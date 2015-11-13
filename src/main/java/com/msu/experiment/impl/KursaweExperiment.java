@@ -1,14 +1,14 @@
-package com.msu.moo.experiment.impl;
+package com.msu.experiment.impl;
 
 import java.util.List;
 
+import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.variables.DoubleListVariableFactory;
 import com.msu.moo.algorithms.RandomSearch;
 import com.msu.moo.algorithms.moead.MOEADBuilder;
 import com.msu.moo.algorithms.nsgaII.NSGAIIBuilder;
-import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.problems.Kursawe;
 import com.msu.moo.visualization.AttainmentSurfacePlot;
 import com.msu.moo.visualization.HypervolumeBoxPlot;

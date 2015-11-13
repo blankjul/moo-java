@@ -1,6 +1,6 @@
 package com.msu.util.events.impl;
 
-import com.msu.moo.experiment.AExperiment;
+import com.msu.experiment.AExperiment;
 import com.msu.util.events.IEvent;
 
 public class ExperimentFininshedEvent implements IEvent {

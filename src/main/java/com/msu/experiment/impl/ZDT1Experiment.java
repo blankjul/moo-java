@@ -1,16 +1,16 @@
-package com.msu.moo.experiment.impl;
+package com.msu.experiment.impl;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.variables.DoubleListVariableFactory;
 import com.msu.moo.algorithms.moead.MOEADBuilder;
 import com.msu.moo.algorithms.nsgaII.NSGAIIBuilder;
-import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.problems.ZDT1;

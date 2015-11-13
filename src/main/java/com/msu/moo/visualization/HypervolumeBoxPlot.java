@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.Configuration;
+import com.msu.experiment.AExperiment;
+import com.msu.experiment.ExperimentResult;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.AVisualize;
-import com.msu.moo.experiment.AExperiment;
-import com.msu.moo.experiment.ExperimentResult;
 import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;

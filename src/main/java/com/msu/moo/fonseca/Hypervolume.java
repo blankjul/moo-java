@@ -23,7 +23,7 @@ public class Hypervolume {
 
 	public Double calculate(NonDominatedSolutionSet set, List<Double> referencePoint) {
 
-		if (!Util.doesFileExist(pathToHV)) throw new RuntimeException("Fonseca's Implementation not found!");
+		if (!Util.doesFileExist(pathToHV)) throw new RuntimeException("Fonseca's Hypverolume Implementation not found!");
 		
 		Double hv = null;
 

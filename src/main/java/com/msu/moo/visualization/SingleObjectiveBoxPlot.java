@@ -3,10 +3,10 @@ package com.msu.moo.visualization;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.AVisualize;
-import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.util.events.IListener;
 import com.msu.util.events.impl.EventDispatcher;
