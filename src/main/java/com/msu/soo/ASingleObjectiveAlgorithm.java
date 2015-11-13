@@ -20,7 +20,7 @@ public abstract class ASingleObjectiveAlgorithm extends AbstractAlgorithm {
 		
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		set.add(s);
-		return set.removeSolutionWithConstraintViolations();
+		return set;
 	}
 
 

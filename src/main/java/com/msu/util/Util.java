@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -96,7 +97,23 @@ public class Util {
         	throw new RuntimeException(String.format("Error while cloning object %s.", obj));
         }
     }
+	
+	public static <T> List<T> createListWithDefault(int n, T t) {
+		List<T> l = new ArrayList<>();
+		for (int i = 0; i < n; i++) {
+			l.add(t);
+		}
+		return l;
+	}
 
+
+	public static List<Integer> createIndex(int n) {
+		List<Integer> l = new ArrayList<>();
+		for (int i = 0; i < n; i++) {
+			l.add(i);
+		}
+		return l;
+	}
 
 
 

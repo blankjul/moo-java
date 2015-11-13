@@ -20,6 +20,9 @@ public class MOEADBuilder {
 	
 	protected int T = 10;
 
+	protected double delta = 1.0;
+	
+	protected int n_r = T;
 
 	
 	public MOEADBuilder setPopulationSize(int populationSize) {
@@ -44,8 +47,20 @@ public class MOEADBuilder {
 	
 	public MOEADBuilder setT(int T) {
 		this.T = T;
+		this.n_r = T;
 		return this;
 	}
+	
+	public MOEADBuilder setN_r(int value) {
+		this.n_r = value;
+		return this;
+	}
+	
+	public MOEADBuilder setDelta(double delta) {
+		this.delta = delta;
+		return this;
+	}
+
 
 	public MOEADBuilder setFactory(IVariableFactory factory) {
 		this.factory = factory;
@@ -67,6 +82,8 @@ public class MOEADBuilder {
 		moead.setCrossover(crossover);
 		moead.setMutation(mutation);
 		moead.T = T;
+		moead.delta = delta;
+		moead.n_r = n_r;
 		return moead;
 	}
 

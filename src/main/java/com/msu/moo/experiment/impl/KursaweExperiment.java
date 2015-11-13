@@ -25,7 +25,7 @@ public class KursaweExperiment extends AExperiment {
 		
 		MOEADBuilder builder = new MOEADBuilder();
 		builder.setPopulationSize(50);
-		builder.setFactory(fac).setT(10).setCrossover(new SimulatedBinaryCrossover(new double[] { -5, 5 })).setMutation(new RealMutation(new Double[] { -5.0, 5.0 }, 20));
+		builder.setFactory(fac).setT(40).setN_r(40).setDelta(0.3).setCrossover(new SimulatedBinaryCrossover(new double[] { -5, 5 })).setMutation(new RealMutation(new Double[] { -5.0, 5.0 }, 20));
 		algorithms.add(builder.create());
 		
 		NSGAIIBuilder builder2 = new NSGAIIBuilder();

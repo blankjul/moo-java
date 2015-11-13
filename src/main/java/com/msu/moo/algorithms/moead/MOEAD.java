@@ -1,7 +1,6 @@
 package com.msu.moo.algorithms.moead;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -15,19 +14,41 @@ import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.util.Random;
 import com.msu.util.Range;
+import com.msu.util.Util;
 
+
+/**
+ * 
+ *	MOEA/D with some improvements:
+ *  - normalize the values before using decomposition metric
+ *  - select only with probability delta from neighborhood
+ *  - add maximal bound for improved solutions n_r
+ *
+ *
+ */
 public class MOEAD extends EvolutionaryAlgorithms {
 
-	// defines the neighborhood of each weight
+	//! defines the neighborhood of each weight
 	protected int T;
+	
+	//! probability to select a solution from the neighborhood
+	protected double delta = 1.0;
+	
+	//! maximal number of solutions that could be replaced
+	protected int n_r;
+	
+	protected MOEAD() {
+	}
 
 	@Override
 	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator eval, Random rand) {
 
+		
 		// archive for storing the non dominated front
 		NonDominatedSolutionSet archive = new NonDominatedSolutionSet();
 		Range<Double> range = new Range<Double>();
 		List<Double> fitness = new ArrayList<>();
+		
 
 		// initialize the pool of individuals
 		population = new SolutionSet(populationSize);
@@ -51,9 +72,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 
 		// create reference point which is when the population is normalized
 		// [0,0,..0]
-		Double[] tmp = new Double[problem.getNumberOfObjectives()];
-		Arrays.fill(tmp, 0d);
-		List<Double> z = Arrays.asList(tmp);
+		List<Double> z = Util.createListWithDefault(problem.getNumberOfObjectives(), 0d);
 
 		// calculate all fitness values of the population
 		for (int i = 0; i < populationSize; i++) {
@@ -65,13 +84,23 @@ public class MOEAD extends EvolutionaryAlgorithms {
 		while (eval.hasNext()) {
 
 			for (int i = 0; i < populationSize; i++) {
-
+				
 				// all nearest weights which are updated
 				List<Integer> nearest = nearestWeights.get(i);
+				
 
+				Solution p1 = null;
+				Solution p2 = null;
 				// create the child from nearest weights selected individual
-				Solution p1 = population.get(rand.select(nearest));
-				Solution p2 = population.get(rand.select(nearest));
+				if (rand.nextDouble() < delta) {
+					p1 = population.get(rand.select(nearest));
+					p2 = population.get(rand.select(nearest));
+				// create offspring from the whole population
+				} else {
+					p1 = rand.select(population);
+					p2 = rand.select(population);
+				}
+				
 				List<IVariable> offsprings = crossover.crossover(p1.getVariable(), p2.getVariable(), rand);
 
 				// for each offspring produced by crossover
@@ -91,16 +120,23 @@ public class MOEAD extends EvolutionaryAlgorithms {
 							fitness.set(k, MOEADUtil.calcTchebichew(population.get(k).normalize(range.get()).getObjective(), weights.get(k),z));
 						}
 					}
+					
+					// always randomize order of neighborhood -> n_r is applied
+					rand.shuffle(nearest);
+					int numOfImproved = 0;
 
 					// for each weight neighbor index
 					for (int j : nearest) {
-
+						
+						//! if number of improved expired -> break
+						if (numOfImproved > n_r) break;
+						
 						Solution neighbor = population.get(j);
 
 						// if the new solution violates the constraints less
 						if (s.getSumOfConstraintViolation() < neighbor.getSumOfConstraintViolation()) {
 							population.set(j, s);
-
+							numOfImproved++;
 							// equal constraint violation
 						} else if (s.getSumOfConstraintViolation().equals(neighbor.getSumOfConstraintViolation())) {
 
@@ -114,10 +150,10 @@ public class MOEAD extends EvolutionaryAlgorithms {
 							if (solutionFitness < fitness.get(j)) {
 								population.set(j, s);
 								fitness.set(j, solutionFitness);
+								numOfImproved++;
 							}
 							
 						}
-
 					}
 				}
 			}

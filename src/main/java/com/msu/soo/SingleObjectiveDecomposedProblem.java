@@ -21,14 +21,6 @@ public class SingleObjectiveDecomposedProblem<V extends IVariable> extends ASing
 	protected Range<Double> range = null;
 
 	
-	public SingleObjectiveDecomposedProblem() {
-		super();
-	}
-	
-	public SingleObjectiveDecomposedProblem(Range<Double> range) {
-		this.range = range;
-	}
-
 
 	public SingleObjectiveDecomposedProblem(IProblem problem, List<Double> weights) {
 		if (problem.getNumberOfObjectives() != weights.size())
@@ -39,6 +31,13 @@ public class SingleObjectiveDecomposedProblem<V extends IVariable> extends ASing
 		this.weights = weights;
 		this.name = problem.toString();
 	}
+	
+	public SingleObjectiveDecomposedProblem(IProblem problem, List<Double> weights, Range<Double> range) {
+		this(problem, weights);
+		this.range = range;
+	}
+	
+	
 
 	@Override
 	protected void evaluate_(V var, List<Double> objectives, List<Double> constraintViolations) {

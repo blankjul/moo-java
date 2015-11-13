@@ -12,6 +12,17 @@ public class Range<T extends Comparable<T>> {
 	
 	protected List<Pair<T,T>> ranges = null;
 	
+	
+	public Range() {
+		super();
+	}
+
+	public Range(int n, T min, T max) {
+		for (int i = 0; i < n; i++) {
+			ranges.add(Pair.create(min, max));
+		}
+	}
+
 	public boolean add(List<T> l) {
 		
 		boolean change = false;
@@ -53,6 +64,14 @@ public class Range<T extends Comparable<T>> {
 	
 	public int size() {
 		return ranges.size();
+	}
+	
+	public void setMinimum(int n, T value) {
+		ranges.get(n).first = value;
+	}
+	
+	public void setMaximum(int n, T value) {
+		ranges.get(n).second = value;
 	}
 	
 	
