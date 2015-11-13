@@ -1,4 +1,4 @@
-package com.msu.model;
+package com.msu.soo;
 
 import java.util.List;
 
@@ -8,31 +8,43 @@ import com.msu.moo.algorithms.moead.MOEADUtil;
 import com.msu.moo.model.solution.Solution;
 import com.msu.util.Range;
 
-public class SingleObjectiveDecomposedProblem<V extends IVariable> extends AProblem<V>{
-	
+public class SingleObjectiveDecomposedProblem<V extends IVariable> extends ASingleObjectiveProblem<V> {
+
+	// ! the problem it self which is decomposed
 	protected IProblem problem = null;
-	
+
+	// ! the weights to decompose the problem
 	protected List<Double> weights = null;
-	
+
+	// ! range that is used for normalizing before
+	// ! the objectives are weighted
 	protected Range<Double> range = null;
 
+	
+	public SingleObjectiveDecomposedProblem() {
+		super();
+	}
+	
+	public SingleObjectiveDecomposedProblem(Range<Double> range) {
+		this.range = range;
+	}
+
+
 	public SingleObjectiveDecomposedProblem(IProblem problem, List<Double> weights) {
-		if (problem.getNumberOfObjectives() != weights.size()) 
-			throw new RuntimeException(String.format("For decomposed problems the number of objectives %s should be equal to the number of weights %s.", problem.getNumberOfObjectives(), weights.size()));
+		if (problem.getNumberOfObjectives() != weights.size())
+			throw new RuntimeException(String.format(
+					"For decomposed problems the number of objectives %s should be equal to the number of weights %s.",
+					problem.getNumberOfObjectives(), weights.size()));
 		this.problem = problem;
 		this.weights = weights;
 		this.name = problem.toString();
 	}
 
 	@Override
-	public int getNumberOfObjectives() {
-		return 1;
-	}
-
-	@Override
 	protected void evaluate_(V var, List<Double> objectives, List<Double> constraintViolations) {
 		Solution s = problem.evaluate(var);
-		if (range != null) s = s.normalize(range.get());
+		if (range != null)
+			s = s.normalize(range.get());
 		objectives.add(MOEADUtil.calcWeightedSum(s.getObjective(), weights));
 		constraintViolations.addAll(s.getConstraintViolations());
 	}
@@ -42,26 +54,14 @@ public class SingleObjectiveDecomposedProblem<V extends IVariable> extends AProb
 		return problem.getNumberOfConstraints();
 	}
 
-	public IProblem getProblem() {
+	public IProblem getMultiObjectiveProblem() {
 		return problem;
 	}
 
 	public List<Double> getWeights() {
 		return weights;
 	}
-
-	public Range<Double> getRange() {
-		return range;
-	}
-
-	public void setRange(Range<Double> range) {
-		this.range = range;
-	}
 	
 	
-    
-    
-    
-    
 
 }
