@@ -7,13 +7,14 @@ import java.util.List;
 
 import org.junit.Test;
 
+import com.msu.Configuration;
 import com.msu.moo.mocks.MockSolution;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public class EmpiricalAttainmentFunctionTest {
 
 	
-	private EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction("vendor/aft-0.95/eaf");
+	private EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction(Configuration.PATH_TO_EAF);
 	
 	@Test
 	public void testHVNoRef() {

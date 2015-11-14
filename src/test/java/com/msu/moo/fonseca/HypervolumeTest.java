@@ -8,13 +8,14 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import com.msu.Configuration;
 import com.msu.moo.mocks.MockSolution;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public class HypervolumeTest {
 
 	
-	private Hypervolume hv = new Hypervolume("vendor/hv-1.3-src/hv");
+	private Hypervolume hv = new Hypervolume(Configuration.PATH_TO_HYPERVOLUME);
 	
 	@Test
 	public void testHVNoRef() {
