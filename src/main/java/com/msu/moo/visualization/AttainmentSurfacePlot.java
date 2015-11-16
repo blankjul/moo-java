@@ -16,9 +16,15 @@ import com.msu.util.plots.ScatterPlot;
 
 public class AttainmentSurfacePlot extends AVisualize implements IListener<ProblemFinishedEvent>{
 
+	protected boolean showTrueFront = false;
 	
 	public AttainmentSurfacePlot() {
 		EventDispatcher.getInstance().register(ProblemFinishedEvent.class, this);
+	}
+	
+	public AttainmentSurfacePlot(boolean showTrueFront) {
+		this();
+		this.showTrueFront = showTrueFront;
 	}
 
 
@@ -36,6 +42,7 @@ public class AttainmentSurfacePlot extends AVisualize implements IListener<Probl
 			experiment.getResult().add(problem, algorithm, median, "median");
 			sp.add(median, algorithm.toString());
 		}
+		if (showTrueFront) sp.add(problem.getOptimum(), "True Front");
 		showOrPrint(sp, String.format("%s-eaf", problem));
 		
 	}

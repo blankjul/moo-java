@@ -34,7 +34,7 @@ public class Evaluator implements IEvaluator{
 
 	public Solution evaluate(IProblem problem, IVariable variable) {
 		
-		if (evaluations >= (int) (maxEvaluations * 1.05)) 
+		if (evaluations >= (int) (maxEvaluations * 1.20)) 
 			throw new EvaluationException("Evaluations expired. Check hasNext() first.");
 		
 		

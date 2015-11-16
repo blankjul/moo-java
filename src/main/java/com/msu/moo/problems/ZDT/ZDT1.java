@@ -1,14 +1,14 @@
-package com.msu.moo.problems;
+package com.msu.moo.problems.ZDT;
 
 import java.util.List;
 
-import com.msu.model.AProblem;
 import com.msu.model.variables.DoubleListVariable;
+import com.msu.util.Range;
 
 /**
  * Class representing problem ZDT1
  */
-public class ZDT1 extends AProblem<DoubleListVariable> {
+public class ZDT1 extends AbstractZDT {
 
 	/**
 	 * Returns the value of the ZDT1 function G.
@@ -40,13 +40,10 @@ public class ZDT1 extends AProblem<DoubleListVariable> {
 		return h;
 	} 
 
-	@Override
-	public int getNumberOfObjectives() {
-		return 2;
-	}
 
+	
 	@Override
-	protected void evaluate_(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
+	protected void evaluate__(DoubleListVariable var, List<Double> objectives) {
 		double[] f = new double[getNumberOfObjectives()];
 		f[0] = var.get().get(0);
 		double g = this.evalG(var.get());
@@ -56,4 +53,14 @@ public class ZDT1 extends AProblem<DoubleListVariable> {
 		objectives.add(f[0]);
 		objectives.add(f[1]);
 	}
+	
+
+
+	@Override
+	public Range<Double> getVariableConstraints() {
+		return new Range<Double>(30, 0d, 1d);
+	}
+
+
+	
 }

@@ -16,4 +16,7 @@ public class DoubleListVariable extends ListVariable<Double>{
 		return new DoubleListVariable(new ArrayList<>(obj));
 	}
 	
+	
+	
+	
 }

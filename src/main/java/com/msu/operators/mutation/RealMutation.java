@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.msu.operators.AbstractMutation;
 import com.msu.util.Random;
+import com.msu.util.Range;
 
 public class RealMutation extends AbstractMutation<List<Double>> {
 
@@ -11,7 +12,7 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	protected Double mProbability = null;
 
 	// ! range of the results
-	protected Double[] range = new Double[] { Double.MIN_VALUE, Double.MAX_VALUE };
+	protected Range<Double> range = null;
 
 	//! distribution index
 	protected double eta_m = 20.0;
@@ -24,12 +25,11 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 		super();
 	}
 
-	public RealMutation(Double[] range) {
-		super();
+	public RealMutation(Range<Double> range) {
 		this.range = range;
 	}
 	
-	public RealMutation(Double[] range, double eta_m) {
+	public RealMutation(Range<Double> range, double eta_m) {
 		this(range);
 		this.eta_m = eta_m;
 	}
@@ -56,18 +56,17 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 
 	@Override
 	protected void mutate_(List<Double> b, Random rand) {
+		
+		if (range == null) range = new Range<Double>(b.size(), Double.MIN_VALUE, Double.MAX_VALUE);
+		
 		mProbability = 1 / (double) b.size();
 		for (int j = 0; j < b.size(); j++) {
 			if (rand.nextDouble() < mProbability) {
 				double u = rand.nextDouble();
-				b.set(j, sbxMutation(b.get(j), u, range[0], range[1]));
+				b.set(j, sbxMutation(b.get(j), u, range.getMinimum(j), range.getMaximum(j)));
 			}
 		}
 	}
-	
 
-	public void setRange(Double[] range) {
-		this.range = range;
-	}
 
 }

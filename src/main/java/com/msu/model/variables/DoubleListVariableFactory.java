@@ -6,34 +6,28 @@ import java.util.List;
 import com.msu.interfaces.IProblem;
 import com.msu.model.AVariableFactory;
 import com.msu.util.Random;
+import com.msu.util.Range;
 
 public class DoubleListVariableFactory extends AVariableFactory {
 	
 	//! length of the vector
-	protected int length;
-	
-	//! length of the vector
-	protected double[] range = new double[]{ Double.MIN_VALUE, Double.MAX_VALUE};
+	protected Range<Double> range = null;
 		
 
-	public DoubleListVariableFactory(int length) {
-		super();
-		this.length = length;
+	public DoubleListVariableFactory(Range<Double> range) {
+		this.range = range;
 	}
 	
-	
 	public DoubleListVariableFactory(int length, double[] range) {
-		super();
-		this.length = length;
-		this.range = range;
+		this.range = new Range<Double>(length, range[0], range[1]);
 	}
 
 
 	@Override
 	public DoubleListVariable next(IProblem problem, Random rand) {
 		List<Double> l = new ArrayList<>();
-		for (int i = 0; i < length; i++) {
-			l.add(rand.nextDouble(range[0], range[1]));
+		for (int i = 0; i < range.size(); i++) {
+			l.add(rand.nextDouble(range.getMinimum(i), range.getMaximum(i)));
 		}
 		return new DoubleListVariable(l);
 	}

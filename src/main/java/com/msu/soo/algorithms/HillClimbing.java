@@ -51,7 +51,6 @@ public class HillClimbing extends ASingleObjectiveAlgorithm {
 					s = next;
 				}
 			}
-			//System.out.println(s);
 		}
 		
 

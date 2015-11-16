@@ -24,5 +24,13 @@ public class ListVariable<T> extends Variable<List<T>>{
 		return new ListVariable<>(new ArrayList<>(obj));
 	}
 	
+	public T get(int i) {
+		return obj.get(i);
+	}
+	
 
+	public int size() {
+		return obj.size();
+	}
+	
 }

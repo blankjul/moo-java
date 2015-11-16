@@ -18,6 +18,7 @@ public class Range<T extends Comparable<T>> {
 	}
 
 	public Range(int n, T min, T max) {
+		ranges = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			ranges.add(Pair.create(min, max));
 		}
@@ -66,12 +67,20 @@ public class Range<T extends Comparable<T>> {
 		return ranges.size();
 	}
 	
-	public void setMinimum(int n, T value) {
+	public Range<T> setMinimum(int n, T value) {
 		ranges.get(n).first = value;
+		return this;
 	}
 	
-	public void setMaximum(int n, T value) {
+	public Range<T> setMaximum(int n, T value) {
 		ranges.get(n).second = value;
+		return this;
+	}
+	
+	public Range<T> set(int n, T min, T max) {
+		setMinimum(n, min);
+		setMaximum(n, max);
+		return this;
 	}
 	
 	

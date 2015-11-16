@@ -15,24 +15,26 @@ import com.msu.moo.visualization.HypervolumeBoxPlot;
 import com.msu.moo.visualization.ObjectiveSpacePlot;
 import com.msu.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.operators.mutation.RealMutation;
+import com.msu.util.Range;
 
 public class KursaweExperiment extends AExperiment {
 
 	@Override
 	protected void setAlgorithms(List<IAlgorithm> algorithms) {
 		
-		DoubleListVariableFactory fac = new DoubleListVariableFactory(3, new double[] { -5, 5 });
+		Range<Double> range = new Range<>(3, -5d, 5d);
+		
+		DoubleListVariableFactory fac = new DoubleListVariableFactory(range);
 		
 		MOEADBuilder builder = new MOEADBuilder();
 		builder.setPopulationSize(50);
-		builder.setFactory(fac).setT(40).setN_r(40).setDelta(0.3).setCrossover(new SimulatedBinaryCrossover(new double[] { -5, 5 })).setMutation(new RealMutation(new Double[] { -5.0, 5.0 }, 20));
+		builder.setFactory(fac).setT(40).setN_r(40).setDelta(0.3).setCrossover(new SimulatedBinaryCrossover(range)).setMutation(new RealMutation(range));
 		algorithms.add(builder.create());
 		
 		NSGAIIBuilder builder2 = new NSGAIIBuilder();
 		builder2.setPopulationSize(50);
-		builder2.setFactory(fac).setCrossover(new SimulatedBinaryCrossover(new double[] { -5, 5 })).setMutation(new RealMutation(new Double[] { -5.0, 5.0 }));
+		builder2.setFactory(fac).setCrossover(new SimulatedBinaryCrossover(range)).setMutation(new RealMutation(range));
 		algorithms.add(builder2.create());
-		
 		
 		algorithms.add(new RandomSearch(fac));
 		

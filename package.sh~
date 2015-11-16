@@ -2,6 +2,8 @@ mvn compile assembly:single
 mvn dependency:copy-dependencies
 mvn package
 
+
+
 rm bin -R
 mkdir bin
 cp target/moo-0.1.jar bin

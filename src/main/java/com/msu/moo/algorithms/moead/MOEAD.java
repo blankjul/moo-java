@@ -112,7 +112,10 @@ public class MOEAD extends EvolutionaryAlgorithms {
 
 					// evaluate and update normalization range
 					Solution s = eval.evaluate(problem, off);
-					boolean hasToBeNormalized = range.add(s.getObjective());
+					
+					// normalize if feasible and new range
+					boolean hasToBeNormalized = false;
+					if (!s.hasConstrainViolations()) hasToBeNormalized = range.add(s.getObjective());
 					
 					// normalize the population according to the new range
 					if (hasToBeNormalized) {

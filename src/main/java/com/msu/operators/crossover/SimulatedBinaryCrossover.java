@@ -7,6 +7,7 @@ import java.util.List;
 import com.msu.operators.AbstractListCrossover;
 import com.msu.util.Pair;
 import com.msu.util.Random;
+import com.msu.util.Range;
 
 public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 
@@ -14,7 +15,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	protected double EPS = 1.0e-30;
 
 	// boundaries for the values
-	protected double[] range = new double[] { Double.MIN_VALUE, Double.MAX_VALUE };
+	protected Range<Double> range = null;
 
 	//! distribution index
 	protected double eta_c = 20.0;
@@ -27,7 +28,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 		super();
 	}
 	
-	public SimulatedBinaryCrossover(double[] range) {
+	public SimulatedBinaryCrossover(Range<Double> range) {
 		super();
 		this.range = range;
 	}
@@ -98,6 +99,8 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 
 		List<Double> child1 = new ArrayList<Double>(parent1);
 		List<Double> child2 = new ArrayList<Double>(parent2);
+		
+		if (range == null) range = new Range<Double>(parent1.size(), Double.MIN_VALUE, Double.MAX_VALUE);
 
 		// for each double value in the list
 		for (int i = 0; i < parent1.size(); i++) {
@@ -113,7 +116,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 				if (Math.abs(p1 - p2) <= EPS) continue;
 
 				// perform sbx for two double variables
-				Pair<Double, Double> children = SBX(p1, p2, range[0], range[1], rand);
+				Pair<Double, Double> children = SBX(p1, p2, range.getMinimum(i), range.getMaximum(i), rand);
 
 				// set the offspring randomly to the children vectors
 				if (rand.nextDouble() <= 0.5) {
