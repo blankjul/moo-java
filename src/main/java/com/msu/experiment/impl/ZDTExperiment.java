@@ -3,12 +3,15 @@ package com.msu.experiment.impl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.variables.DoubleListVariableFactory;
+import com.msu.moo.algorithms.DecomposedAlgorithm;
+import com.msu.moo.algorithms.moead.MOEADBuilder;
 import com.msu.moo.algorithms.nsgaII.NSGAIIBuilder;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
@@ -17,7 +20,9 @@ import com.msu.moo.problems.ZDT.AbstractZDT;
 import com.msu.moo.visualization.AttainmentSurfacePlot;
 import com.msu.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.operators.mutation.RealMutation;
+import com.msu.soo.algorithms.HillClimbing;
 import com.msu.util.BashExecutor;
+import com.msu.util.GenericBuilder;
 import com.msu.util.ObjectFactory;
 
 public class ZDTExperiment extends AExperiment {
@@ -27,7 +32,7 @@ public class ZDTExperiment extends AExperiment {
 			ObjectFactory.create(AbstractZDT.class, "com.msu.moo.problems.ZDT.ZDT1");
 
 	
-	final public boolean CALC_ORIGINAL_NSGAII_FRONT = true;
+	final public boolean SHOW_ORIGINAL_NSGAII_FRONT = true;
 	
 	
 	@Override
@@ -39,12 +44,27 @@ public class ZDTExperiment extends AExperiment {
 		builder.setFactory(fac).setCrossover(new SimulatedBinaryCrossover(problem.getVariableConstraints()))
 				.setMutation(new RealMutation(problem.getVariableConstraints()));
 		algorithms.add(builder.create());
+		
+		
+		MOEADBuilder builder2 = new MOEADBuilder();
+		builder2.setPopulationSize(100);
+		builder2.setDelta(20);
+		builder2.setFactory(fac).setCrossover(new SimulatedBinaryCrossover(problem.getVariableConstraints()))
+				.setMutation(new RealMutation(problem.getVariableConstraints()));
+		algorithms.add(builder2.create());
+		
+		
+		GenericBuilder<DecomposedAlgorithm> b = new GenericBuilder<DecomposedAlgorithm>(new DecomposedAlgorithm());
+		b.set("numOfRuns", 100);
+		b.set("algorithms",Arrays.asList(new HillClimbing(fac, new RealMutation(problem.getVariableConstraints()))));
+		algorithms.add(b.build());
+		
 	}
 	
 
 	@Override
 	protected void initialize() {
-		new AttainmentSurfacePlot(CALC_ORIGINAL_NSGAII_FRONT).setVisibility(true);
+		new AttainmentSurfacePlot(SHOW_ORIGINAL_NSGAII_FRONT).setVisibility(true);
 	}
 
 	@Override

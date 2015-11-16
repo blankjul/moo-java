@@ -24,11 +24,11 @@ public class MOEADUtilTest {
 	public void testUniformWeights() {
 		List<List<Double>> weights = MOEADUtil.getUniformDistributedWeights(new Random(), 5, 2);
 		assertEquals(5, weights.size());
-		assertEquals(Arrays.asList(0.0, 1.0), weights.get(0));
-		assertEquals(Arrays.asList(0.25, 0.75), weights.get(1));
+		assertEquals(Arrays.asList(1.0, 0.0), weights.get(0));
+		assertEquals(Arrays.asList(0.75, 0.25), weights.get(1));
 		assertEquals(Arrays.asList(0.5, 0.5), weights.get(2));
-		assertEquals(Arrays.asList(0.75, 0.25), weights.get(3));
-		assertEquals(Arrays.asList(1.0, 0.0), weights.get(4));
+		assertEquals(Arrays.asList(0.25, 0.75), weights.get(3));
+		assertEquals(Arrays.asList(0.0, 1.0), weights.get(4));
 	}
 
 	@Test

@@ -13,7 +13,7 @@ import com.msu.util.ObjectFactory;
  * maxEvaluations and the random seed has to be set.
  * 
  * EXERIMENTS AVAILABLE
- * KursaweExperiment ZDT1Experiment
+ * KursaweExperiment ZDTExperiment
  * 
  */
 public class ExperimentExecutor {

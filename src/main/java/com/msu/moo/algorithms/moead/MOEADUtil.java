@@ -13,15 +13,15 @@ public class MOEADUtil {
 	public static List<List<Double>> getUniformDistributedWeights(Random r, int n, int length) {
 		if (length != 2) throw new RuntimeException("This implemenation works so far only with 2 objectives!");
 		List<List<Double>> result = new ArrayList<>(n);
-		result.add(Arrays.asList(0.0, 1.0));
+		result.add(Arrays.asList(1.0, 0.0));
 		final double step = 1.0 / (double) (n-1);
 		
 		for (int i = 1; i < n-1; i++) {
 			double value = i * step;
-			result.add(Arrays.asList(value, 1.0 - value));
+			result.add(Arrays.asList(1.0 - value , value));
 		}
 		
-		result.add(Arrays.asList(1.0, 0.0));
+		result.add(Arrays.asList(0.0, 1.0));
 		return result;
 	}
 	

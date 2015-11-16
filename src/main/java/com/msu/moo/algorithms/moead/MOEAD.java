@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.gs.collections.impl.utility.ListIterate;
 import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
@@ -75,6 +76,8 @@ public class MOEAD extends EvolutionaryAlgorithms {
 		List<Double> z = Util.createListWithDefault(problem.getNumberOfObjectives(), 0d);
 
 		// calculate all fitness values of the population
+		
+		
 		for (int i = 0; i < populationSize; i++) {
 			double fitnessValue = MOEADUtil.calcTchebichew(population.get(i).normalize(range.get()).getObjective(),
 					weights.get(i), z);
@@ -163,10 +166,9 @@ public class MOEAD extends EvolutionaryAlgorithms {
 
 		}
 
-		// create non dominated set from population
-		for (int k = 0; k < populationSize; k++) {
-			archive.add(population.get(k));
-		}
+		
+		// create the final archive
+		ListIterate.forEach(population, p -> archive.add(p));
 
 		return archive;
 	}
