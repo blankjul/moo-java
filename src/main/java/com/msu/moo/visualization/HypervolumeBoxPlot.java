@@ -65,8 +65,6 @@ public class HypervolumeBoxPlot extends AVisualize implements IListener<ProblemF
 		AExperiment experiment = event.getExperiment();
 		ExperimentResult result = experiment.getResult();
 		
-		NonDominatedSolutionSet trueFront = problem.getOptimum();
-
 		// plot the hypervolume
 		Hypervolume calcHV = new Hypervolume(Configuration.PATH_TO_HYPERVOLUME);
 
@@ -75,11 +73,7 @@ public class HypervolumeBoxPlot extends AVisualize implements IListener<ProblemF
 		for (int i = 0; i < problem.getNumberOfObjectives(); i++)
 			referencePoint.add(1.0001);
 
-		// estimate true front if not given and calculate the range for
-		// normalization
-		if (trueFront == null)
-			trueFront = AExperiment.estimateTrueFront(result.get().values());
-		Range<Double> range = trueFront.getRange();
+		Range<Double> range = problem.getOptimum().getRange();
 
 		BoxPlot bp = new BoxPlot(problem.toString());
 		for (IAlgorithm algorithm : experiment.getAlgorithms()) {

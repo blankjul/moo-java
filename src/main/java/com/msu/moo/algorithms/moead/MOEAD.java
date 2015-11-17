@@ -38,6 +38,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 	//! maximal number of solutions that could be replaced
 	protected int n_r;
 	
+	
 	protected MOEAD() {
 	}
 
@@ -117,8 +118,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 					Solution s = eval.evaluate(problem, off);
 					
 					// normalize if feasible and new range
-					boolean hasToBeNormalized = false;
-					if (!s.hasConstrainViolations()) hasToBeNormalized = range.add(s.getObjective());
+					boolean hasToBeNormalized = range.add(s.getObjective());
 					
 					// normalize the population according to the new range
 					if (hasToBeNormalized) {
@@ -158,7 +158,6 @@ public class MOEAD extends EvolutionaryAlgorithms {
 								fitness.set(j, solutionFitness);
 								numOfImproved++;
 							}
-							
 						}
 					}
 				}

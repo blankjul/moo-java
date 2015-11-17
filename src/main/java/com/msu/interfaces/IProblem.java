@@ -46,5 +46,10 @@ public interface IProblem {
 	public void setName(String name);
 	
 	
+	/**
+	 * Set a NonDominatedSolutionSet.
+	 */
+	public void setOptimum(NonDominatedSolutionSet set);
+	
 	
 }

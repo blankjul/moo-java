@@ -3,17 +3,13 @@ package com.msu.experiment.impl;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import com.msu.builder.Builder;
+import com.msu.builder.NSGAIIBuilder;
 import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.variables.DoubleListVariableFactory;
-import com.msu.moo.algorithms.DecomposedAlgorithm;
-import com.msu.moo.algorithms.moead.MOEADBuilder;
-import com.msu.moo.algorithms.nsgaII.NSGAIIBuilder;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.problems.DoubleVariableListProblem;
@@ -21,7 +17,6 @@ import com.msu.moo.problems.ZDT.AbstractZDT;
 import com.msu.moo.visualization.AttainmentSurfacePlot;
 import com.msu.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.operators.mutation.RealMutation;
-import com.msu.soo.algorithms.HillClimbing;
 import com.msu.util.BashExecutor;
 import com.msu.util.ObjectFactory;
 
@@ -39,13 +34,17 @@ public class ZDTExperiment extends AExperiment {
 	protected void setAlgorithms(List<IAlgorithm> algorithms) {
 
 		DoubleListVariableFactory fac = new DoubleListVariableFactory(problem.getVariableConstraints());
-		NSGAIIBuilder builder = new NSGAIIBuilder();
-		builder.setPopulationSize(100);
-		builder.setFactory(fac).setCrossover(new SimulatedBinaryCrossover(problem.getVariableConstraints()))
-				.setMutation(new RealMutation(problem.getVariableConstraints()));
-		algorithms.add(builder.create());
+		
+		NSGAIIBuilder nsgaII = new NSGAIIBuilder();
+		nsgaII
+				.set("populationSize", 100)
+				.set("factory", fac)
+				.set("crossover", new SimulatedBinaryCrossover(problem.getVariableConstraints()))
+				.set("mutation", new RealMutation(problem.getVariableConstraints()));
+		algorithms.add(nsgaII.build());
 		
 		
+		/*	
 		MOEADBuilder builder2 = new MOEADBuilder();
 		builder2.setPopulationSize(100);
 		builder2.setDelta(20);
@@ -54,11 +53,11 @@ public class ZDTExperiment extends AExperiment {
 		algorithms.add(builder2.create());
 		
 		
-		Builder<DecomposedAlgorithm> b = new Builder<DecomposedAlgorithm>(new DecomposedAlgorithm());
+	    Builder<DecomposedAlgorithm> b = new Builder<DecomposedAlgorithm>(new DecomposedAlgorithm());
 		b.set("numOfWeights", 100);
 		b.set("algorithms",Arrays.asList(new HillClimbing(fac, new RealMutation(problem.getVariableConstraints()))));
 		algorithms.add(b.build());
-		
+		*/
 	}
 	
 

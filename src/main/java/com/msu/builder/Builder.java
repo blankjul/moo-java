@@ -38,6 +38,7 @@ public class Builder<T> {
 	public Builder(T obj) {
 		this();
 		this.obj = obj;
+		for(Entry<String, Object> entry : defaultFields.entrySet()) set(entry.getKey(), entry.getValue());
 	}
 	
 	
@@ -51,6 +52,7 @@ public class Builder<T> {
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		for(Entry<String, Object> entry : defaultFields.entrySet()) set(entry.getKey(), entry.getValue());
 	}
 	
 
@@ -77,7 +79,6 @@ public class Builder<T> {
 
 
     public T build(){
-    	for(Entry<String, Object> entry : defaultFields.entrySet()) set(entry.getKey(), entry.getValue());
     	for(String s : requiredFields) {
     		if (!attributes.contains(s)) throw new BuilderException(String.format("Required field '%s' for building %s not set. \nRequired are: %s", s, obj, Arrays.toString(requiredFields.toArray())));
     	}

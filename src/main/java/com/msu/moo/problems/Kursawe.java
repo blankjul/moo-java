@@ -40,8 +40,8 @@ public class Kursawe extends DoubleVariableListProblem {
 	public int getNumberOfObjectives() {
 		return 2;
 	}
-
 	
+
 	@Override
 	public Range<Double> getVariableConstraints() {
 		return new Range<Double>(3, -5d, 5d);

@@ -82,7 +82,7 @@ public abstract class AExperiment {
 				IProblem problem = callback.getProblem();
 				IAlgorithm algorithm = callback.getAlgorithm();
 				NonDominatedSolutionSet set = callback.set;
-
+				
 				result.add(problem, algorithm, set);
 
 				// always notify the RunFinishedExperiment
@@ -97,6 +97,7 @@ public abstract class AExperiment {
 						NonDominatedSolutionSet trueFront = callback.getProblem().getOptimum();
 						if (trueFront == null) {
 							trueFront = estimateTrueFront(result.get(callback.getProblem(), getAlgorithms()));
+							problem.setOptimum(trueFront);
 						}
 						EventDispatcher.getInstance().notify(new ProblemFinishedEvent(this, problem, iterations, trueFront));
 					}
