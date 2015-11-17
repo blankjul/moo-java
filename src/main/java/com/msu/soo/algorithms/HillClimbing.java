@@ -27,11 +27,14 @@ public class HillClimbing extends ASingleObjectiveAlgorithm {
 	}
 
 	public Solution initialize(IProblem problem, IEvaluator eval, Random rand) {
+		Solution s = null;
 		if (var == null) {
-			return eval.evaluate(problem, factory.next(problem, rand));
+			s =  eval.evaluate(problem, factory.next(problem, rand));
 		} else {
-			return eval.evaluate(problem, var);
+			s =  eval.evaluate(problem, var);
 		}
+		var = null;
+		return s;
 	}
 
 	@Override

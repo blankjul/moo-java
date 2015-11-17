@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -115,6 +116,22 @@ public class Util {
 		return l;
 	}
 
+	/**
+	 * Get all fields through reflection. also of superclass
+	 */
+    public static Field getField(String fieldName, Class<?> clazz) {
+        Class<?> tmpClass = clazz;
+        do {
+            try {
+                Field f = tmpClass.getDeclaredField(fieldName);
+                return f;
+            } catch (NoSuchFieldException e) {
+                tmpClass = tmpClass.getSuperclass();
+            }
+        } while (tmpClass != null);
 
+        throw new RuntimeException("Field '" + fieldName
+                + "' not found on class " + clazz);
+    }
 
 }

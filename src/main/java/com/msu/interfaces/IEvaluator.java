@@ -1,5 +1,6 @@
 package com.msu.interfaces;
 
+import com.msu.model.Evaluator;
 import com.msu.moo.model.solution.Solution;
 
 public interface IEvaluator {
@@ -24,5 +25,10 @@ public interface IEvaluator {
 	 */
 	public Integer getMaxEvaluations();
 	
+	/**
+	 * Create child evaluator that counts also this one.
+	 * @param maxEvaluations
+	 */
+	public Evaluator createChildEvaluator(int maxEvaluations);
 
 }

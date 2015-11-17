@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.msu.builder.Builder;
 import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
@@ -22,7 +23,6 @@ import com.msu.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.operators.mutation.RealMutation;
 import com.msu.soo.algorithms.HillClimbing;
 import com.msu.util.BashExecutor;
-import com.msu.util.GenericBuilder;
 import com.msu.util.ObjectFactory;
 
 public class ZDTExperiment extends AExperiment {
@@ -54,8 +54,8 @@ public class ZDTExperiment extends AExperiment {
 		algorithms.add(builder2.create());
 		
 		
-		GenericBuilder<DecomposedAlgorithm> b = new GenericBuilder<DecomposedAlgorithm>(new DecomposedAlgorithm());
-		b.set("numOfRuns", 100);
+		Builder<DecomposedAlgorithm> b = new Builder<DecomposedAlgorithm>(new DecomposedAlgorithm());
+		b.set("numOfWeights", 100);
 		b.set("algorithms",Arrays.asList(new HillClimbing(fac, new RealMutation(problem.getVariableConstraints()))));
 		algorithms.add(b.build());
 		

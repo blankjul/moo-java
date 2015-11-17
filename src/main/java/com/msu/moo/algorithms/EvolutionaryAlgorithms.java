@@ -16,7 +16,7 @@ public abstract class EvolutionaryAlgorithms extends AbstractAlgorithm {
 	protected int populationSize;
 
 	// ! default mutation probability
-	protected double probMutation;
+	protected Double probMutation;
 
 	// ! operator for crossover
 	protected AbstractCrossover<?> crossover;

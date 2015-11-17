@@ -19,7 +19,7 @@ import com.msu.util.Util;
 public class DecomposedAlgorithm extends AbstractAlgorithm {
 
 	// ! number of decomposed problem that are solved
-	protected int numOfRuns = 50;
+	protected int numOfWeights = 10;
 
 	// ! if range is set the resulting values are normalized
 	protected Range<Double> range = null;
@@ -42,7 +42,7 @@ public class DecomposedAlgorithm extends AbstractAlgorithm {
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 
 		// weights to be used for decomposition
-		List<List<Double>> weights = MOEADUtil.getUniformDistributedWeights(rand, numOfRuns, 2);
+		List<List<Double>> weights = MOEADUtil.getUniformDistributedWeights(rand, numOfWeights, 2);
 
 		// for each decomposed weight
 		for (List<Double> w : weights) {
@@ -65,7 +65,7 @@ public class DecomposedAlgorithm extends AbstractAlgorithm {
 				}
 			}
 		}
-
+		
 		return set;
 
 	}
