@@ -57,7 +57,7 @@ public class NSGAII extends EvolutionaryAlgorithms {
 				// mutation
 				for (IVariable offspring : off) {
 					if (rand.nextDouble() < this.probMutation)
-						offspring = mutation.mutate(offspring, rand);
+						offspring = mutation.mutate(offspring, problem, rand);
 					offsprings.add(evaluator.evaluate(problem, offspring));
 				}
 			}

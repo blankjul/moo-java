@@ -2,7 +2,6 @@ package com.msu.operators;
 
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.moo.model.solution.Solution;
 import com.msu.util.Random;
 
 /**
@@ -14,7 +13,7 @@ import com.msu.util.Random;
 public abstract class AbstractMutation<T> {
 
 
-	public IVariable mutate(IVariable a, Random rand) {
+	public IVariable mutate(IVariable a, IProblem problem, Random rand) {
 
 		try {
 			
@@ -23,7 +22,9 @@ public abstract class AbstractMutation<T> {
 			@SuppressWarnings("unchecked")
 			T entry = (T) result.get();
 			
-			mutate_(entry, rand);
+			T mutated = mutate_(entry, problem, rand);
+			result.set(mutated);
+			
 			return result;
 			
 		} catch (Exception e){
@@ -35,13 +36,8 @@ public abstract class AbstractMutation<T> {
 
 	}
 
-	public <V extends IVariable, P extends IProblem> Solution mutate(P problem, Solution a, Random rand) {
-		IVariable var = mutate(a.getVariable(), rand);
-		return problem.evaluate(var);
-	}
 	
-	
-	abstract protected void mutate_(T element, Random rand);
+	abstract protected T mutate_(T element, IProblem problem, Random rand);
 
 
 }

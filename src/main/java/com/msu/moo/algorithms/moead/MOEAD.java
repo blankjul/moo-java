@@ -45,7 +45,6 @@ public class MOEAD extends EvolutionaryAlgorithms {
 	@Override
 	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator eval, Random rand) {
 
-		
 		// archive for storing the non dominated front
 		NonDominatedSolutionSet archive = new NonDominatedSolutionSet();
 		Range<Double> range = new Range<Double>();
@@ -61,7 +60,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 		}
 
 		// initialize weights and calculated utility structures
-		List<List<Double>> weights = MOEADUtil.getUniformDistributedWeights(rand, populationSize,
+		List<List<Double>> weights = MOEADUtil.getRandomWeights(rand, populationSize,
 				problem.getNumberOfObjectives());
 
 		// calculate the distances between the weights and save T nearest to
@@ -111,7 +110,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 				for (IVariable off : offsprings) {
 
 					if (rand.nextDouble() < this.probMutation) {
-						off = mutation.mutate(off, rand);
+						off = mutation.mutate(off, problem, rand);
 					}
 
 					// evaluate and update normalization range

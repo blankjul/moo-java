@@ -10,7 +10,7 @@ import org.junit.Test;
 
 import com.moo.FakeRandom;
 import com.msu.interfaces.IVariable;
-import com.msu.model.Variable;
+import com.msu.model.variables.Variable;
 import com.msu.operators.crossover.permutation.CycleCrossover;
 
 public class CycleCrossoverTest {

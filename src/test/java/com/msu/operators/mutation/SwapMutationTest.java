@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.msu.interfaces.IVariable;
-import com.msu.model.Variable;
+import com.msu.model.variables.Variable;
 import com.msu.operators.mutation.SwapMutation;
 import com.msu.util.Random;
 
@@ -28,7 +28,7 @@ public class SwapMutationTest {
 	@Test
 	public void testSwapByPositions() {
 		IVariable v = new Variable<List<Integer>>(l);
-		v = new SwapMutation<>().mutate(v, new Random(123456));
+		v = new SwapMutation<>().mutate(v, null, new Random(123456));
 		assertNotEquals(org, v.get());
 	}
 

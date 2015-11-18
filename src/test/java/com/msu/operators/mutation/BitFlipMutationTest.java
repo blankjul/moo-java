@@ -23,7 +23,7 @@ public class BitFlipMutationTest {
 			super(probability);
 		}
 		public void mutate_(List<Boolean> l) {
-			super.mutate_(l, new Random());
+			super.mutate_(l, null, new Random());
 		}
 	}
 	

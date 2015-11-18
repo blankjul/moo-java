@@ -7,7 +7,7 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-import com.msu.model.Variable;
+import com.msu.model.variables.Variable;
 import com.msu.moo.mocks.MockSolution;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;

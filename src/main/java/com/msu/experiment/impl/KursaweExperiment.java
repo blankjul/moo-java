@@ -27,7 +27,7 @@ public class KursaweExperiment extends AExperiment {
 
 		MOEADBuilder moead = new MOEADBuilder();
 		moead.set("populationSize", 50).set("factory", fac).set("crossover", new SimulatedBinaryCrossover(range))
-				.set("mutation", new RealMutation(range)).set("T", 5).set("delta", 0.3);
+				.set("mutation", new RealMutation(range)).set("T", 15).set("n_r", 7).set("delta", 0.3);
 		algorithms.add(moead.build());
 		
 
@@ -36,7 +36,6 @@ public class KursaweExperiment extends AExperiment {
 				.set("mutation", new RealMutation(range));
 		algorithms.add(nsgaII.build());
 
-		
 		algorithms.add(new RandomSearch(fac));
 
 	}

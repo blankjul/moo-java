@@ -15,7 +15,8 @@ public class DoubleListVariable extends ListVariable<Double>{
 	public IVariable copy() {
 		return new DoubleListVariable(new ArrayList<>(obj));
 	}
-	
+
+
 	
 	
 	

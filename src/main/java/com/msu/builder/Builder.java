@@ -35,13 +35,6 @@ public class Builder<T> {
 	}
 	
 	
-	public Builder(T obj) {
-		this();
-		this.obj = obj;
-		for(Entry<String, Object> entry : defaultFields.entrySet()) set(entry.getKey(), entry.getValue());
-	}
-	
-	
 	@SuppressWarnings("unchecked")
 	public Builder(Class<?> clazz) {
 		this();
@@ -52,6 +45,7 @@ public class Builder<T> {
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			e.printStackTrace();
 		}
+		// set default fields
 		for(Entry<String, Object> entry : defaultFields.entrySet()) set(entry.getKey(), entry.getValue());
 	}
 	

@@ -21,9 +21,9 @@ public class MOEADBuilder extends Builder<MOEAD> {
 	public void addDefaultFields(Map<String, Object> defaultFields) {
 		defaultFields.put("probMutation", 0.3);
 		defaultFields.put("populationSize", 100);
-		defaultFields.put("T", 10);
-		defaultFields.put("delta", 1d);
-		defaultFields.put("n_r", 10);
+		defaultFields.put("T", 100);
+		//defaultFields.put("delta", 1d);
+		//defaultFields.put("n_r", 10);
 	}
 
 }

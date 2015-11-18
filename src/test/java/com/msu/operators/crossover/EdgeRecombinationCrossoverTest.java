@@ -14,7 +14,7 @@ public class EdgeRecombinationCrossoverTest {
 	private class EdgeRecombinationCrossoverMock<T> extends EdgeRecombinationCrossover<T> {
 
 		public List<List<T>> crossover_(List<T> p1, List<T> p2) {
-			return super.crossover_(p1, p2, new Random());
+			return super.crossover_(p1, p2, null, new Random());
 		}
 
 	}

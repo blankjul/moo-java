@@ -95,7 +95,7 @@ public class MOEADUtil {
 	public static Double calcTchebichew(List<Double> obj, List<Double> w, List<Double> z) {
 		double maxDistance = Double.NEGATIVE_INFINITY;
 		for (int i = 0; i < obj.size(); i++) {
-			maxDistance = Math.max(maxDistance, w.get(i) * (obj.get(i) - z.get(i)));
+			maxDistance = Math.max(maxDistance, w.get(i) * Math.abs(obj.get(i) - z.get(i)));
 		}
 		return maxDistance;
 	}

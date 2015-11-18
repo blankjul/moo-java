@@ -1,4 +1,4 @@
-package com.msu.model;
+package com.msu.model.variables;
 
 
 

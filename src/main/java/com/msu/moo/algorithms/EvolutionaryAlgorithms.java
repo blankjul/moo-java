@@ -30,52 +30,5 @@ public abstract class EvolutionaryAlgorithms extends AbstractAlgorithm {
 	// ! current population
 	protected SolutionSet population = null;
 
-	public int getPopulationSize() {
-		return populationSize;
-	}
-
-	public void setPopulationSize(int populationSize) {
-		this.populationSize = populationSize;
-	}
-
-	public double getProbMutation() {
-		return probMutation;
-	}
-
-	public void setProbMutation(double probMutation) {
-		this.probMutation = probMutation;
-	}
-
-	public AbstractCrossover<?> getCrossover() {
-		return crossover;
-	}
-
-	public void setCrossover(AbstractCrossover<?> crossover) {
-		this.crossover = crossover;
-	}
-
-	public AbstractMutation<?> getMutation() {
-		return mutation;
-	}
-
-	public void setMutation(AbstractMutation<?> mutation) {
-		this.mutation = mutation;
-	}
-
-	public IVariableFactory getFactory() {
-		return factory;
-	}
-
-	public void setFactory(IVariableFactory factory) {
-		this.factory = factory;
-	}
-
-	public SolutionSet getPopulation() {
-		return population;
-	}
-
-	public void setPopulation(SolutionSet population) {
-		this.population = population;
-	}
-
+	
 }

@@ -3,7 +3,7 @@ package com.msu.moo.mocks;
 import java.util.List;
 
 import com.msu.interfaces.IVariable;
-import com.msu.model.Variable;
+import com.msu.model.variables.Variable;
 
 public class MockVariable extends Variable<List<Integer>> {
 

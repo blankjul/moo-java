@@ -44,7 +44,7 @@ public class HillClimbing extends ASingleObjectiveAlgorithm {
 
 		while (eval.hasNext()) {
 
-			IVariable nextVar = mutation.mutate(s.getVariable().copy(), rand);
+			IVariable nextVar = mutation.mutate(s.getVariable().copy(), problem, rand);
 			Solution next = eval.evaluate(problem, nextVar);
 
 			if (next.getSumOfConstraintViolation() < s.getSumOfConstraintViolation()) {

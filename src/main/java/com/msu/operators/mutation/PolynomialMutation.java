@@ -1,7 +1,9 @@
 package com.msu.operators.mutation;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
 import com.msu.util.Random;
 
@@ -40,13 +42,15 @@ public class PolynomialMutation extends AbstractMutation<List<Double>> {
 
 
 	@Override
-	protected void mutate_(List<Double> b, Random rand) {
+	protected List<Double> mutate_(List<Double> b, IProblem problem, Random rand) {
+		List<Double> result = new ArrayList<>();
+		
 		if (probability == null) probability = 1 / (double) b.size();
 		for (int i = 0; i < b.size(); i++) {
-			if (rand.nextDouble() < probability) {
-				b.set(i, rand.nextDouble(range[0], range[1]));
-			}
+			if (rand.nextDouble() < probability) result.add(rand.nextDouble(range[0], range[1]));
+			else result.add(b.get(i));
 		}
+		return result;
 	}
 	
 

@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.builder.MOEADBuilder;
 import com.msu.builder.NSGAIIBuilder;
 import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IAlgorithm;
@@ -19,6 +20,7 @@ import com.msu.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.operators.mutation.RealMutation;
 import com.msu.util.BashExecutor;
 import com.msu.util.ObjectFactory;
+import com.msu.util.Range;
 
 public class ZDTExperiment extends AExperiment {
 
@@ -27,37 +29,37 @@ public class ZDTExperiment extends AExperiment {
 			ObjectFactory.create(AbstractZDT.class, "com.msu.moo.problems.ZDT.ZDT1");
 
 	
-	final public boolean SHOW_ORIGINAL_NSGAII_FRONT = true;
+	final public boolean SHOW_ORIGINAL_NSGAII_FRONT = false;
 	
 	
 	@Override
 	protected void setAlgorithms(List<IAlgorithm> algorithms) {
 
-		DoubleListVariableFactory fac = new DoubleListVariableFactory(problem.getVariableConstraints());
-		
+		Range<Double> range = problem.getVariableConstraints();
+		DoubleListVariableFactory fac = new DoubleListVariableFactory(range);
+	
+	
 		NSGAIIBuilder nsgaII = new NSGAIIBuilder();
 		nsgaII
-				.set("populationSize", 100)
+				.set("populationSize", 50)
 				.set("factory", fac)
-				.set("crossover", new SimulatedBinaryCrossover(problem.getVariableConstraints()))
-				.set("mutation", new RealMutation(problem.getVariableConstraints()));
+				.set("crossover", new SimulatedBinaryCrossover(range))
+				.set("mutation", new RealMutation(range));
 		algorithms.add(nsgaII.build());
 		
+	
 		
-		/*	
-		MOEADBuilder builder2 = new MOEADBuilder();
-		builder2.setPopulationSize(100);
-		builder2.setDelta(20);
-		builder2.setFactory(fac).setCrossover(new SimulatedBinaryCrossover(problem.getVariableConstraints()))
-				.setMutation(new RealMutation(problem.getVariableConstraints()));
-		algorithms.add(builder2.create());
+		MOEADBuilder moead = new MOEADBuilder();
+		moead
+			.set("populationSize", 50)
+			.set("factory", fac)
+			.set("crossover", new SimulatedBinaryCrossover(range))
+			.set("mutation", new RealMutation(range))
+			.set("T", 10)
+	     	.set("delta", 0.3);
 		
+		algorithms.add(moead.build());
 		
-	    Builder<DecomposedAlgorithm> b = new Builder<DecomposedAlgorithm>(new DecomposedAlgorithm());
-		b.set("numOfWeights", 100);
-		b.set("algorithms",Arrays.asList(new HillClimbing(fac, new RealMutation(problem.getVariableConstraints()))));
-		algorithms.add(b.build());
-		*/
 	}
 	
 
@@ -68,7 +70,7 @@ public class ZDTExperiment extends AExperiment {
 
 	@Override
 	protected void setProblems(List<IProblem> problems) {
-		problem.setOptimum(calcFront(problem));
+		if (SHOW_ORIGINAL_NSGAII_FRONT) problem.setOptimum(calcFront(problem));
 		problems.add(problem);
 	}
 

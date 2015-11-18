@@ -1,7 +1,9 @@
 package com.msu.operators.mutation;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
 import com.msu.util.Random;
 import com.msu.util.Range;
@@ -55,7 +57,9 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	}
 
 	@Override
-	protected void mutate_(List<Double> b, Random rand) {
+	protected List<Double> mutate_(List<Double> b, IProblem problem, Random rand) {
+		
+		List<Double> result = new ArrayList<>();
 		
 		if (range == null) range = new Range<Double>(b.size(), Double.MIN_VALUE, Double.MAX_VALUE);
 		
@@ -63,9 +67,12 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 		for (int j = 0; j < b.size(); j++) {
 			if (rand.nextDouble() < mProbability) {
 				double u = rand.nextDouble();
-				b.set(j, sbxMutation(b.get(j), u, range.getMinimum(j), range.getMaximum(j)));
-			}
+				result.add(sbxMutation(b.get(j), u, range.getMinimum(j), range.getMaximum(j)));
+			} else 
+				result.add(b.get(j));
 		}
+		
+		return result;
 	}
 
 

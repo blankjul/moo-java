@@ -1,8 +1,10 @@
 package com.msu.operators.mutation;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
 import com.msu.util.Random;
 import com.msu.util.Util;
@@ -22,8 +24,8 @@ public class SwapMutation<T> extends AbstractMutation<List<T>>{
 
 
 	@Override
-	protected void mutate_(List<T> obj, Random rand) {
-		
+	protected List<T> mutate_(List<T> var, IProblem problem,  Random rand) {
+		List<T> obj = new ArrayList<>(var);
 		final double prob = 1 / (double) obj.size();
 		
 		for (int i = 0; i < obj.size(); i++) {
@@ -33,7 +35,7 @@ public class SwapMutation<T> extends AbstractMutation<List<T>>{
 				Util.swap(obj, i, point);
 			}
 		}
-		
+		return obj;
 	}
 	
 
