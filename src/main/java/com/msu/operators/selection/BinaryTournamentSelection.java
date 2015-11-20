@@ -7,7 +7,7 @@ import java.util.Queue;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.operators.AbstractSelection;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 
 /**
@@ -28,7 +28,7 @@ public class BinaryTournamentSelection extends AbstractSelection {
 	 * @param set which should be used for selection
 	 * @param cmp comparator which defines the winner of the tournament
 	 */
-	public BinaryTournamentSelection(SolutionSet set, Comparator<Solution> cmp, Random rand) {
+	public BinaryTournamentSelection(SolutionSet set, Comparator<Solution> cmp, MyRandom rand) {
 		super(set, rand);
 		if (set.size() < 2) {
 			throw new RuntimeException("For the tournament selection the SolutionSet has to be larger than 2!");

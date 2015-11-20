@@ -9,7 +9,7 @@ import com.msu.moo.algorithms.nsgaII.NonDominatedRankIndicator;
 import com.msu.moo.algorithms.nsgaII.RankAndCrowdingComparator;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.operators.selection.BinaryTournamentSelection;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class BinaryTournamentSelectionTest {
 	
@@ -25,7 +25,7 @@ public class BinaryTournamentSelectionTest {
 	
 	@Test
 	public void testSelectionNoException() {
-		BinaryTournamentSelection bts = new BinaryTournamentSelection(l, cmp, new Random());
+		BinaryTournamentSelection bts = new BinaryTournamentSelection(l, cmp, new MyRandom());
 		for (int i = 0; i < 100; i++) {
 			bts.next();
 		}

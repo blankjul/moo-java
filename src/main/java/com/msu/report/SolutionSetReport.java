@@ -1,11 +1,11 @@
 package com.msu.report;
 
-import com.msu.model.AReport;
+import com.msu.model.Report;
 import com.msu.util.events.IListener;
 import com.msu.util.events.impl.EventDispatcher;
 import com.msu.util.events.impl.RunFinishedEvent;
 
-public class SolutionSetReport extends AReport {
+public class SolutionSetReport extends Report {
 
 	public SolutionSetReport() {
 		super();

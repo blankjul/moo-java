@@ -8,7 +8,7 @@ import com.msu.experiment.AExperiment;
 import com.msu.experiment.ExperimentResult;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
-import com.msu.model.AReport;
+import com.msu.model.Report;
 import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.SolutionSet;
@@ -17,7 +17,7 @@ import com.msu.util.events.IListener;
 import com.msu.util.events.impl.EventDispatcher;
 import com.msu.util.events.impl.ProblemFinishedEvent;
 
-public class HypervolumeReport extends AReport {
+public class HypervolumeReport extends Report {
 
 	public HypervolumeReport(String path) {
 		

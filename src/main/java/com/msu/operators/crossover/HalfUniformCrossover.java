@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.msu.operators.AbstractListCrossover;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 
@@ -24,7 +24,7 @@ public class HalfUniformCrossover<T> extends AbstractListCrossover<T> {
 	}
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b, Random rand) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b, MyRandom rand) {
 		// copy the both list and change values
 		List<T> c1 = new ArrayList<T>(a);
 		List<T> c2 = new ArrayList<T>(b);

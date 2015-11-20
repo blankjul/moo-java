@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class MOEADTest {
 	
@@ -23,7 +23,7 @@ public class MOEADTest {
 	
 	@Test
 	public void testRandomWeights() {
-		for (List<Double> l : MOEADUtil.getRandomWeights(new Random(), 100, 2)) {
+		for (List<Double> l : MOEADUtil.getRandomWeights(new MyRandom(), 100, 2)) {
 			assertEquals(2,l.size());
 		}
 	}

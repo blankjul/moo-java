@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 
 public class PolynomialMutation extends AbstractMutation<List<Double>> {
@@ -42,7 +42,7 @@ public class PolynomialMutation extends AbstractMutation<List<Double>> {
 
 
 	@Override
-	protected List<Double> mutate_(List<Double> b, IProblem problem, Random rand) {
+	protected List<Double> mutate_(List<Double> b, IProblem problem, MyRandom rand) {
 		List<Double> result = new ArrayList<>();
 		
 		if (probability == null) probability = 1 / (double) b.size();

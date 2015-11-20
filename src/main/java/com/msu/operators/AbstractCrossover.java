@@ -5,8 +5,7 @@ import java.util.List;
 
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.moo.model.solution.Solution;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 /**
  * This is an abstract Crossover of an object. This class which inherits from
@@ -21,7 +20,7 @@ public abstract class AbstractCrossover<T> {
 	
 
 	@SuppressWarnings("unchecked")
-	public List<IVariable> crossover(IVariable a, IVariable b, IProblem problem, Random rand) {
+	public List<IVariable> crossover(IVariable a, IVariable b, IProblem problem, MyRandom rand) {
 
 		// TODO: This solution is very ugly. could be improved but all crossover
 		// subclasses has to be changed.
@@ -39,7 +38,7 @@ public abstract class AbstractCrossover<T> {
 		 
 		// if problem is null call the normal crossover else specific one
 		List<T> offspring = null;
-		if (problem == null) offspring = crossover_(first,second, problem, rand);
+		if (problem == null) offspring = crossover_(first, second, problem, rand);
 		else offspring = crossover_(first,second, problem, rand);
 		
 		
@@ -54,27 +53,13 @@ public abstract class AbstractCrossover<T> {
 
 	}
 	
-	public List<IVariable> crossover(IVariable a, IVariable b, Random rand) {
+	public List<IVariable> crossover(IVariable a, IVariable b, MyRandom rand) {
 		return crossover(a, b, null, rand);
 	}
 	
 
-	public <V extends IVariable, P extends IProblem> List<Solution> crossover(P problem, Solution a,
-			Solution b, Random rand) {
 
-		List<IVariable> vars = crossover(a.getVariable(), b.getVariable(), problem, rand);
-		List<Solution> result = new ArrayList<>();
-
-		for (IVariable var : vars) {
-			Solution s = problem.evaluate(var);
-			result.add(s);
-		}
-
-		return result;
-	}
-	
-
-	abstract protected List<T> crossover_(T a, T b, IProblem problem, Random rand);
+	abstract protected List<T> crossover_(T a, T b, IProblem problem, MyRandom rand);
 	
 
 }

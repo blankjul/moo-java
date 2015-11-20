@@ -14,11 +14,11 @@ import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.operators.selection.BinaryTournamentSelection;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 /**
- * This algorithm is implemented in the base of NSGAII proposed by Professor
- * Deb in "A fast and elitist multiobjective genetic algorithm: NSGA-II".
+ * This algorithm is implemented in the base of NSGAII proposed by Professor Deb
+ * in "A fast and elitist multiobjective genetic algorithm: NSGA-II".
  * 
  *
  */
@@ -30,30 +30,27 @@ public class NSGAII extends EvolutionaryAlgorithms {
 	// ! crowding distance for the whole population
 	protected Map<Solution, Double> crowding;
 
-	//! function that allows to modify the population after mating
-	protected INSGAIIModifactor funcModify = null;
+	// ! private constructor! use the builder!
+	protected NSGAII() {
+	}
 
-	//! private constructor! use the builder!
-	protected NSGAII() {}
-
-	
 	@Override
-	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, Random rand) {
+	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
 
 		// initialize the population and calculate also rank and crowding
 		initialize(problem, evaluator, rand);
-		
+
 		while (evaluator.hasNext()) {
-			
+
 			// binary tournament selection for mating
-			BinaryTournamentSelection bts = new BinaryTournamentSelection(population, 
+			BinaryTournamentSelection bts = new BinaryTournamentSelection(population,
 					new RankAndCrowdingComparator(rank, crowding), rand);
 
 			// create offspring population until size two times
 			SolutionSet offsprings = new SolutionSet(populationSize);
 			while (offsprings.size() < populationSize) {
 				// crossover
-				List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable(), rand);
+				List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable(), problem, rand);
 				// mutation
 				for (IVariable offspring : off) {
 					if (rand.nextDouble() < this.probMutation)
@@ -64,36 +61,30 @@ public class NSGAII extends EvolutionaryAlgorithms {
 
 			// merge population and offsprings
 			population.addAll(offsprings);
-			
-			// modify population with the given function
-			if (funcModify != null) {
-				funcModify.modify(problem, evaluator, population, rand);
-			}
-			
+
+
 			// survival of the best population
 			calcRankAndCrowding(population);
 			population.sort(new RankAndCrowdingComparator(rank, crowding));
 			Collections.reverse(population);
-
 			population = new SolutionSet(population.subList(0, populationSize));
-			
-			
+
 		}
-		
+
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
 		result.setSolutionDominator(new SolutionDominatorWithConstraints());
 		result.addAll(population);
 		return result;
-		
+
 	}
 
-	protected void initialize(IProblem problem, IEvaluator eval, Random rand) {
+	protected void initialize(IProblem problem, IEvaluator eval, MyRandom rand) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();
 		// initialize the population with populationSize
 		population = new SolutionSet(populationSize * 2);
-		
+
 		for (IVariable variable : factory.next(problem, rand, populationSize)) {
 			population.add(eval.evaluate(problem, variable));
 		}
@@ -113,8 +104,5 @@ public class NSGAII extends EvolutionaryAlgorithms {
 			crowdInd.calculate(crowding, set.getSolutions());
 		}
 	}
-
-	
-	
 
 }

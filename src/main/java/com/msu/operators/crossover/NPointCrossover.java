@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.msu.operators.AbstractListCrossover;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class NPointCrossover<T> extends AbstractListCrossover<T> {
 
@@ -19,7 +19,7 @@ public class NPointCrossover<T> extends AbstractListCrossover<T> {
 
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> p1, List<T> p2, Random rand) {
+	protected List<List<T>> crossoverLists(List<T> p1, List<T> p2, MyRandom rand) {
 		
 	      final int length = p1.size();
 	        if (crossoverPoints >= length) {

@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.msu.util.Util;
 
 /**
@@ -24,7 +24,7 @@ public class SwapMutation<T> extends AbstractMutation<List<T>>{
 
 
 	@Override
-	protected List<T> mutate_(List<T> var, IProblem problem,  Random rand) {
+	protected List<T> mutate_(List<T> var, IProblem problem,  MyRandom rand) {
 		List<T> obj = new ArrayList<>(var);
 		final double prob = 1 / (double) obj.size();
 		

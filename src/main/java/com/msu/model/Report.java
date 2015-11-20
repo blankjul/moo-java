@@ -9,7 +9,7 @@ import com.msu.util.events.IListener;
 import com.msu.util.events.impl.EventDispatcher;
 import com.msu.util.events.impl.ExperimentFininshedEvent;
 
-public abstract class AReport {
+public class Report {
 
 	// ! printer to write the file
 	protected PrintWriter pw;
@@ -17,11 +17,11 @@ public abstract class AReport {
 	protected String pathToFile = null;
 
 
-	public AReport() {
+	public Report() {
 		pw = new PrintWriter(System.out, true);
 	}
 	
-	public AReport(String pathToFile) {
+	public Report(String pathToFile) {
 		
 		setPath(pathToFile);
 
@@ -35,7 +35,7 @@ public abstract class AReport {
 	}
 
 	
-	public AReport setPath(String pathToFile) {
+	public Report setPath(String pathToFile) {
 		try {
 			pw = new PrintWriter(new FileOutputStream(pathToFile), true);
 			this.pathToFile = pathToFile;
@@ -52,6 +52,10 @@ public abstract class AReport {
 		 return "";
 	}
 	
+	
+	public void write(String s) {
+		pw.write(s);
+	}
 	
 	
 }

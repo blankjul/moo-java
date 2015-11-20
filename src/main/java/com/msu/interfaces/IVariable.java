@@ -21,6 +21,10 @@ public interface IVariable {
 	 */
 	public IVariable copy();
 	
+	/**
+	 * cast the variable to a special one
+	 */
+	public <V extends IVariable> V cast(Class<V> clazz);
 
 	
 }

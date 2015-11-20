@@ -7,7 +7,7 @@ import com.msu.interfaces.IVariableFactory;
 import com.msu.moo.model.solution.Solution;
 import com.msu.operators.AbstractMutation;
 import com.msu.soo.ASingleObjectiveAlgorithm;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class HillClimbing extends ASingleObjectiveAlgorithm {
 
@@ -26,7 +26,7 @@ public class HillClimbing extends ASingleObjectiveAlgorithm {
 		this.mutation = mutation;
 	}
 
-	public Solution initialize(IProblem problem, IEvaluator eval, Random rand) {
+	public Solution initialize(IProblem problem, IEvaluator eval, MyRandom rand) {
 		Solution s = null;
 		if (var == null) {
 			s =  eval.evaluate(problem, factory.next(problem, rand));
@@ -38,7 +38,7 @@ public class HillClimbing extends ASingleObjectiveAlgorithm {
 	}
 
 	@Override
-	public Solution run__(IProblem problem, IEvaluator eval, Random rand) {
+	public Solution run__(IProblem problem, IEvaluator eval, MyRandom rand) {
 
 		Solution s = initialize(problem, eval, rand);
 

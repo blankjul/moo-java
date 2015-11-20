@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.msu.operators.AbstractListCrossover;
 import com.msu.util.Pair;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.msu.util.Range;
 
 public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
@@ -71,7 +71,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	 * SBX for two double variables
 	 * @return offspring values which are in [lowerBound,upperBound]
 	 */
-	protected Pair<Double, Double> SBX(double d1, double d2, double lowerBound, double upperBound, Random rand) {
+	protected Pair<Double, Double> SBX(double d1, double d2, double lowerBound, double upperBound, MyRandom rand) {
 
 		// p1 <= p2 is always true
 		double p1 = Math.min(d1, d2);
@@ -95,7 +95,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	}
 
 	@Override
-	protected List<List<Double>> crossoverLists(List<Double> parent1, List<Double> parent2, Random rand) {
+	protected List<List<Double>> crossoverLists(List<Double> parent1, List<Double> parent2, MyRandom rand) {
 
 		List<Double> child1 = new ArrayList<Double>(parent1);
 		List<Double> child2 = new ArrayList<Double>(parent2);

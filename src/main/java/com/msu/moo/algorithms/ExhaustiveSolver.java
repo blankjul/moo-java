@@ -6,7 +6,7 @@ import com.msu.interfaces.IVariable;
 import com.msu.interfaces.IVariableFactory;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 /**
  * ExhaustiveSolver ignores the maxEvaluations completely and tries to find new
@@ -22,7 +22,7 @@ public class ExhaustiveSolver extends RandomSearch {
 	}
 
 	@Override
-	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, Random rand) {
+	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		while (factory.hasNext()) {
 			IVariable var = factory.next(problem, rand);

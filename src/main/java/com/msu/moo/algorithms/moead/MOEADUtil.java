@@ -6,11 +6,11 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class MOEADUtil {
 
-	public static List<List<Double>> getUniformDistributedWeights(Random r, int n, int length) {
+	public static List<List<Double>> getUniformDistributedWeights(MyRandom r, int n, int length) {
 		if (length != 2) throw new RuntimeException("This implemenation works so far only with 2 objectives!");
 		List<List<Double>> result = new ArrayList<>(n);
 		result.add(Arrays.asList(1.0, 0.0));
@@ -25,7 +25,7 @@ public class MOEADUtil {
 		return result;
 	}
 	
-	public static List<List<Double>> getRandomWeights(Random r, int n, int length) {
+	public static List<List<Double>> getRandomWeights(MyRandom r, int n, int length) {
 		List<List<Double>> result = new ArrayList<>(n);
 		for (int i = 0; i < n; i++) {
 			double sum = 0;

@@ -1,7 +1,7 @@
 package com.msu.interfaces;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public interface IAlgorithm {
 
@@ -21,7 +21,7 @@ public interface IAlgorithm {
 	 * @param evaluator which counts the evaluations
 	 * @return Front of non dominated points
 	 */
-	public NonDominatedSolutionSet run(IProblem problem, IEvaluator evaluator, Random rand);
+	public NonDominatedSolutionSet run(IProblem problem, IEvaluator evaluator, MyRandom rand);
 	
 	
 	

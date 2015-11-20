@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
-public class FakeRandom extends Random {
+public class FakeRandom extends MyRandom {
 
 	
 	Queue<Object> values = null;

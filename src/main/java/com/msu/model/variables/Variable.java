@@ -66,6 +66,11 @@ public class Variable<T> implements IVariable {
 	}
 	
 	
+	@SuppressWarnings("unchecked")
+	public <V extends IVariable> V cast(Class<V> clazz) {
+		return (V) this;
+	}
+	
 
 
 }

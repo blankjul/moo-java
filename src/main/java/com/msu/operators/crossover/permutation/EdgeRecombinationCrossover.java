@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msu.operators.AbstractListCrossover;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.rits.cloning.Cloner;
 
 public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
@@ -54,7 +54,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 		}
 	}
 
-	protected List<T> crossover_(Map<T, HashSet<T>> map, List<T> l, int point, Random rand) {
+	protected List<T> crossover_(Map<T, HashSet<T>> map, List<T> l, int point, MyRandom rand) {
 
 		List<T> child = new ArrayList<>();
 		T next = l.get(point);
@@ -114,7 +114,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 	}
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b, Random rand) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b, MyRandom rand) {
 
 		// create combined edge map
 		Map<T, HashSet<T>> map = new HashMap<>();

@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.msu.util.Range;
 
 public class RealMutation extends AbstractMutation<List<Double>> {
@@ -57,7 +57,7 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	}
 
 	@Override
-	protected List<Double> mutate_(List<Double> b, IProblem problem, Random rand) {
+	protected List<Double> mutate_(List<Double> b, IProblem problem, MyRandom rand) {
 		
 		List<Double> result = new ArrayList<>();
 		

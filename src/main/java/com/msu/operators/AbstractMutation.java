@@ -2,7 +2,7 @@ package com.msu.operators;
 
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 /**
  * This is an abstract Mutation of an object. This class which inherits from this one
@@ -13,12 +13,11 @@ import com.msu.util.Random;
 public abstract class AbstractMutation<T> {
 
 
-	public IVariable mutate(IVariable a, IProblem problem, Random rand) {
+	public IVariable mutate(IVariable a, IProblem problem, MyRandom rand) {
 
 		try {
 			
 			IVariable result = a.copy();
-			
 			@SuppressWarnings("unchecked")
 			T entry = (T) result.get();
 			
@@ -37,7 +36,7 @@ public abstract class AbstractMutation<T> {
 	}
 
 	
-	abstract protected T mutate_(T element, IProblem problem, Random rand);
+	abstract protected T mutate_(T element, IProblem problem, MyRandom rand);
 
 
 }

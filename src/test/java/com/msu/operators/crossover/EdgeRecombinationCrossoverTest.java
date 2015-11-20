@@ -7,14 +7,14 @@ import java.util.List;
 import org.junit.Test;
 
 import com.msu.operators.crossover.permutation.EdgeRecombinationCrossover;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class EdgeRecombinationCrossoverTest {
 
 	private class EdgeRecombinationCrossoverMock<T> extends EdgeRecombinationCrossover<T> {
 
 		public List<List<T>> crossover_(List<T> p1, List<T> p2) {
-			return super.crossover_(p1, p2, null, new Random());
+			return super.crossover_(p1, p2, null, new MyRandom());
 		}
 
 	}

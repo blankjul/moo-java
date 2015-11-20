@@ -8,7 +8,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class MOEADUtilTest {
 
@@ -22,7 +22,7 @@ public class MOEADUtilTest {
 
 	@Test
 	public void testUniformWeights() {
-		List<List<Double>> weights = MOEADUtil.getUniformDistributedWeights(new Random(), 5, 2);
+		List<List<Double>> weights = MOEADUtil.getUniformDistributedWeights(new MyRandom(), 5, 2);
 		assertEquals(5, weights.size());
 		assertEquals(Arrays.asList(1.0, 0.0), weights.get(0));
 		assertEquals(Arrays.asList(0.75, 0.25), weights.get(1));
@@ -33,7 +33,7 @@ public class MOEADUtilTest {
 
 	@Test
 	public void testRandomWeights() {
-		for (List<Double> l : MOEADUtil.getRandomWeights(new Random(), 100, 2)) {
+		for (List<Double> l : MOEADUtil.getRandomWeights(new MyRandom(), 100, 2)) {
 			assertEquals(2, l.size());
 		}
 	}

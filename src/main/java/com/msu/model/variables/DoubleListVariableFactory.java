@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.msu.interfaces.IProblem;
 import com.msu.model.AVariableFactory;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.msu.util.Range;
 
 public class DoubleListVariableFactory extends AVariableFactory {
@@ -24,7 +24,7 @@ public class DoubleListVariableFactory extends AVariableFactory {
 
 
 	@Override
-	public DoubleListVariable next(IProblem problem, Random rand) {
+	public DoubleListVariable next(IProblem problem, MyRandom rand) {
 		List<Double> l = new ArrayList<>();
 		for (int i = 0; i < range.size(); i++) {
 			l.add(rand.nextDouble(range.getMinimum(i), range.getMaximum(i)));

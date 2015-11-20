@@ -11,7 +11,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.msu.operators.mutation.BitFlipMutation;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class BitFlipMutationTest {
 	
@@ -23,7 +23,7 @@ public class BitFlipMutationTest {
 			super(probability);
 		}
 		public void mutate_(List<Boolean> l) {
-			super.mutate_(l, null, new Random());
+			super.mutate_(l, null, new MyRandom());
 		}
 	}
 	

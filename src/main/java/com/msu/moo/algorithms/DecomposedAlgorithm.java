@@ -12,7 +12,7 @@ import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.soo.ASingleObjectiveAlgorithm;
 import com.msu.soo.SingleObjectiveDecomposedProblem;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.msu.util.Range;
 import com.msu.util.Util;
 
@@ -28,13 +28,13 @@ public class DecomposedAlgorithm extends AbstractAlgorithm {
 	protected List<ASingleObjectiveAlgorithm> algorithms = new ArrayList<>();
 
 	// ! could be filled with commands in subclass
-	protected void initialize(IProblem problem, IEvaluator eval, Random rand) {
+	protected void initialize(IProblem problem, IEvaluator eval, MyRandom rand) {
 	};
 	
 	
 
 	@Override
-	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator eval, Random rand) {
+	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator eval, MyRandom rand) {
 
 		initialize(problem, eval, rand);
 		

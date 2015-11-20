@@ -3,7 +3,7 @@ package com.msu.moo.algorithms.nsgaII;
 import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 /**
  * Different ideas that should be performed every generation could be injected
@@ -15,6 +15,6 @@ public interface INSGAIIModifactor {
 	/**
 	 * Modifies the given population.
 	 */
-	public void modify(IProblem problem, IEvaluator eval, SolutionSet population, Random r);
+	public void modify(IProblem problem, IEvaluator eval, SolutionSet population, MyRandom r);
 
 }

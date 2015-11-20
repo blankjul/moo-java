@@ -65,10 +65,10 @@ public class Builder<T> {
     }
 	
 	
-	public void addRequiredFields(Set<String> requiredFields) {
+	protected void addRequiredFields(Set<String> requiredFields) {
 	}
 
-	public void addDefaultFields(Map<String,Object> defaultFields) {
+	protected void addDefaultFields(Map<String,Object> defaultFields) {
 	}
 
 
@@ -76,7 +76,7 @@ public class Builder<T> {
     	for(String s : requiredFields) {
     		if (!attributes.contains(s)) throw new BuilderException(String.format("Required field '%s' for building %s not set. \nRequired are: %s", s, obj, Arrays.toString(requiredFields.toArray())));
     	}
-        return obj;
+        return Util.cloneObject(obj);
     }
     
     

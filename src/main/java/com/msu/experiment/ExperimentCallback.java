@@ -8,7 +8,7 @@ import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.msu.util.Util;
 
 public class ExperimentCallback implements Callable<ExperimentCallback> {
@@ -16,7 +16,7 @@ public class ExperimentCallback implements Callable<ExperimentCallback> {
 	static final Logger logger = Logger.getLogger(ExperimentCallback.class);
 
 	public AExperiment experiment;
-	public Random rand;
+	public MyRandom rand;
 	public int i;
 	public int j;
 	public int k;
@@ -25,7 +25,7 @@ public class ExperimentCallback implements Callable<ExperimentCallback> {
 	public int maxEvaluations;
 	public int iterations;
 
-	public ExperimentCallback(AExperiment experiment, Random rand, int maxEvaluations, int iterations, int i, int j, int k) {
+	public ExperimentCallback(AExperiment experiment, MyRandom rand, int maxEvaluations, int iterations, int i, int j, int k) {
 		super();
 		this.experiment = experiment;
 		this.rand = rand;

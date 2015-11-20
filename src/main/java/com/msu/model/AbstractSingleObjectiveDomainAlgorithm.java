@@ -2,7 +2,8 @@ package com.msu.model;
 
 import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.solution.Solution;
+import com.msu.soo.ASingleObjectiveAlgorithm;
 import com.msu.util.MyRandom;
 
 /**
@@ -12,21 +13,23 @@ import com.msu.util.MyRandom;
  * @param
  * 			<P>
  */
-public abstract class AbstractDomainAlgorithm<P extends IProblem> extends AbstractAlgorithm {
+public abstract class AbstractSingleObjectiveDomainAlgorithm<P extends IProblem> extends ASingleObjectiveAlgorithm {
 
-	public abstract NonDominatedSolutionSet run__(P problem, IEvaluator evaluator, MyRandom rand);
+	public abstract Solution run___(P problem, IEvaluator evaluator, MyRandom rand);
 
+	@SuppressWarnings("unchecked")
 	@Override
-	final public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
+	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand) {
+		P domainProblem = null;
 		try {
-			@SuppressWarnings("unchecked")
-			P domainProblem = (P) problem;
-			return run__(domainProblem, evaluator, rand);
+			domainProblem = (P) problem;
 		} catch (Exception e) {
 			throw new RuntimeException("AbstractDomainAlgorithm is not used for the defined problem!");
 		}
+		return run___(domainProblem, evaluator, rand);
 	}
 
+	
 	// ! name for this algorithm
 	protected String name = getClass().getSimpleName();
 

@@ -3,7 +3,7 @@ package com.msu.operators.crossover;
 import org.apache.commons.math3.util.FastMath;
 
 import com.msu.util.Pair;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class CrossoverUtil {
 	
@@ -12,7 +12,7 @@ public class CrossoverUtil {
 	 * @param length maximal length
 	 * @return pair of integer. lb and ub.
 	 */
-	public static Pair<Integer, Integer> getSection(int length, Random rand) {
+	public static Pair<Integer, Integer> getSection(int length, MyRandom rand) {
         // choose random points, making sure that lb < ub.
         int rnd1 = rand.nextInt(length);
         int rnd2;

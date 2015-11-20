@@ -2,7 +2,7 @@ package com.msu.interfaces;
 
 import java.util.Collection;
 
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 /**
  * This class represents a factory class that should create a IVariable or
@@ -15,7 +15,7 @@ public interface IVariableFactory {
 	 * 
 	 * @return new random instance.
 	 */
-	public IVariable next(IProblem problem, Random rand);
+	public IVariable next(IProblem problem, MyRandom rand);
 	
 	
 	/**
@@ -24,7 +24,7 @@ public interface IVariableFactory {
 	 * 
 	 * @return new random instance.
 	 */
-	public Collection<IVariable> next(IProblem problem, Random rand, int n);
+	public Collection<IVariable> next(IProblem problem, MyRandom rand, int n);
 
 	/**
 	 * @return true if a new solution could be created

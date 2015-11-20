@@ -7,7 +7,7 @@ import com.msu.interfaces.IVariableFactory;
 import com.msu.model.AbstractAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 /**
  * The RandomSearch just creates randomly new instances and evaluates them until
@@ -23,7 +23,7 @@ public class RandomSearch extends AbstractAlgorithm {
 	}
 
 	@Override
-	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, Random rand) {
+	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
 		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
 		while (factory.hasNext() && evaluator.hasNext()) {
 			IVariable var = factory.next(problem, rand);

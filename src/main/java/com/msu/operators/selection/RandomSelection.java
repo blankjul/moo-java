@@ -5,7 +5,7 @@ import java.util.Queue;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.operators.AbstractSelection;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 
 /**
@@ -22,7 +22,7 @@ public class RandomSelection extends AbstractSelection {
 	 * Construct a binary tournament selector
 	 * @param set which should be used for selection
 	 */
-	public RandomSelection(SolutionSet set, Random rand) {
+	public RandomSelection(SolutionSet set, MyRandom rand) {
 		super(set, rand);
 	}
 	

@@ -2,14 +2,14 @@ package com.msu.operators;
 
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public abstract class AbstractSelection{
 
 	//! the solution set from which individuals will be selected
 	protected SolutionSet set;
 	
-	protected Random rand;
+	protected MyRandom rand;
 	
 	public AbstractSelection(SolutionSet set) {
 		super();
@@ -17,7 +17,7 @@ public abstract class AbstractSelection{
 	}
 	
 
-	public AbstractSelection(SolutionSet set, Random rand) {
+	public AbstractSelection(SolutionSet set, MyRandom rand) {
 		super();
 		this.set = set;
 		this.rand = rand;

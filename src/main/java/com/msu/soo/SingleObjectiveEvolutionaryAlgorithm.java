@@ -12,7 +12,7 @@ import com.msu.moo.model.solution.SolutionSet;
 import com.msu.operators.AbstractCrossover;
 import com.msu.operators.AbstractMutation;
 import com.msu.operators.selection.RandomSelection;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgorithm {
 
@@ -33,7 +33,7 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 
 	
 	@Override
-	public Solution run__(IProblem problem, IEvaluator evaluator, Random rand) {
+	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand) {
 		
 		// initialize random population
         SolutionSet population = new SolutionSet(populationSize * 2);
@@ -41,11 +41,16 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 			population.add(evaluator.evaluate(problem, variable));
 		}
 		
+		sortBySingleObjective(population);
+		
+		
 		while (evaluator.hasNext()) {
 			
-			// mating with random selection
+			// mating with random selection of the best 20 percent
 			SolutionSet offsprings = new SolutionSet(populationSize);
-			RandomSelection selector = new RandomSelection(population, rand);
+			SolutionSet mating = new SolutionSet(population.subList(0, (int) (populationSize / 20)));
+			
+			RandomSelection selector = new RandomSelection(mating , rand);
 			while (offsprings.size() < populationSize) {
 				// crossover
 				List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable(), rand);
@@ -60,17 +65,22 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 			population.addAll(offsprings);
 			
 			// truncate the population -> survival of the fittest
-			population.sort(new Comparator<Solution>() {
-				@Override
-				public int compare(Solution o1, Solution o2) {
-					return Double.compare(o1.getObjectives(0), o2.getObjectives(0));
-				}
-			});
+			sortBySingleObjective(population);
 			population = new SolutionSet(population.subList(0, populationSize));
 			
 		}
 		
 		return population.get(0);
+	}
+	
+	
+	public void sortBySingleObjective(SolutionSet set) {
+		set.sort(new Comparator<Solution>() {
+			@Override
+			public int compare(Solution o1, Solution o2) {
+				return Double.compare(o1.getObjectives(0), o2.getObjectives(0));
+			}
+		});
 	}
 	
 

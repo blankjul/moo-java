@@ -60,18 +60,17 @@ public class Util {
 		}
 	}
 
-	
 	public static boolean doesFileExist(String path) {
 		File f = new File(path);
 		return f.exists() && !f.isDirectory();
 	}
-	
+
 	public static String getTimestamp() {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS") ;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmssSSS");
 		String date = dateFormat.format(System.currentTimeMillis());
 		return date;
 	}
-	
+
 	public static String readFile(String pathToFile) {
 		StringBuilder sb = new StringBuilder();
 		try {
@@ -86,19 +85,18 @@ public class Util {
 		}
 		return sb.toString();
 	}
-	
-	
-	public static <T> T cloneObject(T obj){
-		Cloner cloner=new Cloner();
-        try{
-        	T clone = cloner.deepClone(obj);
-            return clone;
-        }catch(Exception e){
-        	e.printStackTrace();
-        	throw new RuntimeException(String.format("Error while cloning object %s.", obj));
-        }
-    }
-	
+
+	public static <T> T cloneObject(T obj) {
+		Cloner cloner = new Cloner();
+		try {
+			T clone = cloner.deepClone(obj);
+			return clone;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new RuntimeException(String.format("Error while cloning object %s.", obj));
+		}
+	}
+
 	public static <T> List<T> createListWithDefault(int n, T t) {
 		List<T> l = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
@@ -106,7 +104,6 @@ public class Util {
 		}
 		return l;
 	}
-
 
 	public static List<Integer> createIndex(int n) {
 		List<Integer> l = new ArrayList<>();
@@ -119,19 +116,20 @@ public class Util {
 	/**
 	 * Get all fields through reflection. also of superclass
 	 */
-    public static Field getField(String fieldName, Class<?> clazz) {
-        Class<?> tmpClass = clazz;
-        do {
-            try {
-                Field f = tmpClass.getDeclaredField(fieldName);
-                return f;
-            } catch (NoSuchFieldException e) {
-                tmpClass = tmpClass.getSuperclass();
-            }
-        } while (tmpClass != null);
+	public static Field getField(String fieldName, Class<?> clazz) {
+		Class<?> tmpClass = clazz;
+		do {
+			try {
+				Field f = tmpClass.getDeclaredField(fieldName);
+				return f;
+			} catch (NoSuchFieldException e) {
+				tmpClass = tmpClass.getSuperclass();
+			}
+		} while (tmpClass != null);
 
-        throw new RuntimeException("Field '" + fieldName
-                + "' not found on class " + clazz);
-    }
+		throw new RuntimeException("Field '" + fieldName + "' not found on class " + clazz);
+	}
+
+
 
 }

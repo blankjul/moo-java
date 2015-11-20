@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.msu.util.events.impl.AlgorithmFinishedExecution;
 import com.msu.util.events.impl.EventDispatcher;
 import com.msu.util.events.impl.ExperimentFininshedEvent;
@@ -65,7 +65,7 @@ public abstract class AExperiment {
 				for (int k = 0; k < iterations; k++) {
 
 					// set the random seed that the results will be comparable
-					Random rand = new Random(seed + k);
+					MyRandom rand = new MyRandom(seed + k);
 
 					// add to the thread queue
 					Future<ExperimentCallback> future = executor.submit(new ExperimentCallback(this, rand, maxEvaluations, iterations, i, j, k));

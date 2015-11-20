@@ -4,7 +4,7 @@ import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 
 /**
  * An AbstractAlgorithm implements the IAlgorithm interface 
@@ -15,10 +15,10 @@ import com.msu.util.Random;
 public abstract class AbstractAlgorithm implements IAlgorithm {
 
 	
-public abstract NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, Random rand);
+public abstract NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand);
 	
 	@Override
-	final public NonDominatedSolutionSet run(IProblem problem, IEvaluator evaluator, Random rand) {
+	final public NonDominatedSolutionSet run(IProblem problem, IEvaluator evaluator, MyRandom rand) {
 		return run_(problem, evaluator, rand).removeSolutionWithConstraintViolations();
 	}
 	

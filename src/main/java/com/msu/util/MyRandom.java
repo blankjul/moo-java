@@ -3,16 +3,16 @@ package com.msu.util;
 import java.util.Collections;
 import java.util.List;
 
-public class Random {
+public class MyRandom {
 
 	// ! the current random object
 	protected java.util.Random r;
 
-	public Random() {
+	public MyRandom() {
 		r = new java.util.Random();
 	}
 
-	public Random(long seed) {
+	public MyRandom(long seed) {
 		r = new java.util.Random(seed);
 	}
 

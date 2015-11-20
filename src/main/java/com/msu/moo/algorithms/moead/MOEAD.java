@@ -13,7 +13,7 @@ import com.msu.moo.algorithms.EvolutionaryAlgorithms;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.util.Random;
+import com.msu.util.MyRandom;
 import com.msu.util.Range;
 import com.msu.util.Util;
 
@@ -43,7 +43,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 	}
 
 	@Override
-	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator eval, Random rand) {
+	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator eval, MyRandom rand) {
 
 		// archive for storing the non dominated front
 		NonDominatedSolutionSet archive = new NonDominatedSolutionSet();
@@ -104,7 +104,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 					p2 = rand.select(population);
 				}
 				
-				List<IVariable> offsprings = crossover.crossover(p1.getVariable(), p2.getVariable(), rand);
+				List<IVariable> offsprings = crossover.crossover(p1.getVariable(), p2.getVariable(), problem, rand);
 
 				// for each offspring produced by crossover
 				for (IVariable off : offsprings) {
