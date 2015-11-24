@@ -10,6 +10,8 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
+import com.lowagie.tools.ConcatPdf;
+import com.msu.Configuration;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
@@ -54,7 +56,7 @@ public abstract class AExperiment {
 		logger.info("MaxEvaluations: " + maxEvaluations);
 
 		List<Future<ExperimentCallback>> futures = new ArrayList<>();
-		ExecutorService executor = Executors.newScheduledThreadPool(8);
+		ExecutorService executor = Executors.newScheduledThreadPool(Configuration.NUM_OF_THREADS);
 
 		// for each problem. the true front could also be null!
 		for (int i = 0; i < problems.size(); i++) {

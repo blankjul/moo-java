@@ -104,6 +104,10 @@ public class Util {
 		}
 		return l;
 	}
+	
+	public static <T> void addDefault(Collection<T> c, int n, T t) {
+		for (int i = 0; i < n; i++) c.add(t);
+	}
 
 	public static List<Integer> createIndex(int n) {
 		List<Integer> l = new ArrayList<>();

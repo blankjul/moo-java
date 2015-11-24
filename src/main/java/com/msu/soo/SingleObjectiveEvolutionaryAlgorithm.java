@@ -48,9 +48,8 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 			
 			// mating with random selection of the best 20 percent
 			SolutionSet offsprings = new SolutionSet(populationSize);
-			SolutionSet mating = new SolutionSet(population.subList(0, (int) (populationSize / 20)));
 			
-			RandomSelection selector = new RandomSelection(mating , rand);
+			RandomSelection selector = new RandomSelection(population , rand);
 			while (offsprings.size() < populationSize) {
 				// crossover
 				List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable(), rand);
