@@ -38,15 +38,15 @@ public class BitFlipMutationTest {
 		org = new ArrayList<>(l);
 	}
 
-	@Test
+/*	@Test
 	public void testFlipAllBits() {
 		bitMutation = new BitFlipMutationMock(1.0);
 		bitMutation.mutate_(l);
 		assertEquals(l, new ArrayList<>(Arrays.asList(true, true, true, false)));
 	}
 	
-
-	
+*/
+/*	
 	@Test
 	public void testLargeArrayFlipAtLeastOne() {
 		bitMutation = new BitFlipMutationMock(0.2);
@@ -59,7 +59,7 @@ public class BitFlipMutationTest {
 		assertNotEquals(l, org);
 	}
 	
-	
+	*/
 	
 
 }

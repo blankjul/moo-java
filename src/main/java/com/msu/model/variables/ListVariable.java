@@ -1,8 +1,11 @@
 package com.msu.model.variables;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public abstract class ListVariable<T> extends Variable<List<T>>{
+import com.msu.interfaces.IVariable;
+
+public class ListVariable<T> extends Variable<List<T>>{
 	
 
 	public ListVariable(List<T> obj) {
@@ -23,6 +26,14 @@ public abstract class ListVariable<T> extends Variable<List<T>>{
 	public int size() {
 		return obj.size();
 	}
+
+
+	@Override
+	public IVariable copy() {
+		return new ListVariable<>(new ArrayList<>(obj));
+	}
+	
+	
 
 	
 }

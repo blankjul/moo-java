@@ -53,9 +53,6 @@ public abstract class AbstractCrossover<T> {
 
 	}
 	
-	public List<IVariable> crossover(IVariable a, IVariable b, MyRandom rand) {
-		return crossover(a, b, null, rand);
-	}
 	
 
 

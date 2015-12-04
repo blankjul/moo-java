@@ -59,7 +59,7 @@ public class AbstractCrossoverTest {
 
 	@Test
 	public void test() {
-		c.crossover(new MockVariable(a), new MockVariable(b), new MyRandom());
+		c.crossover(new MockVariable(a), new MockVariable(b), null, new MyRandom());
 	}
 
 }

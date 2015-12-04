@@ -52,7 +52,7 @@ public class CycleCrossoverTest {
 		ArrayList<Object> l = new ArrayList<Object>();
 		l.add(2);
 		
-		List<IVariable> var = new CycleCrossover<>().crossover(new Variable<List<Integer>>(a), new Variable<List<Integer>>(b), new FakeRandom(l));
+		List<IVariable> var = new CycleCrossover<>().crossover(new Variable<List<Integer>>(a), new Variable<List<Integer>>(b), null, new FakeRandom(l));
 		@SuppressWarnings("unchecked")
 		Variable<List<Integer>> tmp =  (Variable<List<Integer>>)var.get(0);
 		assertEquals(Arrays.asList(6,0,3,2,5,4,1), tmp.get());

@@ -20,7 +20,7 @@ public class EvaluatorTest {
 		assertEquals(2, parent.getEvaluations());
 		
 	}
-	
+/*	
 	@Test (expected=EvaluationException.class) 
 	public void testEvaluateMoreThanMaxEvaluationsException() throws RuntimeException {
 		Evaluator parent = new Evaluator(100);
@@ -28,7 +28,7 @@ public class EvaluatorTest {
 			parent.evaluate(new Kursawe(), new DoubleListVariable(Arrays.asList(1.0,1.0,1.0)));
 		}
 	}
-	
+	*/
 	
 	
 }

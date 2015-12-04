@@ -116,6 +116,14 @@ public class Util {
 		}
 		return l;
 	}
+	
+	public static List<Integer> createIndex(int l, int u) {
+		List<Integer> list = new ArrayList<>();
+		for (int i = l; i < u; i++) {
+			list.add(i);
+		}
+		return list;
+	}
 
 	/**
 	 * Get all fields through reflection. also of superclass

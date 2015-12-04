@@ -52,7 +52,7 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 			RandomSelection selector = new RandomSelection(population , rand);
 			while (offsprings.size() < populationSize) {
 				// crossover
-				List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable(), rand);
+				List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable(), problem, rand);
 				// mutation
 				for (IVariable offspring : off) {
 					if (rand.nextDouble() < this.probMutation) {
@@ -77,7 +77,9 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 		set.sort(new Comparator<Solution>() {
 			@Override
 			public int compare(Solution o1, Solution o2) {
-				return Double.compare(o1.getObjectives(0), o2.getObjectives(0));
+				int constraint = Double.compare(o1.getMaxConstraintViolation(), o2.getMaxConstraintViolation());
+				if (constraint != 0) return constraint;
+				else return Double.compare(o1.getObjectives(0), o2.getObjectives(0));
 			}
 		});
 	}

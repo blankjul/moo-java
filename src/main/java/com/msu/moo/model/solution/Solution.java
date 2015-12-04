@@ -42,11 +42,11 @@ public class Solution extends ASolution<List<Double>> {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (Double d : objective) {
+		for (Double d : getObjective()) {
 			sb.append(d);
 			sb.append(",");
 		}
-		for (Double d : constraintViolations) {
+		for (Double d : getConstraintViolations()) {
 			sb.append(d);
 			sb.append(",");
 		}
