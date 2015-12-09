@@ -13,8 +13,9 @@ public abstract class ASingleObjectiveAlgorithm extends AbstractAlgorithm {
 	
 	@Override
 	final public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
-/*		
-		if (!(problem instanceof ASingleObjectiveProblem)) throw new RuntimeException("Single Objective algorithms "
+		/*
+		if (!(problem instanceof ASingleObjectiveProblem)) 
+			throw new RuntimeException("Single Objective algorithms "
 				+ "could only work on SingleObjectiveProblems!");
 		*/
 		Solution s =  run__(problem, evaluator, rand);

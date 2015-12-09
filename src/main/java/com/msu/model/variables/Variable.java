@@ -10,7 +10,6 @@ public class Variable<T> implements IVariable {
 	//! list that contains all the values
 	protected T obj;
 	
-	
 	public Variable(T obj) {
 		super();
 		this.obj = obj;
@@ -38,28 +37,6 @@ public class Variable<T> implements IVariable {
 		return obj.toString();
 	}
 	
-
-	@Override
-	public boolean equals(Object other) {
-		if (other == null)
-			return false;
-		if (other == this)
-			return true;
-		try {
-			@SuppressWarnings("unchecked")
-			T otherObject = (T) ((IVariable) other).get();
-			return isEqual(obj, otherObject);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
-	
-	public boolean isEqual(T o1, T o2) {
-		return o1.equals(o2);
-	}
-	
 	
 	public IVariable copy() {
 		return new Variable<T>(Util.cloneObject(obj));
@@ -70,6 +47,34 @@ public class Variable<T> implements IVariable {
 	public <V extends IVariable> V cast(Class<V> clazz) {
 		return (V) this;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((obj == null) ? 0 : obj.hashCode());
+		return result;
+	}
+
+	
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Variable<?> other = (Variable<?>) obj;
+		if (this.obj == null) {
+			if (other.obj != null)
+				return false;
+		} else if (!this.obj.equals(other.obj))
+			return false;
+		return true;
+	}
+	
+	
 	
 
 

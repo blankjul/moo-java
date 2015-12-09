@@ -30,7 +30,7 @@ public class NaiveNonDominatedSorting implements NonDominatedSorting {
 
 
 	@Override
-	public List<NonDominatedSolutionSet> run(List<Solution> solutions) {
+	public <T extends Solution> List<NonDominatedSolutionSet> run(List<T> solutions) {
 		
 		// resulting list
 		List<NonDominatedSolutionSet> result = new ArrayList<>();

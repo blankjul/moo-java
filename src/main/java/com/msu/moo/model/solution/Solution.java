@@ -10,6 +10,7 @@ import com.msu.util.Pair;
 
 public class Solution extends ASolution<List<Double>> {
 
+	
 	public Solution(IVariable variable, List<Double> objectives) {
 		super(variable, objectives);
 	}
@@ -98,4 +99,33 @@ public class Solution extends ASolution<List<Double>> {
 		return constraintViolations.stream().mapToDouble(Double::doubleValue).sum();
 	}
 
+	
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((variable == null) ? 0 : variable.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Solution other = (Solution) obj;
+		if (variable == null) {
+			if (other.variable != null)
+				return false;
+		} else if (!variable.equals(other.variable))
+			return false;
+		return true;
+	}
+
+	
+	
+	
 }

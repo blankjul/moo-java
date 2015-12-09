@@ -1,6 +1,7 @@
 package com.msu.soo;
 
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 
 import com.msu.interfaces.IEvaluator;
@@ -30,13 +31,16 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 
 	// ! factory for creating new instances
 	protected IVariableFactory factory;
+	
+	//! population of the last run
+	protected SolutionSet population;
 
 	
 	@Override
 	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand) {
 		
 		// initialize random population
-        SolutionSet population = new SolutionSet(populationSize * 2);
+        population = new SolutionSet(populationSize * 2);
 		for (IVariable variable : factory.next(problem, rand, populationSize)) {
 			population.add(evaluator.evaluate(problem, variable));
 		}
@@ -62,12 +66,25 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 				}
 			}
 			population.addAll(offsprings);
+
+				
+			
+			
+			// eliminate duplicates to ensure variety in the population
+			population = new SolutionSet(new HashSet<>(population));
 			
 			// truncate the population -> survival of the fittest
 			sortBySingleObjective(population);
-			population = new SolutionSet(population.subList(0, populationSize));
+			population = new SolutionSet(population.subList(0, Math.min(population.size(), populationSize)));
+			
 			
 		}
+/*		
+		for (Solution s : population.subList(0, Math.min(population.size(), 15))) {
+			System.out.println(String.format("%s %s", s.getObjectives(0), s.hashCode()));
+		}
+		System.out.println("---------------------------");
+		*/
 		
 		return population.get(0);
 	}
@@ -79,10 +96,23 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 			public int compare(Solution o1, Solution o2) {
 				int constraint = Double.compare(o1.getMaxConstraintViolation(), o2.getMaxConstraintViolation());
 				if (constraint != 0) return constraint;
-				else return Double.compare(o1.getObjectives(0), o2.getObjectives(0));
+				else {
+					for (int i = 0; i < o1.countObjectives(); i++) {
+						 int value = Double.compare(o1.getObjectives(i), o2.getObjectives(i));
+						 if (value != 0) return value;
+					}
+					return 0;
+				}
 			}
 		});
 	}
+
+
+	public SolutionSet getPopulation() {
+		return population;
+	}
+	
+	
 	
 
 }
