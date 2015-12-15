@@ -10,7 +10,6 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
-import com.lowagie.tools.ConcatPdf;
 import com.msu.Configuration;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;

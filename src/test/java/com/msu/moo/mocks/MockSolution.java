@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.interfaces.IVariable;
+import com.msu.model.variables.Variable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 
 public class MockSolution extends Solution {
 
+	public static int counter = 0;
+	
 	public MockSolution(List<Double> objectives) {
-		super(null, objectives);
+		super(new Variable<>(counter++), objectives);
 	}
 	
 	public MockSolution(IVariable variable, List<Double> objectives) {
@@ -28,7 +31,8 @@ public class MockSolution extends Solution {
 			s.add(new MockSolution(l));
 		}
 		return s;
-		
 	}
+	
+	
 
 }

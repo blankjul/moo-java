@@ -79,4 +79,14 @@ public class Pair<F, S> {
     public String toString() {
     	return String.format("(%s, %s)", first.toString(), second.toString());
     }
+
+	public F getFirst() {
+		return first;
+	}
+
+	public S getSecond() {
+		return second;
+	}
+    
+    
 }

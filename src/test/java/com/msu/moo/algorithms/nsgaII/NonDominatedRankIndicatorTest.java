@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.moo.ExampleSolutionSet;
+import com.msu.ExampleSolutionSet;
 import com.msu.moo.algorithms.nsgaII.NonDominatedRankIndicator;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;

@@ -10,56 +10,44 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.msu.operators.mutation.BitFlipMutation;
+import com.msu.model.variables.ListVariable;
 import com.msu.util.MyRandom;
 
 public class BitFlipMutationTest {
 	
-	private class BitFlipMutationMock extends BitFlipMutation {
-		public BitFlipMutationMock() {
-			super();
-		}
-		public BitFlipMutationMock(Double probability) {
-			super(probability);
-		}
-		public void mutate_(List<Boolean> l) {
-			super.mutate_(l, null, new MyRandom());
-		}
-	}
 	
-	BitFlipMutationMock bitMutation = new BitFlipMutationMock();
+	BitFlipMutation bitMutation = new BitFlipMutation();
 
-	private ArrayList<Boolean> l;
-	private ArrayList<Boolean> org;
+	private ListVariable<Boolean> l;
+	private MyRandom rand = new MyRandom(123456);
 
 	@Before
 	public void setUp() {
-		l = new ArrayList<>(Arrays.asList(false, false, false, true));
-		org = new ArrayList<>(l);
+		l = new ListVariable<Boolean>(Arrays.asList(false, false, false, true));
 	}
 
-/*	@Test
+	@Test
 	public void testFlipAllBits() {
-		bitMutation = new BitFlipMutationMock(1.0);
-		bitMutation.mutate_(l);
-		assertEquals(l, new ArrayList<>(Arrays.asList(true, true, true, false)));
+		bitMutation = new BitFlipMutation(1.0);
+		@SuppressWarnings("unchecked")
+		ListVariable<Boolean> result = (ListVariable<Boolean>) bitMutation.mutate(l, null, rand);
+		assertEquals(result.get(), new ArrayList<>(Arrays.asList(true, true, true, false)));
 	}
 	
-*/
-/*	
+
 	@Test
 	public void testLargeArrayFlipAtLeastOne() {
-		bitMutation = new BitFlipMutationMock(0.2);
-		l = new ArrayList<>();
+		bitMutation = new BitFlipMutation(0.2);
+		List<Boolean> list = new ArrayList<>();
 		for (int i = 0; i < 2000; i++) {
-			l.add(false);
+			list.add(false);
 		}
-		org = new ArrayList<>(l);
-		bitMutation.mutate_(l);
-		assertNotEquals(l, org);
+		@SuppressWarnings("unchecked")
+		ListVariable<Boolean> result = (ListVariable<Boolean>) bitMutation.mutate(new ListVariable<>(list), null, rand);
+		assertNotEquals(l.get(), result.get());
 	}
 	
-	*/
+	
 	
 
 }

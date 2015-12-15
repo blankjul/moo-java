@@ -8,9 +8,7 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.moo.ExampleSolutionSet;
-import com.msu.model.variables.Variable;
-import com.msu.moo.algorithms.nsgaII.CrowdingIndicator;
+import com.msu.ExampleSolutionSet;
 import com.msu.moo.mocks.MockSolution;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
@@ -32,11 +30,11 @@ public class CrowdingRankingIndicatorTest {
 	@Test
 	public void testCrowdingSamePoint() {
 		SolutionSet l = new SolutionSet();
-		l.add(new MockSolution(new Variable<Integer>(0), new ArrayList<Double>(Arrays.asList(0.0, 0.0))));
-		l.add(new MockSolution(new Variable<Integer>(1), new ArrayList<Double>(Arrays.asList(1.0, 1.0))));
-		l.add(new MockSolution(new Variable<Integer>(1), new ArrayList<Double>(Arrays.asList(1.0, 1.0))));
-		l.add(new MockSolution(new Variable<Integer>(1), new ArrayList<Double>(Arrays.asList(1.0, 1.0))));
-		l.add(new MockSolution(new Variable<Integer>(2), new ArrayList<Double>(Arrays.asList(2.0, 2.0))));
+		l.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0.0, 0.0))));
+		l.add(new MockSolution(new ArrayList<Double>(Arrays.asList(1.0, 1.0))));
+		l.add(new MockSolution(new ArrayList<Double>(Arrays.asList(1.0, 1.0))));
+		l.add(new MockSolution(new ArrayList<Double>(Arrays.asList(1.0, 1.0))));
+		l.add(new MockSolution(new ArrayList<Double>(Arrays.asList(2.0, 2.0))));
 		Map<Solution, Double> result = new CrowdingIndicator().calculate(l);
 		assertEquals(0, result.get(l.get(2)), 0.01);
 	}

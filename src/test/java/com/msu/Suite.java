@@ -1,4 +1,4 @@
-package com.moo;
+package com.msu;
 
 import org.junit.runner.RunWith;
 

@@ -113,6 +113,17 @@ public class SolutionSet extends ArrayList<Solution>{
 		return r;
 	}
 
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Solution s : this) {
+			sb.append(s);
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
+
+	
 	
 	
 	

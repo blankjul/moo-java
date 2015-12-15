@@ -1,4 +1,4 @@
-package com.moo;
+package com.msu;
 
 import java.util.ArrayList;
 import java.util.Arrays;

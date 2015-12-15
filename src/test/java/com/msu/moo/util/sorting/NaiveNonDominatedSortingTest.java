@@ -23,8 +23,8 @@ public class NaiveNonDominatedSortingTest {
 
 	@Test
 	public void testTwoPointsTwoSets() {
-		Solution s1 = new Solution(new MockVariable(), new ArrayList<Double>(Arrays.asList(1d,1d)));
-		Solution s2 = new Solution(new MockVariable(), new ArrayList<Double>(Arrays.asList(0d,0d)));
+		Solution s1 = new Solution(new MockVariable(Arrays.asList(0)), new ArrayList<Double>(Arrays.asList(1d,1d)));
+		Solution s2 = new Solution(new MockVariable(Arrays.asList(1)), new ArrayList<Double>(Arrays.asList(0d,0d)));
 		
 		List<NonDominatedSolutionSet> set = new NaiveNonDominatedSorting().run(new ArrayList<>(Arrays.asList(s1,s2)));
 		

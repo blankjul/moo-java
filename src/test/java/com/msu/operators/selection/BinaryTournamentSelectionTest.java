@@ -3,7 +3,7 @@ package com.msu.operators.selection;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.moo.ExampleSolutionSet;
+import com.msu.ExampleSolutionSet;
 import com.msu.moo.algorithms.nsgaII.CrowdingIndicator;
 import com.msu.moo.algorithms.nsgaII.NonDominatedRankIndicator;
 import com.msu.moo.algorithms.nsgaII.RankAndCrowdingComparator;
