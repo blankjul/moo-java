@@ -102,10 +102,7 @@ public class Solution extends ASolution<List<Double>> {
 	
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((variable == null) ? 0 : variable.hashCode());
-		return result;
+		return (variable == null) ? 0 : variable.hashCode();
 	}
 
 	@Override

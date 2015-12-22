@@ -18,7 +18,6 @@ public abstract class AReader<T> {
 		try {
 			br = new BufferedReader(new FileReader(pathToFile));
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
 			throw new RuntimeException(String.format("Could not open %s.", pathToFile));
 		}
 		T problem = read(br);
@@ -29,7 +28,6 @@ public abstract class AReader<T> {
 		try {
 			return read_(br);
 		} catch (IOException e) {
-			e.printStackTrace();
 			throw new RuntimeException("Error while reading file!");
 		}
 	}
