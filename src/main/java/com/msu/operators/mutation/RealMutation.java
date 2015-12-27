@@ -3,6 +3,7 @@ package com.msu.operators.mutation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
 import com.msu.util.MyRandom;
@@ -57,7 +58,7 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	}
 
 	@Override
-	protected List<Double> mutate_(List<Double> b, IProblem problem, MyRandom rand) {
+	public List<Double> mutate_(List<Double> b, IProblem problem, MyRandom rand, IEvaluator evaluator) {
 		
 		List<Double> result = new ArrayList<>();
 		

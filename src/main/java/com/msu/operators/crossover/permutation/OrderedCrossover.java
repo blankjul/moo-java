@@ -34,7 +34,7 @@ public class OrderedCrossover<T> extends AbstractListCrossover<T> {
 
 
 	
-	protected List<T> crossover_(List<T> a, List<T> b, int lb, int ub) {
+	public List<T> crossover_(List<T> a, List<T> b, int lb, int ub) {
 		
 		// create structures for the child
 		final int length = a.size();

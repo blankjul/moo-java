@@ -31,4 +31,8 @@ public interface IEvaluator {
 	 */
 	public Evaluator createChildEvaluator(int maxEvaluations);
 
+	/**
+	 * @return current number of used evaluations.
+	 */
+	public Integer numOfEvaluations();
 }

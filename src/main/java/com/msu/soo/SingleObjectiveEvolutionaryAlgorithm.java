@@ -31,27 +31,27 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 
 	// ! factory for creating new instances
 	protected IVariableFactory factory;
-	
-	//! population of the last run
+
+	// ! population of the last run
 	protected SolutionSet population;
-	
-	
+
 	public static Comparator<Solution> comp = new Comparator<Solution>() {
 		@Override
 		public int compare(Solution o1, Solution o2) {
 			int constraint = Double.compare(o1.getMaxConstraintViolation(), o2.getMaxConstraintViolation());
-			if (constraint != 0) return constraint;
+			if (constraint != 0)
+				return constraint;
 			else {
 				for (int i = 0; i < o1.countObjectives(); i++) {
-					 int value = Double.compare(o1.getObjectives(i), o2.getObjectives(i));
-					 if (value != 0) return value;
+					int value = Double.compare(o1.getObjectives(i), o2.getObjectives(i));
+					if (value != 0)
+						return value;
 				}
 				return 0;
 			}
 		}
 	};
 
-	
 	@Override
 	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand) {
 		// initialize random population
@@ -61,70 +61,68 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 		}
 		return run__(problem, evaluator, rand, initial);
 	}
-		
-		
-	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand, SolutionSet initialPopulation) {
-		
-		this.population = initialPopulation;
-		
-		sortBySingleObjective(population);
-		
-		while (evaluator.hasNext()) {
-			
-			// mating with random selection of the best 20 percent
-			SolutionSet offsprings = new SolutionSet(populationSize);
-			
-			// selects per default always the maximal value
-			BinaryTournamentSelection selector = new BinaryTournamentSelection(population, new Comparator<Solution>() {
-				@Override
-				public int compare(Solution o1, Solution o2) {
-					return -1 * comp.compare(o1, o2);
-				}
-			}, rand);
-			
-			
-			while (offsprings.size() < populationSize) {
-				// crossover
-				List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable(), problem, rand);
-				// mutation
-				for (IVariable offspring : off) {
-					if (rand.nextDouble() < this.probMutation) {
-						offspring = mutation.mutate(offspring, problem, rand);
-					}
-					offsprings.add(evaluator.evaluate(problem, offspring));
-				}
-			}
-			population.addAll(offsprings);
 
-			// eliminate duplicates to ensure variety in the population
-			population = new SolutionSet(new HashSet<>(population));
-			// truncate the population -> survival of the fittest
-			sortBySingleObjective(population);
-			population = new SolutionSet(population.subList(0, Math.min(population.size(), populationSize)));
-			
-			/*			
-			for (Solution s : population.subList(0, Math.min(population.size(), 15))) {
-				System.out.println(String.format("%s %s", s.getObjectives(0), s.hashCode()));
-			}
-			System.out.println("---------------------------");
-			*/
-			
+	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand, SolutionSet initialPopulation) {
+		this.population = initialPopulation;
+		while (evaluator.hasNext()) {
+			next(problem, evaluator, rand);
 		}
-		
 		return population.get(0);
 	}
-	
-	
+
+	public void next(IProblem problem, IEvaluator evaluator, MyRandom rand) {
+
+		// mating with random selection of the best 20 percent
+		SolutionSet offsprings = new SolutionSet(populationSize);
+
+		// selects per default always the maximal value
+		BinaryTournamentSelection selector = new BinaryTournamentSelection(population, new Comparator<Solution>() {
+			@Override
+			public int compare(Solution o1, Solution o2) {
+				return -1 * comp.compare(o1, o2);
+			}
+		}, rand);
+
+		while (offsprings.size() < populationSize) {
+			// crossover
+			List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable(),
+					problem, rand, evaluator);
+			// mutation
+			for (IVariable offspring : off) {
+				if (rand.nextDouble() < this.probMutation) {
+					offspring = mutation.mutate(offspring, problem, rand, evaluator);
+				}
+				offsprings.add(evaluator.evaluate(problem, offspring));
+			}
+		}
+		population.addAll(offsprings);
+
+		// eliminate duplicates to ensure variety in the population
+		population = new SolutionSet(new HashSet<>(population));
+		// truncate the population -> survival of the fittest
+		sortBySingleObjective(population);
+		population = new SolutionSet(population.subList(0, Math.min(population.size(), populationSize)));
+
+		
+		/*
+		 * for (Solution s : population.subList(0, Math.min(population.size(),
+		 * 15))) { System.out.println(String.format("%s %s", s.getObjectives(0),
+		 * s.hashCode())); } System.out.println("---------------------------");
+		 */
+
+	}
+
 	public static void sortBySingleObjective(SolutionSet set) {
 		set.sort(comp);
 	}
-
 
 	public SolutionSet getPopulation() {
 		return population;
 	}
 	
-	
+	public void setPopulation(SolutionSet population) {
+		this.population = population;
+	}
 	
 
 }

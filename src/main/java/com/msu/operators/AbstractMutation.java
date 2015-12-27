@@ -1,5 +1,6 @@
 package com.msu.operators;
 
+import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.util.MyRandom;
@@ -12,8 +13,13 @@ import com.msu.util.MyRandom;
  */
 public abstract class AbstractMutation<T> {
 
-
+	
 	public IVariable mutate(IVariable a, IProblem problem, MyRandom rand) {
+		return mutate(a, problem, rand, null);
+	}
+	
+	
+	public IVariable mutate(IVariable a, IProblem problem, MyRandom rand, IEvaluator evaluator) {
 
 		try {
 			
@@ -21,7 +27,7 @@ public abstract class AbstractMutation<T> {
 			@SuppressWarnings("unchecked")
 			T entry = (T) result.get();
 			
-			T mutated = mutate_(entry, problem, rand);
+			T mutated = mutate_(entry, problem, rand, evaluator);
 			result.set(mutated);
 			
 			return result;
@@ -36,7 +42,7 @@ public abstract class AbstractMutation<T> {
 	}
 
 	
-	abstract protected T mutate_(T element, IProblem problem, MyRandom rand);
+	abstract public T mutate_(T element, IProblem problem, MyRandom rand, IEvaluator evaluator);
 
 
 }

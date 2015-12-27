@@ -3,8 +3,10 @@ package com.msu.operators;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
+import com.msu.model.Evaluator;
 import com.msu.util.MyRandom;
 
 /**
@@ -18,9 +20,14 @@ import com.msu.util.MyRandom;
 public abstract class AbstractCrossover<T> {
 
 	
+	
+	public List<IVariable> crossover(IVariable a, IVariable b, IProblem problem, MyRandom rand) {
+		return crossover(a, b, problem, rand, new Evaluator(0));
+	}
+	
 
 	@SuppressWarnings("unchecked")
-	public List<IVariable> crossover(IVariable a, IVariable b, IProblem problem, MyRandom rand) {
+	public List<IVariable> crossover(IVariable a, IVariable b, IProblem problem, MyRandom rand, IEvaluator evaluator) {
 
 		// TODO: This solution is very ugly. could be improved but all crossover
 		// subclasses has to be changed.
@@ -38,9 +45,7 @@ public abstract class AbstractCrossover<T> {
 		 
 		// if problem is null call the normal crossover else specific one
 		List<T> offspring = null;
-		if (problem == null) offspring = crossover_(first, second, problem, rand);
-		else offspring = crossover_(first,second, problem, rand);
-		
+		offspring = crossover_(first, second, problem, rand, evaluator);
 		
 		List<IVariable> result = new ArrayList<>();
 		for (T o : offspring) {
@@ -56,7 +61,7 @@ public abstract class AbstractCrossover<T> {
 	
 
 
-	abstract protected List<T> crossover_(T a, T b, IProblem problem, MyRandom rand);
+	abstract public List<T> crossover_(T a, T b, IProblem problem, MyRandom rand, IEvaluator evaluator);
 	
 
 }

@@ -3,6 +3,7 @@ package com.msu.operators.mutation;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
 import com.msu.util.MyRandom;
@@ -38,7 +39,7 @@ public class BitFlipMutation extends AbstractMutation<List<Boolean>> {
 
 
 	@Override
-	protected List<Boolean> mutate_(List<Boolean> var, IProblem problem, MyRandom rand) {
+	public List<Boolean> mutate_(List<Boolean> var, IProblem problem, MyRandom rand, IEvaluator evaluator) {
 		List<Boolean> result = new ArrayList<>();
 		if (probability == null) probability = 1 / (double) var.size();
 		for (int i = 0; i < var.size(); i++) {

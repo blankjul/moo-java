@@ -4,13 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.util.MyRandom;
 
 public abstract class AbstractListCrossover<T> extends AbstractCrossover<List<T>> {
 
 	@Override
-	protected List<List<T>> crossover_(List<T> a, List<T> b, IProblem problem, MyRandom rand) {
+	public List<List<T>> crossover_(List<T> a, List<T> b, IProblem problem, MyRandom rand, IEvaluator evaluator) {
 
 		if (a.size() != b.size())
 			throw new RuntimeException("List crossover is not possible when the size of the lists are different!");

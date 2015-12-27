@@ -67,6 +67,21 @@ public class Evaluator implements IEvaluator{
 		return eval;
 	}
 	
+	public void increase() {
+		++this.evaluations;
+		if (getFather() != null) getFather().evaluations++;
+	}
+
+	public Evaluator getFather() {
+		return father;
+	}
+
+	@Override
+	public Integer numOfEvaluations() {
+		return evaluations;
+	}
+	
+	
 	
 
 }
