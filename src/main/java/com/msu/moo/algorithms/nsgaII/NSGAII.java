@@ -2,6 +2,7 @@ package com.msu.moo.algorithms.nsgaII;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -63,11 +64,15 @@ public class NSGAII extends EvolutionaryAlgorithms {
 			population.addAll(offsprings);
 
 
+			
+			// eliminate duplicates to ensure variety in the population
+			population = new SolutionSet(new HashSet<>(population));
+			
 			// survival of the best population
 			calcRankAndCrowding(population);
 			population.sort(new RankAndCrowdingComparator(rank, crowding));
 			Collections.reverse(population);
-			population = new SolutionSet(population.subList(0, populationSize));
+			population = new SolutionSet(population.subList(0, Math.min(populationSize, population.size())));
 
 		}
 
