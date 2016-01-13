@@ -30,7 +30,7 @@ public class SolutionSet extends ArrayList<Solution>{
 	 * @param obj number of objective
 	 */
 	public void sortByObjective(int obj) {
-		Collections.sort(this, (Solution s1, Solution s2) -> s1.getObjective().get(obj).compareTo(s2.getObjective().get(obj)));
+		Collections.sort(this, (Solution s1, Solution s2) -> s1.getObjectives().get(obj).compareTo(s2.getObjectives().get(obj)));
 	}
 	
 	/**
@@ -49,7 +49,7 @@ public class SolutionSet extends ArrayList<Solution>{
 	public List<Double> getVector(int objective) {
 		List<Double> l = new ArrayList<>();
 		for (Solution s : this) {
-			l.add(s.getObjective().get(objective));
+			l.add(s.getObjectives().get(objective));
 		}
 		return l;
 	}
@@ -60,7 +60,7 @@ public class SolutionSet extends ArrayList<Solution>{
 	 */
 	public SolutionSet normalize() {
 		Range<Double> range = new Range<Double>();
-		for (Solution s : this) range.add(s.getObjective());
+		for (Solution s : this) range.add(s.getObjectives());
 		return normalize(range.get());
 	}
 	
@@ -88,13 +88,13 @@ public class SolutionSet extends ArrayList<Solution>{
 	public SolutionSet invert(Double max) {
 		
 		if (this.isEmpty()) return new SolutionSet();
-		int dimensions = this.get(0).getObjective().size();
+		int dimensions = this.get(0).getObjectives().size();
 		
 		SolutionSet result = new SolutionSet();
 		for (int k = 0; k < size(); k++) {
 			List<Double> obj = new ArrayList<>();
 			for (int i = 0; i < dimensions; i++) {
-				double value = this.get(k).getObjective().get(i);
+				double value = this.get(k).getObjectives().get(i);
 				value = max - value;
 				if (value > max) value = max;
 				obj.add(value);
@@ -108,7 +108,7 @@ public class SolutionSet extends ArrayList<Solution>{
 	public Range<Double> getRange() {
 		Range<Double> r = new Range<>();
 		for (Solution s : this) {
-			r.add(s.getObjective());
+			r.add(s.getObjectives());
 		}
 		return r;
 	}

@@ -50,7 +50,7 @@ public class HillClimbing extends ASingleObjectiveAlgorithm {
 			if (next.getSumOfConstraintViolation() < s.getSumOfConstraintViolation()) {
 				s = next;
 			} else if (next.getSumOfConstraintViolation().equals(s.getSumOfConstraintViolation())) {
-				if (next.getObjectives(0) < s.getObjectives(0)) {
+				if (next.getObjective(0) < s.getObjective(0)) {
 					s = next;
 				}
 			}

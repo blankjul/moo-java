@@ -17,8 +17,8 @@ public class SolutionDominator {
 	 * Check if the objective space is the same
 	 */
 	protected Pair<List<Double>, List<Double>> getObjectives(Solution s1, Solution s2) {
-		List<Double> obj1 = s1.getObjective();
-		List<Double> obj2 = s2.getObjective();
+		List<Double> obj1 = s1.getObjectives();
+		List<Double> obj2 = s2.getObjectives();
 		if (obj1.size() != obj2.size()) {
 			throw new RuntimeException("Different objectives space dimensions. Not comparable.");
 		}

@@ -29,9 +29,9 @@ public class SolutionSetTest {
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(2d,2d))));
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(3d,3d))));
 		SolutionSet n = s.normalize();
-		assertEquals(new ArrayList<Double>(Arrays.asList(0d,0d)), n.get(0).getObjective());
-		assertEquals(new ArrayList<Double>(Arrays.asList(0.5d,0.5d)), n.get(1).getObjective());
-		assertEquals(new ArrayList<Double>(Arrays.asList(1d,1d)), n.get(2).getObjective());
+		assertEquals(new ArrayList<Double>(Arrays.asList(0d,0d)), n.get(0).getObjectives());
+		assertEquals(new ArrayList<Double>(Arrays.asList(0.5d,0.5d)), n.get(1).getObjectives());
+		assertEquals(new ArrayList<Double>(Arrays.asList(1d,1d)), n.get(2).getObjectives());
 	}
 	
 	@Test
@@ -41,9 +41,9 @@ public class SolutionSetTest {
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(1d,1d))));
 		SolutionSet n = s.normalize();
-		assertEquals(new ArrayList<Double>(Arrays.asList(0d,0d)), n.get(0).getObjective());
-		assertEquals(new ArrayList<Double>(Arrays.asList(0.5d,0.5d)), n.get(1).getObjective());
-		assertEquals(new ArrayList<Double>(Arrays.asList(1d,1d)), n.get(2).getObjective());
+		assertEquals(new ArrayList<Double>(Arrays.asList(0d,0d)), n.get(0).getObjectives());
+		assertEquals(new ArrayList<Double>(Arrays.asList(0.5d,0.5d)), n.get(1).getObjectives());
+		assertEquals(new ArrayList<Double>(Arrays.asList(1d,1d)), n.get(2).getObjectives());
 	}
 	
 	@Test
@@ -52,8 +52,8 @@ public class SolutionSetTest {
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(0d,0d))));
 		s.add(new MockSolution(new ArrayList<Double>(Arrays.asList(1d,1d))));
 		SolutionSet n = s.invert(5.0);
-		assertEquals(new ArrayList<Double>(Arrays.asList(5d,5d)), n.get(0).getObjective());
-		assertEquals(new ArrayList<Double>(Arrays.asList(4d,4d)), n.get(1).getObjective());
+		assertEquals(new ArrayList<Double>(Arrays.asList(5d,5d)), n.get(0).getObjectives());
+		assertEquals(new ArrayList<Double>(Arrays.asList(4d,4d)), n.get(1).getObjectives());
 	}
 
 

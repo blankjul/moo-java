@@ -74,6 +74,7 @@ public class NSGAII extends EvolutionaryAlgorithms {
 			Collections.reverse(population);
 			population = new SolutionSet(population.subList(0, Math.min(populationSize, population.size())));
 
+			System.out.println(evaluator.numOfEvaluations());
 		}
 
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();

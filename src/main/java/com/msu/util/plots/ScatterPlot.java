@@ -36,15 +36,15 @@ public class ScatterPlot extends Abstract2DPlot {
 	public void add(SolutionSet set, String name) {
 		if (set.isEmpty()) return;
 		
-		final int dimension = set.get(0).getObjective().size();
+		final int dimension = set.get(0).getObjectives().size();
 		
 		if (dimension <= 0 || dimension > 2) {
 			throw new RuntimeException("Only plotting of 2D objective space is allowed!");
 		} else {
 			XYSeries series = new XYSeries(name);
 			for (Solution s : set) {
-				double first = s.getObjective().get(0);
-				double second = (dimension == 1) ? 0 : s.getObjective().get(1);
+				double first = s.getObjectives().get(0);
+				double second = (dimension == 1) ? 0 : s.getObjectives().get(1);
 				series.add(first,second );
 			}
 			collection.addSeries(series);

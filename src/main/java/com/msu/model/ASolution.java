@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.interfaces.IVariable;
+import com.msu.moo.model.solution.ISolution;
 
 /**
  * This class combines the variable with the result in the objective space. Each
@@ -13,13 +14,13 @@ import com.msu.interfaces.IVariable;
  * This concept ensure to forget to reevaluate a solution which means result and
  * variables does not fit anymore.
  */
-public abstract class ASolution<T> {
+public abstract class ASolution implements ISolution {
 
 	//! this list of doubles allows to safe constraint violations for a solution
 	protected List<Double> constraintViolations;
 	
 	// ! objectives immutable
-	protected T objective;
+	protected List<Double> objective;
 
 	// ! variable immutable
 	protected IVariable variable;
@@ -35,13 +36,13 @@ public abstract class ASolution<T> {
 	/**
 	 * Construct an immutable solution object
 	 */
-	public ASolution(IVariable variable, T objectives) {
+	public ASolution(IVariable variable, List<Double> objectives) {
 		this.variable = variable;
 		this.objective = objectives;
 		constraintViolations = new ArrayList<Double>();
 	}
 	
-	public ASolution(IVariable variable, T objectives, List<Double> constraintViolations) {
+	public ASolution(IVariable variable, List<Double> objectives, List<Double> constraintViolations) {
 		this(variable, objectives);
 		this.constraintViolations = constraintViolations;
 	}
@@ -49,7 +50,7 @@ public abstract class ASolution<T> {
 	/**
 	 * @return all objectives
 	 */
-	public T getObjective() {
+	public List<Double> getObjectives() {
 		return objective;
 	}
 

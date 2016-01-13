@@ -8,7 +8,7 @@ import com.msu.interfaces.IVariable;
 import com.msu.model.ASolution;
 import com.msu.util.Pair;
 
-public class Solution extends ASolution<List<Double>> {
+public class Solution extends ASolution {
 
 	
 	public Solution(IVariable variable, List<Double> objectives) {
@@ -23,7 +23,7 @@ public class Solution extends ASolution<List<Double>> {
 	/**
 	 * @return nth objective
 	 */
-	public Double getObjectives(int n) {
+	public Double getObjective(int n) {
 		return objective.get(n);
 	}
 
@@ -43,7 +43,7 @@ public class Solution extends ASolution<List<Double>> {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (Double d : getObjective()) {
+		for (Double d : getObjectives()) {
 			sb.append(d);
 			sb.append(",");
 		}
@@ -59,7 +59,7 @@ public class Solution extends ASolution<List<Double>> {
 
 	
 	public Solution normalize(List<Pair<Double, Double>> boundaries) {
-		int dimensions = getObjective().size();
+		int dimensions = getObjectives().size();
 		double[] points = new double[dimensions];
 
 		for (int i = 0; i < dimensions; i++) {
@@ -71,7 +71,7 @@ public class Solution extends ASolution<List<Double>> {
 			if (min == max)
 				min = min - 0.0001;
 
-			double value = getObjective().get(i);
+			double value = getObjectives().get(i);
 			points[i] = (value - min) / (max - min);
 
 			// even if max or min are not fitting get the values in range

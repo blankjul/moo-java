@@ -35,6 +35,7 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 	// ! population of the last run
 	protected SolutionSet population;
 
+	
 	public static Comparator<Solution> comp = new Comparator<Solution>() {
 		@Override
 		public int compare(Solution o1, Solution o2) {
@@ -43,7 +44,7 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 				return constraint;
 			else {
 				for (int i = 0; i < o1.countObjectives(); i++) {
-					int value = Double.compare(o1.getObjectives(i), o2.getObjectives(i));
+					int value = Double.compare(o1.getObjective(i), o2.getObjective(i));
 					if (value != 0)
 						return value;
 				}
@@ -103,6 +104,7 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 		sortBySingleObjective(population);
 		population = new SolutionSet(population.subList(0, Math.min(population.size(), populationSize)));
 
+		//System.out.println(evaluator.numOfEvaluations());
 		
 		/*
 		 * for (Solution s : population.subList(0, Math.min(population.size(),

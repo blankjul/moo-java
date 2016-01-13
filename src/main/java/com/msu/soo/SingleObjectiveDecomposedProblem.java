@@ -44,7 +44,7 @@ public class SingleObjectiveDecomposedProblem<V extends IVariable> extends ASing
 		Solution s = problem.evaluate(var);
 		if (range != null)
 			s = s.normalize(range.get());
-		objectives.add(MOEADUtil.calcWeightedSum(s.getObjective(), weights));
+		objectives.add(MOEADUtil.calcWeightedSum(s.getObjectives(), weights));
 		constraintViolations.addAll(s.getConstraintViolations());
 	}
 

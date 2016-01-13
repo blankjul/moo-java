@@ -27,7 +27,7 @@ public class MyRandom {
 	 * Create an Integer in range
 	 */
 	public Integer nextInt(int min, int max) {
-		return r.nextInt(max - min + 1) + min;
+		return r.ints(min, max).findFirst().getAsInt();
 	}
 
 	/**

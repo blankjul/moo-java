@@ -30,7 +30,7 @@ public class SingleObjectiveBoxPlot extends AVisualize implements IListener<Prob
 		for (IAlgorithm algorithm : experiment.getAlgorithms()) {
 			List<Double> hvs = new ArrayList<>();
 			for (NonDominatedSolutionSet set : experiment.getResult().get(problem, algorithm)) {
-				hvs.add(set.get(0).getObjectives(0));
+				hvs.add(set.get(0).getObjective(0));
 			}
 			bp.add(hvs, algorithm.toString());
 		}

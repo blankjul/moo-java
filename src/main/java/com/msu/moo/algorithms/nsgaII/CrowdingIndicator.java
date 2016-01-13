@@ -11,7 +11,7 @@ public class CrowdingIndicator extends AIndicator<Double>{
 	
 	//! helping method for fast access to objective values
 	private Double get(SolutionSet solutions, int index, int objective) {
-		return solutions.get(index).getObjective().get(objective);
+		return solutions.get(index).getObjectives().get(objective);
 	}
 	
 	@Override

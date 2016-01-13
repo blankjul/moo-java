@@ -56,7 +56,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 		for (IVariable variable : factory.next(problem, rand, populationSize)) {
 			Solution s = eval.evaluate(problem, variable);
 			population.add(s);
-			range.add(s.getObjective());
+			range.add(s.getObjectives());
 		}
 
 		// initialize weights and calculated utility structures
@@ -79,7 +79,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 		
 		
 		for (int i = 0; i < populationSize; i++) {
-			double fitnessValue = MOEADUtil.calcTchebichew(population.get(i).normalize(range.get()).getObjective(),
+			double fitnessValue = MOEADUtil.calcTchebichew(population.get(i).normalize(range.get()).getObjectives(),
 					weights.get(i), z);
 			fitness.add(fitnessValue);
 		}
@@ -117,12 +117,12 @@ public class MOEAD extends EvolutionaryAlgorithms {
 					Solution s = eval.evaluate(problem, off);
 					
 					// normalize if feasible and new range
-					boolean hasToBeNormalized = range.add(s.getObjective());
+					boolean hasToBeNormalized = range.add(s.getObjectives());
 					
 					// normalize the population according to the new range
 					if (hasToBeNormalized) {
 						for (int k = 0; k < populationSize; k++) {
-							fitness.set(k, MOEADUtil.calcTchebichew(population.get(k).normalize(range.get()).getObjective(), weights.get(k),z));
+							fitness.set(k, MOEADUtil.calcTchebichew(population.get(k).normalize(range.get()).getObjectives(), weights.get(k),z));
 						}
 					}
 					
@@ -148,7 +148,7 @@ public class MOEAD extends EvolutionaryAlgorithms {
 							// calculate single objective of s according to
 							// weights
 							// of j
-							double solutionFitness = MOEADUtil.calcTchebichew(s.normalize(range.get()).getObjective(),
+							double solutionFitness = MOEADUtil.calcTchebichew(s.normalize(range.get()).getObjectives(),
 									weights.get(j), z);
 
 							// if new solution is better
