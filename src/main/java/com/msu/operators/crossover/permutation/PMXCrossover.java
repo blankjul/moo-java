@@ -9,11 +9,9 @@ import java.util.Map;
 import com.msu.operators.AbstractListCrossover;
 import com.msu.operators.crossover.CrossoverUtil;
 import com.msu.util.Pair;
-import com.msu.util.MyRandom;
 
 
 public class PMXCrossover<T> extends AbstractListCrossover<T> {
-
 
 	
 	protected List<T> crossover_(List<T> a, List<T> b, int lb, int ub) {
@@ -49,7 +47,8 @@ public class PMXCrossover<T> extends AbstractListCrossover<T> {
 	
 	
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b, MyRandom rand) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
+		
         Pair<Integer, Integer> bounds = CrossoverUtil.getSection(a.size(), rand);
 
 		return new ArrayList<>( Arrays.asList(crossover_(a, b, bounds.first, bounds.second), 

@@ -27,7 +27,6 @@ import java.util.Set;
 import com.msu.operators.AbstractListCrossover;
 import com.msu.operators.crossover.CrossoverUtil;
 import com.msu.util.Pair;
-import com.msu.util.MyRandom;
 
 
 public class OrderedCrossover<T> extends AbstractListCrossover<T> {
@@ -63,7 +62,7 @@ public class OrderedCrossover<T> extends AbstractListCrossover<T> {
 	
 	
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b, MyRandom rand) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
         Pair<Integer, Integer> bounds = CrossoverUtil.getSection(a.size(), rand);
 
 		return new ArrayList<>( Arrays.asList(crossover_(a, b, bounds.first, bounds.second), 

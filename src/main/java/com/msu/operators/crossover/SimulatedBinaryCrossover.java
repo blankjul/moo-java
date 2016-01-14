@@ -95,7 +95,7 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	}
 
 	@Override
-	protected List<List<Double>> crossoverLists(List<Double> parent1, List<Double> parent2, MyRandom rand) {
+	protected List<List<Double>> crossoverLists(List<Double> parent1, List<Double> parent2) {
 
 		List<Double> child1 = new ArrayList<Double>(parent1);
 		List<Double> child2 = new ArrayList<Double>(parent2);

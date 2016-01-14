@@ -1,16 +1,12 @@
 package com.msu.operators.mutation;
 
-import com.msu.interfaces.IEvaluator;
-import com.msu.interfaces.IProblem;
+import com.msu.interfaces.IVariable;
 import com.msu.operators.AbstractMutation;
-import com.msu.util.MyRandom;
-import com.msu.util.Util;
 
-public class NoMutation<T>  extends AbstractMutation<T>{
+public class NoMutation extends AbstractMutation<IVariable> {
 
 	@Override
-	public T mutate_(T element, IProblem problem, MyRandom rand, IEvaluator evaluator) {
-		return Util.cloneObject(element);
+	public void mutate_(IVariable var) {
 	}
 
 }

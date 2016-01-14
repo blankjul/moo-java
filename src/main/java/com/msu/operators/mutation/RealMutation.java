@@ -3,10 +3,7 @@ package com.msu.operators.mutation;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.interfaces.IEvaluator;
-import com.msu.interfaces.IProblem;
 import com.msu.operators.AbstractMutation;
-import com.msu.util.MyRandom;
 import com.msu.util.Range;
 
 public class RealMutation extends AbstractMutation<List<Double>> {
@@ -58,22 +55,22 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	}
 
 	@Override
-	public List<Double> mutate_(List<Double> b, IProblem problem, MyRandom rand, IEvaluator evaluator) {
+	public void mutate_(List<Double> b) {
 		
 		List<Double> result = new ArrayList<>();
 		
 		if (range == null) range = new Range<Double>(b.size(), Double.MIN_VALUE, Double.MAX_VALUE);
 		
 		mProbability = 1 / (double) b.size();
+		
 		for (int j = 0; j < b.size(); j++) {
 			if (rand.nextDouble() < mProbability) {
 				double u = rand.nextDouble();
-				result.add(sbxMutation(b.get(j), u, range.getMinimum(j), range.getMaximum(j)));
+				double value = sbxMutation(b.get(j), u, range.getMinimum(j), range.getMaximum(j));
+				result.set(j, value);
 			} else 
-				result.add(b.get(j));
+				result.set(j, b.get(j));
 		}
-		
-		return result;
 	}
 
 

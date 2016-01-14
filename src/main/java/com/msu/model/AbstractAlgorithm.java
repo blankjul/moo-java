@@ -15,7 +15,7 @@ import com.msu.util.MyRandom;
 public abstract class AbstractAlgorithm implements IAlgorithm {
 
 	
-public abstract NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand);
+	public abstract NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand);
 	
 	@Override
 	final public NonDominatedSolutionSet run(IProblem problem, IEvaluator evaluator, MyRandom rand) {

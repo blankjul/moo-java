@@ -114,7 +114,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 	}
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b, MyRandom rand) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
 
 		// create combined edge map
 		Map<T, HashSet<T>> map = new HashMap<>();

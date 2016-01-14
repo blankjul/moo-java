@@ -1,9 +1,7 @@
 package com.msu.operators;
 
-import com.msu.interfaces.IEvaluator;
-import com.msu.interfaces.IProblem;
+import com.msu.interfaces.IMutation;
 import com.msu.interfaces.IVariable;
-import com.msu.util.MyRandom;
 
 /**
  * This is an abstract Mutation of an object. This class which inherits from this one
@@ -11,38 +9,26 @@ import com.msu.util.MyRandom;
  *
  * @param <T> type which could be mutated!
  */
-public abstract class AbstractMutation<T> {
-
-	
-	public IVariable mutate(IVariable a, IProblem problem, MyRandom rand) {
-		return mutate(a, problem, rand, null);
-	}
+public abstract class AbstractMutation<T> extends AbstractOperator implements IMutation {
 	
 	
-	public IVariable mutate(IVariable a, IProblem problem, MyRandom rand, IEvaluator evaluator) {
-
+	public void mutate(IVariable a) {
+		
 		try {
-			
-			IVariable result = a.copy();
 			@SuppressWarnings("unchecked")
-			T entry = (T) result.get();
-			
-			T mutated = mutate_(entry, problem, rand, evaluator);
-			result.set(mutated);
-			
-			return result;
-			
-		} catch (Exception e){
+			T entry = (T) a.get();
+			mutate_(entry);
+		} catch (ClassCastException e){
 			System.out.println(a.getClass().getName());
 			System.out.println(a);
 			e.printStackTrace();
-			throw new RuntimeException("Mutation could not be performed. Wrong IVariable types!");
+			throw new RuntimeException("Mutation could not be performed. Wrong IVariable for mutation!");
 		}
 
 	}
 
 	
-	abstract public T mutate_(T element, IProblem problem, MyRandom rand, IEvaluator evaluator);
+	abstract public void mutate_(T element);
 
 
 }

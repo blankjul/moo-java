@@ -4,14 +4,15 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
+import com.msu.interfaces.ICrossover;
 import com.msu.interfaces.IEvaluator;
+import com.msu.interfaces.IFactory;
+import com.msu.interfaces.IMutation;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.interfaces.IVariableFactory;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.operators.AbstractCrossover;
-import com.msu.operators.AbstractMutation;
+import com.msu.operators.OperatorFactory;
 import com.msu.operators.selection.BinaryTournamentSelection;
 import com.msu.util.MyRandom;
 
@@ -24,14 +25,18 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 	protected Double probMutation;
 
 	// ! operator for crossover
-	protected AbstractCrossover<?> crossover;
+	protected OperatorFactory<ICrossover> fCrossover;
+	protected ICrossover crossover;
 
 	// ! operator for mutation
-	protected AbstractMutation<?> mutation;
+	protected OperatorFactory<IMutation> fMutation;
+	protected IMutation mutation;
 
 	// ! factory for creating new instances
-	protected IVariableFactory factory;
-
+	protected OperatorFactory<IFactory> fFactory;
+	protected IFactory factory;
+	
+	
 	// ! population of the last run
 	protected SolutionSet population;
 
@@ -55,15 +60,23 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 
 	@Override
 	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand) {
+		
+		
+		this.factory = fFactory.create(problem, rand, evaluator);
+		
 		// initialize random population
 		SolutionSet initial = new SolutionSet(populationSize * 2);
-		for (IVariable variable : factory.next(problem, rand, populationSize)) {
-			initial.add(evaluator.evaluate(problem, variable));
+		for (int i = 0; i < populationSize; i++) {
+			initial.add(evaluator.evaluate(problem, factory.next()));
 		}
 		return run__(problem, evaluator, rand, initial);
 	}
 
 	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand, SolutionSet initialPopulation) {
+		
+		this.crossover = fCrossover.create(problem, rand, evaluator);
+		this.mutation = fMutation.create(problem, rand, evaluator);
+		
 		this.population = initialPopulation;
 		while (evaluator.hasNext()) {
 			next(problem, evaluator, rand);
@@ -86,12 +99,11 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 
 		while (offsprings.size() < populationSize) {
 			// crossover
-			List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable(),
-					problem, rand, evaluator);
+			List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable());
 			// mutation
 			for (IVariable offspring : off) {
 				if (rand.nextDouble() < this.probMutation) {
-					offspring = mutation.mutate(offspring, problem, rand, evaluator);
+					mutation.mutate(offspring);
 				}
 				offsprings.add(evaluator.evaluate(problem, offspring));
 			}
@@ -101,22 +113,11 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 		// eliminate duplicates to ensure variety in the population
 		population = new SolutionSet(new HashSet<>(population));
 		// truncate the population -> survival of the fittest
-		sortBySingleObjective(population);
+		population.sort(comp);
 		population = new SolutionSet(population.subList(0, Math.min(population.size(), populationSize)));
 
-		//System.out.println(evaluator.numOfEvaluations());
-		
-		/*
-		 * for (Solution s : population.subList(0, Math.min(population.size(),
-		 * 15))) { System.out.println(String.format("%s %s", s.getObjectives(0),
-		 * s.hashCode())); } System.out.println("---------------------------");
-		 */
-
 	}
 
-	public static void sortBySingleObjective(SolutionSet set) {
-		set.sort(comp);
-	}
 
 	public SolutionSet getPopulation() {
 		return population;

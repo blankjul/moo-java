@@ -34,6 +34,10 @@ public class Builder<T> {
 		addDefaultFields(defaultFields);
 	}
 	
+	public Builder(T obj) {
+		this.obj = obj;
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public Builder(Class<?> clazz) {

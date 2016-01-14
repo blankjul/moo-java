@@ -24,13 +24,12 @@ import java.util.List;
 import java.util.Set;
 
 import com.msu.operators.AbstractListCrossover;
-import com.msu.util.MyRandom;
 
 
 public class CycleCrossover<T> extends AbstractListCrossover<T> {
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b, MyRandom rand) {
+	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
 		return crossover_(a, b, rand.nextInt(0, a.size() - 1));
 	}
 	

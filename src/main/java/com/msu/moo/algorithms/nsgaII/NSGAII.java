@@ -38,9 +38,13 @@ public class NSGAII extends EvolutionaryAlgorithms {
 	@Override
 	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
 
-		// initialize the population and calculate also rank and crowding
+		// initialize operators
 		initialize(problem, evaluator, rand);
-
+		
+		// initialize the population and calculate also rank and crowding
+		initializePopulation(problem, evaluator, rand);
+		
+		
 		while (evaluator.hasNext()) {
 
 			// binary tournament selection for mating
@@ -51,11 +55,10 @@ public class NSGAII extends EvolutionaryAlgorithms {
 			SolutionSet offsprings = new SolutionSet(populationSize);
 			while (offsprings.size() < populationSize) {
 				// crossover
-				List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable(), problem, rand);
+				List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable());
 				// mutation
 				for (IVariable offspring : off) {
-					if (rand.nextDouble() < this.probMutation)
-						offspring = mutation.mutate(offspring, problem, rand);
+					if (rand.nextDouble() < this.probMutation) mutation.mutate(offspring);
 					offsprings.add(evaluator.evaluate(problem, offspring));
 				}
 			}
@@ -74,7 +77,6 @@ public class NSGAII extends EvolutionaryAlgorithms {
 			Collections.reverse(population);
 			population = new SolutionSet(population.subList(0, Math.min(populationSize, population.size())));
 
-			System.out.println(evaluator.numOfEvaluations());
 		}
 
 		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
@@ -84,15 +86,15 @@ public class NSGAII extends EvolutionaryAlgorithms {
 
 	}
 
-	protected void initialize(IProblem problem, IEvaluator eval, MyRandom rand) {
+	protected void initializePopulation(IProblem problem, IEvaluator eval, MyRandom rand) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();
 		// initialize the population with populationSize
 		population = new SolutionSet(populationSize * 2);
 
-		for (IVariable variable : factory.next(problem, rand, populationSize)) {
-			population.add(eval.evaluate(problem, variable));
+		for (int i = 0; i < populationSize; i++) {
+			population.add(eval.evaluate(problem, factory.next()));
 		}
 
 		// calculate Rank and Crowding for the initial population

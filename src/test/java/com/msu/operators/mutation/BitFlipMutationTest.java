@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.msu.model.variables.ListVariable;
-import com.msu.util.MyRandom;
 
 public class BitFlipMutationTest {
 	
@@ -19,7 +18,6 @@ public class BitFlipMutationTest {
 	BitFlipMutation bitMutation = new BitFlipMutation();
 
 	private ListVariable<Boolean> l;
-	private MyRandom rand = new MyRandom(123456);
 
 	@Before
 	public void setUp() {
@@ -30,7 +28,7 @@ public class BitFlipMutationTest {
 	public void testFlipAllBits() {
 		bitMutation = new BitFlipMutation(1.0);
 		@SuppressWarnings("unchecked")
-		ListVariable<Boolean> result = (ListVariable<Boolean>) bitMutation.mutate(l, null, rand);
+		ListVariable<Boolean> result = (ListVariable<Boolean>) bitMutation.mutate(l);
 		assertEquals(result.get(), new ArrayList<>(Arrays.asList(true, true, true, false)));
 	}
 	
@@ -43,7 +41,7 @@ public class BitFlipMutationTest {
 			list.add(false);
 		}
 		@SuppressWarnings("unchecked")
-		ListVariable<Boolean> result = (ListVariable<Boolean>) bitMutation.mutate(new ListVariable<>(list), null, rand);
+		ListVariable<Boolean> result = (ListVariable<Boolean>) bitMutation.mutate(new ListVariable<>(list));
 		assertNotEquals(l.get(), result.get());
 	}
 	

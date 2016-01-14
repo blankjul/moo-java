@@ -6,13 +6,14 @@ package com.msu.interfaces;
  *
  * @param <T> variable type
  */
-public interface IFactory<T extends IVariable> {
+public interface IFactory {
 	
 	/**
 	 * Create a new object from the class.
 	 * @return new random instance.
 	 */
-	public T create();
+	public IVariable next();
 	
+	public boolean hasNext();
 
 }

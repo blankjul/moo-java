@@ -5,17 +5,18 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.builder.MOEADBuilder;
-import com.msu.builder.NSGAIIBuilder;
+import com.msu.builder.Builder;
 import com.msu.experiment.AExperiment;
 import com.msu.interfaces.IAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.model.variables.DoubleListVariableFactory;
+import com.msu.moo.algorithms.nsgaII.NSGAII;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.problems.DoubleVariableListProblem;
 import com.msu.moo.problems.ZDT.AbstractZDT;
 import com.msu.moo.visualization.AttainmentSurfacePlot;
+import com.msu.operators.OperatorFactory;
 import com.msu.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.operators.mutation.RealMutation;
 import com.msu.util.BashExecutor;
@@ -38,27 +39,15 @@ public class ZDTExperiment extends AExperiment {
 		Range<Double> range = problem.getVariableConstraints();
 		DoubleListVariableFactory fac = new DoubleListVariableFactory(range);
 	
-	
-		NSGAIIBuilder nsgaII = new NSGAIIBuilder();
+
+		Builder<NSGAII> nsgaII = new Builder<>(NSGAII.class);
 		nsgaII
-				.set("populationSize", 50)
-				.set("factory", fac)
-				.set("crossover", new SimulatedBinaryCrossover(range))
-				.set("mutation", new RealMutation(range));
+		.set("probMutation", 0.3)
+		.set("populationSize", 50)
+		.set("fFactory", new OperatorFactory<>(fac))
+		.set("fCrossover", new OperatorFactory<>(new SimulatedBinaryCrossover(range)))
+		.set("fMutation", new OperatorFactory<>(new RealMutation(range)));
 		algorithms.add(nsgaII.build());
-		
-	
-		
-		MOEADBuilder moead = new MOEADBuilder();
-		moead
-			.set("populationSize", 50)
-			.set("factory", fac)
-			.set("crossover", new SimulatedBinaryCrossover(range))
-			.set("mutation", new RealMutation(range))
-			.set("T", 10)
-	     	.set("delta", 0.3);
-		
-		algorithms.add(moead.build());
 		
 	}
 	
