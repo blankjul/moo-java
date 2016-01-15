@@ -12,6 +12,7 @@ import com.msu.util.MyRandom;
  */
 public interface IMultiObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> {
 
+	
 	/**
 	 * Execute the implementation of the algorithm.
 	 * 
@@ -19,9 +20,15 @@ public interface IMultiObjectiveAlgorithm<V extends IVariable, P extends IProble
 	 *            to solve
 	 * @param evaluator
 	 *            which counts the evaluations
+	 */
+	public IMultiObjectiveAlgorithm<V,P> initialize(P problem, IEvaluator<V,P> evaluator, MyRandom rand);
+
+	
+	/**
 	 * @return front of non dominated points
 	 */
-	public  NonDominatedSolutionSet<V> run(P problem, IEvaluator<V,P> evaluator,
-			MyRandom rand);
+	public  NonDominatedSolutionSet<V> run();
 
+	
+	
 }

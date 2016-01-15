@@ -1,12 +1,10 @@
 package com.msu.moo.algorithms;
 
-import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IFactory;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.util.MyRandom;
 
 /**
  * ExhaustiveSolver ignores the maxEvaluations completely and tries to find new
@@ -22,7 +20,7 @@ public class ExhaustiveSolver<V extends IVariable, P extends IProblem<V>> extend
 	}
 	
 	@Override
-	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V,P> evaluator, MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_() {
 		NonDominatedSolutionSet<V> set = new NonDominatedSolutionSet<V>();
 		while (factory.hasNext()) {
 			V var = factory.next(problem, rand);

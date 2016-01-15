@@ -11,4 +11,5 @@ public interface ICrossover<V extends IVariable, P extends IProblem<V>> {
 
 	public List<V> crossover(P problem, MyRandom rand, V a, V b);
 
+	
 }

@@ -5,19 +5,17 @@ import java.util.HashSet;
 import java.util.List;
 
 import com.msu.interfaces.ICrossover;
-import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IFactory;
 import com.msu.interfaces.IMutation;
 import com.msu.interfaces.IProblem;
-import com.msu.interfaces.ISingleObjectiveAlgorithm;
 import com.msu.interfaces.ISolution;
 import com.msu.interfaces.IVariable;
+import com.msu.model.ASingleObjectiveAlgorithm;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.operators.selection.BinaryTournamentSelection;
-import com.msu.util.MyRandom;
 
-public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends IProblem<V>>  implements ISingleObjectiveAlgorithm<V,P> {
+public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends IProblem<V>>  extends ASingleObjectiveAlgorithm<V,P> {
 
 	// ! size of the whole Population
 	protected int populationSize;
@@ -37,6 +35,7 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 	// ! population of the last run
 	protected SolutionSet<V> population;
 
+	
 	
 	public static Comparator<ISolution<?>> comp = new Comparator<ISolution<?>>() {
 		@Override
@@ -59,7 +58,7 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		
 
 	@Override
-	public Solution<V> run(P problem, IEvaluator<V,P> evaluator, MyRandom rand) {
+	public Solution<V> run() {
 			
 		while (population.size() < populationSize) {
 			population.add(evaluator.evaluate(problem, factory.next(problem, rand)));

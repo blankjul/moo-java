@@ -5,14 +5,14 @@ import com.msu.interfaces.IFactory;
 import com.msu.interfaces.IMutation;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.model.AbstractMultiObjectiveAlgorithm;
+import com.msu.model.AMultiObjectiveAlgorithm;
 import com.msu.moo.model.solution.SolutionSet;
 
 /**
  * This class should be used as a template for all evolutionary algorithms that
  * are used. 
  */
-public abstract class AMultiObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends IProblem<V>>  extends AbstractMultiObjectiveAlgorithm<V,P> {
+public abstract class AMultiObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends IProblem<V>>  extends AMultiObjectiveAlgorithm<V,P> {
 
 	// ! size of the whole Population
 	protected int populationSize;
@@ -32,5 +32,8 @@ public abstract class AMultiObjectiveEvolutionaryAlgorithm<V extends IVariable, 
 	// ! current population
 	protected SolutionSet<V> population = null;
 
+	
+	
+	
 	
 }

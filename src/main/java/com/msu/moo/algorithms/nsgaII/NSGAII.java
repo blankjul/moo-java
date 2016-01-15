@@ -37,8 +37,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	}
 
 	@Override
-	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V,P> evaluator,
-			MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_() {
 
 		// initialize the population and calculate also rank and crowding
 		initializePopulation(problem, evaluator, rand);

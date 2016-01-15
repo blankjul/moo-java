@@ -61,7 +61,8 @@ public abstract class AMultiObjectiveExperiment<V extends IVariable, P extends I
 					IEvaluator<V, P> evaluator = new Evaluator<>(maxEvaluations);
 
 					// calculate result
-					NonDominatedSolutionSet<V> set = algorithm.run(problem, evaluator, rand);
+					algorithm.initialize(problem, evaluator, rand);
+					NonDominatedSolutionSet<V> set = algorithm.run();
 
 					// print result
 					System.out.println("------------------------------");
