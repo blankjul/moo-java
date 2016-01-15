@@ -17,6 +17,8 @@ public abstract class AProblem<V extends IVariable> implements IProblem<V> {
 	 */
 	protected abstract void evaluate_(V var, List<Double> objectives, List<Double> constraintViolations);
 	
+	//! name of the problem
+	protected String name;
 	
 	@Override
 	public Solution<V> evaluate(V variable) {
@@ -45,7 +47,12 @@ public abstract class AProblem<V extends IVariable> implements IProblem<V> {
 		return Solution.create(variable, objectives, constraintViolations);
 		
 	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 	
 
+	
 
 }
