@@ -9,14 +9,15 @@ import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IFactory;
 import com.msu.interfaces.IMutation;
 import com.msu.interfaces.IProblem;
+import com.msu.interfaces.ISingleObjectiveAlgorithm;
+import com.msu.interfaces.ISolution;
 import com.msu.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.operators.OperatorFactory;
 import com.msu.operators.selection.BinaryTournamentSelection;
 import com.msu.util.MyRandom;
 
-public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgorithm {
+public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends IProblem<V>>  implements ISingleObjectiveAlgorithm<V,P> {
 
 	// ! size of the whole Population
 	protected int populationSize;
@@ -25,30 +26,26 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 	protected Double probMutation;
 
 	// ! operator for crossover
-	protected OperatorFactory<ICrossover> fCrossover;
-	protected ICrossover crossover;
+	protected ICrossover<V,P> crossover;
 
 	// ! operator for mutation
-	protected OperatorFactory<IMutation> fMutation;
-	protected IMutation mutation;
+	protected IMutation<V,P> mutation;
 
 	// ! factory for creating new instances
-	protected OperatorFactory<IFactory> fFactory;
-	protected IFactory factory;
-	
+	protected IFactory<V,P> factory;
 	
 	// ! population of the last run
-	protected SolutionSet population;
+	protected SolutionSet<V> population;
 
 	
-	public static Comparator<Solution> comp = new Comparator<Solution>() {
+	public static Comparator<ISolution<?>> comp = new Comparator<ISolution<?>>() {
 		@Override
-		public int compare(Solution o1, Solution o2) {
-			int constraint = Double.compare(o1.getMaxConstraintViolation(), o2.getMaxConstraintViolation());
+		public int compare(ISolution<?> o1, ISolution<?> o2) {
+			int constraint = Double.compare(o1.getSumOfConstraintViolation(), o2.getSumOfConstraintViolation());
 			if (constraint != 0)
 				return constraint;
 			else {
-				for (int i = 0; i < o1.countObjectives(); i++) {
+				for (int i = 0; i < o1.numOfObjectives(); i++) {
 					int value = Double.compare(o1.getObjective(i), o2.getObjective(i));
 					if (value != 0)
 						return value;
@@ -58,74 +55,66 @@ public class SingleObjectiveEvolutionaryAlgorithm extends ASingleObjectiveAlgori
 		}
 	};
 
-	@Override
-	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand) {
+	
 		
-		
-		this.factory = fFactory.create(problem, rand, evaluator);
-		
-		// initialize random population
-		SolutionSet initial = new SolutionSet(populationSize * 2);
-		for (int i = 0; i < populationSize; i++) {
-			initial.add(evaluator.evaluate(problem, factory.next()));
-		}
-		return run__(problem, evaluator, rand, initial);
-	}
 
-	public Solution run__(IProblem problem, IEvaluator evaluator, MyRandom rand, SolutionSet initialPopulation) {
+	@Override
+	public Solution<V> run(P problem, IEvaluator<V,P> evaluator, MyRandom rand) {
+			
+		while (population.size() < populationSize) {
+			population.add(evaluator.evaluate(problem, factory.next(problem, rand)));
+		}
 		
-		this.crossover = fCrossover.create(problem, rand, evaluator);
-		this.mutation = fMutation.create(problem, rand, evaluator);
-		
-		this.population = initialPopulation;
 		while (evaluator.hasNext()) {
-			next(problem, evaluator, rand);
+			
+			// mating with random selection of the best 20 percent
+			SolutionSet<V> offsprings = new SolutionSet<V>(populationSize);
+
+			// selects per default always the maximal value
+			BinaryTournamentSelection<V> selector = new BinaryTournamentSelection<V>(population, new Comparator<Solution<V>>() {
+				@Override
+				public int compare(Solution<V> o1, Solution<V> o2) {
+					return -1 * comp.compare(o1, o2);
+				}
+			}, rand);
+
+			while (offsprings.size() < populationSize) {
+				// crossover
+				List<V> off = crossover.crossover(problem, rand, selector.next().getVariable(), selector.next().getVariable());
+				
+				// mutation
+				for (V offspring : off) {
+					if (rand.nextDouble() < this.probMutation) {
+						mutation.mutate(problem, rand, offspring);
+					}
+					offsprings.add(evaluator.evaluate(problem, offspring));
+				}
+			}
+			population.addAll(offsprings);
+
+			// eliminate duplicates to ensure variety in the population
+			population = new SolutionSet<V>(new HashSet<>(population));
+			// truncate the population -> survival of the fittest
+			population.sort(comp);
+			population = new SolutionSet<V>(population.subList(0, Math.min(population.size(), populationSize)));
+			
 		}
 		return population.get(0);
 	}
 
-	public void next(IProblem problem, IEvaluator evaluator, MyRandom rand) {
-
-		// mating with random selection of the best 20 percent
-		SolutionSet offsprings = new SolutionSet(populationSize);
-
-		// selects per default always the maximal value
-		BinaryTournamentSelection selector = new BinaryTournamentSelection(population, new Comparator<Solution>() {
-			@Override
-			public int compare(Solution o1, Solution o2) {
-				return -1 * comp.compare(o1, o2);
-			}
-		}, rand);
-
-		while (offsprings.size() < populationSize) {
-			// crossover
-			List<IVariable> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable());
-			// mutation
-			for (IVariable offspring : off) {
-				if (rand.nextDouble() < this.probMutation) {
-					mutation.mutate(offspring);
-				}
-				offsprings.add(evaluator.evaluate(problem, offspring));
-			}
-		}
-		population.addAll(offsprings);
-
-		// eliminate duplicates to ensure variety in the population
-		population = new SolutionSet(new HashSet<>(population));
-		// truncate the population -> survival of the fittest
-		population.sort(comp);
-		population = new SolutionSet(population.subList(0, Math.min(population.size(), populationSize)));
-
-	}
+	
 
 
-	public SolutionSet getPopulation() {
+	public SolutionSet<V> getPopulation() {
 		return population;
 	}
 	
-	public void setPopulation(SolutionSet population) {
+	public void setPopulation(SolutionSet<V> population) {
 		this.population = population;
 	}
+
+
+
 	
 
 }

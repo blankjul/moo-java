@@ -2,9 +2,9 @@ package com.msu.operators.selection;
 
 import java.util.Queue;
 
+import com.msu.model.ASelection;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.operators.AbstractSelection;
 import com.msu.util.MyRandom;
 
 
@@ -13,21 +13,21 @@ import com.msu.util.MyRandom;
  * always to individuals to a tournament and choose the winner by using a comparator!	
  *
  */
-public class RandomSelection extends AbstractSelection {
+public class RandomSelection<T> extends ASelection<T> {
 
 	//! current pool which is used for the selection
-	protected Queue<Solution> q = null;
+	protected Queue<Solution<T>> q = null;
 	
 	/**
 	 * Construct a binary tournament selector
 	 * @param set which should be used for selection
 	 */
-	public RandomSelection(SolutionSet set, MyRandom rand) {
+	public RandomSelection(SolutionSet<T> set, MyRandom rand) {
 		super(set, rand);
 	}
 	
 	@Override
-	public Solution next() {
+	public Solution<T> next() {
 		return rand.select(set);
 	}
 	

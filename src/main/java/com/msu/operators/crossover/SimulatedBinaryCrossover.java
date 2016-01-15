@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.operators.AbstractListCrossover;
-import com.msu.util.Pair;
+import com.msu.interfaces.IProblem;
+import com.msu.model.ACrossover;
+import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.util.MyRandom;
+import com.msu.util.Pair;
 import com.msu.util.Range;
 
-public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
+public class SimulatedBinaryCrossover extends ACrossover<List<Double>, DoubleListVariable> {
 
 	// ! minimal difference for executing the simulated binary crossover
 	protected double EPS = 1.0e-30;
@@ -95,22 +97,23 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 	}
 
 	@Override
-	protected List<List<Double>> crossoverLists(List<Double> parent1, List<Double> parent2) {
+	public List<List<Double>> crossover(IProblem<DoubleListVariable> problem, MyRandom rand, List<Double> a,
+			List<Double> b) {
 
-		List<Double> child1 = new ArrayList<Double>(parent1);
-		List<Double> child2 = new ArrayList<Double>(parent2);
+		List<Double> child1 = new ArrayList<Double>(a);
+		List<Double> child2 = new ArrayList<Double>(b);
 		
-		if (range == null) range = new Range<Double>(parent1.size(), Double.MIN_VALUE, Double.MAX_VALUE);
+		if (range == null) range = new Range<Double>(a.size(), Double.MIN_VALUE, Double.MAX_VALUE);
 
 		// for each double value in the list
-		for (int i = 0; i < parent1.size(); i++) {
+		for (int i = 0; i < a.size(); i++) {
 
 			// perform crossover if sbxProbability is given
 			if (rand.nextDouble() <= cProbability) {
 
 				// get the parent values
-				double p1 = parent1.get(i);
-				double p2 = parent2.get(i);
+				double p1 = a.get(i);
+				double p2 = b.get(i);
 
 				// if the difference is very small -> no crossover
 				if (Math.abs(p1 - p2) <= EPS) continue;
@@ -130,5 +133,10 @@ public class SimulatedBinaryCrossover extends AbstractListCrossover<Double> {
 		}
 		return new ArrayList<>(Arrays.asList(child1, child2));
 	}
+
+
+	
+
+	
 
 }

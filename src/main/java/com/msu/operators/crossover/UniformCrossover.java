@@ -4,14 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.operators.AbstractListCrossover;
+import com.msu.interfaces.IProblem;
+import com.msu.model.ACrossover;
+import com.msu.moo.model.variable.ListVariable;
+import com.msu.util.MyRandom;
 
-public class UniformCrossover<T> extends AbstractListCrossover<T> {
+public class UniformCrossover<T> extends ACrossover<List<T>, ListVariable<T>> {
 
-	
 	
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
+	public List<List<T>> crossover(IProblem<ListVariable<T>> problem, MyRandom rand, List<T> a, List<T> b) {
+		
 		// copy the both list and change values
 		List<T> c1 = new ArrayList<T>();
 		List<T> c2 = new ArrayList<T>();
@@ -28,5 +31,7 @@ public class UniformCrossover<T> extends AbstractListCrossover<T> {
 		}
 		return new ArrayList<>(Arrays.asList(c1, c2));
 	}
+
+	
 
 }

@@ -10,7 +10,7 @@ public class SolutionDominatorWithConstraints extends SolutionDominator {
 	/**
 	 * Check if the objective space is the same
 	 */
-	protected Pair<Double, Double> getConstraintViolations(Solution s1, Solution s2) {
+	protected Pair<Double, Double> getConstraintViolations(Solution<?> s1, Solution<?> s2) {
 		List<Double> obj1 = s1.getConstraintViolations();
 		List<Double> obj2 = s2.getConstraintViolations();
 		if (obj1.size() != obj2.size()) {
@@ -21,7 +21,7 @@ public class SolutionDominatorWithConstraints extends SolutionDominator {
 	}
 
 	@Override
-	public boolean isDominating(Solution s1, Solution s2) {
+	public boolean isDominating(Solution<?> s1, Solution<?> s2) {
 		Pair<Double, Double> p = getConstraintViolations(s1, s2);
 		if (!p.first.equals(p.second))
 			return p.first < p.second;
@@ -31,7 +31,7 @@ public class SolutionDominatorWithConstraints extends SolutionDominator {
 
 
 	@Override
-	public boolean isEqual(Solution s1, Solution s2) {
+	public boolean isEqual(Solution<?> s1, Solution<?> s2) {
 		Pair<Double, Double> p = getConstraintViolations(s1, s2);
 		if (!p.first.equals(p.second))
 			return false;

@@ -16,7 +16,7 @@ import com.msu.util.exceptions.EvaluationException;
  * might be implemented.
  *
  */
-public class Evaluator implements IEvaluator{
+public class Evaluator<V extends IVariable, P extends IProblem<V>> implements IEvaluator<V,P> {
 
 	// ! current amount of evaluations
 	protected int evaluations = 0;
@@ -25,14 +25,14 @@ public class Evaluator implements IEvaluator{
 	protected Integer maxEvaluations = null;
 	
 	// ! current amount of evaluations
-	protected Evaluator father = null;
+	protected Evaluator<V,P> father = null;
 
 	
 	public Evaluator(int maxEvaluations) {
 		this.maxEvaluations = maxEvaluations;
 	}
 
-	public Solution evaluate(IProblem problem, IVariable variable) {
+	public Solution<V> evaluate(P problem, V variable) {
 		
 		if (evaluations >= (int) (maxEvaluations * 1.20)) 
 			throw new EvaluationException("Evaluations expired. Check hasNext() first.");
@@ -61,8 +61,8 @@ public class Evaluator implements IEvaluator{
 	}
 
 	
-	public Evaluator createChildEvaluator(int maxEvaluations) {
-		Evaluator eval = new Evaluator(maxEvaluations);
+	public Evaluator<V,P> createChildEvaluator(int maxEvaluations) {
+		Evaluator<V,P> eval = new Evaluator<V,P>(maxEvaluations);
 		eval.father = this;
 		return eval;
 	}
@@ -72,7 +72,7 @@ public class Evaluator implements IEvaluator{
 		if (getFather() != null) getFather().evaluations++;
 	}
 
-	public Evaluator getFather() {
+	public Evaluator<V,P> getFather() {
 		return father;
 	}
 

@@ -8,10 +8,10 @@ import java.util.stream.Collectors;
 
 import com.msu.util.Range;
 
-public class NonDominatedSolutionSet implements Iterable<Solution> {
+public class NonDominatedSolutionSet<V> implements Iterable<Solution<V>> {
 
 	// ! list which contains all the solutions
-	protected SolutionSet solutions = new SolutionSet();
+	protected SolutionSet<V> solutions = new SolutionSet<V>();
 
 	// ! solution comparator for testing domination
 	protected SolutionDominator cmp = new SolutionDominatorWithConstraints();
@@ -20,35 +20,34 @@ public class NonDominatedSolutionSet implements Iterable<Solution> {
 		super();
 	}
 
-	public NonDominatedSolutionSet(NonDominatedSolutionSet set) {
-		for (Solution s : set.solutions)
+	public NonDominatedSolutionSet(NonDominatedSolutionSet<V> set) {
+		for (Solution<V> s : set.solutions)
 			solutions.add(s);
 	}
 
-	public NonDominatedSolutionSet(List<Solution> solutions) {
-		for (Solution s : solutions)
+	public NonDominatedSolutionSet(List<Solution<V>> solutions) {
+		for (Solution<V> s : solutions)
 			add(s);
 	}
 
-	public <T extends List<Solution>> void addAll(T solutions) {
-		for (Solution entry : solutions)
-			add(entry);
+	public void addAll(List<Solution<V>> solutions) {
+		for (Solution<V> entry : solutions) add(entry);
 	}
 
-	public Solution get(int index) {
+	public Solution<V> get(int index) {
 		return solutions.get(index);
 	}
 
-	public void addAll(Collection<Solution> set) {
-		for (Solution s : set) add(s);
+	public void addAll(Collection<Solution<V>> set) {
+		for (Solution<V> s : set) add(s);
 	}
 	
-	public boolean add(Solution solutionToAdd) {
+	public boolean add(Solution<V> solutionToAdd) {
 
 		// all the solutions which are dominated by new one
-		List<Solution> areDominated = new ArrayList<>();
+		List<Solution<V>> areDominated = new ArrayList<>();
 
-		for (Solution s : solutions) {
+		for (Solution<V> s : solutions) {
 
 			// if the solution objectives are exactly equal
 			if (cmp.isEqual(s, solutionToAdd)) {
@@ -80,8 +79,8 @@ public class NonDominatedSolutionSet implements Iterable<Solution> {
 		return true;
 	}
 
-	protected boolean addEqualSolution(Solution solutionToAdd) {
-		for (Solution s : solutions) {
+	protected boolean addEqualSolution(Solution<V> solutionToAdd) {
+		for (Solution<V> s : solutions) {
 			if (s.getVariable().equals(solutionToAdd.getVariable())) {
 				return false;
 			}
@@ -100,13 +99,13 @@ public class NonDominatedSolutionSet implements Iterable<Solution> {
 	/**
 	 * @return all the solutions in a list!
 	 */
-	public SolutionSet getSolutions() {
+	public SolutionSet<V> getSolutions() {
 		return solutions;
 	}
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (Solution s : solutions) {
+		for (Solution<V> s : solutions) {
 			sb.append(s.toString());
 			sb.append("\n");
 		}
@@ -132,14 +131,14 @@ public class NonDominatedSolutionSet implements Iterable<Solution> {
 	 * 
 	 * @return
 	 */
-	public NonDominatedSolutionSet removeSolutionWithConstraintViolations() {
-		List<Solution> l = solutions.stream().filter(s -> s.hasConstrainViolations() == false).collect(Collectors.toList());
-		solutions = new SolutionSet(l);
+	public NonDominatedSolutionSet<V> removeSolutionWithConstraintViolations() {
+		List<Solution<V>> l = solutions.stream().filter(s -> s.hasConstrainViolations() == false).collect(Collectors.toList());
+		solutions = new SolutionSet<V>(l);
 		return this;
 	}
 
 	@Override
-	public Iterator<Solution> iterator() {
+	public Iterator<Solution<V>> iterator() {
 		return solutions.iterator();
 	}
 

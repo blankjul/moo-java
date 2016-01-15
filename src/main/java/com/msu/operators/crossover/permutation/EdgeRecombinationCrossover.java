@@ -24,11 +24,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.operators.AbstractListCrossover;
+import com.msu.interfaces.IProblem;
+import com.msu.model.ACrossover;
+import com.msu.moo.model.variable.ListVariable;
 import com.msu.util.MyRandom;
 import com.rits.cloning.Cloner;
 
-public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
+public class EdgeRecombinationCrossover<T> extends ACrossover<List<T>, ListVariable<T>> {
+
 
 	private void addEdgesToMap(Map<T, HashSet<T>> map, List<T> l) {
 
@@ -114,7 +117,7 @@ public class EdgeRecombinationCrossover<T> extends AbstractListCrossover<T> {
 	}
 
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
+	public List<List<T>> crossover(IProblem<ListVariable<T>> problem, MyRandom rand, List<T> a, List<T> b) {
 
 		// create combined edge map
 		Map<T, HashSet<T>> map = new HashMap<>();

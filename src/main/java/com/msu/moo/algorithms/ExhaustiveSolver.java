@@ -6,7 +6,6 @@ import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.operators.OperatorFactory;
 import com.msu.util.MyRandom;
 
 /**
@@ -16,22 +15,19 @@ import com.msu.util.MyRandom;
  * The Factory needs to be design as a exhaustive factory as well, to iterate
  * over all solutions.
  */
-public class ExhaustiveSolver extends RandomSearch {
+public class ExhaustiveSolver<V extends IVariable, P extends IProblem<V>> extends RandomSearch<V,P> {
 
-
-	public ExhaustiveSolver(OperatorFactory<IFactory> fFactory) {
-		super(fFactory);
+	public ExhaustiveSolver(IFactory<V, P>  factory) {
+		super(factory);
 	}
+	
 	@Override
-	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
-		
-		IFactory factory = fFactory.create(problem, rand, evaluator);
-		
-		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V,P> evaluator, MyRandom rand) {
+		NonDominatedSolutionSet<V> set = new NonDominatedSolutionSet<V>();
 		while (factory.hasNext()) {
-			IVariable var = factory.next();
+			V var = factory.next(problem, rand);
 			// here: use problem evaluator directly, because it is an exhaustive search!
-			Solution s = problem.evaluate(var);
+			Solution<V> s = problem.evaluate(var);
 			set.add(s);
 		}
 		return set;

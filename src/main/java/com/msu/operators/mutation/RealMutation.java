@@ -1,12 +1,14 @@
 package com.msu.operators.mutation;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.operators.AbstractMutation;
+import com.msu.interfaces.IMutation;
+import com.msu.interfaces.IProblem;
+import com.msu.moo.model.variable.DoubleListVariable;
+import com.msu.util.MyRandom;
 import com.msu.util.Range;
 
-public class RealMutation extends AbstractMutation<List<Double>> {
+public class RealMutation implements IMutation<DoubleListVariable, IProblem<DoubleListVariable>> {
 
 	// ! the probability that a bit is changed -> if null it will be 1 / length
 	protected Double mProbability = null;
@@ -55,9 +57,9 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 	}
 
 	@Override
-	public void mutate_(List<Double> b) {
+	public void mutate(IProblem<DoubleListVariable> problem, MyRandom rand, DoubleListVariable a) {
 		
-		List<Double> result = new ArrayList<>();
+		List<Double> b = a.decode();
 		
 		if (range == null) range = new Range<Double>(b.size(), Double.MIN_VALUE, Double.MAX_VALUE);
 		
@@ -67,11 +69,15 @@ public class RealMutation extends AbstractMutation<List<Double>> {
 			if (rand.nextDouble() < mProbability) {
 				double u = rand.nextDouble();
 				double value = sbxMutation(b.get(j), u, range.getMinimum(j), range.getMaximum(j));
-				result.set(j, value);
+				b.set(j, value);
 			} else 
-				result.set(j, b.get(j));
+				b.set(j, b.get(j));
 		}
+		
 	}
+
+	
+	
 
 
 }

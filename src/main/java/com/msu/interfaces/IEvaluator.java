@@ -1,17 +1,24 @@
 package com.msu.interfaces;
 
-import com.msu.model.Evaluator;
 import com.msu.moo.model.solution.Solution;
 
-public interface IEvaluator {
+/**
+ * This interface templates the evaluators that are used to evaluate the
+ * solution for a specific problem. The evaluator counts the evaluations and
+ * could determine through hasNext() if evaluations are left.
+ * 
+ * @param <E>
+ *            encoded variable
+ */
+public interface IEvaluator<V extends IVariable, P extends IProblem<V>> {
 
+	
 	/**
 	 * Evaluate the variable using the problem
 	 * 
 	 * @return always MultiObjectiveSolution but could also have one objective
 	 */
-	public Solution evaluate(IProblem problem, IVariable variable);
-
+	public Solution<V> evaluate(P problem, V variable);
 
 	/**
 	 * @return whether further evaluations are allowed or not
@@ -24,15 +31,20 @@ public interface IEvaluator {
 	 * @return maximal allowed evaluations
 	 */
 	public Integer getMaxEvaluations();
+
 	
 	/**
 	 * Create child evaluator that counts also this one.
+	 * 
 	 * @param maxEvaluations
 	 */
-	public Evaluator createChildEvaluator(int maxEvaluations);
+	public IEvaluator<V,P> createChildEvaluator(int maxEvaluations);
 
+	
 	/**
 	 * @return current number of used evaluations.
 	 */
 	public Integer numOfEvaluations();
+	
+	
 }

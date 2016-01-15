@@ -24,12 +24,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.msu.operators.AbstractListCrossover;
+import com.msu.interfaces.IProblem;
+import com.msu.model.ACrossover;
+import com.msu.moo.model.variable.ListVariable;
 import com.msu.operators.crossover.CrossoverUtil;
+import com.msu.util.MyRandom;
 import com.msu.util.Pair;
 
 
-public class OrderedCrossover<T> extends AbstractListCrossover<T> {
+public class OrderedCrossover<T> extends ACrossover<List<T>, ListVariable<T>> {
+
+
 
 
 	
@@ -62,7 +67,7 @@ public class OrderedCrossover<T> extends AbstractListCrossover<T> {
 	
 	
 	@Override
-	protected List<List<T>> crossoverLists(List<T> a, List<T> b) {
+	public List<List<T>> crossover(IProblem<ListVariable<T>> problem, MyRandom rand, List<T> a, List<T> b) {
         Pair<Integer, Integer> bounds = CrossoverUtil.getSection(a.size(), rand);
 
 		return new ArrayList<>( Arrays.asList(crossover_(a, b, bounds.first, bounds.second), 

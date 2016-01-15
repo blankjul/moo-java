@@ -2,7 +2,9 @@ package com.msu;
 
 import org.apache.log4j.BasicConfigurator;
 
-import com.msu.experiment.AExperiment;
+import com.msu.experiment.AMultiObjectiveExperiment;
+import com.msu.interfaces.IProblem;
+import com.msu.interfaces.IVariable;
 import com.msu.util.ObjectFactory;
 
 /**
@@ -30,9 +32,10 @@ public class ExperimentExecutor {
 	// ! random seed for experiment execution
 	protected final static long SEED = 123456;
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
-		AExperiment experiment = ObjectFactory.create(AExperiment.class, EXPERIMENT);
+		AMultiObjectiveExperiment<IVariable, IProblem<IVariable>> experiment = ObjectFactory.create(AMultiObjectiveExperiment.class, EXPERIMENT);
 		experiment.run(MAX_EVALUATIONS, ITERATIONS, SEED);
 	}
 

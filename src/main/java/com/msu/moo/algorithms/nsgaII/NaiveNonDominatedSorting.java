@@ -30,21 +30,21 @@ public class NaiveNonDominatedSorting implements NonDominatedSorting {
 
 
 	@Override
-	public <T extends Solution> List<NonDominatedSolutionSet> run(List<T> solutions) {
+	public <T> List<NonDominatedSolutionSet<T>> run(List<Solution<T>> solutions) {
 		
 		// resulting list
-		List<NonDominatedSolutionSet> result = new ArrayList<>();
+		List<NonDominatedSolutionSet<T>> result = new ArrayList<>();
 		
-		List<Solution> copy = new ArrayList<Solution>(solutions);
+		List<Solution<T>> copy = new ArrayList<Solution<T>>(solutions);
 		
 		// there are solution to sort
 		while (!copy.isEmpty()) {
 			
 			// empty set and search for all non dominated one
-			NonDominatedSolutionSet set = new NonDominatedSolutionSet();
+			NonDominatedSolutionSet<T> set = new NonDominatedSolutionSet<T>();
 			set.setSolutionDominator(cmp);
 			
-			for(Solution s : copy) {
+			for(Solution<T> s : copy) {
 				set.add(s);
 			}
 			
@@ -58,6 +58,8 @@ public class NaiveNonDominatedSorting implements NonDominatedSorting {
 		
 		return result;
 	}
+
+	
 
 
 	

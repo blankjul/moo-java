@@ -16,7 +16,7 @@ public class SolutionDominator {
 	/**
 	 * Check if the objective space is the same
 	 */
-	protected Pair<List<Double>, List<Double>> getObjectives(Solution s1, Solution s2) {
+	protected Pair<List<Double>, List<Double>> getObjectives(Solution<?> s1, Solution<?> s2) {
 		List<Double> obj1 = s1.getObjectives();
 		List<Double> obj2 = s2.getObjectives();
 		if (obj1.size() != obj2.size()) {
@@ -28,7 +28,7 @@ public class SolutionDominator {
 	/**
 	 * @return true if s1 dominates s2 (false when equal)
 	 */
-	public boolean isDominating(Solution s1, Solution s2) {
+	public boolean isDominating(Solution<?> s1, Solution<?> s2) {
 		Pair<List<Double>, List<Double>> obj = getObjectives(s1, s2);
 		int length = obj.first.size();
 		for (int i = 0; i < length; i++) {
@@ -45,7 +45,7 @@ public class SolutionDominator {
 	/**
 	 * @return true if s1 is dominated s2 (false when equal)
 	 */
-	public boolean isDominatedBy(Solution s1, Solution s2) {
+	public boolean isDominatedBy(Solution<?> s1, Solution<?> s2) {
 		return isDominating(s2, s1);
 	}
 	
@@ -54,7 +54,7 @@ public class SolutionDominator {
 	 * @return true if both objectives vectors are equal. the variable is not
 	 *         checked for equality!
 	 */
-	public boolean isEqual(Solution s1, Solution s2) {
+	public boolean isEqual(Solution<?> s1, Solution<?> s2) {
 		Pair<List<Double>, List<Double>> obj = getObjectives(s1, s2);
 		final int length = obj.first.size();
 		for (int i = 0; i < length; i++) {
@@ -71,7 +71,7 @@ public class SolutionDominator {
 	 *         no solution dominates the other one or is dominated by. The
 	 *         solution are not allowed to be equal!
 	 */
-	public boolean isIndifferent(Solution s1, Solution s2) {
+	public boolean isIndifferent(Solution<?> s1, Solution<?> s2) {
 		return isDominating(s1, s2) == false && isDominating(s2, s1) == false && !isEqual(s1, s2);
 	}
 

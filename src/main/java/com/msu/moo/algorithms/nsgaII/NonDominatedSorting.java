@@ -12,6 +12,6 @@ import com.msu.moo.model.solution.Solution;
  */
 public interface NonDominatedSorting {
 	
-	public <T extends Solution> List<NonDominatedSolutionSet> run(List<T> solutions);
+	public <T> List<NonDominatedSolutionSet<T>> run(List<Solution<T>> solutions);
 
 }

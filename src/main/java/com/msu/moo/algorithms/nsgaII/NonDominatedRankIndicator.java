@@ -1,5 +1,6 @@
 package com.msu.moo.algorithms.nsgaII;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -14,9 +15,6 @@ public class NonDominatedRankIndicator extends AIndicator<Integer> {
 	// ! NonDominatedSorting that is used for calculating the rank
 	protected NonDominatedSorting sort = new NaiveNonDominatedSorting(new SolutionDominatorWithConstraints());
 	
-	//! when you have calculated the fronts you have access to the list of fronts.
-	protected List<NonDominatedSolutionSet> sets = null;
-
 	
 	public NonDominatedRankIndicator() {
 		super();
@@ -28,24 +26,26 @@ public class NonDominatedRankIndicator extends AIndicator<Integer> {
 	}
 
 	@Override
-	public void calculate(Map<Solution, Integer> map, SolutionSet solutions) {
+	public <T> Map<Solution<T>, Integer> calculate(SolutionSet<T> solutions) {
+		
 		// sort the population
-		sets = sort.run(solutions);
+		List<NonDominatedSolutionSet<T>> sets = sort.run(solutions);
 
-		// assign integer according to result list
+		Map<Solution<T>, Integer> map = new HashMap<Solution<T>, Integer>();
+		calculate(map, sets);
+		return map;
+	}
+	
+	
+	public <T> void calculate(Map<Solution<T>, Integer> map, List<NonDominatedSolutionSet<T>> sets) {
 		for (int i = 0; i < sets.size(); i++) {
-			for (Solution s : sets.get(i).getSolutions())
+			for (Solution<T> s : sets.get(i).getSolutions())
 				map.put(s, i);
 		}
 	}
 
-	/**
-	 * @return all the fronts that were used to determine the rank of each solution
-	 */
-	public List<NonDominatedSolutionSet> getNonDominatedSets() {
-		return sets;
-	}
 	
+
 	
 
 }

@@ -3,7 +3,7 @@ package com.msu.moo.problems.ZDT;
 
 import java.util.List;
 
-import com.msu.model.variables.DoubleListVariable;
+import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.util.Range;
 
 
@@ -13,15 +13,17 @@ public class ZDT2 extends AbstractZDT {
 	@Override
 	protected void evaluate__(DoubleListVariable var, List<Double> objectives) {
 		
-		double g = 0.0;
-		for (int i = 1; i < var.size(); i++) {
-			g += var.get(i);
-		}
-		g = (9.0 / (var.size() - 1)) * g + 1.0;
-
-		double h = 1.0 - Math.pow(var.get(0) / g, 2.0);
+		List<Double> v = var.decode();
 		
-		objectives.add(var.get(0));
+		double g = 0.0;
+		for (int i = 1; i < v.size(); i++) {
+			g += v.get(i);
+		}
+		g = (9.0 / (v.size() - 1)) * g + 1.0;
+
+		double h = 1.0 - Math.pow(v.get(0) / g, 2.0);
+		
+		objectives.add(v.get(0));
 		objectives.add(g * h);
 		
 	}

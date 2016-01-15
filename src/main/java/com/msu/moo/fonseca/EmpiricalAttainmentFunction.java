@@ -19,16 +19,16 @@ public class EmpiricalAttainmentFunction {
 		this.pathToEaf = pathToEaf;
 	}
 
-	public NonDominatedSolutionSet calculate(Collection<NonDominatedSolutionSet> sets) {
+	public <T> NonDominatedSolutionSet<T> calculate(Collection<NonDominatedSolutionSet<T>> sets) {
 		return calculate(sets, (sets.size() / 2) + 1);
 	}
 
-	public NonDominatedSolutionSet calculate(Collection<NonDominatedSolutionSet> sets, int level) {
+	public <T> NonDominatedSolutionSet<T> calculate(Collection<NonDominatedSolutionSet<T>> sets, int level) {
 
 		if (!Util.doesFileExist(pathToEaf)) throw new RuntimeException("Fonseca's Implementation not found!");
 		
 		// result where the value are added
-		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
+		NonDominatedSolutionSet<T> result = new NonDominatedSolutionSet<T>();
 		String command = getCommand(sets, level);
 		String out = BashExecutor.execute(command);
 		
@@ -48,17 +48,17 @@ public class EmpiricalAttainmentFunction {
 			for (String value : line.split("\\s"))
 				objectives.add(Double.valueOf(value));
 
-			result.add(new Solution(null, objectives));
+			result.add(new Solution<T>(null, objectives));
 
 		}
 
 		return result;
 	}
 
-	protected String getCommand(Collection<NonDominatedSolutionSet> sets, int level) {
+	protected <T> String getCommand(Collection<NonDominatedSolutionSet<T>> sets, int level) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("echo -e \"");
-		for (NonDominatedSolutionSet set : sets) {
+		for (NonDominatedSolutionSet<T> set : sets) {
 			sb.append(FonsecaUtil.toString(set.getSolutions()));
 			sb.append("\n");
 		}

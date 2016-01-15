@@ -4,38 +4,36 @@ import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IFactory;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.model.AbstractAlgorithm;
+import com.msu.model.AbstractMultiObjectiveAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.operators.OperatorFactory;
 import com.msu.util.MyRandom;
 
 /**
  * The RandomSearch just creates randomly new instances and evaluates them until
  * there are no evaluations left.
  */
-public class RandomSearch extends AbstractAlgorithm {
+public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AbstractMultiObjectiveAlgorithm<V, P> {
 
 	// ! variable factory to create new solutions
-	protected OperatorFactory<IFactory> fFactory;
+	protected IFactory<V, P> factory;
 
-	public RandomSearch(OperatorFactory<IFactory> fFactory) {
-		this.fFactory = fFactory;
+	public RandomSearch(IFactory<V, P>  fFactory) {
+		this.factory = fFactory;
 	}
 
 	@Override
-	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V,P> evaluator, MyRandom rand) {
 		
-		IFactory fac = fFactory.create(problem, rand, evaluator);
-		
-		NonDominatedSolutionSet set = new NonDominatedSolutionSet();
-		while (fac.hasNext() && evaluator.hasNext()) {
-			IVariable var = fac.next();
-			Solution s = evaluator.evaluate(problem, var);
+		NonDominatedSolutionSet<V> set = new NonDominatedSolutionSet<V>();
+		while (factory.hasNext() && evaluator.hasNext()) {
+			V var = factory.next(problem, rand);
+			Solution<V> s = evaluator.evaluate(problem, var);
 			set.add(s);
 		}
 		return set;
 	}
+
 
 
 }

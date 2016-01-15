@@ -6,20 +6,18 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.msu.ExampleSolutionSet;
-import com.msu.moo.algorithms.nsgaII.CrowdingIndicator;
-import com.msu.moo.algorithms.nsgaII.NonDominatedRankIndicator;
-import com.msu.moo.algorithms.nsgaII.RankAndCrowdingComparator;
+import com.msu.MockVariable;
 import com.msu.moo.model.solution.SolutionSet;
 
 public class RankAndCrowdingComparatorTest {
 
-	private RankAndCrowdingComparator cmp;
+	private RankAndCrowdingComparator<MockVariable> cmp;
 	
-	private SolutionSet l = ExampleSolutionSet.get();
+	private SolutionSet<MockVariable> l = ExampleSolutionSet.get();
 	
 	@Before
     public void setUp() {
-        cmp = new RankAndCrowdingComparator(new NonDominatedRankIndicator().calculate(l), new CrowdingIndicator().calculate(l));
+        cmp = new RankAndCrowdingComparator<MockVariable>(new NonDominatedRankIndicator().calculate(l), new CrowdingIndicator().calculate(l));
     }
 	
 	@Test

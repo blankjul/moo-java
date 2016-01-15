@@ -17,9 +17,9 @@ public class FonsecaUtil {
 	}
 	
 	
-	public static String toString(SolutionSet set) {
+	public static String toString(SolutionSet<?> set) {
 		StringBuilder sb = new StringBuilder();
-		for (Solution s : set) {
+		for (Solution<?> s : set) {
 			sb.append(FonsecaUtil.toString(s.getObjectives()));
 			sb.append("\n");
 		}

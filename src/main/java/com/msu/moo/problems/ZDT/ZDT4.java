@@ -19,7 +19,7 @@ package com.msu.moo.problems.ZDT;
 
 import java.util.List;
 
-import com.msu.model.variables.DoubleListVariable;
+import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.util.Range;
 import com.msu.util.exceptions.EvaluationException;
 
@@ -27,20 +27,21 @@ public class ZDT4 extends AbstractZDT {
 
 	@Override
 	protected void evaluate__(DoubleListVariable var, List<Double> objectives) {
+		List<Double> v = var.decode();
 
-		if (var.size() != 10) 
-			throw new EvaluationException(String.format("Variable needs to have 10 entries, but %s are provided.", var.size()));
+		if (v.size() != 10) 
+			throw new EvaluationException(String.format("Variable needs to have 10 entries, but %s are provided.", v.size()));
 		
 		
 		double g = 0.0;
-		for (int i = 1; i < var.size(); i++) {
-			g += Math.pow(var.get(i), 2.0) - 10.0 * Math.cos(4.0 * Math.PI * var.get(i));
+		for (int i = 1; i < v.size(); i++) {
+			g += Math.pow(v.get(i), 2.0) - 10.0 * Math.cos(4.0 * Math.PI * v.get(i));
 		}
-		g += 1.0 + 10.0 * (var.size() - 1);
+		g += 1.0 + 10.0 * (v.size() - 1);
 
-		double h = 1.0 - Math.sqrt(var.get(0) / g);
+		double h = 1.0 - Math.sqrt(v.get(0) / g);
 
-		objectives.add(var.get(0));
+		objectives.add(v.get(0));
 		objectives.add(g * h);
 
 	}

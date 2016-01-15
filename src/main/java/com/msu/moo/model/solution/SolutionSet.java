@@ -9,14 +9,14 @@ import java.util.Map;
 import com.msu.util.Pair;
 import com.msu.util.Range;
 
-public class SolutionSet extends ArrayList<Solution>{
+public class SolutionSet<T> extends ArrayList<Solution<T>>{
 	
 
 	public SolutionSet() {
 		super();
 	}
 
-	public SolutionSet(Collection<? extends Solution> c) {
+	public SolutionSet(Collection<? extends Solution<T>> c) {
 		super(c);
 	}
 
@@ -30,7 +30,7 @@ public class SolutionSet extends ArrayList<Solution>{
 	 * @param obj number of objective
 	 */
 	public void sortByObjective(int obj) {
-		Collections.sort(this, (Solution s1, Solution s2) -> s1.getObjectives().get(obj).compareTo(s2.getObjectives().get(obj)));
+		Collections.sort(this, (Solution<T> s1, Solution<T> s2) -> s1.getObjective(obj).compareTo(s2.getObjective(obj)));
 	}
 	
 	/**
@@ -39,8 +39,8 @@ public class SolutionSet extends ArrayList<Solution>{
 	 * @param <T>
 	 * @param obj number of objective
 	 */
-	public <T extends Comparable<T>> void sortByIndicator(Map<Solution, T> m) {
-		Collections.sort(this, (Solution s1, Solution s2) -> m.get(s1).compareTo(m.get(s2)));
+	public <C extends Comparable<C>> void sortByIndicator(Map<Solution<T>, C> m) {
+		Collections.sort(this, (Solution<T> s1, Solution<T> s2) -> m.get(s1).compareTo(m.get(s2)));
 	}
 	
 	/**
@@ -48,7 +48,7 @@ public class SolutionSet extends ArrayList<Solution>{
 	 */
 	public List<Double> getVector(int objective) {
 		List<Double> l = new ArrayList<>();
-		for (Solution s : this) {
+		for (Solution<T> s : this) {
 			l.add(s.getObjectives().get(objective));
 		}
 		return l;
@@ -58,9 +58,9 @@ public class SolutionSet extends ArrayList<Solution>{
 	/**
 	 * Normalize by using the boundaries of this set.
 	 */
-	public SolutionSet normalize() {
+	public SolutionSet<T> normalize() {
 		Range<Double> range = new Range<Double>();
-		for (Solution s : this) range.add(s.getObjectives());
+		for (Solution<T> s : this) range.add(s.getObjectives());
 		return normalize(range.get());
 	}
 	
@@ -69,10 +69,10 @@ public class SolutionSet extends ArrayList<Solution>{
 	 * The given boundaries are used for maximum and minimum calculation.
 	 * @return normalized front with objectives values between [0,1]
 	 */
-	public SolutionSet normalize(List<Pair<Double,Double>> boundaries) {
-		if (this.isEmpty()) return new SolutionSet();
-		SolutionSet result = new SolutionSet();
-		for (Solution s : this) {
+	public SolutionSet<T> normalize(List<Pair<Double,Double>> boundaries) {
+		if (this.isEmpty()) return new SolutionSet<T>();
+		SolutionSet<T> result = new SolutionSet<T>();
+		for (Solution<T> s : this) {
 			result.add(s.normalize(boundaries));
 		}
 		return result;
@@ -85,12 +85,12 @@ public class SolutionSet extends ArrayList<Solution>{
 	 * @param max value for the inversion
 	 * @return Solution that inverted with respect to maximal value
 	 */
-	public SolutionSet invert(Double max) {
+	public SolutionSet<T> invert(Double max) {
 		
-		if (this.isEmpty()) return new SolutionSet();
+		if (this.isEmpty()) return new SolutionSet<T>();
 		int dimensions = this.get(0).getObjectives().size();
 		
-		SolutionSet result = new SolutionSet();
+		SolutionSet<T> result = new SolutionSet<T>();
 		for (int k = 0; k < size(); k++) {
 			List<Double> obj = new ArrayList<>();
 			for (int i = 0; i < dimensions; i++) {
@@ -99,7 +99,7 @@ public class SolutionSet extends ArrayList<Solution>{
 				if (value > max) value = max;
 				obj.add(value);
 			}
-			result.add(new Solution(this.get(k).getVariable(), obj));
+			result.add(new Solution<T>(this.get(k).getVariable(), obj));
 		}
 		return result;
 	}
@@ -107,7 +107,7 @@ public class SolutionSet extends ArrayList<Solution>{
 	
 	public Range<Double> getRange() {
 		Range<Double> r = new Range<>();
-		for (Solution s : this) {
+		for (Solution<T> s : this) {
 			r.add(s.getObjectives());
 		}
 		return r;
@@ -116,7 +116,7 @@ public class SolutionSet extends ArrayList<Solution>{
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (Solution s : this) {
+		for (Solution<T> s : this) {
 			sb.append(s);
 			sb.append("\n");
 		}

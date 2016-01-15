@@ -2,13 +2,13 @@ package com.msu.moo.algorithms.nsgaII;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.moo.mocks.MockVariable;
+import com.msu.MockSolution;
+import com.msu.MockVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 
@@ -22,10 +22,11 @@ public class NaiveNonDominatedSortingTest {
 
 	@Test
 	public void testTwoPointsTwoSets() {
-		Solution s1 = new Solution(new MockVariable(Arrays.asList(0)), new ArrayList<Double>(Arrays.asList(1d,1d)));
-		Solution s2 = new Solution(new MockVariable(Arrays.asList(1)), new ArrayList<Double>(Arrays.asList(0d,0d)));
 		
-		List<NonDominatedSolutionSet> set = new NaiveNonDominatedSorting().run(Arrays.asList(s1,s2));
+		Solution<MockVariable> s1 = MockSolution.create(0, Arrays.asList(1d,1d));
+		Solution<MockVariable> s2 = MockSolution.create(1, Arrays.asList(0d,0d));
+		
+		List<NonDominatedSolutionSet<MockVariable>> set = new NaiveNonDominatedSorting().run(Arrays.asList(s1,s2));
 		
 		assertEquals(2, set.size());
 		assertEquals(s2,set.get(0).getSolutions().get(0));

@@ -1,5 +1,6 @@
 package com.msu.moo.algorithms.nsgaII;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,7 +10,7 @@ import java.util.Map;
 import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.moo.algorithms.EvolutionaryAlgorithms;
+import com.msu.moo.algorithms.AMultiObjectiveEvolutionaryAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
@@ -23,24 +24,22 @@ import com.msu.util.MyRandom;
  * 
  *
  */
-public class NSGAII extends EvolutionaryAlgorithms {
+public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiObjectiveEvolutionaryAlgorithm<V,P> {
 
 	// ! rank for the whole population
-	protected Map<Solution, Integer> rank;
+	protected Map<Solution<V>, Integer> rank;
 
 	// ! crowding distance for the whole population
-	protected Map<Solution, Double> crowding;
+	protected Map<Solution<V>, Double> crowding;
 
 	// ! private constructor! use the builder!
 	protected NSGAII() {
 	}
 
 	@Override
-	public NonDominatedSolutionSet run_(IProblem problem, IEvaluator evaluator, MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V,P> evaluator,
+			MyRandom rand) {
 
-		// initialize operators
-		initialize(problem, evaluator, rand);
-		
 		// initialize the population and calculate also rank and crowding
 		initializePopulation(problem, evaluator, rand);
 		
@@ -48,17 +47,19 @@ public class NSGAII extends EvolutionaryAlgorithms {
 		while (evaluator.hasNext()) {
 
 			// binary tournament selection for mating
-			BinaryTournamentSelection bts = new BinaryTournamentSelection(population,
-					new RankAndCrowdingComparator(rank, crowding), rand);
+			BinaryTournamentSelection<V> bts = new BinaryTournamentSelection<V>(population,
+					new RankAndCrowdingComparator<V>(rank, crowding), rand);
 
 			// create offspring population until size two times
-			SolutionSet offsprings = new SolutionSet(populationSize);
+			SolutionSet<V> offsprings = new SolutionSet<V>(populationSize);
 			while (offsprings.size() < populationSize) {
 				// crossover
-				List<IVariable> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable());
+				List<V> off = crossover.crossover(problem, rand, bts.next().getVariable(), bts.next().getVariable());
 				// mutation
-				for (IVariable offspring : off) {
-					if (rand.nextDouble() < this.probMutation) mutation.mutate(offspring);
+				for (V offspring : off) {
+					if (rand.nextDouble() < this.probMutation) {
+						mutation.mutate(problem, rand, offspring);
+					}
 					offsprings.add(evaluator.evaluate(problem, offspring));
 				}
 			}
@@ -69,32 +70,32 @@ public class NSGAII extends EvolutionaryAlgorithms {
 
 			
 			// eliminate duplicates to ensure variety in the population
-			population = new SolutionSet(new HashSet<>(population));
+			population = new SolutionSet<V>(new HashSet<>(population));
 			
 			// survival of the best population
 			calcRankAndCrowding(population);
-			population.sort(new RankAndCrowdingComparator(rank, crowding));
+			population.sort(new RankAndCrowdingComparator<V>(rank, crowding));
 			Collections.reverse(population);
-			population = new SolutionSet(population.subList(0, Math.min(populationSize, population.size())));
+			population = new SolutionSet<V>(population.subList(0, Math.min(populationSize, population.size())));
 
 		}
 
-		NonDominatedSolutionSet result = new NonDominatedSolutionSet();
+		NonDominatedSolutionSet<V> result = new NonDominatedSolutionSet<V>();
 		result.setSolutionDominator(new SolutionDominatorWithConstraints());
 		result.addAll(population);
 		return result;
 
 	}
 
-	protected void initializePopulation(IProblem problem, IEvaluator eval, MyRandom rand) {
+	protected void initializePopulation(P problem, IEvaluator<V,P> evaluator, MyRandom rand) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();
 		// initialize the population with populationSize
-		population = new SolutionSet(populationSize * 2);
+		population = new SolutionSet<V>(populationSize * 2);
 
 		for (int i = 0; i < populationSize; i++) {
-			population.add(eval.evaluate(problem, factory.next()));
+			population.add(evaluator.evaluate(problem, factory.next(problem, rand)));
 		}
 
 		// calculate Rank and Crowding for the initial population
@@ -103,14 +104,15 @@ public class NSGAII extends EvolutionaryAlgorithms {
 
 	}
 
-	protected void calcRankAndCrowding(SolutionSet population) {
+	protected void calcRankAndCrowding(SolutionSet<V> population) {
 		NonDominatedRankIndicator rankInd = new NonDominatedRankIndicator();
 		rank = rankInd.calculate(population);
 		crowding = new HashMap<>();
-		for (NonDominatedSolutionSet set : rankInd.getNonDominatedSets()) {
-			CrowdingIndicator crowdInd = new CrowdingIndicator();
-			crowdInd.calculate(crowding, set.getSolutions());
+		Collection<NonDominatedSolutionSet<V>> fronts = new NaiveNonDominatedSorting(new SolutionDominatorWithConstraints()).run(population);
+		for (NonDominatedSolutionSet<V> set : fronts) {
+			crowding.putAll(new CrowdingIndicator().calculate(set.getSolutions()));
 		}
 	}
+
 
 }

@@ -17,11 +17,11 @@ public class Hypervolume {
 		this.pathToHV = pathToHV;
 	}
 
-	public Double calculate(NonDominatedSolutionSet set) {
+	public Double calculate(NonDominatedSolutionSet<?> set) {
 		return calculate(set, null);
 	}
 
-	public Double calculate(NonDominatedSolutionSet set, List<Double> referencePoint) {
+	public Double calculate(NonDominatedSolutionSet<?> set, List<Double> referencePoint) {
 
 		if (!Util.doesFileExist(pathToHV)) throw new RuntimeException("Fonseca's Hypverolume Implementation not found!");
 		
@@ -47,7 +47,7 @@ public class Hypervolume {
 
 	
 	
-	protected String getCommand(NonDominatedSolutionSet set) {
+	protected String getCommand(NonDominatedSolutionSet<?> set) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("echo -e  \"");
 		sb.append(FonsecaUtil.toString(set.getSolutions()));

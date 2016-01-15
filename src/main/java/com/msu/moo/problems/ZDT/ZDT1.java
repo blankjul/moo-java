@@ -2,13 +2,13 @@ package com.msu.moo.problems.ZDT;
 
 import java.util.List;
 
-import com.msu.model.variables.DoubleListVariable;
+import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.util.Range;
 
 /**
  * Class representing problem ZDT1
  */
-public class ZDT1 extends AbstractZDT {
+public class ZDT1 extends AbstractZDT  {
 
 	/**
 	 * Returns the value of the ZDT1 function G.
@@ -45,8 +45,8 @@ public class ZDT1 extends AbstractZDT {
 	@Override
 	protected void evaluate__(DoubleListVariable var, List<Double> objectives) {
 		double[] f = new double[getNumberOfObjectives()];
-		f[0] = var.get().get(0);
-		double g = this.evalG(var.get());
+		f[0] = var.decode().get(0);
+		double g = this.evalG(var.decode());
 		double h = this.evalH(f[0], g);
 		f[1] = h * g;
 		

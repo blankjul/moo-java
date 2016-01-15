@@ -1,12 +1,15 @@
 package com.msu.operators.mutation;
 
+import com.msu.interfaces.IMutation;
+import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.operators.AbstractMutation;
+import com.msu.util.MyRandom;
 
-public class NoMutation extends AbstractMutation<IVariable> {
+public class NoMutation implements IMutation<IVariable, IProblem<IVariable>> {
+
 
 	@Override
-	public void mutate_(IVariable var) {
+	public void mutate(IProblem<IVariable> problem, MyRandom rand, IVariable a) {
 	}
 
 }
