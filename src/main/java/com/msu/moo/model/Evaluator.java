@@ -1,4 +1,4 @@
-package com.msu.model;
+package com.msu.moo.model;
 
 
 import com.msu.interfaces.IEvaluator;
@@ -16,7 +16,7 @@ import com.msu.util.exceptions.EvaluationException;
  * might be implemented.
  *
  */
-public class Evaluator<V extends IVariable, P extends IProblem<V>> implements IEvaluator<V,P> {
+public class Evaluator<V extends IVariable> implements IEvaluator<V> {
 
 	// ! current amount of evaluations
 	protected int evaluations = 0;
@@ -25,21 +25,31 @@ public class Evaluator<V extends IVariable, P extends IProblem<V>> implements IE
 	protected Integer maxEvaluations = null;
 	
 	// ! current amount of evaluations
-	protected Evaluator<V,P> father = null;
+	protected Evaluator<V> father = null;
 
 	
 	public Evaluator(int maxEvaluations) {
 		this.maxEvaluations = maxEvaluations;
 	}
 
-	public Solution<V> evaluate(P problem, V variable) {
+	@SuppressWarnings("unchecked")
+	public Solution<V> evaluate(IProblem<? extends IVariable> problem, V variable) {
 		
 		if (evaluations >= (int) (maxEvaluations * 1.20)) 
 			throw new EvaluationException("Evaluations expired. Check hasNext() first.");
 		
 		++evaluations;
 		if (father != null) father.evaluations++;
-		return problem.evaluate(variable);
+		
+		
+		// cast the problem to the specific one
+		IProblem<V> p = null;
+		try {
+			p = (IProblem<V>) problem;
+		} catch (Exception e) {
+			throw new EvaluationException("Problem does not accept the given variable!");
+		}
+		return p.evaluate(variable);
 	}
 
 	public int getEvaluations() {
@@ -61,8 +71,8 @@ public class Evaluator<V extends IVariable, P extends IProblem<V>> implements IE
 	}
 
 	
-	public Evaluator<V,P> createChildEvaluator(int maxEvaluations) {
-		Evaluator<V,P> eval = new Evaluator<V,P>(maxEvaluations);
+	public Evaluator<V> createChildEvaluator(int maxEvaluations) {
+		Evaluator<V> eval = new Evaluator<V>(maxEvaluations);
 		eval.father = this;
 		return eval;
 	}
@@ -72,7 +82,7 @@ public class Evaluator<V extends IVariable, P extends IProblem<V>> implements IE
 		if (getFather() != null) getFather().evaluations++;
 	}
 
-	public Evaluator<V,P> getFather() {
+	public Evaluator<V> getFather() {
 		return father;
 	}
 

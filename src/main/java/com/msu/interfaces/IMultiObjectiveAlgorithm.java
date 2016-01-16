@@ -22,7 +22,7 @@ public interface IMultiObjectiveAlgorithm<V extends IVariable, P extends IProble
 	 *            which counts the evaluations
 	 * @return front of non dominated points
 	 */
-	public  NonDominatedSolutionSet<V> run(P problem, IEvaluator<V, P> evaluator, MyRandom rand);
+	public  NonDominatedSolutionSet<V> run(P problem, IEvaluator<V> evaluator, MyRandom rand);
 
 	
 	

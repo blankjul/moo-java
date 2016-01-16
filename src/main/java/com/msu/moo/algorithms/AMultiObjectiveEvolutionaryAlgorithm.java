@@ -5,7 +5,7 @@ import com.msu.interfaces.IFactory;
 import com.msu.interfaces.IMutation;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.model.AMultiObjectiveAlgorithm;
+import com.msu.moo.model.AMultiObjectiveAlgorithm;
 import com.msu.moo.model.solution.SolutionSet;
 
 /**

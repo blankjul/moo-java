@@ -2,7 +2,7 @@ package com.msu;
 
 import java.util.List;
 
-import com.msu.model.AProblem;
+import com.msu.moo.model.AProblem;
 import com.msu.moo.model.variable.ListVariable;
 
 public class MockListProblem<T> extends AProblem<ListVariable<T>>{

@@ -1,7 +1,7 @@
 package com.msu;
 
-import com.msu.model.Evaluator;
 import com.msu.moo.algorithms.nsgaII.NSGAII;
+import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variable.DoubleListVariable;

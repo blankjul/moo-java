@@ -10,7 +10,7 @@ import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IMultiObjectiveAlgorithm;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.model.Evaluator;
+import com.msu.moo.model.Evaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.util.MyRandom;
@@ -58,7 +58,7 @@ public abstract class AMultiObjectiveExperiment<V extends IVariable, P extends I
 
 					// set the random seed that the results will be comparable
 					MyRandom rand = new MyRandom(seed + k);
-					IEvaluator<V, P> evaluator = new Evaluator<>(maxEvaluations);
+					IEvaluator<V> evaluator = new Evaluator<>(maxEvaluations);
 
 					// calculate result
 					NonDominatedSolutionSet<V> set = algorithm.run(problem, evaluator, rand);

@@ -24,7 +24,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.msu.model.ACrossover;
+import com.msu.moo.model.ACrossover;
 import com.msu.moo.model.variable.ListVariable;
 import com.msu.operators.crossover.CrossoverUtil;
 import com.msu.util.MyRandom;

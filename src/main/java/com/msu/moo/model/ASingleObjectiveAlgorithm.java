@@ -1,4 +1,4 @@
-package com.msu.model;
+package com.msu.moo.model;
 
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.ISingleObjectiveAlgorithm;

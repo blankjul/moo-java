@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.model.ACrossover;
+import com.msu.moo.model.ACrossover;
 import com.msu.moo.model.variable.ListVariable;
 import com.msu.util.MyRandom;
 

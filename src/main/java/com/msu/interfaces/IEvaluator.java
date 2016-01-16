@@ -10,7 +10,7 @@ import com.msu.moo.model.solution.Solution;
  * @param <E>
  *            encoded variable
  */
-public interface IEvaluator<V extends IVariable, P extends IProblem<V>> {
+public interface IEvaluator<V extends IVariable> {
 
 	
 	/**
@@ -18,7 +18,7 @@ public interface IEvaluator<V extends IVariable, P extends IProblem<V>> {
 	 * 
 	 * @return always MultiObjectiveSolution but could also have one objective
 	 */
-	public Solution<V> evaluate(P problem, V variable);
+	public Solution<V> evaluate(IProblem<? extends IVariable> problem, V variable);
 
 	/**
 	 * @return whether further evaluations are allowed or not
@@ -38,7 +38,7 @@ public interface IEvaluator<V extends IVariable, P extends IProblem<V>> {
 	 * 
 	 * @param maxEvaluations
 	 */
-	public IEvaluator<V,P> createChildEvaluator(int maxEvaluations);
+	public IEvaluator<V> createChildEvaluator(int maxEvaluations);
 
 	
 	/**

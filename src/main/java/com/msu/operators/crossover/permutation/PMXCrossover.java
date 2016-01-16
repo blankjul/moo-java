@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.model.ACrossover;
+import com.msu.moo.model.ACrossover;
 import com.msu.moo.model.variable.ListVariable;
 import com.msu.operators.crossover.CrossoverUtil;
 import com.msu.util.MyRandom;

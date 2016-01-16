@@ -2,7 +2,7 @@ package com.msu.operators.selection;
 
 import java.util.Queue;
 
-import com.msu.model.ASelection;
+import com.msu.moo.model.ASelection;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.util.MyRandom;

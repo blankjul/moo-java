@@ -1,4 +1,4 @@
-package com.msu.model;
+package com.msu.moo.model;
 
 import java.io.File;
 import java.io.FileOutputStream;

@@ -21,6 +21,6 @@ public interface ISingleObjectiveAlgorithm<V extends IVariable, P extends IProbl
 	 *            which counts the evaluations
 	 * @return best found solution for the problem
 	 */
-	public Solution<V> run(P problem, IEvaluator<V, P> evaluator, MyRandom rand);
+	public Solution<V> run(P problem, IEvaluator<V> evaluator, MyRandom rand);
 
 }

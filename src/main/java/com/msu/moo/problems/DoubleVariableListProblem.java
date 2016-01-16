@@ -2,7 +2,7 @@ package com.msu.moo.problems;
 
 import java.util.List;
 
-import com.msu.model.AProblem;
+import com.msu.moo.model.AProblem;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.util.Range;
 import com.msu.util.exceptions.EvaluationException;

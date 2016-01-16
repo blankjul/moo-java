@@ -1,4 +1,4 @@
-package com.msu.model;
+package com.msu.moo.model;
 
 import java.util.ArrayList;
 import java.util.List;

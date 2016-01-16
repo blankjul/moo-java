@@ -3,7 +3,7 @@ package com.msu.moo.algorithms.nsgaII;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.msu.model.AIndicator;
+import com.msu.moo.model.AIndicator;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 

@@ -4,7 +4,7 @@ import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IFactory;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
-import com.msu.model.AMultiObjectiveAlgorithm;
+import com.msu.moo.model.AMultiObjectiveAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.util.MyRandom;
@@ -24,7 +24,7 @@ public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AM
 
 
 	@Override
-	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V, P> evaluator, MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V> evaluator, MyRandom rand) {
 		NonDominatedSolutionSet<V> set = new NonDominatedSolutionSet<V>();
 		while (factory.hasNext() && evaluator.hasNext()) {
 			V var = factory.next(rand);

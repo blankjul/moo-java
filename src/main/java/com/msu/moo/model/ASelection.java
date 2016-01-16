@@ -1,4 +1,4 @@
-package com.msu.model;
+package com.msu.moo.model;
 
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;

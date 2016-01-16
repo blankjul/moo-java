@@ -11,7 +11,7 @@ import com.msu.interfaces.IMutation;
 import com.msu.interfaces.IProblem;
 import com.msu.interfaces.ISolution;
 import com.msu.interfaces.IVariable;
-import com.msu.model.ASingleObjectiveAlgorithm;
+import com.msu.moo.model.ASingleObjectiveAlgorithm;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.operators.selection.BinaryTournamentSelection;
@@ -60,7 +60,7 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		
 
 	@Override
-	public Solution<V> run(P problem, IEvaluator<V, P> evaluator, MyRandom rand) {
+	public Solution<V> run(P problem, IEvaluator<V> evaluator, MyRandom rand) {
 			
 		while (population.size() < populationSize) {
 			population.add(evaluator.evaluate(problem, factory.next(rand)));
