@@ -37,7 +37,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	}
 
 	@Override
-	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V> evaluator, MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand) {
 
 		// initialize the population and calculate also rank and crowding
 		initializePopulation(problem, evaluator, rand);
@@ -86,7 +86,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 
 	}
 
-	protected void initializePopulation(P problem, IEvaluator<V> evaluator, MyRandom rand) {
+	protected void initializePopulation(P problem, IEvaluator evaluator, MyRandom rand) {
 		// create empty indicator maps
 		this.rank = new HashMap<>();
 		this.crowding = new HashMap<>();

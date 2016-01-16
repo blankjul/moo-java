@@ -27,7 +27,7 @@ public class SimpleExperiment {
 		
 		NSGAII<DoubleListVariable, Kursawe> nsgaII = builder.build();
 		
-		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run(new Kursawe(), new Evaluator<>(50000), new MyRandom());
+		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run(new Kursawe(), new Evaluator(50000), new MyRandom());
 		
 		for (Solution<DoubleListVariable> solution : set) {
 			System.out.println(String.format("%f,%f", solution.getObjective(0), solution.getObjective(1)));

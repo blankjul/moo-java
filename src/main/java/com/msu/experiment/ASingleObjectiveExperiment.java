@@ -57,7 +57,7 @@ public abstract class ASingleObjectiveExperiment<V extends IVariable, P extends 
 					
 					// set the random seed that the results will be comparable
 					MyRandom rand = new MyRandom(seed + k);
-					IEvaluator<V> evaluator = new Evaluator<>(maxEvaluations);
+					IEvaluator evaluator = new Evaluator(maxEvaluations);
 					
 					// calculate result
 					Solution<V> s = algorithm.run(problem, evaluator, rand);

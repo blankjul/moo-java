@@ -24,7 +24,7 @@ public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AM
 
 
 	@Override
-	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V> evaluator, MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand) {
 		NonDominatedSolutionSet<V> set = new NonDominatedSolutionSet<V>();
 		while (factory.hasNext() && evaluator.hasNext()) {
 			V var = factory.next(rand);

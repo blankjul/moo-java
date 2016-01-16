@@ -35,7 +35,6 @@ public class OrderedCrossover<T> extends ACrossover<List<T>, ListVariable<T>> {
 
 
 
-
 	
 	public List<T> crossover_(List<T> a, List<T> b, int lb, int ub) {
 		

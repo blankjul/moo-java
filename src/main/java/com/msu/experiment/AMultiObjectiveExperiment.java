@@ -58,7 +58,7 @@ public abstract class AMultiObjectiveExperiment<V extends IVariable, P extends I
 
 					// set the random seed that the results will be comparable
 					MyRandom rand = new MyRandom(seed + k);
-					IEvaluator<V> evaluator = new Evaluator<>(maxEvaluations);
+					IEvaluator evaluator = new Evaluator(maxEvaluations);
 
 					// calculate result
 					NonDominatedSolutionSet<V> set = algorithm.run(problem, evaluator, rand);

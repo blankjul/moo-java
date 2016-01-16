@@ -22,7 +22,7 @@ public class ExhaustiveSolver<V extends IVariable, P extends IProblem<V>> extend
 	}
 	
 	@Override
-	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V> evaluator, MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand) {
 		NonDominatedSolutionSet<V> set = new NonDominatedSolutionSet<V>();
 		while (factory.hasNext()) {
 			V var = factory.next(rand);
