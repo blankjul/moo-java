@@ -24,13 +24,13 @@ public class KursaweExperiment extends AMultiObjectiveExperiment<DoubleListVaria
 		nsgaII
 		.set("probMutation", 0.3)
 		.set("populationSize", 50)
-		.set("factory", new DoubleListVariableFactory<Kursawe>(range))
+		.set("factory", new DoubleListVariableFactory(range))
 		.set("crossover", new SimulatedBinaryCrossover(range))
 		.set("mutation", new RealMutation(range));
 		
 		algorithms.add(nsgaII.build());
 		
-		algorithms.add(new RandomSearch<DoubleListVariable, Kursawe>(new DoubleListVariableFactory<Kursawe>(range)));
+		algorithms.add(new RandomSearch<DoubleListVariable, Kursawe>(new DoubleListVariableFactory(range)));
 
 	}
 

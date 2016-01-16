@@ -21,14 +21,13 @@ public class SimpleExperiment {
 		builder
 		.set("probMutation", 0.3)
 		.set("populationSize", 50)
-		.set("factory", new DoubleListVariableFactory<Kursawe>(range))
+		.set("factory", new DoubleListVariableFactory(range))
 		.set("crossover", new SimulatedBinaryCrossover(range))
 		.set("mutation", new RealMutation(range));
 		
 		NSGAII<DoubleListVariable, Kursawe> nsgaII = builder.build();
-		nsgaII.initialize(new Kursawe(), new Evaluator<>(50000), new MyRandom());
 		
-		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run();
+		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run(new Kursawe(), new Evaluator<>(50000), new MyRandom());
 		
 		for (Solution<DoubleListVariable> solution : set) {
 			System.out.println(String.format("%f,%f", solution.getObjective(0), solution.getObjective(1)));

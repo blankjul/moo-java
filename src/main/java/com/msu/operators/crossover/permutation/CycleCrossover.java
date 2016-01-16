@@ -23,7 +23,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.msu.interfaces.IProblem;
 import com.msu.model.ACrossover;
 import com.msu.moo.model.variable.ListVariable;
 import com.msu.util.MyRandom;
@@ -32,7 +31,7 @@ import com.msu.util.MyRandom;
 public class CycleCrossover<T> extends ACrossover<List<T>, ListVariable<T>> {
 
 	@Override
-	public List<List<T>> crossover(IProblem<ListVariable<T>> problem, MyRandom rand, List<T> a, List<T> b) {
+	public List<List<T>> crossover(List<T> a, List<T> b, MyRandom rand) {
 		return crossover_(a, b, rand.nextInt(0, a.size() - 1));
 	}
 	

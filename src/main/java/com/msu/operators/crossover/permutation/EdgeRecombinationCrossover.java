@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.interfaces.IProblem;
 import com.msu.model.ACrossover;
 import com.msu.moo.model.variable.ListVariable;
 import com.msu.util.MyRandom;
@@ -117,7 +116,7 @@ public class EdgeRecombinationCrossover<T> extends ACrossover<List<T>, ListVaria
 	}
 
 	@Override
-	public List<List<T>> crossover(IProblem<ListVariable<T>> problem, MyRandom rand, List<T> a, List<T> b) {
+	public List<List<T>> crossover(List<T> a, List<T> b, MyRandom rand) {
 
 		// create combined edge map
 		Map<T, HashSet<T>> map = new HashMap<>();

@@ -9,8 +9,8 @@ import com.msu.util.MyRandom;
  * @param <D>
  *            decoded type of the variable
  */
-public interface IMutation<V extends IVariable, P extends IProblem<V>> {
+public interface IMutation<V extends IVariable> {
 
-	public void mutate(P problem, MyRandom rand, V a);
+	public void mutate(V a, MyRandom rand);
 
 }

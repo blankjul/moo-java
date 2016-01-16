@@ -19,14 +19,8 @@ public interface ISingleObjectiveAlgorithm<V extends IVariable, P extends IProbl
 	 *            to solve
 	 * @param evaluator
 	 *            which counts the evaluations
-	 */
-	public ISingleObjectiveAlgorithm<V,P> initialize(P problem, IEvaluator<V,P> evaluator, MyRandom rand);
-
-	
-	
-	/**
 	 * @return best found solution for the problem
 	 */
-	public Solution<V> run();
+	public Solution<V> run(P problem, IEvaluator<V, P> evaluator, MyRandom rand);
 
 }

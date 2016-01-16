@@ -4,11 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.interfaces.IFactory;
-import com.msu.interfaces.IProblem;
 import com.msu.util.MyRandom;
 import com.msu.util.Range;
 
-public class DoubleListVariableFactory<P extends IProblem<DoubleListVariable>> implements IFactory<DoubleListVariable, P> {
+public class DoubleListVariableFactory implements IFactory<DoubleListVariable> {
 	
 	//! length of the vector
 	protected Range<Double> range = null;
@@ -23,7 +22,7 @@ public class DoubleListVariableFactory<P extends IProblem<DoubleListVariable>> i
 	}
 
 	@Override
-	public DoubleListVariable next(P problem, MyRandom rand) {
+	public DoubleListVariable next(MyRandom rand) {
 		List<Double> l = new ArrayList<>();
 		for (int i = 0; i < range.size(); i++) {
 			l.add(rand.nextDouble(range.getMinimum(i), range.getMaximum(i)));

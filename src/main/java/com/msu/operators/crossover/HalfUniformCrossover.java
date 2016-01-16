@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.interfaces.IProblem;
 import com.msu.model.ACrossover;
 import com.msu.moo.model.variable.ListVariable;
 import com.msu.util.MyRandom;
@@ -27,7 +26,7 @@ public class HalfUniformCrossover<T> extends ACrossover<List<T>, ListVariable<T>
 
 
 	@Override
-	public List<List<T>> crossover(IProblem<ListVariable<T>> problem, MyRandom rand, List<T> a, List<T> b) {
+	public List<List<T>> crossover(List<T> a, List<T> b, MyRandom rand) {
 		
 		// copy the both list and change values
 		List<T> c1 = new ArrayList<T>(a);

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 
 import com.msu.interfaces.ICrossover;
+import com.msu.interfaces.IEvaluator;
 import com.msu.interfaces.IFactory;
 import com.msu.interfaces.IMutation;
 import com.msu.interfaces.IProblem;
@@ -14,6 +15,7 @@ import com.msu.model.ASingleObjectiveAlgorithm;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.operators.selection.BinaryTournamentSelection;
+import com.msu.util.MyRandom;
 
 public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends IProblem<V>>  extends ASingleObjectiveAlgorithm<V,P> {
 
@@ -24,13 +26,13 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 	protected Double probMutation;
 
 	// ! operator for crossover
-	protected ICrossover<V,P> crossover;
+	protected ICrossover<V> crossover;
 
 	// ! operator for mutation
-	protected IMutation<V,P> mutation;
+	protected IMutation<V> mutation;
 
 	// ! factory for creating new instances
-	protected IFactory<V,P> factory;
+	protected IFactory<V> factory;
 	
 	// ! population of the last run
 	protected SolutionSet<V> population;
@@ -58,10 +60,10 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		
 
 	@Override
-	public Solution<V> run() {
+	public Solution<V> run(P problem, IEvaluator<V, P> evaluator, MyRandom rand) {
 			
 		while (population.size() < populationSize) {
-			population.add(evaluator.evaluate(problem, factory.next(problem, rand)));
+			population.add(evaluator.evaluate(problem, factory.next(rand)));
 		}
 		
 		while (evaluator.hasNext()) {
@@ -79,12 +81,12 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 
 			while (offsprings.size() < populationSize) {
 				// crossover
-				List<V> off = crossover.crossover(problem, rand, selector.next().getVariable(), selector.next().getVariable());
+				List<V> off = crossover.crossover(selector.next().getVariable(), selector.next().getVariable(), rand);
 				
 				// mutation
 				for (V offspring : off) {
 					if (rand.nextDouble() < this.probMutation) {
-						mutation.mutate(problem, rand, offspring);
+						mutation.mutate(offspring, rand);
 					}
 					offsprings.add(evaluator.evaluate(problem, offspring));
 				}

@@ -41,7 +41,7 @@ public class ZDTExperiment extends AMultiObjectiveExperiment<DoubleListVariable,
 		nsgaII
 		.set("probMutation", 0.3)
 		.set("populationSize", 50)
-		.set("factory", new DoubleListVariableFactory<AbstractZDT>(range))
+		.set("factory", new DoubleListVariableFactory(range))
 		.set("crossover", new SimulatedBinaryCrossover(range))
 		.set("mutation", new RealMutation(range));
 		

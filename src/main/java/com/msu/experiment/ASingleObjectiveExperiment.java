@@ -60,8 +60,7 @@ public abstract class ASingleObjectiveExperiment<V extends IVariable, P extends 
 					IEvaluator<V, P> evaluator = new Evaluator<>(maxEvaluations);
 					
 					// calculate result
-					algorithm.initialize(problem, evaluator, rand);
-					Solution<V> s = algorithm.run();
+					Solution<V> s = algorithm.run(problem, evaluator, rand);
 					
 					// print result
 					System.out.println(String.format("%s %s %s %s", problem, algorithm, k, s));

@@ -21,13 +21,13 @@ public abstract class AMultiObjectiveEvolutionaryAlgorithm<V extends IVariable, 
 	protected Double probMutation;
 
 	// ! operator for crossover
-	protected ICrossover<V,P> crossover;
+	protected ICrossover<V> crossover;
 
 	// ! operator for mutation
-	protected IMutation<V,P> mutation;
+	protected IMutation<V> mutation;
 
 	// ! factory for creating new instances
-	protected IFactory<V,P> factory;
+	protected IFactory<V> factory;
 	
 	// ! current population
 	protected SolutionSet<V> population = null;

@@ -37,7 +37,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	}
 
 	@Override
-	public NonDominatedSolutionSet<V> run_() {
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V, P> evaluator, MyRandom rand) {
 
 		// initialize the population and calculate also rank and crowding
 		initializePopulation(problem, evaluator, rand);
@@ -53,11 +53,11 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 			SolutionSet<V> offsprings = new SolutionSet<V>(populationSize);
 			while (offsprings.size() < populationSize) {
 				// crossover
-				List<V> off = crossover.crossover(problem, rand, bts.next().getVariable(), bts.next().getVariable());
+				List<V> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable(), rand);
 				// mutation
 				for (V offspring : off) {
 					if (rand.nextDouble() < this.probMutation) {
-						mutation.mutate(problem, rand, offspring);
+						mutation.mutate(offspring, rand);
 					}
 					offsprings.add(evaluator.evaluate(problem, offspring));
 				}
@@ -94,7 +94,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 		population = new SolutionSet<V>(populationSize * 2);
 
 		for (int i = 0; i < populationSize; i++) {
-			population.add(evaluator.evaluate(problem, factory.next(problem, rand)));
+			population.add(evaluator.evaluate(problem, factory.next(rand)));
 		}
 
 		// calculate Rank and Crowding for the initial population

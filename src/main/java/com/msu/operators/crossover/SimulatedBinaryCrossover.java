@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.interfaces.IProblem;
 import com.msu.model.ACrossover;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.util.MyRandom;
@@ -97,8 +96,7 @@ public class SimulatedBinaryCrossover extends ACrossover<List<Double>, DoubleLis
 	}
 
 	@Override
-	public List<List<Double>> crossover(IProblem<DoubleListVariable> problem, MyRandom rand, List<Double> a,
-			List<Double> b) {
+	public List<List<Double>> crossover(List<Double> a, List<Double> b, MyRandom rand) {
 
 		List<Double> child1 = new ArrayList<Double>(a);
 		List<Double> child2 = new ArrayList<Double>(b);

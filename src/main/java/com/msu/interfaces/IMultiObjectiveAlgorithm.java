@@ -20,14 +20,9 @@ public interface IMultiObjectiveAlgorithm<V extends IVariable, P extends IProble
 	 *            to solve
 	 * @param evaluator
 	 *            which counts the evaluations
-	 */
-	public IMultiObjectiveAlgorithm<V,P> initialize(P problem, IEvaluator<V,P> evaluator, MyRandom rand);
-
-	
-	/**
 	 * @return front of non dominated points
 	 */
-	public  NonDominatedSolutionSet<V> run();
+	public  NonDominatedSolutionSet<V> run(P problem, IEvaluator<V, P> evaluator, MyRandom rand);
 
 	
 	

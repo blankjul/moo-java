@@ -4,15 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.msu.interfaces.ICrossover;
-import com.msu.interfaces.IProblem;
 import com.msu.interfaces.IVariable;
 import com.msu.util.MyRandom;
 
-public class NoCrossover implements ICrossover<IVariable, IProblem<IVariable>> {
+public class NoCrossover implements ICrossover<IVariable> {
 
 
 	@Override
-	public List<IVariable> crossover(IProblem<IVariable> problem, MyRandom rand, IVariable a, IVariable b) {
+	public List<IVariable> crossover(IVariable a, IVariable b, MyRandom rand) {
 		return Arrays.asList(a.copy(), b.copy());
 	}
 

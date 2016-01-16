@@ -24,7 +24,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.msu.interfaces.IProblem;
 import com.msu.model.ACrossover;
 import com.msu.moo.model.variable.ListVariable;
 import com.msu.operators.crossover.CrossoverUtil;
@@ -67,7 +66,8 @@ public class OrderedCrossover<T> extends ACrossover<List<T>, ListVariable<T>> {
 	
 	
 	@Override
-	public List<List<T>> crossover(IProblem<ListVariable<T>> problem, MyRandom rand, List<T> a, List<T> b) {
+	public List<List<T>> crossover(List<T> a, List<T> b, MyRandom rand) {
+		
         Pair<Integer, Integer> bounds = CrossoverUtil.getSection(a.size(), rand);
 
 		return new ArrayList<>( Arrays.asList(crossover_(a, b, bounds.first, bounds.second), 

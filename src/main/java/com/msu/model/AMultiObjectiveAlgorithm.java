@@ -10,23 +10,7 @@ import com.msu.util.MyRandom;
 public abstract class AMultiObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> implements IMultiObjectiveAlgorithm<V,P>  {
 
 	
-	protected P problem;
-	
-	protected IEvaluator<V, P> evaluator;
-	
-	protected MyRandom rand;
-	
-	@Override
-	public IMultiObjectiveAlgorithm<V, P> initialize(P problem, IEvaluator<V, P> evaluator, MyRandom rand) {
-		this.problem = problem;
-		this.evaluator = evaluator;
-		this.rand = rand;
-		return this;
-	}
-
-	
-	
-	public abstract NonDominatedSolutionSet<V> run_();
+	public abstract NonDominatedSolutionSet<V> run_(P problem, IEvaluator<V, P> evaluator, MyRandom rand);
 
 	
 	/**
@@ -35,8 +19,8 @@ public abstract class AMultiObjectiveAlgorithm<V extends IVariable, P extends IP
 	 * multi-objective algorithm.
 	 */
 	@Override
-	public NonDominatedSolutionSet<V> run() {
-		return run_().removeSolutionWithConstraintViolations();
+	public NonDominatedSolutionSet<V> run(P problem, IEvaluator<V, P> evaluator, MyRandom rand) {
+		return run_(problem, evaluator, rand).removeSolutionWithConstraintViolations();
 	}
 
 

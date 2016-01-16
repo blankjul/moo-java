@@ -5,20 +5,18 @@ import java.util.List;
 
 import com.msu.interfaces.ICrossover;
 import com.msu.interfaces.IEvolutionaryVariable;
-import com.msu.interfaces.IProblem;
 import com.msu.util.MyRandom;
 
-public abstract class ACrossover<T, V extends IEvolutionaryVariable<T,V>> implements ICrossover<V,IProblem<V>> {
+public abstract class ACrossover<T, V extends IEvolutionaryVariable<T,V>> implements ICrossover<V> {
 
 
-	public abstract List<T> crossover(IProblem<V> problem, MyRandom rand, T a, T b);
+	public abstract List<T> crossover(T a, T b, MyRandom rand);
 	
 
 	@Override
-	public List<V> crossover(IProblem<V> problem, MyRandom rand,
-			V a, V b) {
+	public List<V> crossover(V a, V b, MyRandom rand) {
 		
-		List<T> offspring = crossover(problem, rand, a.decode(), b.decode());
+		List<T> offspring = crossover(a.decode(), b.decode(), rand);
 		
 		List<V> result = new ArrayList<>();
 		

@@ -8,13 +8,13 @@ import com.msu.util.MyRandom;
  *
  * @param <T> decoded variable type
  */
-public interface IFactory<V extends IVariable, P extends IProblem<V>> {
+public interface IFactory<V extends IVariable> {
 	
 	/**
 	 * Create a new object from the class.
 	 * @return new random instance.
 	 */
-	public V next(P problem, MyRandom rand);
+	public V next(MyRandom rand);
 	
 	public boolean hasNext();
 

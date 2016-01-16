@@ -3,12 +3,11 @@ package com.msu.operators.mutation;
 import java.util.List;
 
 import com.msu.interfaces.IMutation;
-import com.msu.interfaces.IProblem;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.util.MyRandom;
 import com.msu.util.Range;
 
-public class RealMutation implements IMutation<DoubleListVariable, IProblem<DoubleListVariable>> {
+public class RealMutation implements IMutation<DoubleListVariable> {
 
 	// ! the probability that a bit is changed -> if null it will be 1 / length
 	protected Double mProbability = null;
@@ -57,7 +56,7 @@ public class RealMutation implements IMutation<DoubleListVariable, IProblem<Doub
 	}
 
 	@Override
-	public void mutate(IProblem<DoubleListVariable> problem, MyRandom rand, DoubleListVariable a) {
+	public void mutate(DoubleListVariable a, MyRandom rand) {
 		
 		List<Double> b = a.decode();
 		
