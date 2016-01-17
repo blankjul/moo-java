@@ -9,6 +9,7 @@ import com.msu.moo.util.MyRandom;
 
 public abstract class AMultiObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> implements IMultiObjectiveAlgorithm<V,P>  {
 
+	protected String name;
 	
 	public abstract NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand);
 
@@ -24,9 +25,17 @@ public abstract class AMultiObjectiveAlgorithm<V extends IVariable, P extends IP
 	}
 
 
+	
+	public AMultiObjectiveAlgorithm() {
+		super();
+		name = getClass().getSimpleName();
+	}
+
+
+
 	@Override
 	public String toString() {
-		return getClass().getSimpleName();
+		return name;
 	}
 
 

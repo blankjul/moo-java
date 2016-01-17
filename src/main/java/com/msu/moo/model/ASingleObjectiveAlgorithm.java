@@ -6,17 +6,21 @@ import com.msu.moo.interfaces.algorithms.ISingleObjectiveAlgorithm;
 
 public abstract class ASingleObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> implements ISingleObjectiveAlgorithm<V,P>  {
 
+	protected String name;
 	
-	@Override
-	public String toString() {
-		return getClass().getSimpleName();
+	
+	public ASingleObjectiveAlgorithm() {
+		super();
+		name = getClass().getSimpleName();
 	}
 
 
 
+	@Override
+	public String toString() {
+		return name;
+	}
 
-	
 
-	
 
 }

@@ -9,7 +9,7 @@ public abstract class ASingleObjectiveExperiment<V extends IVariable, P extends 
 
 	@Override
 	protected void analyze(P problem, IAlgorithm<Solution<V>, V, P> algorithm, int run, Solution<V> result) {
-		System.out.println(String.format("%s %s %s %s", problem, algorithm, run, result));
+		System.out.println(String.format("%s,%s,%s,%s", problem, algorithm, run, result));
 	}
 
 

@@ -46,8 +46,6 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 			List<IAlgorithm<R, V, P>> algorithms = new ArrayList<>();
 			setAlgorithms(problems.get(i), algorithms);
 
-			logger.info("Algorithms: " + algorithms);
-
 			// calculate the result for each algorithm
 			for (int j = 0; j < algorithms.size(); j++) {
 

@@ -7,30 +7,29 @@ import java.io.IOException;
 
 /**
  *
- * @param <T> Resulting file that should be read by this class.
+ * @param <T>
+ *            Resulting file that should be read by this class.
  */
 public abstract class AReader<T> {
-	
-	protected abstract T read_(BufferedReader br) throws IOException;
+
+	protected abstract T read_(String pathToFile) throws IOException;
 	
 	public T read(String pathToFile) {
+		try {
+			return read_(pathToFile);
+		} catch (IOException e) {
+			throw new RuntimeException(String.format("Error while reading %s.", pathToFile));
+		}
+	};
+
+	protected BufferedReader createBufferedReader(String pathToFile) {
 		BufferedReader br = null;
 		try {
 			br = new BufferedReader(new FileReader(pathToFile));
 		} catch (FileNotFoundException e) {
 			throw new RuntimeException(String.format("Could not open %s.", pathToFile));
 		}
-		T problem = read(br);
-		return problem;
+		return br;
 	}
 
-	public T read(BufferedReader br) {
-		try {
-			return read_(br);
-		} catch (IOException e) {
-			throw new RuntimeException("Error while reading file!");
-		}
-	}
-	
-	
 }
