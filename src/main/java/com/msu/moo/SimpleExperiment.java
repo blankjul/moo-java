@@ -9,6 +9,7 @@ import com.msu.moo.model.variable.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.moo.operators.mutation.RealMutation;
 import com.msu.moo.problems.Kursawe;
+import com.msu.moo.util.Builder;
 import com.msu.moo.util.MyRandom;
 import com.msu.moo.util.Range;
 

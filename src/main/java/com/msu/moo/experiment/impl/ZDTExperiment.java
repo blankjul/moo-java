@@ -5,10 +5,9 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.Builder;
 import com.msu.moo.algorithms.nsgaII.NSGAII;
 import com.msu.moo.experiment.AMultiObjectiveExperiment;
-import com.msu.moo.interfaces.IMultiObjectiveAlgorithm;
+import com.msu.moo.interfaces.algorithms.IAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variable.DoubleListVariable;
@@ -19,6 +18,7 @@ import com.msu.moo.problems.DoubleVariableListProblem;
 import com.msu.moo.problems.ZDT.AbstractZDT;
 import com.msu.moo.problems.ZDT.ZDT1;
 import com.msu.moo.util.BashExecutor;
+import com.msu.moo.util.Builder;
 import com.msu.moo.util.ObjectFactory;
 import com.msu.moo.util.Range;
 
@@ -30,11 +30,12 @@ public class ZDTExperiment extends AMultiObjectiveExperiment<DoubleListVariable,
 
 	
 	final public boolean SHOW_ORIGINAL_NSGAII_FRONT = false;
-	
-	
+
+
 	@Override
-	protected void setAlgorithms(List<IMultiObjectiveAlgorithm<DoubleListVariable, AbstractZDT>> algorithms) {
-		
+	protected void setAlgorithms(AbstractZDT problem,
+			List<IAlgorithm<NonDominatedSolutionSet<DoubleListVariable>, DoubleListVariable, AbstractZDT>> algorithms) {
+	
 		Range<Double> range = problem.getVariableConstraints();
 
 		Builder<NSGAII<DoubleListVariable, AbstractZDT>> nsgaII = new Builder<>(NSGAII.class);
@@ -48,10 +49,8 @@ public class ZDTExperiment extends AMultiObjectiveExperiment<DoubleListVariable,
 		algorithms.add(nsgaII.build());
 		
 	}
+
 	
-
-
-
 	@Override
 	protected void setProblems(List<AbstractZDT> problems) {
 		//if (SHOW_ORIGINAL_NSGAII_FRONT) problem.setOptimum(calcFront(problem));
@@ -96,6 +95,9 @@ public class ZDTExperiment extends AMultiObjectiveExperiment<DoubleListVariable,
 		BashExecutor.execute("rm *.out");
 		return result;
 	}
+
+
+
 
 
 

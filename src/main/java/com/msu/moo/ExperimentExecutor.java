@@ -21,7 +21,7 @@ import com.msu.moo.util.ObjectFactory;
 public class ExperimentExecutor {
 
 	// ! experiment that should be executed
-	protected final static String EXPERIMENT = "com.msu.experiment.impl.KursaweExperiment";
+	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.KursaweExperiment";
 
 	// ! number of iterations per experiment
 	protected final static int ITERATIONS = 1;

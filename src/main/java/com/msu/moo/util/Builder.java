@@ -1,4 +1,4 @@
-package com.msu.moo;
+package com.msu.moo.util;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -10,7 +10,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.msu.moo.util.Util;
 import com.msu.moo.util.exceptions.BuilderException;
 
 

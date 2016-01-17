@@ -1,9 +1,9 @@
 package com.msu.moo.model;
 
 import com.msu.moo.interfaces.IEvaluator;
-import com.msu.moo.interfaces.IMultiObjectiveAlgorithm;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
+import com.msu.moo.interfaces.algorithms.IMultiObjectiveAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.util.MyRandom;
 
