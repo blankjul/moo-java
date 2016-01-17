@@ -3,7 +3,7 @@ package com.msu.moo.model.variable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.interfaces.IEvolutionaryVariable;
+import com.msu.moo.interfaces.IEvolutionaryVariable;
 
 public class ListVariable<T> extends AVariable<List<T>> implements IEvolutionaryVariable<List<T>, ListVariable<T>>{
 

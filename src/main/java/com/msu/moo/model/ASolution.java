@@ -3,7 +3,7 @@ package com.msu.moo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.interfaces.ISolution;
+import com.msu.moo.interfaces.ISolution;
 
 /**
  * This class combines the variable with the result in the objective space. Each

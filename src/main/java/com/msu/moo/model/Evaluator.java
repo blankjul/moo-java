@@ -1,11 +1,11 @@
 package com.msu.moo.model;
 
 
-import com.msu.interfaces.IEvaluator;
-import com.msu.interfaces.IProblem;
-import com.msu.interfaces.IVariable;
+import com.msu.moo.interfaces.IEvaluator;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
-import com.msu.util.exceptions.EvaluationException;
+import com.msu.moo.util.exceptions.EvaluationException;
 
 /**
  * The Evaluator class should be used for each algorithm to evaluate the result

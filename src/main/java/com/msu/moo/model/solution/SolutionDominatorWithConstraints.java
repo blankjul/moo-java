@@ -3,7 +3,7 @@ package com.msu.moo.model.solution;
 import java.util.Collections;
 import java.util.List;
 
-import com.msu.util.Pair;
+import com.msu.moo.util.Pair;
 
 public class SolutionDominatorWithConstraints extends SolutionDominator {
 

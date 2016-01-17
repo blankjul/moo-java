@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.msu.moo.model.AProblem;
 import com.msu.moo.model.variable.DoubleListVariable;
-import com.msu.util.Range;
-import com.msu.util.exceptions.EvaluationException;
+import com.msu.moo.util.Range;
+import com.msu.moo.util.exceptions.EvaluationException;
 
 public abstract class DoubleVariableListProblem extends AProblem<DoubleListVariable> {
 	

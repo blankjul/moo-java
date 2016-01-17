@@ -5,8 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.msu.ExampleSolutionSet;
-import com.msu.MockVariable;
+import com.msu.moo.mock.ExampleSolutionSet;
+import com.msu.moo.mock.MockVariable;
 import com.msu.moo.model.solution.SolutionSet;
 
 public class RankAndCrowdingComparatorTest {

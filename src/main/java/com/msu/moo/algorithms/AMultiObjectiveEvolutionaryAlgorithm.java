@@ -1,10 +1,10 @@
 package com.msu.moo.algorithms;
 
-import com.msu.interfaces.ICrossover;
-import com.msu.interfaces.IFactory;
-import com.msu.interfaces.IMutation;
-import com.msu.interfaces.IProblem;
-import com.msu.interfaces.IVariable;
+import com.msu.moo.interfaces.ICrossover;
+import com.msu.moo.interfaces.IFactory;
+import com.msu.moo.interfaces.IMutation;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.AMultiObjectiveAlgorithm;
 import com.msu.moo.model.solution.SolutionSet;
 

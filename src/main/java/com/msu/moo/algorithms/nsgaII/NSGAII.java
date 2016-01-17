@@ -7,16 +7,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.interfaces.IEvaluator;
-import com.msu.interfaces.IProblem;
-import com.msu.interfaces.IVariable;
 import com.msu.moo.algorithms.AMultiObjectiveEvolutionaryAlgorithm;
+import com.msu.moo.interfaces.IEvaluator;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.operators.selection.BinaryTournamentSelection;
-import com.msu.util.MyRandom;
+import com.msu.moo.operators.selection.BinaryTournamentSelection;
+import com.msu.moo.util.MyRandom;
 
 /**
  * This algorithm is implemented in the base of NSGAII proposed by Professor Deb

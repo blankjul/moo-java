@@ -7,7 +7,7 @@ import java.io.IOException;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.ChartUtilities;
 
-import com.msu.interfaces.IPlot;
+import com.msu.moo.interfaces.IPlot;
 
 /**
  * This interface provides the method to visualize an experiment result in any

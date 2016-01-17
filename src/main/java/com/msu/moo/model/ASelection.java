@@ -2,7 +2,7 @@ package com.msu.moo.model;
 
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.util.MyRandom;
+import com.msu.moo.util.MyRandom;
 
 public abstract class ASelection<V> {
 

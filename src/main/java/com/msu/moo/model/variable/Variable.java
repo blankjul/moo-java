@@ -1,7 +1,7 @@
 package com.msu.moo.model.variable;
 
-import com.msu.interfaces.IEvolutionaryVariable;
-import com.msu.util.Util;
+import com.msu.moo.interfaces.IEvolutionaryVariable;
+import com.msu.moo.util.Util;
 
 /**
  * This is a template for variable where the encoding and decoding is the same.

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.msu.interfaces.IProblem;
-import com.msu.interfaces.IVariable;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
 
 public abstract class AProblem<V extends IVariable> implements IProblem<V> {

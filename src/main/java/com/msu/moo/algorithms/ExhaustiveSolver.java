@@ -1,12 +1,12 @@
 package com.msu.moo.algorithms;
 
-import com.msu.interfaces.IEvaluator;
-import com.msu.interfaces.IFactory;
-import com.msu.interfaces.IProblem;
-import com.msu.interfaces.IVariable;
+import com.msu.moo.interfaces.IEvaluator;
+import com.msu.moo.interfaces.IFactory;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.util.MyRandom;
+import com.msu.moo.util.MyRandom;
 
 /**
  * ExhaustiveSolver ignores the maxEvaluations completely and tries to find new

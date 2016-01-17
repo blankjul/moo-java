@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.Configuration;
-import com.msu.MockNonDominatedSet;
-import com.msu.MockVariable;
+import com.msu.moo.Configuration;
+import com.msu.moo.mock.MockNonDominatedSet;
+import com.msu.moo.mock.MockVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public class EmpiricalAttainmentFunctionTest {

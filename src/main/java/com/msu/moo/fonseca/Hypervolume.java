@@ -3,8 +3,8 @@ package com.msu.moo.fonseca;
 import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.util.BashExecutor;
-import com.msu.util.Util;
+import com.msu.moo.util.BashExecutor;
+import com.msu.moo.util.Util;
 
 public class Hypervolume {
 

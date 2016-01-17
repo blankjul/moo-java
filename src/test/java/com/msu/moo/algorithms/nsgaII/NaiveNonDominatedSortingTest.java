@@ -7,8 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.MockSolution;
-import com.msu.MockVariable;
+import com.msu.moo.mock.MockSolution;
+import com.msu.moo.mock.MockVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 

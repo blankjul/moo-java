@@ -7,9 +7,9 @@ import java.util.Map;
 
 import org.junit.Test;
 
-import com.msu.ExampleSolutionSet;
-import com.msu.MockSolution;
-import com.msu.MockVariable;
+import com.msu.moo.mock.ExampleSolutionSet;
+import com.msu.moo.mock.MockSolution;
+import com.msu.moo.mock.MockVariable;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 

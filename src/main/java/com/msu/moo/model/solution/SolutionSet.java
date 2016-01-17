@@ -6,8 +6,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import com.msu.util.Pair;
-import com.msu.util.Range;
+import com.msu.moo.util.Pair;
+import com.msu.moo.util.Range;
 
 public class SolutionSet<T> extends ArrayList<Solution<T>>{
 	

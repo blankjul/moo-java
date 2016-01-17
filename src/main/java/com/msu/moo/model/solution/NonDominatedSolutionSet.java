@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.msu.util.Range;
+import com.msu.moo.util.Range;
 
 public class NonDominatedSolutionSet<V> implements Iterable<Solution<V>> {
 

@@ -3,8 +3,8 @@ package com.msu.moo.model.variable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.interfaces.IEvolutionaryVariable;
-import com.msu.interfaces.IVariable;
+import com.msu.moo.interfaces.IEvolutionaryVariable;
+import com.msu.moo.interfaces.IVariable;
 
 public class DoubleListVariable extends AVariable<List<Double>> implements IEvolutionaryVariable<List<Double>, DoubleListVariable>{
 
