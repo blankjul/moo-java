@@ -37,7 +37,7 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 		// get the problems to solve
 		List<P> problems = new ArrayList<>();
 		setProblems(problems);
-		logger.info("Problems: " + problems.size());
+		logger.info("Problems: " + problems);
 
 		// for each problem. the true front could also be null!
 		for (int i = 0; i < problems.size(); i++) {
