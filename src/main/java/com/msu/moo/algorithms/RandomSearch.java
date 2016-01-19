@@ -30,6 +30,7 @@ public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AM
 			V var = factory.next(rand);
 			Solution<V> s = evaluator.evaluate(problem, var);
 			set.add(s);
+			evaluator.notify(s);
 		}
 		return set;
 	}

@@ -14,8 +14,8 @@ import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.algorithms.IAlgorithm;
-import com.msu.moo.model.Evaluator;
 import com.msu.moo.util.MyRandom;
+import com.msu.moo.util.Util;
 
 /**
  * This is a general experiment class which could be used to execute single and
@@ -42,17 +42,16 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 
 	
 	// ! run the experiment
-	public void run(int maxEvaluations, int iterations, long seed, int numOfThreads) {
-		if (numOfThreads == 1) runSingle(maxEvaluations, iterations, seed);
-		else runMulti(maxEvaluations, iterations, seed, numOfThreads);
+	public void run(IEvaluator evaluator, int iterations, long seed, int numOfThreads) {
+		if (numOfThreads == 1) runSingle(evaluator, iterations, seed);
+		else runMulti(evaluator, iterations, seed, numOfThreads);
 	}
 	
 	
-	public void runSingle(int maxEvaluations, int iterations, long seed) {
+	public void runSingle(IEvaluator evaluator, int iterations, long seed) {
 
 		logger.info("Running the experiment.");
 		logger.info("Iterations: " + iterations);
-		logger.info("MaxEvaluations: " + maxEvaluations);
 
 		// get the problems to solve
 		List<P> problems = new ArrayList<>();
@@ -76,10 +75,9 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 
 					// set the random seed that the results will be comparable
 					MyRandom rand = new MyRandom(seed + k);
-					IEvaluator evaluator = new Evaluator(maxEvaluations);
 
 					// calculate result
-					R result = algorithm.run(problem, evaluator, rand);
+					R result = algorithm.run(problem, Util.cloneObject(evaluator), rand);
 
 					getCallback().analyze(problem, algorithm, k, result);
 
@@ -91,11 +89,10 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 
 	
 	
-	public void runMulti(int maxEvaluations, int iterations, long seed, int numOfThreads) {
+	public void runMulti(IEvaluator evaluator, int iterations, long seed, int numOfThreads) {
 
 		logger.info("Running the experiment.");
 		logger.info("Iterations: " + iterations);
-		logger.info("MaxEvaluations: " + maxEvaluations);
 
 		// get the problems to solve
 		List<P> problems = new ArrayList<>();
@@ -122,7 +119,7 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 
 					// add to the thread queue
 					ExperimentCallback<R, V, P> c = new ExperimentCallback<>(algorithms.get(j), problems.get(i), rand,
-							i, j, k, maxEvaluations);
+							i, j, k, Util.cloneObject(evaluator));
 					Future<ExperimentCallback<R, V, P>> future = executor.submit(c);
 					futures.add(future);
 

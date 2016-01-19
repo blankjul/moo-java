@@ -1,6 +1,7 @@
 package com.msu.moo.interfaces;
 
 import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.SolutionSet;
 
 /**
  * This interface templates the evaluators that are used to evaluate the
@@ -35,16 +36,34 @@ public interface IEvaluator {
 	
 	/**
 	 * Create child evaluator that counts also this one.
-	 * 
-	 * @param maxEvaluations
 	 */
-	public IEvaluator createChildEvaluator(int maxEvaluations);
+	public void setFather(IEvaluator father);
 
 	
 	/**
 	 * @return current number of used evaluations.
 	 */
 	public Integer numOfEvaluations();
+	
+	/**
+	 * increase the counting by one.
+	 */
+	public void increase();
+	
+	
+	/**
+	 * @param set current best non dominated solution set
+	 */
+	public <V extends IVariable> void notify(SolutionSet<V> set);
+	
+	
+	/**
+	 * @param set current best solution
+	 */
+	public <V extends IVariable> void notify(Solution<V> s);
+	
+	
+	
 	
 	
 }

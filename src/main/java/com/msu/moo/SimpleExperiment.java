@@ -1,7 +1,7 @@
 package com.msu.moo;
 
 import com.msu.moo.algorithms.nsgaII.NSGAII;
-import com.msu.moo.model.Evaluator;
+import com.msu.moo.model.evaluator.StandardEvaluator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variable.DoubleListVariable;
@@ -28,7 +28,7 @@ public class SimpleExperiment {
 		
 		NSGAII<DoubleListVariable, Kursawe> nsgaII = builder.build();
 		
-		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run(new Kursawe(), new Evaluator(50000), new MyRandom());
+		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run(new Kursawe(), new StandardEvaluator(50000), new MyRandom());
 		
 		for (Solution<DoubleListVariable> solution : set) {
 			System.out.println(String.format("%f,%f", solution.getObjective(0), solution.getObjective(1)));

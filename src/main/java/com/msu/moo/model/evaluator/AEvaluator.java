@@ -1,10 +1,10 @@
-package com.msu.moo.model;
-
+package com.msu.moo.model.evaluator;
 
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.exceptions.EvaluationException;
 
 /**
@@ -16,32 +16,22 @@ import com.msu.moo.util.exceptions.EvaluationException;
  * might be implemented.
  *
  */
-public class Evaluator implements IEvaluator {
+public abstract class AEvaluator implements IEvaluator {
 
 	// ! current amount of evaluations
-	protected int evaluations = 0;	
+	private int evaluations = 0;
 
 	// ! current amount of evaluations
-	protected Integer maxEvaluations = null;
+	protected IEvaluator father = null;
 	
-	// ! current amount of evaluations
-	protected Evaluator father = null;
-
-	
-	public Evaluator(int maxEvaluations) {
-		this.maxEvaluations = maxEvaluations;
-	}
 
 	@SuppressWarnings("unchecked")
+	@Override
 	public <V extends IVariable> Solution<V> evaluate(IProblem<? extends IVariable> problem, V variable) {
-		
-		if (evaluations >= (int) (maxEvaluations * 1.20)) 
-			throw new EvaluationException("Evaluations expired. Check hasNext() first.");
-		
-		++evaluations;
-		if (father != null) father.evaluations++;
-		
-		
+
+		// increase the number of evaluations
+		increase();
+
 		// cast the problem to the specific one
 		IProblem<V> p = null;
 		try {
@@ -56,42 +46,29 @@ public class Evaluator implements IEvaluator {
 		return evaluations;
 	}
 
-
-	/**
-	 * @return whether further evaluations are allowed or not
-	 */
-	public boolean hasNext() {
-		if (maxEvaluations == null)
-			return true;
-		return evaluations <= maxEvaluations;
-	}
-
-	public Integer getMaxEvaluations() {
-		return maxEvaluations;
-	}
-
-	
-	public Evaluator createChildEvaluator(int maxEvaluations) {
-		Evaluator eval = new Evaluator(maxEvaluations);
-		eval.father = this;
-		return eval;
-	}
-	
 	public void increase() {
 		++this.evaluations;
-		if (getFather() != null) getFather().evaluations++;
+		if (father != null)
+			father.increase();
 	}
+	
 
-	public Evaluator getFather() {
-		return father;
-	}
 
 	@Override
 	public Integer numOfEvaluations() {
 		return evaluations;
 	}
-	
-	
-	
+
+	@Override
+	public <V extends IVariable> void notify(Solution<V> s) {
+		SolutionSet<V> set = new SolutionSet<>();
+		set.add(s);
+		notify(set);
+	}
+
+	@Override
+	public void setFather(IEvaluator father) {
+		this.father = father;
+	}
 
 }

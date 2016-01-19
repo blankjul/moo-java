@@ -2,10 +2,10 @@ package com.msu.moo.experiment;
 
 import java.util.concurrent.Callable;
 
+import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.interfaces.algorithms.IAlgorithm;
-import com.msu.moo.model.Evaluator;
 import com.msu.moo.util.MyRandom;
 import com.msu.moo.util.Util;
 
@@ -17,7 +17,7 @@ public class ExperimentCallback<R, V extends IVariable, P extends IProblem<V>> i
 	public int i;
 	public int j;
 	public int k;
-	public int maxEvaluations;
+	public IEvaluator evaluator;
 	
 	public double duration;
 	public R result;
@@ -25,8 +25,9 @@ public class ExperimentCallback<R, V extends IVariable, P extends IProblem<V>> i
 	
 
 
+
 	public ExperimentCallback(IAlgorithm<R, V, P> algorithm, P problem, MyRandom rand, int i, int j, int k,
-			int maxEvaluations) {
+			IEvaluator evaluator) {
 		super();
 		this.algorithm = algorithm;
 		this.problem = problem;
@@ -34,8 +35,9 @@ public class ExperimentCallback<R, V extends IVariable, P extends IProblem<V>> i
 		this.i = i;
 		this.j = j;
 		this.k = k;
-		this.maxEvaluations = maxEvaluations;
+		this.evaluator = evaluator;
 	}
+
 
 
 
@@ -47,7 +49,7 @@ public class ExperimentCallback<R, V extends IVariable, P extends IProblem<V>> i
 		P p = Util.cloneObject(problem);
 
 		long startTime = System.currentTimeMillis();
-		result = a.run(p, new Evaluator(maxEvaluations), rand);
+		result = a.run(p, evaluator, rand);
 		duration = ((System.currentTimeMillis() - startTime) / 1000.0);
 
 		return this;

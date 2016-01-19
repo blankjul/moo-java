@@ -134,6 +134,8 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		next.sort(comp);
 		next = new SolutionSet<V>(next.subList(0, Math.min(next.size(), populationSize)));
 		
+		evaluator.notify(next);
+		
 		if (verbose) {
 			for (Solution<V> solution : next.subList(0, 3)) {
 				System.out.println(solution);

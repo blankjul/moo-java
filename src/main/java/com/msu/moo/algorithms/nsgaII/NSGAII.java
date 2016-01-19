@@ -77,6 +77,8 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 			Collections.reverse(population);
 			population = new SolutionSet<V>(population.subList(0, Math.min(populationSize, population.size())));
 
+			evaluator.notify(population);
+			
 		}
 
 		NonDominatedSolutionSet<V> result = new NonDominatedSolutionSet<V>();
