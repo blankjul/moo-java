@@ -18,8 +18,8 @@ public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AM
 	// ! variable factory to create new solutions
 	protected IFactory<V> factory;
 
-	public RandomSearch(IFactory<V>  fFactory) {
-		this.factory = fFactory;
+	public RandomSearch(IFactory<V>  factory) {
+		this.factory = factory;
 	}
 
 

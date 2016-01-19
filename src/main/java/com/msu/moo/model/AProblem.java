@@ -20,6 +20,13 @@ public abstract class AProblem<V extends IVariable> implements IProblem<V> {
 	//! name of the problem
 	protected String name;
 	
+	
+	
+	public AProblem() {
+		super();
+		this.name = this.getClass().getSimpleName();
+	}
+
 	@Override
 	public Solution<V> evaluate(V variable) {
 

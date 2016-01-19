@@ -4,7 +4,9 @@ import java.util.List;
 
 import com.msu.moo.algorithms.RandomSearch;
 import com.msu.moo.algorithms.nsgaII.NSGAII;
-import com.msu.moo.experiment.AMultiObjectiveExperiment;
+import com.msu.moo.experiment.AExperiment;
+import com.msu.moo.experiment.callback.ICallback;
+import com.msu.moo.experiment.callback.MultiObjectiveCallback;
 import com.msu.moo.interfaces.algorithms.IAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.variable.DoubleListVariable;
@@ -15,8 +17,10 @@ import com.msu.moo.problems.Kursawe;
 import com.msu.moo.util.Builder;
 import com.msu.moo.util.Range;
 
-public class KursaweExperiment extends AMultiObjectiveExperiment<DoubleListVariable, Kursawe> {
+public class KursaweExperiment extends AExperiment<NonDominatedSolutionSet<DoubleListVariable>, DoubleListVariable, Kursawe> {
 
+
+	
 	@Override
 	protected void setAlgorithms(Kursawe problem,
 			List<IAlgorithm<NonDominatedSolutionSet<DoubleListVariable>, DoubleListVariable, Kursawe>> algorithms) {
@@ -35,6 +39,12 @@ public class KursaweExperiment extends AMultiObjectiveExperiment<DoubleListVaria
 	@Override
 	protected void setProblems(List<Kursawe> problems) {
 		problems.add(new Kursawe());
+	}
+
+
+	@Override
+	protected ICallback<NonDominatedSolutionSet<DoubleListVariable>, DoubleListVariable, Kursawe> getCallback() {
+		return new MultiObjectiveCallback<>();
 	}
 
 }

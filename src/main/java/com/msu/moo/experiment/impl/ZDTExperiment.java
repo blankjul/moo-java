@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.msu.moo.algorithms.nsgaII.NSGAII;
-import com.msu.moo.experiment.AMultiObjectiveExperiment;
+import com.msu.moo.experiment.AExperiment;
+import com.msu.moo.experiment.callback.ICallback;
+import com.msu.moo.experiment.callback.MultiObjectiveCallback;
 import com.msu.moo.interfaces.algorithms.IAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
@@ -22,9 +24,9 @@ import com.msu.moo.util.Builder;
 import com.msu.moo.util.ObjectFactory;
 import com.msu.moo.util.Range;
 
-public class ZDTExperiment extends AMultiObjectiveExperiment<DoubleListVariable, AbstractZDT> {
+public class ZDTExperiment extends AExperiment<NonDominatedSolutionSet<DoubleListVariable>, DoubleListVariable, AbstractZDT> {
 
-	
+
 	final public DoubleVariableListProblem problem = 
 			ObjectFactory.create(AbstractZDT.class, "com.msu.moo.problems.ZDT.ZDT1");
 
@@ -48,6 +50,11 @@ public class ZDTExperiment extends AMultiObjectiveExperiment<DoubleListVariable,
 		
 		algorithms.add(nsgaII.build());
 		
+	}
+	
+	@Override
+	protected ICallback<NonDominatedSolutionSet<DoubleListVariable>, DoubleListVariable, AbstractZDT> getCallback() {
+		return new MultiObjectiveCallback<>();
 	}
 
 	

@@ -35,8 +35,6 @@ public class Configuration {
 	// ! path to Fonseca's Hypervolume C Implementation
 	public static String PATH_TO_HYPERVOLUME = "vendor/bin/hv";
 	
-	//! number of threads for executing the experiment
-	public static int NUM_OF_THREADS = 8;
 
 }
 

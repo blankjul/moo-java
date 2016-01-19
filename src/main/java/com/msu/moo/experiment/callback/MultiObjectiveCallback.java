@@ -1,4 +1,4 @@
-package com.msu.moo.experiment;
+package com.msu.moo.experiment.callback;
 
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
@@ -6,11 +6,11 @@ import com.msu.moo.interfaces.algorithms.IAlgorithm;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 
-public abstract class AMultiObjectiveExperiment<V extends IVariable, P extends IProblem<V>>
-		extends AExperiment<NonDominatedSolutionSet<V>, V, P> {
+public class MultiObjectiveCallback<V extends IVariable, P extends IProblem<V>>
+		implements ICallback<NonDominatedSolutionSet<V>, V, P> {
 
 	@Override
-	protected void analyze(P problem, IAlgorithm<NonDominatedSolutionSet<V>, V, P> algorithm, int run,
+	public void analyze(P problem, IAlgorithm<NonDominatedSolutionSet<V>, V, P> algorithm, int run,
 			NonDominatedSolutionSet<V> result) {
 
 		System.out.println("------------------------------");
