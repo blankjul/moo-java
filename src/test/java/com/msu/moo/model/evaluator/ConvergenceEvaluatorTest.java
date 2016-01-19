@@ -13,7 +13,7 @@ public class ConvergenceEvaluatorTest extends TestCase{
 
 	
 	public void testSingleObjectiveNotify() {
-		ConvergenceEvaluator eval = new ConvergenceEvaluator(100);
+		ConvergenceEvaluator eval = new ConvergenceEvaluator(100, 10);
 		for (int i = 0; i < 100; i++) {
 			eval.notify(MockSolution.create(1, Arrays.asList(5d,2d)));
 			assertTrue(eval.hasNext());
@@ -27,15 +27,19 @@ public class ConvergenceEvaluatorTest extends TestCase{
 	public void testMultiObjectiveNotify() {
 		ConvergenceEvaluator eval = new ConvergenceEvaluator(100);
 		
+
+		for (int i = 0; i < 100; i++) {
+			SolutionSet<MockVariable> set = new SolutionSet<>();
+			set.add(MockSolution.create(1, Arrays.asList(5d,2d)));
+			set.add(MockSolution.create(2, Arrays.asList(4d,3d)));
+			eval.notify(set);
+			assertTrue(eval.hasNext());
+		}
+		
 		SolutionSet<MockVariable> set = new SolutionSet<>();
 		set.add(MockSolution.create(1, Arrays.asList(5d,2d)));
 		set.add(MockSolution.create(2, Arrays.asList(4d,3d)));
 		
-		
-		for (int i = 0; i < 100; i++) {
-			eval.notify(set);
-			assertTrue(eval.hasNext());
-		}
 		eval.notify(set);
 		assertFalse(eval.hasNext());
 		
