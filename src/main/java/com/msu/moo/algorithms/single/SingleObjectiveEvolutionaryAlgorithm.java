@@ -42,6 +42,10 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 	//! if true output is printed
 	protected boolean verbose = false;
 	
+	//! final population when the algorithm was executed
+	protected SolutionSet<V> finalPopulation = null;
+	
+	
 
 	public static Comparator<ISolution<?>> comp = new Comparator<ISolution<?>>() {
 		@Override
@@ -140,5 +144,11 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		return next;
 	}
 
+	
+	public SolutionSet<V> getFinalPopulation() {
+		return finalPopulation;
+	}
+	
+	
 
 }
