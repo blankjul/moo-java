@@ -2,6 +2,7 @@ package com.msu.moo.algorithms;
 
 import com.msu.moo.interfaces.ICrossover;
 import com.msu.moo.interfaces.IFactory;
+import com.msu.moo.interfaces.ILocalOptimization;
 import com.msu.moo.interfaces.IMutation;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
@@ -28,6 +29,9 @@ public abstract class AMultiObjectiveEvolutionaryAlgorithm<V extends IVariable, 
 
 	// ! factory for creating new instances
 	protected IFactory<V> factory;
+	
+	// ! factory for creating new instances
+	protected ILocalOptimization<V, P> local;
 	
 	// ! current population
 	protected SolutionSet<V> population = null;

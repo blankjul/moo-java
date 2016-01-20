@@ -13,8 +13,6 @@ public class NonDominatedSolutionSet<V> implements Iterable<Solution<V>> {
 	// ! list which contains all the solutions
 	protected SolutionSet<V> solutions = new SolutionSet<V>();
 
-	// ! solution comparator for testing domination
-	protected SolutionDominator cmp = new SolutionDominatorWithConstraints();
 
 	public NonDominatedSolutionSet() {
 		super();
@@ -50,7 +48,7 @@ public class NonDominatedSolutionSet<V> implements Iterable<Solution<V>> {
 		for (Solution<V> s : solutions) {
 
 			// if the solution objectives are exactly equal
-			if (cmp.isEqual(s, solutionToAdd)) {
+			if (SolutionDominator.isEqual(s, solutionToAdd)) {
 				
 				// if variable is null (e.g. after calc median front) dont add it.
 				if (s.getVariable() == null || solutionToAdd.getVariable() == null) {
@@ -63,11 +61,11 @@ public class NonDominatedSolutionSet<V> implements Iterable<Solution<V>> {
 			}
 
 			// if one solution dominates the new one
-			if (cmp.isDominating(s, solutionToAdd))
+			if (SolutionDominator.isDominating(s, solutionToAdd))
 				return false;
 
 			// if the new solution dominates one store them in a list
-			if (cmp.isDominatedBy(s, solutionToAdd))
+			if (SolutionDominator.isDominatedBy(s, solutionToAdd))
 				areDominated.add(s);
 
 		}
@@ -118,13 +116,6 @@ public class NonDominatedSolutionSet<V> implements Iterable<Solution<V>> {
 		return this.solutions.getRange();
 	}
 
-	public SolutionDominator getSolutionDominator() {
-		return cmp;
-	}
-
-	public void setSolutionDominator(SolutionDominator cmp) {
-		this.cmp = cmp;
-	}
 
 	/**
 	 * Remove INPLACE all solutions which have violated constraints

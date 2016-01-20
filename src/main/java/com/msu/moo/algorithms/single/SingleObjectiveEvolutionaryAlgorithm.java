@@ -43,7 +43,7 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 	protected boolean verbose = false;
 	
 	//! final population when the algorithm was executed
-	protected SolutionSet<V> finalPopulation = null;
+	protected SolutionSet<V> population = null;
 	
 	
 
@@ -70,11 +70,13 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 	public Solution<V> run(P problem, IEvaluator evaluator, MyRandom rand) {
 	
 		// initial population
-		SolutionSet<V> population = initialize(problem, evaluator, rand);
+		if (population.isEmpty()) 
+			population = initialize(problem, evaluator, rand);
 
 		// iterate until evaluator has no evaluations
 		while (evaluator.hasNext()) {
 			population = next(problem, evaluator, rand, population);
+			if (verbose) SingleObjectiveEvolutionaryAlgorithm.print(population, 3);
 		}
 		
 		// return the best
@@ -83,7 +85,7 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 	}
 	
 	public SolutionSet<V> initialize(P problem, IEvaluator evaluator, MyRandom rand) {
-		SolutionSet<V> population = new SolutionSet<>();
+		population = new SolutionSet<>();
 		while (population.size() < populationSize) {
 			population.add(evaluator.evaluate(problem, factory.next(rand)));
 		}
@@ -136,21 +138,21 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		
 		evaluator.notify(next);
 		
-		if (verbose) {
-			for (Solution<V> solution : next.subList(0, 3)) {
-				System.out.println(solution);
-			}
-			System.out.println("-----------------------------------");
-		}
 		
 		return next;
 	}
 
 	
-	public SolutionSet<V> getFinalPopulation() {
-		return finalPopulation;
+	public SolutionSet<V> getPopulation() {
+		return population;
 	}
 	
 	
+	public static <V> void print(SolutionSet<V> population, int n) {
+		for (Solution<V> solution : population.subList(0, Math.min(n, population.size()))) {
+			System.out.println(solution);
+		}
+		System.out.println("-----------------------------------");
+	}
 
 }

@@ -7,13 +7,12 @@ import java.util.Map;
 import com.msu.moo.model.AIndicator;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
 
 public class NonDominatedRankIndicator extends AIndicator<Integer> {
 
 	// ! NonDominatedSorting that is used for calculating the rank
-	protected NonDominatedSorting sort = new NaiveNonDominatedSorting(new SolutionDominatorWithConstraints());
+	protected NonDominatedSorting sort = new NaiveNonDominatedSorting();
 	
 	
 	public NonDominatedRankIndicator() {

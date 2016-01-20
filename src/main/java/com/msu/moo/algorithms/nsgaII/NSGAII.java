@@ -13,7 +13,6 @@ import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionDominatorWithConstraints;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.selection.BinaryTournamentSelection;
 import com.msu.moo.util.MyRandom;
@@ -31,6 +30,8 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 
 	// ! crowding distance for the whole population
 	protected Map<Solution<V>, Double> crowding;
+	
+	
 
 	// ! private constructor! use the builder!
 	protected NSGAII() {
@@ -59,7 +60,16 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 					if (rand.nextDouble() < this.probMutation) {
 						mutation.mutate(offspring, rand);
 					}
-					offsprings.add(evaluator.evaluate(problem, offspring));
+					
+					// evaluate directly or perform local optimization
+					Solution<V> s = null;
+					if (local != null && evaluator.hasNext()) {
+						s = local.run(problem, evaluator, offspring);
+					} else {
+						s = evaluator.evaluate(problem, offspring);
+					}
+					
+					offsprings.add(s);
 				}
 			}
 
@@ -82,7 +92,6 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 		}
 
 		NonDominatedSolutionSet<V> result = new NonDominatedSolutionSet<V>();
-		result.setSolutionDominator(new SolutionDominatorWithConstraints());
 		result.addAll(population);
 		return result;
 
@@ -109,7 +118,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 		NonDominatedRankIndicator rankInd = new NonDominatedRankIndicator();
 		rank = rankInd.calculate(population);
 		crowding = new HashMap<>();
-		Collection<NonDominatedSolutionSet<V>> fronts = new NaiveNonDominatedSorting(new SolutionDominatorWithConstraints()).run(population);
+		Collection<NonDominatedSolutionSet<V>> fronts = new NaiveNonDominatedSorting().run(population);
 		for (NonDominatedSolutionSet<V> set : fronts) {
 			crowding.putAll(new CrowdingIndicator().calculate(set.getSolutions()));
 		}
