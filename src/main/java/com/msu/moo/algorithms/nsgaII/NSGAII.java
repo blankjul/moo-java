@@ -1,8 +1,6 @@
 package com.msu.moo.algorithms.nsgaII;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -11,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msu.moo.algorithms.AMultiObjectiveEvolutionaryAlgorithm;
-import com.msu.moo.algorithms.single.SingleObjectiveEvolutionaryAlgorithm;
+import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
@@ -35,34 +33,18 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	// ! crowding distance for the whole population
 	protected Map<Solution<V>, Double> crowding;
 	
-	
+
 	// ! private constructor! use the builder!
 	protected NSGAII() {
 	}
+	
+	
 
 	@Override
 	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand)  {
 
 		// initialize the population and calculate also rank and crowding
 		initializePopulation(problem, evaluator, rand);
-		
-		PrintWriter writer = null;
-		try {
-			writer = new PrintWriter(String.format("comparison/zdt1/my%s.out", counter++), "UTF-8");
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		
-		writer.println("#");
-		for (Solution<V> solution : population) {
-			if (solution.getObjective(1).isNaN()) {
-				System.out.println();
-			}
-			writer.println(String.format("%s	%s", solution.getObjective(0), solution.getObjective(1)));
-		}
-		
 		
 		while (evaluator.hasNext()) {
 			
@@ -86,12 +68,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 					}
 					
 					// evaluate directly or perform local optimization
-					Solution<V> s = null;
-					if (local != null && evaluator.hasNext()) {
-						s = local.run(problem, evaluator, offspring);
-					} else {
-						s = evaluator.evaluate(problem, offspring);
-					}
+					Solution<V> s = evaluator.evaluate(problem, offspring);;
 					
 					offsprings.add(s);
 				}
@@ -113,18 +90,9 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 
 			evaluator.notify(population);
 			
-			writer.println("#");
-			for (Solution<V> solution : population) {
-				writer.println(String.format("%s	%s", solution.getObjective(0), solution.getObjective(1)));
-			}
-			
-			
-			//System.out.println(Hypervolume.calculate(population,Arrays.asList(1.01, 1.01)));
-		
 		}
 
-		writer.flush();
-		writer.close();
+		System.out.println(Hypervolume.calculate(population,Arrays.asList(1.01, 1.01)));
 		
 		NonDominatedSolutionSet<V> result = new NonDominatedSolutionSet<V>();
 		result.addAll(population);
@@ -157,6 +125,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 		for (NonDominatedSolutionSet<V> set : fronts) {
 			crowding.putAll(new CrowdingIndicator().calculate(set.getSolutions()));
 		}
+		
 	}
 
 

@@ -21,7 +21,7 @@ public class SimulatedBinaryCrossover extends ACrossover<List<Double>, DoubleLis
 	protected double eta_c = 20.0;
 
 	// ! crossover probability in the list
-	protected double cProbability = 0.5;
+	protected double cProbability = 0.9;
 
 	public SimulatedBinaryCrossover(Range<Double> range) {
 		super();

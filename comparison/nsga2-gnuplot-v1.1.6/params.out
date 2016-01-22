@@ -70,6 +70,6 @@
  Distribution index for crossover = 1.500000e+01
  Distribution index for mutation = 2.000000e+01
  Number of binary variables = 0
- Seed for random number generator = 1.000000e-02
- Number of crossover of real variable = 8966
- Number of mutation of real variable = 19663
+ Seed for random number generator = 3.000000e-01
+ Number of crossover of real variable = 8999
+ Number of mutation of real variable = 19712

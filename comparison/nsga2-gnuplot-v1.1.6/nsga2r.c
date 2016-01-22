@@ -67,7 +67,6 @@ int main (int argc, char **argv)
     fpt5 = fopen("params.out","w");
     fprintf(fpt1,"# This file contains the data of initial population\n");
     fprintf(fpt2,"# This file contains the data of final population\n");
-    fprintf(fpt3,"# This file contains the data of final feasible population (if found)\n");
     fprintf(fpt5,"# This file contains information about inputs as read by the program\n");
     printf("\n Enter the problem relevant and algorithm relevant parameters ... ");
     printf("\n Enter the population size (a multiple of 4) : ");
@@ -357,7 +356,6 @@ int main (int argc, char **argv)
     }
     fprintf(fpt1,"# of objectives = %d, # of constraints = %d, # of real_var = %d, # of bits of bin_var = %d, constr_violation, rank, crowding_distance\n",nobj,ncon,nreal,bitlength);
     fprintf(fpt2,"# of objectives = %d, # of constraints = %d, # of real_var = %d, # of bits of bin_var = %d, constr_violation, rank, crowding_distance\n",nobj,ncon,nreal,bitlength);
-    fprintf(fpt3,"# of objectives = %d, # of constraints = %d, # of real_var = %d, # of bits of bin_var = %d, constr_violation, rank, crowding_distance\n",nobj,ncon,nreal,bitlength);
     nbinmut = 0;
     nrealmut = 0;
     nbincross = 0;

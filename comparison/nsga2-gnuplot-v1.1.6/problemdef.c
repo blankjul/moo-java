@@ -13,8 +13,7 @@
 /* # define kur */
 /* # define pol */
 /* # define vnt */
-# define zdt1
-/* # define zdt2 */
+# define zdt3
 /* # define zdt3 */
 /* # define zdt4 */
 /* # define zdt5 */

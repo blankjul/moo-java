@@ -2,18 +2,28 @@ package com.msu.moo.util;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 public class MyRandom {
 
 	// ! the current random object
 	protected java.util.Random r;
+	
+	final protected int warmup = 1000000;
 
 	public MyRandom() {
-		r = new java.util.Random();
+		r = new Random();
+		for (int i = 0; i < warmup; i++) {
+			r.nextDouble();
+		}
 	}
 
 	public MyRandom(long seed) {
-		r = new java.util.Random(seed);
+		r = new Random();
+		r.setSeed(seed);
+		for (int i = 0; i < warmup; i++) {
+			r.nextDouble();
+		}
 	}
 
 	/**

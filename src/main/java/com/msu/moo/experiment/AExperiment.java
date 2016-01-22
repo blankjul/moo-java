@@ -79,7 +79,8 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 					// calculate result
 					R result = algorithm.run(problem, Util.cloneObject(evaluator), rand);
 
-					getCallback().analyze(problem, algorithm, k, result);
+					ICallback<R, V, P> callback = getCallback();
+					if (callback!= null) callback.analyze(problem, algorithm, k, result);
 
 				}
 			}
@@ -133,9 +134,9 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 
 				//String prefix = String.format("[%s/%s | %s | %s/%s ]", c.i + 1, problems.size(), c.algorithm, c.k + 1, iterations);
 				//logger.info(String.format("%s %s in %f s", prefix, c.algorithm, c.duration));
-
-				getCallback().analyze(c.problem, c.algorithm, c.k, c.result);
-
+				
+				ICallback<R, V, P> callback = getCallback();
+				if (callback!= null) callback.analyze(c.problem, c.algorithm, c.k, c.result);
 			}
 		} catch (InterruptedException | ExecutionException e) {
 			e.printStackTrace();
