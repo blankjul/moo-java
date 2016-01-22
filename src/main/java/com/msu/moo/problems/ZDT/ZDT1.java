@@ -17,14 +17,15 @@ public class ZDT1 extends AbstractZDT  {
 	 *            The decision variables of the solution to evaluate.
 	 */
 	private double evalG(List<Double> x) {
-		double g = 0.0;
-		for (int i = 1; i < x.size(); i++)
+		double g = 0;
+		for (int i = 1; i < x.size(); i++) {
 			g += x.get(i);
-		double constante = (9.0 / (x.size() - 1));
-		g = constante * g;
-		g = g + 1.0;
-		return g;
+		}
+		
+		double c = (9.0 / (x.size() - 1));
+		return 1 + c * g;
 	} 
+	
 
 	/**
 	 * Returns the value of the ZDT1 function H.
@@ -35,23 +36,24 @@ public class ZDT1 extends AbstractZDT  {
 	 *            Second argument of the function H.
 	 */
 	public double evalH(double f, double g) {
-		double h = 0.0;
-		h = 1.0 - java.lang.Math.sqrt(f / g);
-		return h;
+		if (f == g) {
+			System.out.println();
+		}
+		return 1.0 - Math.sqrt(f / g);
 	} 
 
 
 	
 	@Override
 	protected void evaluate__(DoubleListVariable var, List<Double> objectives) {
-		double[] f = new double[getNumberOfObjectives()];
-		f[0] = var.decode().get(0);
-		double g = this.evalG(var.decode());
-		double h = this.evalH(f[0], g);
-		f[1] = h * g;
 		
-		objectives.add(f[0]);
-		objectives.add(f[1]);
+		final double f = var.get(0);
+		objectives.add(f);
+		
+		final double g = evalG(var.decode());
+		final double h = evalH(f, g);
+		objectives.add(h);
+		
 	}
 	
 

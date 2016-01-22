@@ -1,5 +1,8 @@
 package com.msu.moo.algorithms.nsgaII;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -8,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.msu.moo.algorithms.AMultiObjectiveEvolutionaryAlgorithm;
+import com.msu.moo.algorithms.single.SingleObjectiveEvolutionaryAlgorithm;
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
@@ -32,20 +36,36 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	protected Map<Solution<V>, Double> crowding;
 	
 	
-
 	// ! private constructor! use the builder!
 	protected NSGAII() {
 	}
 
 	@Override
-	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand) {
+	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand)  {
 
 		// initialize the population and calculate also rank and crowding
 		initializePopulation(problem, evaluator, rand);
 		
+		PrintWriter writer = null;
+		try {
+			writer = new PrintWriter(String.format("comparison/zdt1/my%s.out", counter++), "UTF-8");
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		
+		writer.println("#");
+		for (Solution<V> solution : population) {
+			if (solution.getObjective(1).isNaN()) {
+				System.out.println();
+			}
+			writer.println(String.format("%s	%s", solution.getObjective(0), solution.getObjective(1)));
+		}
+		
 		
 		while (evaluator.hasNext()) {
-
+			
 			// binary tournament selection for mating
 			BinaryTournamentSelection<V> bts = new BinaryTournamentSelection<V>(population,
 					new RankAndCrowdingComparator<V>(rank, crowding), rand);
@@ -53,8 +73,12 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 			// create offspring population until size two times
 			SolutionSet<V> offsprings = new SolutionSet<V>(populationSize);
 			while (offsprings.size() < populationSize) {
+				
 				// crossover
-				List<V> off = crossover.crossover(bts.next().getVariable(), bts.next().getVariable(), rand);
+				Solution<V> p1 = bts.next();
+				Solution<V> p2 = bts.next();
+				
+				List<V> off = crossover.crossover(p1.getVariable(), p2.getVariable(), rand);
 				// mutation
 				for (V offspring : off) {
 					if (rand.nextDouble() < this.probMutation) {
@@ -89,8 +113,19 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 
 			evaluator.notify(population);
 			
+			writer.println("#");
+			for (Solution<V> solution : population) {
+				writer.println(String.format("%s	%s", solution.getObjective(0), solution.getObjective(1)));
+			}
+			
+			
+			//System.out.println(Hypervolume.calculate(population,Arrays.asList(1.01, 1.01)));
+		
 		}
 
+		writer.flush();
+		writer.close();
+		
 		NonDominatedSolutionSet<V> result = new NonDominatedSolutionSet<V>();
 		result.addAll(population);
 		return result;

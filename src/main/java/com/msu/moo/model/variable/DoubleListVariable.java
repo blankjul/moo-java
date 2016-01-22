@@ -22,5 +22,16 @@ public class DoubleListVariable extends AVariable<List<Double>> implements IEvol
 		return new DoubleListVariable(obj);
 	}
 	
-
+	
+	public void set(int i, double value) {
+		obj.set(i, value);
+	}
+	
+	public double get(int i) {
+		return obj.get(i);
+	}
+	
+	public int size() {
+		return obj.size();
+	}
 }

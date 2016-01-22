@@ -1,4 +1,4 @@
-package com.msu.moo.model;
+package com.msu.moo.model.solution;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

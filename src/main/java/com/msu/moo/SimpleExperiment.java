@@ -7,7 +7,7 @@ import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.moo.model.variable.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
-import com.msu.moo.operators.mutation.RealMutation;
+import com.msu.moo.operators.mutation.SimulatedBinaryMutation;
 import com.msu.moo.problems.Kursawe;
 import com.msu.moo.util.Builder;
 import com.msu.moo.util.MyRandom;
@@ -24,7 +24,7 @@ public class SimpleExperiment {
 		.set("populationSize", 50)
 		.set("factory", new DoubleListVariableFactory(range))
 		.set("crossover", new SimulatedBinaryCrossover(range))
-		.set("mutation", new RealMutation(range));
+		.set("mutation", new SimulatedBinaryMutation(range));
 		
 		NSGAII<DoubleListVariable, Kursawe> nsgaII = builder.build();
 		

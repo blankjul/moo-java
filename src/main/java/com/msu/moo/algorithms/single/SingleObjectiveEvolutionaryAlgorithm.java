@@ -1,6 +1,5 @@
 package com.msu.moo.algorithms.single;
 
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 
@@ -10,12 +9,12 @@ import com.msu.moo.interfaces.IFactory;
 import com.msu.moo.interfaces.ILocalOptimization;
 import com.msu.moo.interfaces.IMutation;
 import com.msu.moo.interfaces.IProblem;
-import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.interfaces.IVariable;
+import com.msu.moo.model.ASelection;
 import com.msu.moo.model.ASingleObjectiveAlgorithm;
+import com.msu.moo.model.solution.SingleObjectiveComparator;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.operators.selection.BinaryTournamentSelection;
 import com.msu.moo.util.MyRandom;
 
 public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends IProblem<V>>
@@ -45,25 +44,6 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 	//! final population when the algorithm was executed
 	protected SolutionSet<V> population = null;
 	
-	
-
-	public static Comparator<ISolution<?>> comp = new Comparator<ISolution<?>>() {
-		@Override
-		public int compare(ISolution<?> o1, ISolution<?> o2) {
-			int constraint = Double.compare(o1.getSumOfConstraintViolation(), o2.getSumOfConstraintViolation());
-			if (constraint != 0)
-				return constraint;
-			else {
-				for (int i = 0; i < o1.numOfObjectives(); i++) {
-					int value = Double.compare(o1.getObjective(i), o2.getObjective(i));
-					if (value != 0)
-						return value;
-				}
-				return 0;
-			}
-		}
-	};
-
 
 
 	@Override
@@ -99,13 +79,7 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		SolutionSet<V> offsprings = new SolutionSet<V>(populationSize);
 
 		// selects per default always the maximal value
-		BinaryTournamentSelection<V> selector = new BinaryTournamentSelection<V>(population,
-				new Comparator<Solution<V>>() {
-					@Override
-					public int compare(Solution<V> o1, Solution<V> o2) {
-						return -1 * comp.compare(o1, o2);
-					}
-				}, rand);
+		ASelection<V> selector = new SingleObjectiveBinaryTournament<>(population, rand);
 
 		while (offsprings.size() < populationSize) {
 			// crossover
@@ -133,7 +107,7 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		// eliminate duplicates to ensure variety in the population
 		SolutionSet<V> next = new SolutionSet<V>(new HashSet<>(population));
 		// truncate the population -> survival of the fittest
-		next.sort(comp);
+		next.sort(new SingleObjectiveComparator());
 		next = new SolutionSet<V>(next.subList(0, Math.min(next.size(), populationSize)));
 		
 		evaluator.notify(next);

@@ -7,7 +7,6 @@ import java.util.List;
 import com.msu.moo.model.ACrossover;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.moo.util.MyRandom;
-import com.msu.moo.util.Pair;
 import com.msu.moo.util.Range;
 
 public class SimulatedBinaryCrossover extends ACrossover<List<Double>, DoubleListVariable> {
@@ -18,123 +17,97 @@ public class SimulatedBinaryCrossover extends ACrossover<List<Double>, DoubleLis
 	// boundaries for the values
 	protected Range<Double> range = null;
 
-	//! distribution index
+	// ! distribution index
 	protected double eta_c = 20.0;
-	
-	//! crossover probability in the list
+
+	// ! crossover probability in the list
 	protected double cProbability = 0.5;
 
-
-	public SimulatedBinaryCrossover() {
-		super();
-	}
-	
 	public SimulatedBinaryCrossover(Range<Double> range) {
 		super();
 		this.range = range;
 	}
 
-	/**
-	 * Calculate like
-	 * 
-	 * @param u
-	 *            random variable between [0,1]
-	 * @param alpha
-	 * @return beta value
-	 */
-	protected double calcBeta(double u, double alpha, double eta_c) {
-		if (u <= 0.5 / (1 - alpha))
-			return Math.pow(2 * u * (1 - alpha), (1.0 / (eta_c + 1.0)));
-		else
-			return 1 / Math.pow(2 * (1 - u * (1 - alpha)), (1.0 / (eta_c + 1.0)));
-	}
-
-	/**
-	 * p1 < p2 has to be true
-	 * @param p1 first parent
-	 * @param p2 second parent
-	 * @param lowerBound the lower bound which should hold for the child
-	 * @return alpha value for the lower child
-	 */
-	protected double calcAplhaLower(double p1, double p2, double lowerBound) {
-		return 0.5 / (1 + 2 * (p1 - lowerBound) / (p2 - p1));
-	}
-
-	/**
-	 * p1 < p2 has to be true
-	 * @return alpha value for the upper child
-	 */
-	protected double calcAplhaUpper(double p1, double p2, double upperBound) {
-		return 0.5 / (1 + 2 * (upperBound - p2) / (p2 - p1));
-	}
-
-	/**
-	 * SBX for two double variables
-	 * @return offspring values which are in [lowerBound,upperBound]
-	 */
-	protected Pair<Double, Double> SBX(double d1, double d2, double lowerBound, double upperBound, MyRandom rand) {
-
-		// p1 <= p2 is always true
-		double p1 = Math.min(d1, d2);
-		double p2 = Math.max(d1, d2);
-
-		// left child
-		double leftBeta = calcBeta(rand.nextDouble(), calcAplhaLower(p1, p2, lowerBound), eta_c);
-		double c1 = (p1 + p2) / 2 - leftBeta * (p1 + p2) / 2;
-
-		// right child
-		double rightBeta = calcBeta(rand.nextDouble(), calcAplhaUpper(p1, p2, upperBound), eta_c);
-		double c2 = (p1 + p2) / 2 + rightBeta * (p1 + p2) / 2;
-
-		// to avoid floating point problems set boundaries.
-		if (c1 < lowerBound)
-			c1 = lowerBound;
-		if (c2 > upperBound)
-			c2 = upperBound;
-
-		return Pair.create(c1, c2);
-	}
-
 	@Override
-	public List<List<Double>> crossover(List<Double> a, List<Double> b, MyRandom rand) {
+	public List<List<Double>> crossover(List<Double> a, List<Double> b, MyRandom r) {
 
-		List<Double> child1 = new ArrayList<Double>(a);
-		List<Double> child2 = new ArrayList<Double>(b);
-		
-		if (range == null) range = new Range<Double>(a.size(), Double.MIN_VALUE, Double.MAX_VALUE);
+		List<Double> c1 = new ArrayList<>();
+		List<Double> c2 = new ArrayList<>();
 
-		// for each double value in the list
 		for (int i = 0; i < a.size(); i++) {
-
-			// perform crossover if sbxProbability is given
-			if (rand.nextDouble() <= cProbability) {
-
-				// get the parent values
-				double p1 = a.get(i);
-				double p2 = b.get(i);
-
-				// if the difference is very small -> no crossover
-				if (Math.abs(p1 - p2) <= EPS) continue;
-
-				// perform sbx for two double variables
-				Pair<Double, Double> children = SBX(p1, p2, range.getMinimum(i), range.getMaximum(i), rand);
-
-				// set the offspring randomly to the children vectors
-				if (rand.nextDouble() <= 0.5) {
-					child1.set(i, children.first);
-					child2.set(i, children.second);
-				} else {
-					child1.set(i, children.second);
-					child2.set(i, children.first);
-				}
-			}
+			List<Double> offsprings = calc(a.get(i), b.get(i), range.getMinimum(i), range.getMaximum(i), r);
+			c1.add(offsprings.get(0));
+			c2.add(offsprings.get(1));
 		}
-		return new ArrayList<>(Arrays.asList(child1, child2));
+
+		return Arrays.asList(c1, c2);
 	}
 
+	protected List<Double> calc(double valueX1, double valueX2, double yL, double yU, MyRandom r) {
 
-	
+		double y1, y2;
 
-	
+		double c1, c2;
+		double betaq;
+
+		if (r.nextDouble() <= 0.5) {
+
+			if (Math.abs(valueX1 - valueX2) > EPS) {
+
+				if (valueX1 < valueX2) {
+					y1 = valueX1;
+					y2 = valueX2;
+				} else {
+					y1 = valueX2;
+					y2 = valueX1;
+				} // if
+
+				double rand = r.nextDouble();
+				double beta = 1.0 + (2.0 * (y1 - yL) / (y2 - y1));
+				double alpha = 2.0 - Math.pow(beta, -(eta_c + 1.0));
+
+				if (rand <= (1.0 / alpha)) {
+					betaq = Math.pow((rand * alpha), (1.0 / (eta_c + 1.0)));
+				} else {
+					betaq = Math.pow((1.0 / (2.0 - rand * alpha)), (1.0 / (eta_c + 1.0)));
+				} // if
+
+				c1 = 0.5 * ((y1 + y2) - betaq * (y2 - y1));
+				beta = 1.0 + (2.0 * (yU - y2) / (y2 - y1));
+				alpha = 2.0 - Math.pow(beta, -(eta_c + 1.0));
+
+				if (rand <= (1.0 / alpha)) {
+					betaq = Math.pow((rand * alpha), (1.0 / (eta_c + 1.0)));
+				} else {
+					betaq = Math.pow((1.0 / (2.0 - rand * alpha)), (1.0 / (eta_c + 1.0)));
+				} // if
+
+				c2 = 0.5 * ((y1 + y2) + betaq * (y2 - y1));
+
+				if (c1 < yL)
+					c1 = yL;
+
+				if (c2 < yL)
+					c2 = yL;
+
+				if (c1 > yU)
+					c1 = yU;
+
+				if (c2 > yU)
+					c2 = yU;
+
+				if (r.nextDouble() <= 0.5) {
+					return Arrays.asList(c2, c1);
+				} else {
+					return Arrays.asList(c1, c2);
+				} // if
+
+			} else {
+				return Arrays.asList(valueX1, valueX2);
+			} // if
+		} else {
+			return Arrays.asList(valueX2, valueX1);
+		} // if
+	}
 
 }
