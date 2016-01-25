@@ -52,7 +52,7 @@ public class Kursawe extends DoubleVariableListProblem {
 
 	@Override
 	public int getNumberOfConstraints() {
-		return 3;
+		return 1;
 	}
 
 

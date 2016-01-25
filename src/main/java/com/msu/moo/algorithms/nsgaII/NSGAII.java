@@ -1,8 +1,8 @@
 package com.msu.moo.algorithms.nsgaII;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -33,7 +33,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	// ! crowding distance for the whole population
 	protected Map<Solution<V>, Double> crowding;
 	
-
+	
 	// ! private constructor! use the builder!
 	protected NSGAII() {
 	}
@@ -45,6 +45,9 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 
 		// initialize the population and calculate also rank and crowding
 		initializePopulation(problem, evaluator, rand);
+		
+		int counter = 0;
+		
 		
 		while (evaluator.hasNext()) {
 			
@@ -77,33 +80,45 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 			// merge population and offsprings
 			population.addAll(offsprings);
 
-
-			
 			// eliminate duplicates to ensure variety in the population
 			population = new SolutionSet<V>(new HashSet<>(population));
 			
 			// survival of the best population
-			calcRankAndCrowding(population);
-			population.sort(new RankAndCrowdingComparator<V>(rank, crowding));
-			Collections.reverse(population);
+			population = calcRankAndCrowding(population);
+			
+			//population.sort(new RankAndCrowdingComparator<V>(rank, crowding));
+			//Collections.reverse(population);
 			population = new SolutionSet<V>(population.subList(0, Math.min(populationSize, population.size())));
 
+				
+		
+			
+			counter++;
+			
+			
 			evaluator.notify(population);
 			
 		}
-
+		
+		
 		System.out.println(Hypervolume.calculate(population,Arrays.asList(1.01, 1.01)));
+		for (Solution<V> s : population) {
+			System.out.println(String.format("%s %f %s", rank.get(s), crowding.get(s), s));
+		}
+		System.out.println("--------------------");
+
+		
 		
 		NonDominatedSolutionSet<V> result = new NonDominatedSolutionSet<V>();
 		result.addAll(population);
+		
+		
 		return result;
 
 	}
 
 	protected void initializePopulation(P problem, IEvaluator evaluator, MyRandom rand) {
-		// create empty indicator maps
-		this.rank = new HashMap<>();
-		this.crowding = new HashMap<>();
+	
 		// initialize the population with populationSize
 		population = new SolutionSet<V>(populationSize * 2);
 
@@ -117,14 +132,45 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 
 	}
 
-	protected void calcRankAndCrowding(SolutionSet<V> population) {
-		NonDominatedRankIndicator rankInd = new NonDominatedRankIndicator();
-		rank = rankInd.calculate(population);
-		crowding = new HashMap<>();
-		Collection<NonDominatedSolutionSet<V>> fronts = new NaiveNonDominatedSorting().run(population);
-		for (NonDominatedSolutionSet<V> set : fronts) {
-			crowding.putAll(new CrowdingIndicator().calculate(set.getSolutions()));
+	protected SolutionSet<V> calcRankAndCrowding(SolutionSet<V> population) {
+		//NonDominatedRankIndicator rankInd = new NonDominatedRankIndicator();
+		//rank = rankInd.calculate(population);
+		
+		SolutionSet<V> solutions = new SolutionSet<V>();
+		
+		// reinitialize rank and crowding
+		this.rank = new HashMap<>();
+		this.crowding = new HashMap<>();
+		
+		// calculate all the fronts which are needed
+		List<NonDominatedSolutionSet<V>> fronts = new NaiveNonDominatedSorting().run(population);
+		
+		int counter = 0;
+		
+		
+		for (NonDominatedSolutionSet<V> front : fronts) {
+			
+			crowding.putAll(new CrowdingIndicator().calculate(front.getSolutions()));
+			
+			SolutionSet<V> next = front.getSolutions();
+			
+			Collections.sort(next, new Comparator<Solution<V>>() {
+				@Override
+				public int compare(Solution<V> o1, Solution<V> o2) {
+					return Double.compare(crowding.get(o2), crowding.get(o1));
+				}
+			});
+			
+			for (Solution<V> s : next) {
+				solutions.add(s);
+				rank.put(s, counter);
+			}
+			
+			counter++;
+			
 		}
+
+		return solutions;
 		
 	}
 

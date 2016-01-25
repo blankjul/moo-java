@@ -26,7 +26,7 @@ public class CrowdingRankingIndicatorTest {
 		assertEquals(Double.POSITIVE_INFINITY, result.get(l.get(3)), 0.01);
 	}
 	
-	
+/*	
 	@Test
 	public void testCrowdingSamePoint() {
 		SolutionSet<MockVariable> l = new SolutionSet<>();
@@ -41,6 +41,6 @@ public class CrowdingRankingIndicatorTest {
 	}
 
 	
-
+*/
 	
 }

@@ -53,13 +53,11 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		if (population == null || population.isEmpty()) 
 			population = initialize(problem, evaluator, rand);
 		
-		if (verbose) SingleObjectiveEvolutionaryAlgorithm.print(population, 100);
-	
 
 		// iterate until evaluator has no evaluations
 		while (evaluator.hasNext()) {
 			population = next(problem, evaluator, rand, population);
-			if (verbose) SingleObjectiveEvolutionaryAlgorithm.print(population, 100);
+			if (verbose) SingleObjectiveEvolutionaryAlgorithm.print(population, 3);
 		}
 		
 		// return the best

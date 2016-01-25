@@ -26,11 +26,13 @@ public class RankAndCrowdingComparator<V> implements Comparator<Solution<V>> {
 		if (!rank.containsKey(o1) || !rank.containsKey(o2))
 			throw new RuntimeException("Could not compare solutions because the rank details are not provided!");
 		
+		
 		if (rank.get(o1) < rank.get(o2))
 			return 1;
 		else if (rank.get(o1) > rank.get(o2))
 			return -1;
 		else {
+			
 			
 			// check if crowding for both exists
 			if (!crowding.containsKey(o1) || !crowding.containsKey(o2))

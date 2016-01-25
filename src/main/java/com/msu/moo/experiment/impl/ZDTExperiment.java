@@ -12,7 +12,7 @@ import com.msu.moo.model.variable.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.moo.operators.mutation.SimulatedBinaryMutation;
 import com.msu.moo.problems.ZDT.AbstractZDT;
-import com.msu.moo.problems.ZDT.ZDT3;
+import com.msu.moo.problems.ZDT.ZDT2;
 import com.msu.moo.util.Builder;
 import com.msu.moo.util.Range;
 
@@ -48,7 +48,7 @@ public class ZDTExperiment extends AExperiment<NonDominatedSolutionSet<DoubleLis
 	
 	@Override
 	protected void setProblems(List<AbstractZDT> problems) {
-		problems.add(new ZDT3());
+		problems.add(new ZDT2());
 	}
 
 

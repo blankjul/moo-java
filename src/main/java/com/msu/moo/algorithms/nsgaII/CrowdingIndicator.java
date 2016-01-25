@@ -38,6 +38,7 @@ public class CrowdingIndicator extends AIndicator<Double> {
 
 		// for all objectives
 		int numberOfObjectives = copy.get(0).numOfObjectives();
+		
 		for (int i = 0; i < numberOfObjectives; i++) {
 			copy.sortByObjective(i);
 

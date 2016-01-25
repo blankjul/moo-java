@@ -23,6 +23,7 @@ public class NonDominatedSetTest extends TestCase {
 	@Test
 	public void testRemoveConstraintViolations() {
 		MockSolution s1 = MockSolution.create(Arrays.asList(0d, 0d));
+		s.add(s1);
 		s.add(MockSolution.create(Arrays.asList(1d, 0d)));
 		s.removeSolutionWithConstraintViolations();
 		assertEquals(1, s.size());

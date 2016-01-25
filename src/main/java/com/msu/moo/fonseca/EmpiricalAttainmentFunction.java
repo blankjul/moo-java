@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.msu.moo.Configuration;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.util.BashExecutor;
@@ -11,21 +12,15 @@ import com.msu.moo.util.Util;
 
 public class EmpiricalAttainmentFunction {
 
-	// ! default path to the EAF executable
-	protected String pathToEaf = null;
 
 
-	public EmpiricalAttainmentFunction(String pathToEaf) {
-		this.pathToEaf = pathToEaf;
-	}
-
-	public <T> NonDominatedSolutionSet<T> calculate(Collection<NonDominatedSolutionSet<T>> sets) {
+	public static <T> NonDominatedSolutionSet<T> calculate(Collection<NonDominatedSolutionSet<T>> sets) {
 		return calculate(sets, (sets.size() / 2) + 1);
 	}
 
-	public <T> NonDominatedSolutionSet<T> calculate(Collection<NonDominatedSolutionSet<T>> sets, int level) {
+	public static <T> NonDominatedSolutionSet<T> calculate(Collection<NonDominatedSolutionSet<T>> sets, int level) {
 
-		if (!Util.doesFileExist(pathToEaf)) throw new RuntimeException("Fonseca's Implementation not found!");
+		if (!Util.doesFileExist(Configuration.PATH_TO_EAF)) throw new RuntimeException("Fonseca's Implementation not found!");
 		
 		// result where the value are added
 		NonDominatedSolutionSet<T> result = new NonDominatedSolutionSet<T>();
@@ -55,7 +50,7 @@ public class EmpiricalAttainmentFunction {
 		return result;
 	}
 
-	protected <T> String getCommand(Collection<NonDominatedSolutionSet<T>> sets, int level) {
+	protected static <T> String getCommand(Collection<NonDominatedSolutionSet<T>> sets, int level) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("echo -e \"");
 		for (NonDominatedSolutionSet<T> set : sets) {
@@ -63,7 +58,7 @@ public class EmpiricalAttainmentFunction {
 			sb.append("\n");
 		}
 		sb.append("\" | ");
-		sb.append(pathToEaf + " -l " + level);
+		sb.append(Configuration.PATH_TO_EAF + " -l " + level);
 		return sb.toString();
 	}
 

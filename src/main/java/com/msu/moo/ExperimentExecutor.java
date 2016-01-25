@@ -35,7 +35,7 @@ public class ExperimentExecutor {
 	protected final static long SEED = 123456789;
 	
 	//! allows to use multiple threads
-	protected final static int NUM_OF_THREADS = 8;
+	protected final static int NUM_OF_THREADS = 1;
 	
 	
 	@SuppressWarnings({ "unchecked"})
