@@ -20,15 +20,15 @@ public class SimpleExperiment {
 		Range<Double> range = new Range<>(3, -5d, 5d);
 		Builder<NSGAII<DoubleListVariable, Kursawe>> builder = new Builder<>(NSGAII.class);
 		builder
-		.set("probMutation", 0.3)
-		.set("populationSize", 50)
+		.set("probMutation", 1.0)
+		.set("populationSize", 100)
 		.set("factory", new DoubleListVariableFactory(range))
 		.set("crossover", new SimulatedBinaryCrossover(range))
 		.set("mutation", new SimulatedBinaryMutation(range));
 		
 		NSGAII<DoubleListVariable, Kursawe> nsgaII = builder.build();
 		
-		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run(new Kursawe(), new StandardEvaluator(50000), new MyRandom());
+		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run(new Kursawe(), new StandardEvaluator(50000), new MyRandom(123456795));
 		
 		for (Solution<DoubleListVariable> solution : set) {
 			System.out.println(String.format("%f,%f", solution.getObjective(0), solution.getObjective(1)));

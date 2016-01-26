@@ -12,7 +12,7 @@ import com.msu.moo.model.variable.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.moo.operators.mutation.SimulatedBinaryMutation;
 import com.msu.moo.problems.ZDT.AbstractZDT;
-import com.msu.moo.problems.ZDT.ZDT2;
+import com.msu.moo.problems.ZDT.ZDT3;
 import com.msu.moo.util.Builder;
 import com.msu.moo.util.Range;
 
@@ -29,7 +29,7 @@ public class ZDTExperiment extends AExperiment<NonDominatedSolutionSet<DoubleLis
 
 		Builder<NSGAII<DoubleListVariable, AbstractZDT>> nsgaII = new Builder<>(NSGAII.class);
 		nsgaII
-		.set("probMutation", 0.3)
+		.set("probMutation", 1.0)
 		.set("populationSize", 100)
 		.set("factory", new DoubleListVariableFactory(range))
 		.set("crossover", new SimulatedBinaryCrossover(range))
@@ -48,7 +48,7 @@ public class ZDTExperiment extends AExperiment<NonDominatedSolutionSet<DoubleLis
 	
 	@Override
 	protected void setProblems(List<AbstractZDT> problems) {
-		problems.add(new ZDT2());
+		problems.add(new ZDT3());
 	}
 
 

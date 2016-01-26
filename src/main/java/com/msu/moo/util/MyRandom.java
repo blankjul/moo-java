@@ -9,21 +9,17 @@ public class MyRandom {
 	// ! the current random object
 	protected java.util.Random r;
 	
-	final protected int warmup = 1000000;
-
+	protected long seed = -1;
+	
+	
 	public MyRandom() {
 		r = new Random();
-		for (int i = 0; i < warmup; i++) {
-			r.nextDouble();
-		}
 	}
 
 	public MyRandom(long seed) {
+		this.seed = seed;
 		r = new Random();
-		r.setSeed(seed);
-		for (int i = 0; i < warmup; i++) {
-			r.nextDouble();
-		}
+		r.setSeed(this.seed);
 	}
 
 	/**
@@ -61,5 +57,10 @@ public class MyRandom {
 	public <T> T select(List<T> l) {
 		return l.get(r.nextInt(l.size()));
 	}
+
+	public long getSeed() {
+		return seed;
+	}
+	
 
 }

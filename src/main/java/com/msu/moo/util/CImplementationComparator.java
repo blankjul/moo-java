@@ -1,4 +1,4 @@
-package com.msu.moo;
+package com.msu.moo.util;
 
 import java.io.IOException;
 import java.nio.file.Files;

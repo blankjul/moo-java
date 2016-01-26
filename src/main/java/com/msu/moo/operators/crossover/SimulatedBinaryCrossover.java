@@ -27,6 +27,15 @@ public class SimulatedBinaryCrossover extends ACrossover<List<Double>, DoubleLis
 		super();
 		this.range = range;
 	}
+	
+
+	public SimulatedBinaryCrossover(Range<Double> range, double eta_c, double cProbability) {
+		super();
+		this.range = range;
+		this.eta_c = eta_c;
+		this.cProbability = cProbability;
+	}
+
 
 	@Override
 	public List<List<Double>> crossover(List<Double> a, List<Double> b, MyRandom r) {

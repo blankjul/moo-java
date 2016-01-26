@@ -11,7 +11,7 @@ public class SimulatedBinaryMutation implements IMutation<DoubleListVariable> {
 	protected Range<Double> range = null;
 
 	// ! distribution index
-	protected double eta_m = 20.0;
+	protected double eta_m = 15.0;
 
 	protected double mProbability = 0.033;
 
@@ -19,6 +19,15 @@ public class SimulatedBinaryMutation implements IMutation<DoubleListVariable> {
 		super();
 		this.range = range;
 	}
+	
+
+	public SimulatedBinaryMutation(Range<Double> range, double eta_m, double mProbability) {
+		super();
+		this.range = range;
+		this.eta_m = eta_m;
+		this.mProbability = mProbability;
+	}
+
 
 	@Override
 	public void mutate(DoubleListVariable a, MyRandom rand) {
