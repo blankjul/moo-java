@@ -3,9 +3,9 @@ package com.msu.moo.model.variable;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.interfaces.IFactory;
-import com.msu.util.MyRandom;
-import com.msu.util.Range;
+import com.msu.moo.interfaces.IFactory;
+import com.msu.moo.util.MyRandom;
+import com.msu.moo.util.Range;
 
 public class DoubleListVariableFactory implements IFactory<DoubleListVariable> {
 	

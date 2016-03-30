@@ -2,14 +2,15 @@ package com.msu.moo.util.sorting;
 
 import static org.junit.Assert.assertEquals;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.MockSolution;
 import com.msu.moo.algorithms.nsgaII.NaiveNonDominatedSorting;
+import com.msu.moo.mock.MockSolution;
+import com.msu.moo.mock.MockVariable;
+import com.msu.moo.model.GenericSolutionSet;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 
@@ -27,7 +28,7 @@ public class NaiveNonDominatedSortingTest {
 		MockSolution s2 = MockSolution.create(1, Arrays.asList(0d,0d));
 		
 		
-		List<NonDominatedSolutionSet<com.msu.MockVariable>> set = new NaiveNonDominatedSorting().run(new ArrayList<>(Arrays.asList(s1,s2)));
+		List<NonDominatedSolutionSet<com.msu.moo.mock.MockVariable>> set = NaiveNonDominatedSorting.sort(new GenericSolutionSet<MockSolution, MockVariable>(Arrays.asList(s1,s2)));
 		
 		assertEquals(2, set.size());
 		assertEquals(s2,set.get(0).getSolutions().get(0));

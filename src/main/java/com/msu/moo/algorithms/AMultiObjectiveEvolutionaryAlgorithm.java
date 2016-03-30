@@ -1,12 +1,12 @@
 package com.msu.moo.algorithms;
 
-import com.msu.interfaces.ICrossover;
-import com.msu.interfaces.IFactory;
-import com.msu.interfaces.IMutation;
-import com.msu.interfaces.IProblem;
-import com.msu.interfaces.IVariable;
+import com.msu.moo.interfaces.ICrossover;
+import com.msu.moo.interfaces.IFactory;
+import com.msu.moo.interfaces.ILocalOptimization;
+import com.msu.moo.interfaces.IMutation;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.AMultiObjectiveAlgorithm;
-import com.msu.moo.model.solution.SolutionSet;
 
 /**
  * This class should be used as a template for all evolutionary algorithms that
@@ -29,11 +29,9 @@ public abstract class AMultiObjectiveEvolutionaryAlgorithm<V extends IVariable, 
 	// ! factory for creating new instances
 	protected IFactory<V> factory;
 	
-	// ! current population
-	protected SolutionSet<V> population = null;
+	// ! factory for creating new instances
+	protected ILocalOptimization<V, P> local;
+	
 
-	
-	
-	
 	
 }

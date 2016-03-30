@@ -3,9 +3,9 @@ package com.msu.moo.algorithms.nsgaII;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.msu.moo.model.GenericSolutionSet;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionDominator;
 
 /**
  * Implementation of a naive approach which searching for the current front off
@@ -13,43 +13,29 @@ import com.msu.moo.model.solution.SolutionDominator;
  * there are no elements.
  *
  */
-public class NaiveNonDominatedSorting implements NonDominatedSorting {
-
-	//! solution comparator for testing domination
-	protected SolutionDominator cmp = new SolutionDominator();
-	
-	
-	public NaiveNonDominatedSorting() {
-		this(new SolutionDominator());
-	}
-	
-	public NaiveNonDominatedSorting(SolutionDominator cmp) {
-		super();
-		this.cmp = cmp;
-	}
+public class NaiveNonDominatedSorting  {
 
 
-	@Override
-	public <T> List<NonDominatedSolutionSet<T>> run(List<Solution<T>> solutions) {
+	public static <S extends Solution<V>,V> List<NonDominatedSolutionSet<V>> sort(GenericSolutionSet<S, V> solutions) {
 		
 		// resulting list
-		List<NonDominatedSolutionSet<T>> result = new ArrayList<>();
+		List<NonDominatedSolutionSet<V>> result = new ArrayList<>();
 		
-		List<Solution<T>> copy = new ArrayList<Solution<T>>(solutions);
+		List<Solution<V>> copy = new ArrayList<Solution<V>>(solutions);
 		
 		// there are solution to sort
 		while (!copy.isEmpty()) {
 			
 			// empty set and search for all non dominated one
-			NonDominatedSolutionSet<T> set = new NonDominatedSolutionSet<T>();
-			set.setSolutionDominator(cmp);
+			NonDominatedSolutionSet<V> set = new NonDominatedSolutionSet<V>();
 			
-			for(Solution<T> s : copy) {
+			for(Solution<V> s : copy) {
 				set.add(s);
 			}
 			
 			// add all non dominated solution to list
 			result.add(set);
+			
 			// remove all solutions from the copy object
 			copy.removeAll(set.getSolutions());
 			

@@ -2,36 +2,29 @@ package com.msu.moo.fonseca;
 
 import java.util.List;
 
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.util.BashExecutor;
-import com.msu.util.Util;
+import com.msu.moo.Configuration;
+import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.util.BashExecutor;
+import com.msu.moo.util.Util;
 
 public class Hypervolume {
 
-	// ! default path to the EAF executable
-	protected String pathToHV = null;
 
-
-	public Hypervolume(String pathToHV) {
-		super();
-		this.pathToHV = pathToHV;
-	}
-
-	public Double calculate(NonDominatedSolutionSet<?> set) {
+	public static Double calculate(SolutionSet<?> set) {
 		return calculate(set, null);
 	}
 
-	public Double calculate(NonDominatedSolutionSet<?> set, List<Double> referencePoint) {
+	public static Double calculate(SolutionSet<?> set, List<Double> referencePoint) {
 
-		if (!Util.doesFileExist(pathToHV)) throw new RuntimeException("Fonseca's Hypverolume Implementation not found!");
+		if (!Util.doesFileExist(Configuration.PATH_TO_HYPERVOLUME)) throw new RuntimeException("Fonseca's Hypverolume Implementation not found!");
 		
 		Double hv = null;
 
 		StringBuilder sb = new StringBuilder();
 		sb.append("echo -e  \"");
-		sb.append(FonsecaUtil.toString(set.getSolutions()));
+		sb.append(FonsecaUtil.toString(set));
 		sb.append("\" | ");
-		sb.append(pathToHV);
+		sb.append(Configuration.PATH_TO_HYPERVOLUME);
 		
 		
 		if (referencePoint != null) {
@@ -47,12 +40,12 @@ public class Hypervolume {
 
 	
 	
-	protected String getCommand(NonDominatedSolutionSet<?> set) {
+	protected String getCommand(SolutionSet<?> set) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("echo -e  \"");
-		sb.append(FonsecaUtil.toString(set.getSolutions()));
+		sb.append(FonsecaUtil.toString(set));
 		sb.append("\" | ");
-		sb.append(pathToHV);
+		sb.append(Configuration.PATH_TO_HYPERVOLUME);
 		return sb.toString();
 	}
 

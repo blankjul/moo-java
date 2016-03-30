@@ -4,8 +4,8 @@ import java.util.List;
 
 import com.msu.moo.model.AProblem;
 import com.msu.moo.model.variable.DoubleListVariable;
-import com.msu.util.Range;
-import com.msu.util.exceptions.EvaluationException;
+import com.msu.moo.util.Range;
+import com.msu.moo.util.exceptions.EvaluationException;
 
 public abstract class DoubleVariableListProblem extends AProblem<DoubleListVariable> {
 	
@@ -25,12 +25,18 @@ public abstract class DoubleVariableListProblem extends AProblem<DoubleListVaria
 		
 		// add all the constraint violations.
 		Range<Double> constraints = getVariableConstraints();
+		
+		double violation = 0;
+		
 		for (int i = 0; i < getNumberOfDoubleVariable(); i++) {
+			
 			double value = var.decode().get(i);
-			if (value < constraints.getMinimum(i)) constraintViolations.add(Math.abs(constraints.getMinimum(i) - value));
-			else if (value > constraints.getMaximum(i)) constraintViolations.add(Math.abs(value - constraints.getMaximum(i)));
-			else constraintViolations.add(0d);
+			
+			if (value < constraints.getMinimum(i)) violation += Math.abs(constraints.getMinimum(i) - value);
+			else if (value > constraints.getMaximum(i)) violation += Math.abs(value - constraints.getMaximum(i));
 		}
+		
+		constraintViolations.add(violation);
 
 		// call the evaluation method
 		evaluate__(var, objectives);
@@ -39,7 +45,7 @@ public abstract class DoubleVariableListProblem extends AProblem<DoubleListVaria
 
 	@Override
 	public int getNumberOfConstraints() {
-		return getVariableConstraints().size();
+		return 1;
 	}
 	
 	

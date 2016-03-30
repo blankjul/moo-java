@@ -7,15 +7,12 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.Configuration;
-import com.msu.MockNonDominatedSet;
-import com.msu.MockVariable;
+import com.msu.moo.mock.MockNonDominatedSet;
+import com.msu.moo.mock.MockVariable;
 import com.msu.moo.model.solution.NonDominatedSolutionSet;
 
 public class EmpiricalAttainmentFunctionTest {
 
-	
-	private EmpiricalAttainmentFunction eaf = new EmpiricalAttainmentFunction(Configuration.PATH_TO_EAF);
 	
 	@Test
 	public void testHVNoRef() {
@@ -23,7 +20,7 @@ public class EmpiricalAttainmentFunctionTest {
 		fronts.add(MockNonDominatedSet.create(new Double[][] {{0.0,0.5}, {0.5,0.5}, {0.0,1.0}}));
 		fronts.add(MockNonDominatedSet.create(new Double[][] {{0.0,0.2}, {0.5,0.5}, {0.0,1.0}}));
 		fronts.add(MockNonDominatedSet.create(new Double[][] {{1.0,0.7}, {0.5,0.5}, {0.0,1.0}}));
-		NonDominatedSolutionSet<MockVariable> d = eaf.calculate(fronts);
+		NonDominatedSolutionSet<MockVariable> d = EmpiricalAttainmentFunction.calculate(fronts);
 		assertTrue(!d.getSolutions().isEmpty());
 	}
 

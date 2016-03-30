@@ -3,9 +3,9 @@ package com.msu.moo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.interfaces.ICrossover;
-import com.msu.interfaces.IEvolutionaryVariable;
-import com.msu.util.MyRandom;
+import com.msu.moo.interfaces.ICrossover;
+import com.msu.moo.interfaces.IEvolutionaryVariable;
+import com.msu.moo.util.MyRandom;
 
 public abstract class ACrossover<T, V extends IEvolutionaryVariable<T,V>> implements ICrossover<V> {
 

@@ -1,0 +1,109 @@
+<html>
+<head>
+
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+	
+	<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+	
+
+	<style type="text/css">
+		#container {
+		    height: 400;
+		    margin: auto;
+		    width: 60%;
+		 }
+		#info {
+		    height: 100;
+		}		
+		#slider {
+		    margin: 40px 100px 40px 100px;
+		}
+		#scatterInfo {
+		    margin: 40px 0px;
+		    text-align: center;
+	            font-weight: bold;
+                    font-size: 24;
+		}
+	</style>
+
+</head>
+
+
+<body>
+
+
+<div id="scatter"></div>
+<div id="scatterInfo"></div>
+<div id="slider"></div>
+<div id="variableInfo"></div>
+<div id="container"></div>
+
+
+
+
+<script>
+
+$(document).ready(function() {
+
+	
+	var objScatter = JSON.parse(document.getElementById('dScatter').text);
+
+	$( "#slider" ).slider({
+               orientation:"horizontal",
+               max: objScatter.length - 1,
+               slide: function( event, ui ) {
+		  update(objScatter, ui.value);
+                  console.log(ui.value);
+               }	
+            });
+
+
+	update(objScatter, 0);
+
+	$('#scatter').bind('plotly_click',
+	    function(event,data){
+	});
+	
+ });
+
+function update(objScatter, i) {
+	layout = { 
+		hovermode:'closest',
+		title:'Objective Space'
+
+	};
+
+	marker = {size : 10};
+	objScatter[i][0].marker = marker;
+	objScatter[i][0].name = "NonDominated";
+
+	objScatter[i][1].marker = marker;
+	objScatter[i][1].name = "Dominated";
+
+	Plotly.newPlot('scatter', objScatter[i], layout);
+
+	scatterInfo.innerHTML = i + 1;
+}
+
+
+
+
+
+
+</script>
+<script id="dAlgorithms" type="application/json">
+[ "ThiefExhaustive", "ThiefExhaustive_ALL", "NSGAII-[OPT-RANDOM]-[NO-HUX]-[NO-BF]" ]
+</script>
+
+<script id="dScatter" type="application/json">
+{{{ data }}}
+</script>
+
+
+
+
+
+</body>
+</html>

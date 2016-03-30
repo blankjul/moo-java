@@ -3,7 +3,7 @@ package com.msu.moo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.interfaces.ISolution;
+import com.msu.moo.interfaces.ISolution;
 
 /**
  * This class combines the variable with the result in the objective space. Each
@@ -102,7 +102,6 @@ public abstract class ASolution<V> implements ISolution<V> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		@SuppressWarnings("unchecked")
 		ASolution<V> other = (ASolution<V>) obj;
 		if (constraintViolations == null) {
 			if (other.constraintViolations != null)

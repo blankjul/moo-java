@@ -3,7 +3,7 @@ package com.msu.moo.problems;
 import java.util.List;
 
 import com.msu.moo.model.variable.DoubleListVariable;
-import com.msu.util.Range;
+import com.msu.moo.util.Range;
 
 public class Kursawe extends DoubleVariableListProblem {
 
@@ -52,7 +52,7 @@ public class Kursawe extends DoubleVariableListProblem {
 
 	@Override
 	public int getNumberOfConstraints() {
-		return 3;
+		return 1;
 	}
 
 

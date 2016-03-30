@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import com.msu.interfaces.IProblem;
-import com.msu.interfaces.IVariable;
+import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
 
 public abstract class AProblem<V extends IVariable> implements IProblem<V> {
@@ -20,6 +20,14 @@ public abstract class AProblem<V extends IVariable> implements IProblem<V> {
 	//! name of the problem
 	protected String name;
 	
+	
+	
+	public AProblem() {
+		super();
+		this.name = this.getClass().getSimpleName();
+	}
+	
+
 	@Override
 	public Solution<V> evaluate(V variable) {
 
@@ -51,6 +59,16 @@ public abstract class AProblem<V extends IVariable> implements IProblem<V> {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+	
 	
 
 	

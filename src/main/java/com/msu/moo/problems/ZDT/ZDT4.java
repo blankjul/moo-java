@@ -20,8 +20,8 @@ package com.msu.moo.problems.ZDT;
 import java.util.List;
 
 import com.msu.moo.model.variable.DoubleListVariable;
-import com.msu.util.Range;
-import com.msu.util.exceptions.EvaluationException;
+import com.msu.moo.util.Range;
+import com.msu.moo.util.exceptions.EvaluationException;
 
 public class ZDT4 extends AbstractZDT {
 
