@@ -2,82 +2,70 @@ package com.msu.moo.model.solution;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
-import com.msu.moo.model.GenericSolutionSet;
-import com.msu.moo.util.Pair;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.util.Range;
 
-public class SolutionSet<V> extends GenericSolutionSet<Solution<V>,V>{
+public class SolutionSet<S extends ISolution<V>, V> extends ArrayList<S>{
 	
-
+	
 	public SolutionSet() {
 		super();
-	}
+	}	
 
-	public <S extends Solution<V>> SolutionSet(Collection<S> c) {
-		for(S entry : c) {
-			Solution<V> toAdd = (Solution<V>) entry;
-			this.add(toAdd);
-		}
+	public SolutionSet(Collection<S> c) {
+		super(c);
 	}
 
 	public SolutionSet(int initialCapacity) {
 		super(initialCapacity);
 	}
 
-	
 	/**
-	 * Normalize by using the boundaries of this set.
+	 * Sorts the population by using a specific objective.
+	 * DEFAULT: Increasing!
+	 * @param obj number of objective
 	 */
-	public SolutionSet<V> normalize() {
-		Range<Double> range = new Range<Double>();
-		for (Solution<V> s : this) range.add(s.getObjectives());
-		return normalize(range.get());
+	public void sortByObjective(int obj) {
+		Collections.sort(this, (ISolution<V> s1, ISolution<V> s2) -> s1.getObjective(obj).compareTo(s2.getObjective(obj)));
 	}
 	
 	
 	/**
-	 * The given boundaries are used for maximum and minimum calculation.
-	 * @return normalized front with objectives values between [0,1]
+	 * @return vector of all current solution of given objective
 	 */
-	public SolutionSet<V> normalize(List<Pair<Double,Double>> boundaries) {
-		if (this.isEmpty()) return new SolutionSet<V>();
-		SolutionSet<V> result = new SolutionSet<V>();
-		for (Solution<V> s : this) {
-			result.add(s.normalize(boundaries));
+	public List<Double> getVector(int objective) {
+		List<Double> l = new ArrayList<>();
+		for (ISolution<V> s : this) {
+			l.add(s.getObjectives().get(objective));
 		}
-		return result;
+		return l;
 	}
 	
 	
-	/**
-	 * This method inverts the front. Which means calculate max - current value.
-	 * If the value is larger than max, it is set to max!
-	 * @param max value for the inversion
-	 * @return Solution that inverted with respect to maximal value
-	 */
-	public SolutionSet<V> invert(Double max) {
-		
-		if (this.isEmpty()) return new SolutionSet<V>();
-		int dimensions = this.get(0).getObjectives().size();
-		
-		SolutionSet<V> result = new SolutionSet<V>();
-		for (int k = 0; k < size(); k++) {
-			List<Double> obj = new ArrayList<>();
-			for (int i = 0; i < dimensions; i++) {
-				double value = this.get(k).getObjectives().get(i);
-				value = max - value;
-				if (value > max) value = max;
-				obj.add(value);
-			}
-			result.add(new Solution<V>(this.get(k).getVariable(), obj));
+	public Range<Double> getRange() {
+		Range<Double> r = new Range<>();
+		for (ISolution<V> s : this) {
+			r.add(s.getObjectives());
 		}
-		return result;
+		return r;
 	}
-	
-	
 
+	
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (ISolution<V> s : this) {
+			sb.append(s);
+			sb.append("\n");
+		}
+		return sb.toString();
+	}
+
+	
 	
 	
 	

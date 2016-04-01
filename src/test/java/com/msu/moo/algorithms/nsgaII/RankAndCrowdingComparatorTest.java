@@ -2,22 +2,32 @@ package com.msu.moo.algorithms.nsgaII;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Comparator;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import com.msu.moo.algorithms.impl.nsgaII.CrowdingDistance;
+import com.msu.moo.algorithms.impl.nsgaII.NSGAIISolution;
+import com.msu.moo.algorithms.impl.nsgaII.NonDominatedRankIndicator;
 import com.msu.moo.mock.ExampleSolutionSet;
 import com.msu.moo.mock.MockVariable;
+import com.msu.moo.model.solution.SolutionSet;
 
 public class RankAndCrowdingComparatorTest {
 
-	private RankAndCrowdingComparator<MockVariable> cmp = new RankAndCrowdingComparator<>();
+	private Comparator<NSGAIISolution<MockVariable>> cmp;
 	
-	private NSGAIISolutionSet<MockVariable> set = ExampleSolutionSet.get();
+	private SolutionSet<NSGAIISolution<MockVariable>, MockVariable> set = ExampleSolutionSet.getAsNSGAIISolution();
 	
 	@Before
     public void setUp() {
+		cmp = Comparator.comparingInt(NSGAIISolution::getRank);
+		cmp = cmp.reversed();
+		cmp = cmp.thenComparingDouble(NSGAIISolution::getCrowding);
+		
 		NonDominatedRankIndicator.calculate(set);
-		CrowdingIndicator.calculate(set);
+		CrowdingDistance.calculate(set);
     }
 	
 	@Test

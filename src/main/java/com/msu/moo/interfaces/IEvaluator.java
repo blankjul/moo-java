@@ -1,6 +1,5 @@
 package com.msu.moo.interfaces;
 
-import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 
 /**
@@ -8,8 +7,6 @@ import com.msu.moo.model.solution.SolutionSet;
  * solution for a specific problem. The evaluator counts the evaluations and
  * could determine through hasNext() if evaluations are left.
  * 
- * @param <E>
- *            encoded variable
  */
 public interface IEvaluator {
 
@@ -19,7 +16,7 @@ public interface IEvaluator {
 	 * 
 	 * @return always MultiObjectiveSolution but could also have one objective
 	 */
-	public <V extends IVariable> Solution<V> evaluate(IProblem<? extends IVariable> problem, V variable);
+	public <V extends IVariable> ISolution<V> evaluate(IProblem<? extends IVariable> problem, V variable);
 
 	/**
 	 * @return whether further evaluations are allowed or not
@@ -54,13 +51,13 @@ public interface IEvaluator {
 	/**
 	 * @param set current best non dominated solution set
 	 */
-	public <V extends IVariable> void notify(SolutionSet<V> set);
+	public <S extends ISolution<V>, V extends IVariable> void notify(SolutionSet<S,V> set);
 	
 	
 	/**
 	 * @param set current best solution
 	 */
-	public <V extends IVariable> void notify(Solution<V> s);
+	public <S extends ISolution<V>, V extends IVariable> void notify(S s);
 	
 	
 	

@@ -1,20 +1,21 @@
 package com.msu.moo.fonseca;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.msu.moo.Configuration;
-import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.util.BashExecutor;
 import com.msu.moo.util.Util;
 
 public class Hypervolume {
 
 
-	public static Double calculate(SolutionSet<?> set) {
+	public static Double calculate(Collection<? extends ISolution<?>> set) {
 		return calculate(set, null);
 	}
 
-	public static Double calculate(SolutionSet<?> set, List<Double> referencePoint) {
+	public static Double calculate(Collection<? extends ISolution<?>> set, List<Double> referencePoint) {
 
 		if (!Util.doesFileExist(Configuration.PATH_TO_HYPERVOLUME)) throw new RuntimeException("Fonseca's Hypverolume Implementation not found!");
 		
@@ -40,7 +41,7 @@ public class Hypervolume {
 
 	
 	
-	protected String getCommand(SolutionSet<?> set) {
+	protected String getCommand(Collection<? extends ISolution<?>> set) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("echo -e  \"");
 		sb.append(FonsecaUtil.toString(set));

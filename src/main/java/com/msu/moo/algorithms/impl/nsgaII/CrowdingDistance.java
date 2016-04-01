@@ -1,22 +1,24 @@
-package com.msu.moo.algorithms.nsgaII;
+package com.msu.moo.algorithms.impl.nsgaII;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class CrowdingIndicator {
+import com.msu.moo.model.solution.SolutionSet;
+
+public class CrowdingDistance {
 
 	// ! helping method for fast access to objective values
-	private static <T> Double get(List<NSGAIISolution<T>> solutions, int index, int objective) {
+	private static <S extends NSGAIISolution<V>,V> Double get(List<S> solutions, int index, int objective) {
 		return solutions.get(index).getObjective(objective);
 	}
 	
-	public static <V> void calculate(NSGAIISolutionSet<V> solutions) {
+	public static <S extends NSGAIISolution<V>,V> void calculate(SolutionSet<S , V> solutions) {
 		
 		// the resulting set is also empty
 		if (solutions.isEmpty()) return;
 		
-		NSGAIISolutionSet<V> copy = new NSGAIISolutionSet<V>(solutions);
+		SolutionSet<S, V> copy = new SolutionSet<S, V>(solutions);
 		copy.forEach(s -> s.setCrowding(0.0));
 		
 

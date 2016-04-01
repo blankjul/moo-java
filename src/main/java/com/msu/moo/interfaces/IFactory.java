@@ -3,20 +3,20 @@ package com.msu.moo.interfaces;
 import com.msu.moo.util.MyRandom;
 
 /**
- * This class represents a factory class that could construct new
- * variable randomly.
+ * This class represents a factory class that could construct new variable
+ * randomly.
  *
- * @param <T> decoded variable type
+ * @param <V>
+ *            variable
  */
 public interface IFactory<V extends IVariable> {
-	
+
 	/**
 	 * Create a new object from the class.
+	 * 
 	 * @return new random instance.
 	 */
 	public V next(MyRandom rand);
-	
-	public boolean hasNext();
 
-	
+
 }

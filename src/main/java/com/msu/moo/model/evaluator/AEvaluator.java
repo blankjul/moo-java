@@ -2,6 +2,7 @@ package com.msu.moo.model.evaluator;
 
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
@@ -60,8 +61,8 @@ public abstract class AEvaluator implements IEvaluator {
 	}
 
 	@Override
-	public <V extends IVariable> void notify(Solution<V> s) {
-		SolutionSet<V> set = new SolutionSet<>();
+	public <S extends ISolution<V>, V extends IVariable> void notify(S s) {
+		SolutionSet<S,V> set = new SolutionSet<>();
 		set.add(s);
 		notify(set);
 	}
@@ -69,6 +70,10 @@ public abstract class AEvaluator implements IEvaluator {
 	@Override
 	public void setFather(IEvaluator father) {
 		this.father = father;
+	}
+	
+	@Override
+	public <S extends ISolution<V>, V extends IVariable> void notify(SolutionSet<S, V> set) {
 	}
 
 }

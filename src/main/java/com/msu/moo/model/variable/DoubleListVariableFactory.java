@@ -30,15 +30,5 @@ public class DoubleListVariableFactory implements IFactory<DoubleListVariable> {
 		return new DoubleListVariable(l);
 	}
 
-	@Override
-	public boolean hasNext() {
-		return true;
-	}
-
-
-
-
-
-
 
 }

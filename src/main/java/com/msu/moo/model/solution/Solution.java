@@ -3,7 +3,6 @@ package com.msu.moo.model.solution;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.model.ASolution;
 import com.msu.moo.util.Pair;
 
 public class Solution<V> extends ASolution<V> {

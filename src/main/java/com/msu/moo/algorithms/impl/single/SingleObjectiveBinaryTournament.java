@@ -1,4 +1,4 @@
-package com.msu.moo.algorithms.single;
+package com.msu.moo.algorithms.impl.single;
 
 import java.util.Comparator;
 import java.util.List;
@@ -12,7 +12,7 @@ import com.msu.moo.util.MyRandom;
 public class SingleObjectiveBinaryTournament<S extends Solution<V>,V extends IVariable> extends BinaryTournamentSelection<S,V> {
 
 	public SingleObjectiveBinaryTournament(List<S> set, MyRandom rand) {
-		super(set, null, rand);
+		super(null);
 
 		this.cmp = new Comparator<S>() {
 			@Override

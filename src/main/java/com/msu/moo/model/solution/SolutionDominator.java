@@ -2,6 +2,7 @@ package com.msu.moo.model.solution;
 
 import java.util.List;
 
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.util.Pair;
 
 /**
@@ -19,7 +20,7 @@ public class SolutionDominator {
 	/**
 	 * Check if the objective space is the same
 	 */
-	protected static Pair<List<Double>, List<Double>> getObjectives(Solution<?> s1, Solution<?> s2) {
+	protected static Pair<List<Double>, List<Double>> getObjectives(ISolution<?> s1, ISolution<?> s2) {
 		List<Double> obj1 = s1.getObjectives();
 		List<Double> obj2 = s2.getObjectives();
 		if (obj1.size() != obj2.size()) {
@@ -33,7 +34,7 @@ public class SolutionDominator {
 	/**
 	 * @return true if s1 dominates s2 (false when equal)
 	 */
-	public static boolean isDominating(Solution<?> s1, Solution<?> s2) {
+	public static boolean isDominating(ISolution<?> s1, ISolution<?> s2) {
 		
 		// if s1 has less constraint violations 
 		if (s1.getSumOfConstraintViolation() < s2.getSumOfConstraintViolation()) 
@@ -55,7 +56,7 @@ public class SolutionDominator {
 	/**
 	 * @return true if s1 is dominated s2 (false when equal)
 	 */
-	public static boolean isDominatedBy(Solution<?> s1, Solution<?> s2) {
+	public static boolean isDominatedBy(ISolution<?> s1, ISolution<?> s2) {
 		return isDominating(s2, s1);
 	}
 	
@@ -64,7 +65,7 @@ public class SolutionDominator {
 	 * @return true if both objectives vectors are equal. the variable is not
 	 *         checked for equality!
 	 */
-	public static boolean isEqual(Solution<?> s1, Solution<?> s2) {
+	public static boolean isEqual(ISolution<?> s1, ISolution<?> s2) {
 		
 		if (!s1.getConstraintViolations().equals(s2.getConstraintViolations())) 
 			return false;
@@ -85,7 +86,7 @@ public class SolutionDominator {
 	 *         no solution dominates the other one or is dominated by. The
 	 *         solution are not allowed to be equal!
 	 */
-	public static boolean isIndifferent(Solution<?> s1, Solution<?> s2) {
+	public static boolean isIndifferent(ISolution<?> s1, ISolution<?> s2) {
 		return isDominating(s1, s2) == false && isDominating(s2, s1) == false && !isEqual(s1, s2);
 	}
 

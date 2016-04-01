@@ -2,12 +2,11 @@ package com.msu.moo;
 
 import java.util.Arrays;
 
-import com.msu.moo.algorithms.nsgaII.NSGAII;
+import com.msu.moo.algorithms.impl.nsgaII.NSGAII;
 import com.msu.moo.fonseca.Hypervolume;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.evaluator.StandardEvaluator;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.moo.model.variable.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
@@ -30,10 +29,10 @@ public class SimpleExperiment {
 		
 		final NonDominatedSetToJson json = new NonDominatedSetToJson();
 		
-		IListener<SolutionSet<DoubleListVariable>> listener = new IListener<SolutionSet<DoubleListVariable>>() {
+		IListener<NonDominatedSet<ISolution<DoubleListVariable>, DoubleListVariable>> listener = new IListener<NonDominatedSet<ISolution<DoubleListVariable>, DoubleListVariable>>() {
 			@Override
-			public void notify(SolutionSet<DoubleListVariable> var) {
-				json.append(var);
+			public void notify(NonDominatedSet<ISolution<DoubleListVariable>, DoubleListVariable> var) {
+				json.append(var.getSolutions());
 			}
 		};
 		
@@ -53,11 +52,11 @@ public class SimpleExperiment {
 		
 		NSGAII<DoubleListVariable, DoubleVariableListProblem> nsgaII = builder.buildNoClone();
 		
-		NonDominatedSolutionSet<DoubleListVariable> set = nsgaII.run(problem, new StandardEvaluator(20000), new MyRandom(123456789));
+		NonDominatedSet<ISolution<DoubleListVariable>, DoubleListVariable> set = nsgaII.run(problem, new StandardEvaluator(20000), new MyRandom(123456789));
 		
 		System.out.println(Hypervolume.calculate(set.getSolutions(),Arrays.asList(1.01, 1.01)));
 		
-		for (Solution<DoubleListVariable> solution : set) {
+		for (ISolution<DoubleListVariable> solution : set) {
 			System.out.println(String.format("%f,%f -> %s", solution.getObjective(0), solution.getObjective(1), solution.getVariable()));
 		}
 		

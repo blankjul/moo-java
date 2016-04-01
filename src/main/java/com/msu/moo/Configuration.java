@@ -5,27 +5,8 @@ package com.msu.moo;
  * feature which are implemented in other programming language, interfaces are
  * used.
  * 
- * -----------------------------------------------------------------------------
- * EAF from Fonseca
- * -----------------------------------------------------------------------------
- * The empirical first-order attainment function (EAF) is used to assess the
- * performance of stochastic multiobjective optimisers such as multiobjective
- * evolutionary algorithms
+ * NEEDS TO BE COMPILED BEFORE!
  * 
- * https://eden.dei.uc.pt/~cmfonsec/software.html
- * 
- * 
- * -----------------------------------------------------------------------------
- * Computation of the Hypervolume from Fonseca
- * -----------------------------------------------------------------------------
- * This program implements a recursive, dimension-sweep algorithm for computing
- * the hypervolume indicator of the quality of a set of n non-dominated points
- * in d dimensions
- * 
- * http://iridia.ulb.ac.be/~manuel/hypervolume
- *
- * -----------------------------------------------------------------------------
- *
  */
 public class Configuration {
 

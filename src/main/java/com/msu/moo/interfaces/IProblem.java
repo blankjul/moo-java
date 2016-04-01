@@ -5,7 +5,7 @@ import com.msu.moo.model.solution.Solution;
 /**
  * This interface defines a problem which is able to evaluate a solution.
  * 
- * @param <E> encoded type of the variable which is used.
+ * @param <V> Variable which is needed to evaluate
  *         
  */
 public interface IProblem<V extends IVariable> {

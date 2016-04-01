@@ -5,7 +5,8 @@ import java.util.Collection;
 import java.util.List;
 
 import com.msu.moo.Configuration;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.interfaces.ISolution;
+import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.util.BashExecutor;
 import com.msu.moo.util.Util;
@@ -14,16 +15,16 @@ public class EmpiricalAttainmentFunction {
 
 
 
-	public static <T> NonDominatedSolutionSet<T> calculate(Collection<NonDominatedSolutionSet<T>> sets) {
+	public static NonDominatedSet<ISolution<Object>, Object> calculate(Collection<Collection<? extends ISolution<?>>> sets) {
 		return calculate(sets, (sets.size() / 2) + 1);
 	}
 
-	public static <T> NonDominatedSolutionSet<T> calculate(Collection<NonDominatedSolutionSet<T>> sets, int level) {
+	public static NonDominatedSet<ISolution<Object>, Object> calculate(Collection<Collection<? extends ISolution<?>>> sets, int level) {
 
 		if (!Util.doesFileExist(Configuration.PATH_TO_EAF)) throw new RuntimeException("Fonseca's Implementation not found!");
 		
 		// result where the value are added
-		NonDominatedSolutionSet<T> result = new NonDominatedSolutionSet<T>();
+		NonDominatedSet<ISolution<Object>, Object> result = new NonDominatedSet<>();
 		String command = getCommand(sets, level);
 		String out = BashExecutor.execute(command);
 		
@@ -43,18 +44,18 @@ public class EmpiricalAttainmentFunction {
 			for (String value : line.split("\\s"))
 				objectives.add(Double.valueOf(value));
 
-			result.add(new Solution<T>(null, objectives));
+			result.add(new Solution<Object>(null, objectives));
 
 		}
 
 		return result;
 	}
 
-	protected static <T> String getCommand(Collection<NonDominatedSolutionSet<T>> sets, int level) {
+	protected static String getCommand(Collection<Collection<? extends ISolution<?>>> sets, int level) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("echo -e \"");
-		for (NonDominatedSolutionSet<T> set : sets) {
-			sb.append(FonsecaUtil.toString(set.getSolutions()));
+		for (Collection<? extends ISolution<?>> set : sets) {
+			sb.append(FonsecaUtil.toString(set));
 			sb.append("\n");
 		}
 		sb.append("\" | ");

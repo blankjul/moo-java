@@ -3,7 +3,6 @@ package com.msu.moo.model.evaluator;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.exceptions.EvaluationException;
 
 /**
@@ -47,10 +46,9 @@ public class StandardEvaluator extends AEvaluator {
 		return maxEvaluations;
 	}
 
-	@Override
-	public <V extends IVariable> void notify(SolutionSet<V> set) {
-	}
-	
+
+
+
 	
 
 }

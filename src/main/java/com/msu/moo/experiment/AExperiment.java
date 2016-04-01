@@ -9,11 +9,11 @@ import java.util.concurrent.Future;
 
 import org.apache.log4j.Logger;
 
-import com.msu.moo.experiment.callback.ICallback;
+import com.msu.moo.algorithms.IAlgorithm;
+import com.msu.moo.interfaces.ICallback;
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.interfaces.algorithms.IAlgorithm;
 import com.msu.moo.util.MyRandom;
 import com.msu.moo.util.Util;
 

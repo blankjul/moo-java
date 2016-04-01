@@ -1,35 +1,20 @@
 package com.msu.moo.operators.selection;
 
-import java.util.Queue;
+import java.util.List;
 
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.ASelection;
-import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.MyRandom;
 
 
-/**
- * This is a binary tournament select which could be used for sending
- * always to individuals to a tournament and choose the winner by using a comparator!	
- *
- */
-public class RandomSelection<T> extends ASelection<Solution<T>, T> {
 
-	//! current pool which is used for the selection
-	protected Queue<Solution<T>> q = null;
-	
-	/**
-	 * Construct a binary tournament selector
-	 * @param set which should be used for selection
-	 */
-	public RandomSelection(SolutionSet<T> set, MyRandom rand) {
-		super(set, rand);
-	}
-	
+public class RandomSelection<S extends ISolution<V>, V> extends ASelection<S, V> {
+
 	@Override
-	public Solution<T> next() {
-		return rand.select(set);
+	public S next(List<S> population, MyRandom rand) {
+		return rand.select(population);
 	}
+
 	
 
 

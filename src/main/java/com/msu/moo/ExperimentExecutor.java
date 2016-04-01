@@ -10,16 +10,14 @@ import com.msu.moo.model.evaluator.StandardEvaluator;
 import com.msu.moo.util.ObjectFactory;
 
 /**
- * This here is the central Experiment Executor. This avoids that each
- * experiment contains its own main method.
+ * This is the experiment executor which allows to set some settings. Also
+ * multiple threads could be started an therefore the executing time could be
+ * decreased.
  * 
- * The experiment is factored by the given string. Furthermore, the iterations,
- * maxEvaluations and the random seed has to be set.
  * 
  * EXERIMENTS AVAILABLE
  * 
- * KursaweExperiment 
- * ZDTExperiment
+ * KursaweExperiment ZDTExperiment
  * 
  */
 public class ExperimentExecutor {
@@ -35,12 +33,11 @@ public class ExperimentExecutor {
 
 	// ! random seed for experiment execution
 	protected final static long SEED = 123456789;
-	
-	//! allows to use multiple threads
+
+	// ! allows to use multiple threads
 	protected final static int NUM_OF_THREADS = 10;
-	
-	
-	@SuppressWarnings({ "unchecked"})
+
+	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		AExperiment<?, IVariable, IProblem<IVariable>> experiment = ObjectFactory.create(AExperiment.class, EXPERIMENT);

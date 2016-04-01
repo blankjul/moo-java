@@ -1,9 +1,9 @@
-package com.msu.moo.interfaces.algorithms;
+package com.msu.moo.algorithms;
 
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.solution.Solution;
 import com.msu.moo.util.MyRandom;
 
 /**
@@ -13,7 +13,7 @@ import com.msu.moo.util.MyRandom;
  * @param <E>
  *            encoded type of the variable which is used.
  */
-public interface ISingleObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> extends IAlgorithm<Solution<V>, V, P>{
+public interface ISingleObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> extends IAlgorithm<ISolution<V>, V, P>{
 
 	/**
 	 * Execute the implementation of the algorithm.
@@ -24,6 +24,6 @@ public interface ISingleObjectiveAlgorithm<V extends IVariable, P extends IProbl
 	 *            which counts the evaluations
 	 * @return best found solution for the problem
 	 */
-	public Solution<V> run(P problem, IEvaluator evaluator, MyRandom rand);
+	public ISolution<V> run(P problem, IEvaluator evaluator, MyRandom rand);
 
 }

@@ -1,8 +1,7 @@
-package com.msu.moo.model;
+package com.msu.moo.algorithms;
 
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.interfaces.algorithms.ISingleObjectiveAlgorithm;
 
 public abstract class ASingleObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> implements ISingleObjectiveAlgorithm<V,P>  {
 
@@ -13,7 +12,6 @@ public abstract class ASingleObjectiveAlgorithm<V extends IVariable, P extends I
 		super();
 		name = getClass().getSimpleName();
 	}
-
 
 
 	@Override

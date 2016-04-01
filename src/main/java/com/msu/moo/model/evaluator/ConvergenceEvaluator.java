@@ -3,6 +3,7 @@ package com.msu.moo.model.evaluator;
 import java.util.List;
 
 import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
@@ -53,9 +54,9 @@ public class ConvergenceEvaluator extends AEvaluator {
 
 	
 	@Override
-	public <V extends IVariable> void notify(SolutionSet<V> set) {
+	public <S extends ISolution<V>, V extends IVariable> void notify(SolutionSet<S,V> set) {
 		
-		List<Solution<V>> list = set;
+		List<S> list = set;
 		if (firstN != -1 && set.size() >  firstN) list = set.subList(0, firstN);
 		
 		final int hash = list.hashCode();

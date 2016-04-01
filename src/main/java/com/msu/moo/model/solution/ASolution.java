@@ -1,4 +1,4 @@
-package com.msu.moo.model;
+package com.msu.moo.model.solution;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,31 +6,35 @@ import java.util.List;
 import com.msu.moo.interfaces.ISolution;
 
 /**
- * This class combines the variable with the result in the objective space. Each
- * instance is IMMUTABLE which means a solution that is calculate could not be
- * altered anymore.
- * 
- * This concept ensure to forget to reevaluate a solution which means result and
- * variables does not fit anymore.
+ * Abstracts solution class which implements the Solution interface. If extra
+ * information have to be stored simply inherit from this class.
+ *
+ * @param <V>
  */
 public abstract class ASolution<V> implements ISolution<V> {
 
 	// ! objectives immutable
 	protected List<Double> objective;
-	
-	//! this list of doubles allows to safe constraint violations for a solution
+
+	// ! this list of doubles allows to safe constraint violations for a
+	// solution
 	protected List<Double> constraintViolations;
 
 	// ! variable immutable
 	protected V variable;
 
-
+	/**
+	 * Create a solution without constraints.
+	 */
 	public ASolution(V variable, List<Double> objectives) {
 		this.variable = variable;
 		this.objective = objectives;
 		constraintViolations = new ArrayList<Double>();
 	}
-	
+
+	/**
+	 * Create a solution with constraints
+	 */
 	public ASolution(V variable, List<Double> objectives, List<Double> constraintViolations) {
 		this(variable, objectives);
 		this.constraintViolations = constraintViolations;
@@ -49,18 +53,15 @@ public abstract class ASolution<V> implements ISolution<V> {
 	public V getVariable() {
 		return variable;
 	}
-	
 
 	public List<Double> getConstraintViolations() {
 		return constraintViolations;
 	}
 
-
 	@Override
 	public Double getObjective(int n) {
 		return objective.get(n);
 	}
-
 
 	@Override
 	public int numOfObjectives() {
@@ -69,20 +70,15 @@ public abstract class ASolution<V> implements ISolution<V> {
 
 	@Override
 	public boolean hasConstrainViolations() {
-		for (Double d : constraintViolations) {
-			if (!d.equals(0d))
-				return true;
-		}
-		return false;
+		return getSumOfConstraintViolation() != 0;
 	}
-	
+
 	@Override
 	public double getSumOfConstraintViolation() {
-		if (constraintViolations.isEmpty()) return 0d;
+		if (constraintViolations.isEmpty())
+			return 0d;
 		return constraintViolations.stream().mapToDouble(Double::doubleValue).sum();
 	}
-
-
 
 	@Override
 	public int hashCode() {
@@ -102,6 +98,7 @@ public abstract class ASolution<V> implements ISolution<V> {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
+		@SuppressWarnings("unchecked")
 		ASolution<V> other = (ASolution<V>) obj;
 		if (constraintViolations == null) {
 			if (other.constraintViolations != null)
@@ -121,8 +118,6 @@ public abstract class ASolution<V> implements ISolution<V> {
 		return true;
 	}
 
-	
-	
 	/**
 	 * Print only the objectives
 	 */

@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.msu.moo.fonseca.Hypervolume;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.visualization.NonDominatedSetToJson;
@@ -30,7 +31,7 @@ public class CImplementationComparator {
 
 				List<String> list = stream.collect(Collectors.toList());
 
-				SolutionSet<Integer> set = new SolutionSet<>();
+				SolutionSet<ISolution<Integer>, Integer> set = new SolutionSet<>();
 
 				for (String line : list) {
 

@@ -1,9 +1,9 @@
 package com.msu.moo.fonseca;
 
+import java.util.Collection;
 import java.util.List;
 
-import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.interfaces.ISolution;
 
 public class FonsecaUtil {
 
@@ -17,9 +17,9 @@ public class FonsecaUtil {
 	}
 	
 	
-	public static String toString(SolutionSet<?> set) {
+	public static String toString(Collection<? extends ISolution<?>> set) {
 		StringBuilder sb = new StringBuilder();
-		for (Solution<?> s : set) {
+		for (ISolution<?> s : set) {
 			sb.append(FonsecaUtil.toString(s.getObjectives()));
 			sb.append("\n");
 		}

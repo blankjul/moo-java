@@ -3,9 +3,9 @@ package com.msu.moo.mock;
 import java.util.Arrays;
 import java.util.List;
 
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.algorithms.impl.nsgaII.NSGAIISolution;
 
-public class MockSolution extends Solution<MockVariable> {
+public class MockSolution extends NSGAIISolution<MockVariable> {
 
 	public MockSolution(List<Double> objectives) {
 		super(MockVariable.create(), objectives);

@@ -16,7 +16,7 @@ public class SingleObjectiveComparatorTest {
 		MockSolution s1 = MockSolution.create(Arrays.asList(1d,1d), Arrays.asList(0d, 0d));
 		MockSolution s2 = MockSolution.create(Arrays.asList(1d,0d), Arrays.asList(0d, 0d));
 		
-		SolutionSet<MockVariable> set = new SolutionSet<>();
+		SolutionSet<MockSolution, MockVariable> set = new SolutionSet<>();
 		set.add(s1);
 		set.add(s2);
 		
@@ -32,7 +32,7 @@ public class SingleObjectiveComparatorTest {
 		MockSolution s1 = MockSolution.create(Arrays.asList(1d,1d), Arrays.asList(0d, 0d));
 		MockSolution s2 = MockSolution.create(Arrays.asList(1d,0d), Arrays.asList(1d, 0d));
 		
-		SolutionSet<MockVariable> set = new SolutionSet<>();
+		SolutionSet<MockSolution, MockVariable> set = new SolutionSet<>();
 		set.add(s1);
 		set.add(s2);
 		

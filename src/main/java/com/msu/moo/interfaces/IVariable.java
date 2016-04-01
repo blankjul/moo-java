@@ -2,7 +2,6 @@ package com.msu.moo.interfaces;
 
 /**
  * Interface for any variable that could be used. 
- *
  */
 public interface IVariable{
 	

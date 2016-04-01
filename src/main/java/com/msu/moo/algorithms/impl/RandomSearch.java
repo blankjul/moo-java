@@ -1,12 +1,12 @@
-package com.msu.moo.algorithms;
+package com.msu.moo.algorithms.impl;
 
+import com.msu.moo.algorithms.AMultiObjectiveAlgorithm;
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IFactory;
 import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.AMultiObjectiveAlgorithm;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.Solution;
+import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.util.MyRandom;
 
 /**
@@ -18,23 +18,20 @@ public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AM
 	// ! variable factory to create new solutions
 	protected IFactory<V> factory;
 
-	public RandomSearch(IFactory<V>  factory) {
+	public RandomSearch(IFactory<V> factory) {
 		this.factory = factory;
 	}
 
-
 	@Override
-	public NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand) {
-		NonDominatedSolutionSet<V> set = new NonDominatedSolutionSet<V>();
-		while (factory.hasNext() && evaluator.hasNext()) {
+	public NonDominatedSet<ISolution<V>, V> run_(P problem, IEvaluator evaluator, MyRandom rand) {
+		NonDominatedSet<ISolution<V>, V> set = new NonDominatedSet<>();
+		while (evaluator.hasNext()) {
 			V var = factory.next(rand);
-			Solution<V> s = evaluator.evaluate(problem, var);
+			ISolution<V> s = evaluator.evaluate(problem, var);
 			set.add(s);
 			evaluator.notify(s);
 		}
 		return set;
 	}
-
-
 
 }

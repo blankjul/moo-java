@@ -1,7 +1,8 @@
-package com.msu.moo.algorithms.nsgaII;
+package com.msu.moo.algorithms.impl.nsgaII;
 
 import java.util.List;
 
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.solution.Solution;
 
 /**
@@ -17,7 +18,7 @@ public class NSGAIISolution<V> extends Solution<V> {
 	private Double crowding = null;
 
 	
-	public NSGAIISolution(Solution<V> s) {
+	public NSGAIISolution(ISolution<V> s) {
 		super(s.getVariable(), s.getObjectives(), s.getConstraintViolations());
 	}
 	

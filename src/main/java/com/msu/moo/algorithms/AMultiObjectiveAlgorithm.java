@@ -1,17 +1,17 @@
-package com.msu.moo.model;
+package com.msu.moo.algorithms;
 
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.interfaces.algorithms.IMultiObjectiveAlgorithm;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.util.MyRandom;
 
 public abstract class AMultiObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> implements IMultiObjectiveAlgorithm<V,P>  {
 
 	protected String name;
 	
-	public abstract NonDominatedSolutionSet<V> run_(P problem, IEvaluator evaluator, MyRandom rand);
+	public abstract NonDominatedSet<ISolution<V>, V> run_(P problem, IEvaluator evaluator, MyRandom rand);
 
 	
 	/**
@@ -20,7 +20,7 @@ public abstract class AMultiObjectiveAlgorithm<V extends IVariable, P extends IP
 	 * multi-objective algorithm.
 	 */
 	@Override
-	public NonDominatedSolutionSet<V> run(P problem, IEvaluator evaluator, MyRandom rand) {
+	public NonDominatedSet<ISolution<V>, V> run(P problem, IEvaluator evaluator, MyRandom rand) {
 		return run_(problem, evaluator, rand).removeSolutionWithConstraintViolations();
 	}
 

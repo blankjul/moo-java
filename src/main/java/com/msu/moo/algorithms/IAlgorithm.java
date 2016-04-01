@@ -1,4 +1,4 @@
-package com.msu.moo.interfaces.algorithms;
+package com.msu.moo.algorithms;
 
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;

@@ -4,20 +4,21 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.mock.MockSolution;
 import com.msu.moo.mock.MockVariable;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
+import com.msu.moo.model.solution.NonDominatedSet;
 
 import junit.framework.TestCase;
 
 public class NonDominatedSetTest extends TestCase {
 
-	private NonDominatedSolutionSet<MockVariable> s;
+	private NonDominatedSet<ISolution<MockVariable>, MockVariable> s;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		s = new NonDominatedSolutionSet<>();
+		s = new NonDominatedSet<>();
 	}
 
 	@Test

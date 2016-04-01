@@ -1,40 +1,29 @@
 package com.msu.moo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.model.solution.Solution;
+import org.apache.commons.lang3.NotImplementedException;
+
+import com.msu.moo.interfaces.ISelection;
+import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.MyRandom;
 
-public abstract class ASelection<S extends Solution<V>, V> {
+public abstract class ASelection<S extends ISolution<V>, V> implements ISelection<S, V>{
 
-	/**
-	 * @return next solution by selection implementation
-	 */
-	abstract public Solution<V> next();
-
-	// ! the solution set from which individuals will be selected
-	protected List<S> set;
-
-	protected MyRandom rand;
-
-	public ASelection(List<S> set, MyRandom rand) {
-		super();
-		this.set = set;
-		this.rand = rand;
-	}
-
-	/**
-	 * @param n
-	 *            number of solutions
-	 * @return multiple solutions in base of the given set.
-	 */
-	public SolutionSet<V> next(int n) {
-		SolutionSet<V> result = new SolutionSet<V>();
+	@Override
+	public SolutionSet<S,V> next(List<S> population, int n, MyRandom rand) {
+		List<S> result = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
-			result.add(next());
+			result.add(next(population, rand));
 		}
-		return result;
+		return new SolutionSet<>(result);
+	}
+	
+	
+	public S next(List<S> population, MyRandom rand) {
+		throw new NotImplementedException("Not Implement how to select one item!");
 	}
 
 }

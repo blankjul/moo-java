@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 
@@ -13,9 +14,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.mustachejava.DefaultMustacheFactory;
 import com.github.mustachejava.Mustache;
 import com.github.mustachejava.MustacheFactory;
-import com.msu.moo.model.solution.NonDominatedSolutionSet;
-import com.msu.moo.model.solution.Solution;
-import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.interfaces.ISolution;
+import com.msu.moo.model.solution.NonDominatedSet;
 
 public class NonDominatedSetToJson {
 
@@ -31,14 +31,14 @@ public class NonDominatedSetToJson {
 		}
 	}
 
-	public void append(SolutionSet<?> set) {
+	public <V> void append(Collection<ISolution<V>> set) {
 		
-		NonDominatedSolutionSet<?> isNonDominated = new NonDominatedSolutionSet<>(set);
+		NonDominatedSet<ISolution<V>, V> isNonDominated = new NonDominatedSet<>(set);
 
 		Scatter scNonDom = new Scatter();
 		Scatter scDom = new Scatter();
 		
-		for (Solution<?> s : set) {
+		for (ISolution<V> s : set) {
 			Scatter sc = (isNonDominated.getSolutions().contains(s)) ? scNonDom : scDom;
 			sc.x.add(s.getObjective(0));
 			sc.y.add(s.getObjective(1));
