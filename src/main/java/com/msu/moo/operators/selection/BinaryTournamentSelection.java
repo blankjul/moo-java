@@ -32,7 +32,7 @@ public class BinaryTournamentSelection<S extends ISolution<V>, V> extends ASelec
 	protected void rndPool(List<S> population, MyRandom rand, Queue<S> q) {
 		LinkedList<S> tmp = new LinkedList<>(population);
 		rand.shuffle(tmp);
-		q = new LinkedList<>(tmp);
+		q.addAll(tmp);
 	}
 	
 	
@@ -46,16 +46,16 @@ public class BinaryTournamentSelection<S extends ISolution<V>, V> extends ASelec
 		
 		
 		SolutionSet<S, V> result = new SolutionSet<>();
-		Queue<S> q = null;
+		Queue<S> q = new LinkedList<>();
 		
 		
 		while (result.size() < n) {
 			
 			
 			// get two solutions. if pool is empty just create a new one!
-			if (q == null || q.isEmpty()) rndPool(population, rand, q);
+			if (q.isEmpty()) rndPool(population, rand, q);
 			S a = q.poll();
-			if (q == null || q.isEmpty()) rndPool(population, rand, q);
+			if (q.isEmpty()) rndPool(population, rand, q);
 			S b = q.poll();
 			
 			// tournament of this two solution

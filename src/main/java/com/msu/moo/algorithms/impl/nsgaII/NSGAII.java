@@ -37,7 +37,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	protected IFactory<V> factory;
 	
 	// ! selector for getting parents from the population
-	protected ISelection<NSGAIISolution<V>, V> selector = new NSGAIIBinaryTournament<V>();
+	protected ISelection<NSGAIISolution<V>, V> selector;
 
 	// ! allow external listener to get updates
 	protected IListener<SolutionSet<NSGAIISolution<V>, V>> listener;
@@ -57,6 +57,8 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	@Override
 	public NonDominatedSet<ISolution<V>, V> run_(P problem, IEvaluator evaluator, MyRandom rand) {
 
+		selector = new NSGAIIBinaryTournament<V>();
+		
 		// initialize the population and calculate also rank and crowding
 		initializePopulation(problem, evaluator, rand);
 		if (listener != null)

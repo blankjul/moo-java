@@ -23,10 +23,10 @@ import com.msu.moo.util.ObjectFactory;
 public class ExperimentExecutor {
 
 	// ! experiment that should be executed
-	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.ZDTExperiment";
+	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.KursaweExperiment";
 
 	// ! number of iterations per experiment
-	protected final static int ITERATIONS = 30;
+	protected final static int ITERATIONS = 10;
 
 	// ! max evaluations per run
 	protected final static IEvaluator EVALUATOR = new StandardEvaluator(20000);
@@ -35,7 +35,7 @@ public class ExperimentExecutor {
 	protected final static long SEED = 123456789;
 
 	// ! allows to use multiple threads
-	protected final static int NUM_OF_THREADS = 10;
+	protected final static int NUM_OF_THREADS = 1;
 
 	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) {

@@ -27,7 +27,7 @@ public class NaiveNonDominatedSorting  {
 		while (!copy.isEmpty()) {
 			
 			// empty set and search for all non dominated one
-			NonDominatedSet<S,V> set = new NonDominatedSet<>(solutions);
+			NonDominatedSet<S,V> set = new NonDominatedSet<>(copy);
 			
 			for(S s : copy) {
 				set.add(s);
