@@ -42,10 +42,11 @@ public interface IEvaluator {
 	 */
 	public Integer numOfEvaluations();
 	
+	
 	/**
 	 * increase the counting by one.
 	 */
-	public void increase();
+	public void increaseCounter();
 	
 	
 	/**

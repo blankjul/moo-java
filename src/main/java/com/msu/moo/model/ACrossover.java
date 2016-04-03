@@ -18,7 +18,7 @@ import com.msu.moo.util.MyRandom;
  * @param <V>
  *            variable type
  */
-public abstract class ACrossover<T, V extends IEvolutionaryVariable<T, V>> implements ICrossover<V> {
+public abstract class ACrossover<T, V extends IEvolutionaryVariable<T>> implements ICrossover<V> {
 
 	/**
 	 * Crossover of the decoded variable contents
@@ -39,7 +39,7 @@ public abstract class ACrossover<T, V extends IEvolutionaryVariable<T, V>> imple
 		// create variables
 		List<V> result = new ArrayList<>();
 		for (T off : offspring) {
-			V var = a.build(off);
+			V var = (V) a.build(off);
 			result.add(var);
 		}
 

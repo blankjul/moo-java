@@ -12,10 +12,10 @@ import com.msu.moo.util.exceptions.EvaluationException;
  * The Evaluator class should be used for each algorithm to evaluate the result
  * of an object of type IVariable.
  * 
- * It is not forbidden to use the problem itself directly, but the evaluator is
- * counting the evaluations and also some other feature like hashing results
- * might be implemented.
- *
+ * It is not forbidden to use the problem itself directly, but the evaluator is useful
+ * for defining the termination condition.
+ * 
+ * If the evaluator does not have any evaluations left the algorithms should terminate.
  */
 public abstract class AEvaluator implements IEvaluator {
 
@@ -31,7 +31,7 @@ public abstract class AEvaluator implements IEvaluator {
 	public <V extends IVariable> Solution<V> evaluate(IProblem<? extends IVariable> problem, V variable) {
 
 		// increase the number of evaluations
-		increase();
+		increaseCounter();
 
 		// cast the problem to the specific one
 		IProblem<V> p = null;
@@ -47,10 +47,10 @@ public abstract class AEvaluator implements IEvaluator {
 		return evaluations;
 	}
 
-	public void increase() {
+	public void increaseCounter() {
 		++this.evaluations;
 		if (father != null)
-			father.increase();
+			father.increaseCounter();
 	}
 	
 

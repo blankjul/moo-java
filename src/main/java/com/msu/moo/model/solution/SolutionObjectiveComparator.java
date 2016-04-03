@@ -4,10 +4,17 @@ import java.util.Comparator;
 
 import com.msu.moo.interfaces.ISolution;
 
-public class SingleObjectiveComparator implements Comparator<ISolution<?>>{
-	
+/**
+ * Comparator for sorting solutions according the given constraints and
+ * objective values.
+ *
+ * @param <S>
+ *            solution type
+ */
+public class SolutionObjectiveComparator<S extends ISolution<?>> implements Comparator<S> {
+
 	@Override
-	public int compare(ISolution<?> o1, ISolution<?> o2) {
+	public int compare(S o1, S o2) {
 		int constraint = Double.compare(o1.getSumOfConstraintViolation(), o2.getSumOfConstraintViolation());
 		if (constraint != 0)
 			return constraint;
@@ -20,6 +27,5 @@ public class SingleObjectiveComparator implements Comparator<ISolution<?>>{
 			return 0;
 		}
 	}
-	
 
 }

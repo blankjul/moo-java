@@ -6,9 +6,6 @@ package com.msu.moo.model.variable;
  * 
  * NOTE: If this class is inherited PLEASE override
  * 
- *				public IVariable<T> copy() - more efficient without reflection.
- *
- *
  * @param <T>
  *            decoded AND encoded type of variable.
  */
@@ -16,6 +13,7 @@ public abstract class AVariable<T>  {
 
 	protected T obj = null;
 
+	
 	public AVariable(T obj) {
 		super();
 		this.obj = obj;

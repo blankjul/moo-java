@@ -7,7 +7,7 @@ import com.msu.moo.interfaces.IMutation;
 import com.msu.moo.util.MyRandom;
 import com.msu.moo.util.Util;
 
-public class SwapMutation<T, V extends IEvolutionaryVariable<List<T>,V>> implements IMutation<V> {
+public class SwapMutation<T, V extends IEvolutionaryVariable<List<T>>> implements IMutation<V> {
 
 
 	@Override

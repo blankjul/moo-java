@@ -6,18 +6,18 @@ import java.util.List;
 import com.msu.moo.algorithms.ASingleObjectiveAlgorithm;
 import com.msu.moo.interfaces.ICrossover;
 import com.msu.moo.interfaces.IEvaluator;
+import com.msu.moo.interfaces.IEvolutionaryVariable;
 import com.msu.moo.interfaces.IFactory;
 import com.msu.moo.interfaces.IMutation;
 import com.msu.moo.interfaces.ISelection;
 import com.msu.moo.interfaces.ISolution;
-import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.ASingleObjectiveProblem;
-import com.msu.moo.model.solution.SingleObjectiveComparator;
+import com.msu.moo.model.solution.SolutionObjectiveComparator;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.operators.selection.RandomSelection;
 import com.msu.moo.util.MyRandom;
 
-public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends ASingleObjectiveProblem<V>>
+public class SingleObjectiveEvolutionaryAlgorithm<V extends IEvolutionaryVariable<?>, P extends ASingleObjectiveProblem<V>>
 		extends ASingleObjectiveAlgorithm<V, P> {
 
 	// ! size of the whole Population
@@ -106,13 +106,11 @@ public class SingleObjectiveEvolutionaryAlgorithm<V extends IVariable, P extends
 		SolutionSet<ISolution<V>> next = new SolutionSet<>(new HashSet<>(population));
 		
 		// truncate the population -> survival of the fittest
-		next.sort(new SingleObjectiveComparator());
+		next.sort(new SolutionObjectiveComparator<>());
 		
 		next = new SolutionSet<ISolution<V>>(next.subList(0, Math.min(next.size(), populationSize)));
 		
 		evaluator.notify(next);
-		
-		
 		
 		return next;
 	}

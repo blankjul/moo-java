@@ -11,9 +11,19 @@ import com.msu.moo.model.solution.Solution;
 import com.msu.moo.util.BashExecutor;
 import com.msu.moo.util.Util;
 
+/**
+ * 
+ *
+ * EAF from Fonseca
+ * -----------------------------------------------------------------------------
+ * The empirical first-order attainment function (EAF) is used to assess the
+ * performance of stochastic multiobjective optimisers such as multiobjective
+ * evolutionary algorithms
+ * 
+ * https://eden.dei.uc.pt/~cmfonsec/software.html
+ *
+ */
 public class EmpiricalAttainmentFunction {
-
-
 
 	public static NonDominatedSet<ISolution<Object>> calculate(Collection<Collection<? extends ISolution<?>>> sets) {
 		return calculate(sets, (sets.size() / 2) + 1);
@@ -21,13 +31,14 @@ public class EmpiricalAttainmentFunction {
 
 	public static NonDominatedSet<ISolution<Object>> calculate(Collection<Collection<? extends ISolution<?>>> sets, int level) {
 
-		if (!Util.doesFileExist(Configuration.PATH_TO_EAF)) throw new RuntimeException("Fonseca's Implementation not found!");
-		
+		if (!Util.doesFileExist(Configuration.PATH_TO_EAF))
+			throw new RuntimeException("Fonseca's Implementation not found!");
+
 		// result where the value are added
 		NonDominatedSet<ISolution<Object>> result = new NonDominatedSet<>();
 		String command = getCommand(sets, level);
 		String out = BashExecutor.execute(command);
-		
+
 		if (out == null) {
 			System.out.println(command);
 			return null;

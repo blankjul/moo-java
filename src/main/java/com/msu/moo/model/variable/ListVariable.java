@@ -5,7 +5,7 @@ import java.util.List;
 
 import com.msu.moo.interfaces.IEvolutionaryVariable;
 
-public class ListVariable<T> extends AVariable<List<T>> implements IEvolutionaryVariable<List<T>, ListVariable<T>>{
+public class ListVariable<T> extends AVariable<List<T>> implements IEvolutionaryVariable<List<T>>{
 
 
 	public ListVariable(List<T> obj) {

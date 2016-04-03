@@ -6,7 +6,8 @@ import java.util.List;
 import com.msu.moo.interfaces.IEvolutionaryVariable;
 import com.msu.moo.interfaces.IVariable;
 
-public class DoubleListVariable extends AVariable<List<Double>> implements IEvolutionaryVariable<List<Double>, DoubleListVariable>{
+
+public class DoubleListVariable extends AVariable<List<Double>> implements IEvolutionaryVariable<List<Double>>{
 
 	public DoubleListVariable(List<Double> obj) {
 		super(obj);

@@ -1,78 +1,87 @@
 package com.msu.moo.model.evaluator;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.ISolution;
-import com.msu.moo.interfaces.IVariable;
-import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 
-public class ConvergenceEvaluator extends AEvaluator {
+/**
+ * This evaluator has a look at the population over time.
+ * 
+ * - convergencePeriod: Please define the convergencePeriod which means what
+ * populations are compared.
+ * 
+ * - firtN: Also the parameter firtN could observe not only the best but also a
+ * sub population.
+ * 
+ * - percentage: The percentage define the improvement which has to be fulfilled
+ * in order to be converged.
+ *
+ */
+public class SingleObectiveConvergenceEvaluator extends AEvaluator {
 
+	// logs the average objectives over time
+	protected List<Double> objectives = new ArrayList<Double>();
+
+	// ! how often the same result has to be notified to converge
+	protected int convergencePeriod = 1;
+
+	// ! only first N solutions of notifications are observed
+	protected int firstN = 1;
+
+	// percentage to improve for convergence
+	protected double percentage = 0.001;
 	
-	//! how often the same result has to be notified to converge
-	protected int convergencePeriod = 50;
-	
-	//! only first N solutions of notifications are observed
-	protected int firstN = -1;
-	
-	//! hash code of the last notification
-	protected int lastHashCode = -1;
-	
-	//! how often the same result was notified
-	protected int counter = 1;
-	
-	
-	public ConvergenceEvaluator() {
+
+	public SingleObectiveConvergenceEvaluator() {
 		super();
 	}
-	
 
-	public ConvergenceEvaluator(int convergencePeriod) {
-		super();
-		this.convergencePeriod = convergencePeriod;
-	}
 	
-	
-	
-	public ConvergenceEvaluator(int convergencePeriod, int firstN) {
+	public SingleObectiveConvergenceEvaluator(int convergencePeriod, int firstN, double percentage) {
 		super();
 		this.convergencePeriod = convergencePeriod;
 		this.firstN = firstN;
+		this.percentage = percentage;
 	}
 
 
-	public <V extends IVariable> Solution<V> evaluate(IProblem<? extends IVariable> problem, V variable) {
-		return super.evaluate(problem, variable);
-	}
 
 	@Override
 	public boolean hasNext() {
-		return counter <= convergencePeriod;
+
+		if (objectives.isEmpty())
+			return true;
+
+		// get last average of objectives
+		double current = objectives.get(objectives.size() - 1);
+		
+		// compare with entry of convergencePeriod populations ago
+		double lastToCompare = objectives.get(Math.max(0, objectives.size() - 1 - convergencePeriod));
+
+		// if improvement was less than percentage of the current one, go for it
+		return (lastToCompare - current) < current * percentage;
 	}
 
-	
 	@Override
 	public <S extends ISolution<?>> void notify(SolutionSet<S> set) {
-		
-		List<S> list = set;
-		if (firstN != -1 && set.size() >  firstN) list = set.subList(0, firstN);
-		
-		final int hash = list.hashCode();
-		if (lastHashCode == hash) ++counter;
-		else {
-			lastHashCode = hash;
-			counter = 1;
+
+		List<S> solutions = set.subList(0, Math.min(set.size(), firstN));
+
+		double avg = 0;
+		for (S s : solutions) {
+			avg += s.getObjective(0);
 		}
+		avg /= solutions.size();
+
+		objectives.add(avg);
+
 	}
 
-	
 	@Override
 	public Integer getMaxEvaluations() {
 		return Integer.MAX_VALUE;
 	}
-	
-	
 
 }

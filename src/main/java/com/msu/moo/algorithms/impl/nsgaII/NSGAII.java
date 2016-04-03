@@ -7,19 +7,19 @@ import java.util.List;
 import com.msu.moo.algorithms.AMultiObjectiveAlgorithm;
 import com.msu.moo.interfaces.ICrossover;
 import com.msu.moo.interfaces.IEvaluator;
+import com.msu.moo.interfaces.IEvolutionaryVariable;
 import com.msu.moo.interfaces.IFactory;
 import com.msu.moo.interfaces.IMutation;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.ISelection;
 import com.msu.moo.interfaces.ISolution;
-import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.sorting.SortingBestOrder;
+import com.msu.moo.sorting.SortingNaive;
 import com.msu.moo.util.IListener;
 import com.msu.moo.util.MyRandom;
 
-public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiObjectiveAlgorithm<V, P> {
+public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> extends AMultiObjectiveAlgorithm<V, P> {
 
 	// ! size of the whole Population
 	protected int populationSize;
@@ -136,7 +136,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 		int ranking = 0;
 
 		// for every front in the current population
-		for (NonDominatedSet<NSGAIISolution<V>> front : SortingBestOrder.sort(population)) {
+		for (NonDominatedSet<NSGAIISolution<V>> front : SortingNaive.sort(population)) {
 
 			SolutionSet<NSGAIISolution<V>> next = front.getSolutions();
 

@@ -39,7 +39,6 @@ public class ZDTExperiment extends AExperiment<NonDominatedSet<ISolution<DoubleL
 		.set("mutation", new PolynomialMutation(range))
 		.set("selector", new NSGAIIBinaryTournament<>());
 		
-		
 		algorithms.add(nsgaII.build());
 		
 	}

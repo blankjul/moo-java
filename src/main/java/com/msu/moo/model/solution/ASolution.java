@@ -6,10 +6,10 @@ import java.util.List;
 import com.msu.moo.interfaces.ISolution;
 
 /**
- * Abstracts solution class which implements the Solution interface. If extra
- * information have to be stored simply inherit from this class.
+ * Abstracts solution class which implements the Solution interface. If an extra
+ * information has to be stored simply inherit from this class.
  *
- * @param <V>
+ * @param <V> variable type
  */
 public abstract class ASolution<V> implements ISolution<V> {
 

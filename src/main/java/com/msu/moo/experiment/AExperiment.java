@@ -18,12 +18,15 @@ import com.msu.moo.util.Util;
 
 /**
  * This is a general experiment class which could be used to execute single and
- * multi-objective experiments. To experiment class needs to overwrite the
+ * multi-objective experiments. The experiment class needs to overwrite the
  * analyze method which gets the result from the algorithm.
- * 
  *
  * @param <R>
- *            result type of algorithm
+ *            Result type. Either a pareto front or a single solution
+ * @param <V>
+ *            variable type
+ * @param <P>
+ *            problem type
  */
 public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>> {
 
@@ -50,6 +53,12 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 			runMulti(evaluator, iterations, seed, numOfThreads);
 	}
 
+	/**
+	 * Runs the experiment in a single thread
+	 * @param evaluator defines when the algorithm finishes
+	 * @param iterations number of iterations
+	 * @param seed random seed
+	 */
 	public void runSingle(IEvaluator evaluator, int iterations, long seed) {
 
 		logger.info("Running the experiment.");
@@ -78,11 +87,11 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 					// set the random seed that the results will be comparable
 					MyRandom rand = new MyRandom(seed + k);
 
-					ExperimentCallback<R,V,P> c = new ExperimentCallback<>(algorithm, problem, rand, i, j, k, Util.cloneObject(evaluator));
-					
+					ExperimentCallback<R, V, P> c = new ExperimentCallback<>(algorithm, problem, rand, i, j, k, Util.cloneObject(evaluator));
+
 					String prefix = String.format("[%s/%s | %s | %s/%s ]", c.i + 1, problems.size(), c.algorithm, c.k + 1, iterations);
 					logger.info(String.format("%s %s in %f s", prefix, c.algorithm, c.duration));
-					
+
 					// calculate result
 					analyse(c);
 
@@ -92,6 +101,13 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 
 	}
 
+	/**
+	 * Run the experiment in a multiple threads
+	 * @param evaluator defines when the algorithm finishes
+	 * @param iterations number of iterations
+	 * @param seed random seed
+	 * @param numOfThreads number of threads
+	 */
 	public void runMulti(IEvaluator evaluator, int iterations, long seed, int numOfThreads) {
 
 		logger.info("Running the experiment.");

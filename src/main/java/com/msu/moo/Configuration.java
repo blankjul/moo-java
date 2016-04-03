@@ -5,8 +5,6 @@ package com.msu.moo;
  * feature which are implemented in other programming language, interfaces are
  * used.
  * 
- * NEEDS TO BE COMPILED BEFORE!
- * 
  */
 public class Configuration {
 

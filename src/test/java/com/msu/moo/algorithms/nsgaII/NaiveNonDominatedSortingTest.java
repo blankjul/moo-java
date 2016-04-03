@@ -7,11 +7,8 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.mock.MockSolution;
-import com.msu.moo.mock.MockVariable;
 import com.msu.moo.model.solution.NonDominatedSet;
-import com.msu.moo.model.solution.Solution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.sorting.SortingNaive;
 
@@ -26,10 +23,10 @@ public class NaiveNonDominatedSortingTest {
 	@Test
 	public void testTwoPointsTwoSets() {
 		
-		Solution<MockVariable> s1 = MockSolution.create(0, Arrays.asList(1d,1d));
-		Solution<MockVariable> s2 = MockSolution.create(1, Arrays.asList(0d,0d));
+		MockSolution s1 = MockSolution.create(0, Arrays.asList(1d,1d));
+		MockSolution s2 = MockSolution.create(1, Arrays.asList(0d,0d));
 		
-		List<NonDominatedSet<ISolution<MockVariable>, MockVariable>> set = SortingNaive.sort(new SolutionSet<>(Arrays.asList(s1,s2)));
+		List<NonDominatedSet<MockSolution>> set = SortingNaive.sort(new SolutionSet<>(Arrays.asList(s1,s2)));
 		
 		assertEquals(2, set.size());
 		assertEquals(s2,set.get(0).getSolutions().get(0));

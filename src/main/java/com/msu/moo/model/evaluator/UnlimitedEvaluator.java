@@ -5,12 +5,7 @@ import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.Solution;
 
 /**
- * The Evaluator class should be used for each algorithm to evaluate the result
- * of an object of type IVariable.
- * 
- * It is not forbidden to use the problem itself directly, but the evaluator is
- * counting the evaluations and also some other feature like hashing results
- * might be implemented.
+ * Unlimited evaluations. Will never terminate!
  *
  */
 public class UnlimitedEvaluator extends AEvaluator {
@@ -18,7 +13,6 @@ public class UnlimitedEvaluator extends AEvaluator {
 	
 	public <V extends IVariable> Solution<V> evaluate(IProblem<? extends IVariable> problem, V variable) {
 		return super.evaluate(problem, variable);
-		
 	}
 
 	/**

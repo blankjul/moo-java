@@ -68,7 +68,7 @@ public class SortingBestOrder {
 						outerloop: for (SolutionNode other : front) {
 
 							// if other is not better in current objective m, it
-							// could not dominate node
+							// could not dominate node -> maximal indifferent
 							if (other.isDominatingInObjective[m] == false) {
 								continue outerloop;
 							} else {
@@ -138,10 +138,7 @@ public class SortingBestOrder {
 			result.add(set);
 			
 		}
-		
 		return result;
-		
-		
 
 	}
 

@@ -7,7 +7,7 @@ import com.msu.moo.util.MyRandom;
 /**
  * @param <V> Variable that should be recombined.
  */
-public interface ICrossover<V extends IVariable> {
+public interface ICrossover<V extends IEvolutionaryVariable<?>> {
 
 	/**
 	 * Perform a crossover on two individuals.

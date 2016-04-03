@@ -6,12 +6,8 @@ import com.msu.moo.model.solution.Solution;
 import com.msu.moo.util.exceptions.EvaluationException;
 
 /**
- * The Evaluator class should be used for each algorithm to evaluate the result
- * of an object of type IVariable.
- * 
- * It is not forbidden to use the problem itself directly, but the evaluator is
- * counting the evaluations and also some other feature like hashing results
- * might be implemented.
+ * The evaluations are expired when the maximal number of evaluations is done
+ * using this evaluator.
  *
  */
 public class StandardEvaluator extends AEvaluator {
@@ -19,12 +15,10 @@ public class StandardEvaluator extends AEvaluator {
 	// ! current amount of evaluations
 	protected Integer maxEvaluations = null;
 
-	
 	public StandardEvaluator(int maxEvaluations) {
 		this.maxEvaluations = maxEvaluations;
 	}
 
-	
 	public <V extends IVariable> Solution<V> evaluate(IProblem<? extends IVariable> problem, V variable) {
 
 		// 20 percent are okay - some times the population size will be larger..
@@ -32,7 +26,7 @@ public class StandardEvaluator extends AEvaluator {
 			throw new EvaluationException("Evaluations expired. Check hasNext() first.");
 
 		return super.evaluate(problem, variable);
-		
+
 	}
 
 	/**
@@ -45,10 +39,5 @@ public class StandardEvaluator extends AEvaluator {
 	public Integer getMaxEvaluations() {
 		return maxEvaluations;
 	}
-
-
-
-
-	
 
 }

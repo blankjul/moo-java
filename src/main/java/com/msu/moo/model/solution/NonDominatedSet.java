@@ -8,6 +8,14 @@ import java.util.stream.Collectors;
 
 import com.msu.moo.interfaces.ISolution;
 
+/**
+ * This is a NonDominatedSolutionSet which stores only solutions which are
+ * indifferent to each other. This class can be used to extract the front of a
+ * solution list.
+ *
+ * @param <S>
+ *            solution type
+ */
 public class NonDominatedSet<S extends ISolution<?>> implements Iterable<S> {
 
 	// ! list which contains all the solutions

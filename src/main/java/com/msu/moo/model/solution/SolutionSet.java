@@ -8,12 +8,19 @@ import java.util.List;
 import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.util.Range;
 
-public class SolutionSet<S extends ISolution<?>> extends ArrayList<S>{
-	
-	
+/**
+ * SolutionSet provides a list of objects that implement ISolution<?>. They can
+ * easily be sorted according one objective are the object vector can be
+ * returned.
+ *
+ * @param <S>
+ *            solution type
+ */
+public class SolutionSet<S extends ISolution<?>> extends ArrayList<S> {
+
 	public SolutionSet() {
 		super();
-	}	
+	}
 
 	public SolutionSet(Collection<S> c) {
 		super(c);
@@ -24,15 +31,15 @@ public class SolutionSet<S extends ISolution<?>> extends ArrayList<S>{
 	}
 
 	/**
-	 * Sorts the population by using a specific objective.
-	 * DEFAULT: Increasing!
-	 * @param obj number of objective
+	 * Sorts the population by using a specific objective. DEFAULT: Increasing!
+	 * 
+	 * @param obj
+	 *            number of objective
 	 */
 	public void sortByObjective(int obj) {
 		Collections.sort(this, (ISolution<?> s1, ISolution<?> s2) -> s1.getObjective(obj).compareTo(s2.getObjective(obj)));
 	}
-	
-	
+
 	/**
 	 * @return vector of all current solution of given objective
 	 */
@@ -43,8 +50,7 @@ public class SolutionSet<S extends ISolution<?>> extends ArrayList<S>{
 		}
 		return l;
 	}
-	
-	
+
 	public Range<Double> getRange() {
 		Range<Double> r = new Range<>();
 		for (ISolution<?> s : this) {
@@ -53,7 +59,6 @@ public class SolutionSet<S extends ISolution<?>> extends ArrayList<S>{
 		return r;
 	}
 
-	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -63,9 +68,5 @@ public class SolutionSet<S extends ISolution<?>> extends ArrayList<S>{
 		}
 		return sb.toString();
 	}
-
-	
-	
-	
 
 }

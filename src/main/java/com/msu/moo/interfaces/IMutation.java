@@ -9,7 +9,7 @@ import com.msu.moo.util.MyRandom;
  * @param <V>
  *            variable that is mutated
  */
-public interface IMutation<V extends IVariable> {
+public interface IMutation<V extends IEvolutionaryVariable<?>> {
 
 	public void mutate(V a, MyRandom rand);
 

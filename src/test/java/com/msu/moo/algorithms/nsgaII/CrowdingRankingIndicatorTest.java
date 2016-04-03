@@ -5,9 +5,8 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.msu.moo.algorithms.impl.nsgaII.CrowdingDistance;
-import com.msu.moo.algorithms.impl.nsgaII.NSGAIISolution;
 import com.msu.moo.mock.ExampleSolutionSet;
-import com.msu.moo.mock.MockVariable;
+import com.msu.moo.mock.MockSolution;
 import com.msu.moo.model.solution.SolutionSet;
 
 public class CrowdingRankingIndicatorTest {
@@ -15,7 +14,7 @@ public class CrowdingRankingIndicatorTest {
 	
 	@Test
 	public void testCalcValuesOfExample() {
-		SolutionSet<NSGAIISolution<MockVariable>, MockVariable> l = ExampleSolutionSet.getAsNSGAIISolution();
+		SolutionSet<MockSolution> l = ExampleSolutionSet.get();
 		CrowdingDistance.calculate(l);
 		
 		assertEquals(Double.POSITIVE_INFINITY, l.get(0).getCrowding(), 0.01);

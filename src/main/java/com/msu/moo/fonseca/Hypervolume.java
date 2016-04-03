@@ -8,6 +8,19 @@ import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.util.BashExecutor;
 import com.msu.moo.util.Util;
 
+
+
+/** -----------------------------------------------------------------------------
+* Computation of the Hypervolume from Fonseca
+* -----------------------------------------------------------------------------
+* This program implements a recursive, dimension-sweep algorithm for computing
+* the hypervolume indicator of the quality of a set of n non-dominated points
+* in d dimensions
+* 
+* http://iridia.ulb.ac.be/~manuel/hypervolume
+*
+* -----------------------------------------------------------------------------
+*/
 public class Hypervolume {
 
 

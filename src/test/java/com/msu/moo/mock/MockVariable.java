@@ -4,7 +4,7 @@ import com.msu.moo.interfaces.IEvolutionaryVariable;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.variable.AVariable;
 
-public class MockVariable extends AVariable<Integer> implements IEvolutionaryVariable<Integer, MockVariable>{
+public class MockVariable extends AVariable<Integer> implements IEvolutionaryVariable<Integer>{
 
 
 	public MockVariable() {

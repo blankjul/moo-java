@@ -7,7 +7,11 @@ import com.msu.moo.model.ASelection;
 import com.msu.moo.util.MyRandom;
 
 
-
+/**
+ * Returns randomly solutions of a given pool.
+ * 
+ * @param <S> solution type
+ */
 public class RandomSelection<S extends ISolution<?>> extends ASelection<S> {
 
 	@Override
@@ -16,6 +20,5 @@ public class RandomSelection<S extends ISolution<?>> extends ASelection<S> {
 	}
 
 	
-
 
 }

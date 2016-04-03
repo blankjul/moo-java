@@ -1,14 +1,13 @@
 package com.msu.moo.operators.mutation;
 
+import com.msu.moo.interfaces.IEvolutionaryVariable;
 import com.msu.moo.interfaces.IMutation;
-import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.util.MyRandom;
 
-public class NoMutation implements IMutation<IVariable> {
-
+public class NoMutation<V extends IEvolutionaryVariable<?>> implements IMutation<V> {
 
 	@Override
-	public void mutate(IVariable a, MyRandom rand) {
+	public void mutate(V a, MyRandom rand) {
 	}
 
 }

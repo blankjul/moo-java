@@ -6,20 +6,18 @@ import java.util.Arrays;
 import org.junit.Test;
 
 import com.msu.moo.mock.MockSolution;
-import com.msu.moo.mock.MockSolutionSet;
-import com.msu.moo.mock.MockVariable;
 import com.msu.moo.model.solution.SolutionSet;
 
 import junit.framework.TestCase;
 
 public class SolutionSetTest extends TestCase{
 
-	private SolutionSet<MockSolution, MockVariable> s;
+	private SolutionSet<MockSolution> s;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		s = new MockSolutionSet();
+		s = new SolutionSet<>();
 	}
 	
 

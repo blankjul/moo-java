@@ -14,7 +14,6 @@ public class UniformCrossover<T> extends ACrossover<List<T>, ListVariable<T>> {
 	@Override
 	public List<List<T>> crossover(List<T> a, List<T> b, MyRandom rand) {
 		
-		
 		// copy the both list and change values
 		List<T> c1 = new ArrayList<T>();
 		List<T> c2 = new ArrayList<T>();

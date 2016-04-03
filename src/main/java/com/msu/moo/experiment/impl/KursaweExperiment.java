@@ -24,6 +24,7 @@ public class KursaweExperiment extends AExperiment<NonDominatedSet<ISolution<Dou
 
 		Range<Double> range = new Range<>(3, -5d, 5d);
 		Builder<NSGAII<DoubleListVariable, Kursawe>> nsgaII = new Builder<>(NSGAII.class);
+		
 		nsgaII.set("probMutation", 1.0)
 		.set("populationSize", 100)
 		.set("factory", new DoubleListVariableFactory(range))
@@ -32,7 +33,6 @@ public class KursaweExperiment extends AExperiment<NonDominatedSet<ISolution<Dou
 		.set("selector", new NSGAIIBinaryTournament<>());
 
 		algorithms.add(nsgaII.build());
-
 
 	}
 
