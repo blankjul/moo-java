@@ -8,7 +8,7 @@ import java.util.List;
 import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.util.Range;
 
-public class SolutionSet<S extends ISolution<V>, V> extends ArrayList<S>{
+public class SolutionSet<S extends ISolution<?>> extends ArrayList<S>{
 	
 	
 	public SolutionSet() {
@@ -29,7 +29,7 @@ public class SolutionSet<S extends ISolution<V>, V> extends ArrayList<S>{
 	 * @param obj number of objective
 	 */
 	public void sortByObjective(int obj) {
-		Collections.sort(this, (ISolution<V> s1, ISolution<V> s2) -> s1.getObjective(obj).compareTo(s2.getObjective(obj)));
+		Collections.sort(this, (ISolution<?> s1, ISolution<?> s2) -> s1.getObjective(obj).compareTo(s2.getObjective(obj)));
 	}
 	
 	
@@ -38,7 +38,7 @@ public class SolutionSet<S extends ISolution<V>, V> extends ArrayList<S>{
 	 */
 	public List<Double> getVector(int objective) {
 		List<Double> l = new ArrayList<>();
-		for (ISolution<V> s : this) {
+		for (ISolution<?> s : this) {
 			l.add(s.getObjectives().get(objective));
 		}
 		return l;
@@ -47,25 +47,23 @@ public class SolutionSet<S extends ISolution<V>, V> extends ArrayList<S>{
 	
 	public Range<Double> getRange() {
 		Range<Double> r = new Range<>();
-		for (ISolution<V> s : this) {
+		for (ISolution<?> s : this) {
 			r.add(s.getObjectives());
 		}
 		return r;
 	}
 
 	
-	
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		for (ISolution<V> s : this) {
+		for (ISolution<?> s : this) {
 			sb.append(s);
 			sb.append("\n");
 		}
 		return sb.toString();
 	}
 
-	
 	
 	
 	

@@ -61,8 +61,8 @@ public abstract class AEvaluator implements IEvaluator {
 	}
 
 	@Override
-	public <S extends ISolution<V>, V extends IVariable> void notify(S s) {
-		SolutionSet<S,V> set = new SolutionSet<>();
+	public <S extends ISolution<?>> void notify(S s) {
+		SolutionSet<S> set = new SolutionSet<>();
 		set.add(s);
 		notify(set);
 	}
@@ -73,7 +73,7 @@ public abstract class AEvaluator implements IEvaluator {
 	}
 	
 	@Override
-	public <S extends ISolution<V>, V extends IVariable> void notify(SolutionSet<S, V> set) {
+	public <S extends ISolution<?>> void notify(SolutionSet<S> set) {
 	}
 
 }

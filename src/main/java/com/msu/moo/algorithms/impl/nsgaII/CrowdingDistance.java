@@ -13,12 +13,12 @@ public class CrowdingDistance {
 		return solutions.get(index).getObjective(objective);
 	}
 	
-	public static <S extends NSGAIISolution<V>,V> void calculate(SolutionSet<S , V> solutions) {
+	public static <S extends NSGAIISolution<V>,V> void calculate(SolutionSet<S> solutions) {
 		
 		// the resulting set is also empty
 		if (solutions.isEmpty()) return;
 		
-		SolutionSet<S, V> copy = new SolutionSet<S, V>(solutions);
+		SolutionSet<S> copy = new SolutionSet<S>(solutions);
 		copy.forEach(s -> s.setCrowding(0.0));
 		
 

@@ -4,17 +4,18 @@ import java.util.List;
 
 import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.sorting.SortingNaive;
 
 public class NonDominatedRankIndicator {
 	
 
-	public static <S extends NSGAIISolution<V>, V> void calculate(SolutionSet<S,V> solutions) {
+	public static <S extends NSGAIISolution<?>> void calculate(SolutionSet<S> solutions) {
 		
 		// sort the population
-		List<NonDominatedSet<S,V>> sets = NaiveNonDominatedSorting.sort(solutions);
+		List<NonDominatedSet<S>> sets = SortingNaive.sort(solutions);
 
 		int ranking = 0;
-		for(NonDominatedSet<S,V> set : sets) {
+		for(NonDominatedSet<S> set : sets) {
 			for(S s : set) {
 				s.setRank(ranking);
 			}

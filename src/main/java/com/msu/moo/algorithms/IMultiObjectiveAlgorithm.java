@@ -14,7 +14,7 @@ import com.msu.moo.util.MyRandom;
  * @param <E>
  *            encoded type of the variable which is used.
  */
-public interface IMultiObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> extends IAlgorithm<NonDominatedSet<ISolution<V>, V>, V, P>{
+public interface IMultiObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> extends IAlgorithm<NonDominatedSet<ISolution<V>>, V, P>{
 
 	
 	/**
@@ -26,7 +26,7 @@ public interface IMultiObjectiveAlgorithm<V extends IVariable, P extends IProble
 	 *            which counts the evaluations
 	 * @return front of non dominated points
 	 */
-	public  NonDominatedSet<ISolution<V>, V> run(P problem, IEvaluator evaluator, MyRandom rand);
+	public  NonDominatedSet<ISolution<V>> run(P problem, IEvaluator evaluator, MyRandom rand);
 
 	
 	

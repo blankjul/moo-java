@@ -1,9 +1,9 @@
 package com.msu.moo.algorithms;
 
-import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
+import com.msu.moo.model.ASingleObjectiveProblem;
 
-public abstract class ASingleObjectiveAlgorithm<V extends IVariable, P extends IProblem<V>> implements ISingleObjectiveAlgorithm<V,P>  {
+public abstract class ASingleObjectiveAlgorithm<V extends IVariable, P extends ASingleObjectiveProblem<V>> implements ISingleObjectiveAlgorithm<V,P>  {
 
 	protected String name;
 	

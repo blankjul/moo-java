@@ -15,11 +15,11 @@ import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.interfaces.IVariable;
 import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.sorting.SortingBestOrder;
 import com.msu.moo.util.IListener;
 import com.msu.moo.util.MyRandom;
 
-
-public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiObjectiveAlgorithm<V,P>{
+public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiObjectiveAlgorithm<V, P> {
 
 	// ! size of the whole Population
 	protected int populationSize;
@@ -35,16 +35,16 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 
 	// ! factory for creating new instances
 	protected IFactory<V> factory;
-	
+
 	// ! selector for getting parents from the population
-	protected ISelection<NSGAIISolution<V>, V> selector;
+	protected ISelection<NSGAIISolution<V>> selector;
 
 	// ! allow external listener to get updates
-	protected IListener<SolutionSet<NSGAIISolution<V>, V>> listener;
+	protected IListener<SolutionSet<NSGAIISolution<V>>> listener;
 
 	// population with NSGAII solutions -> allows to save rank and crowding
 	// directly
-	protected SolutionSet<NSGAIISolution<V>, V> population = null;
+	protected SolutionSet<NSGAIISolution<V>> population = null;
 
 	// recommended for discrete problems
 	protected boolean elimanateDuplicates = false;
@@ -53,27 +53,39 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 	protected NSGAII() {
 	}
 
-	
 	@Override
-	public NonDominatedSet<ISolution<V>, V> run_(P problem, IEvaluator evaluator, MyRandom rand) {
+	public NonDominatedSet<ISolution<V>> run_(P problem, IEvaluator evaluator, MyRandom rand) {
 
-		selector = new NSGAIIBinaryTournament<V>();
-		
 		// initialize the population and calculate also rank and crowding
-		initializePopulation(problem, evaluator, rand);
-		if (listener != null)
-			listener.notify(population);
+		population = new SolutionSet<>(populationSize * 2);
 
+		for (int i = 0; i < populationSize; i++) {
+			ISolution<V> s = evaluator.evaluate(problem, factory.next(rand));
+			population.add(new NSGAIISolution<>(s));
+		}
+
+		// calculate Rank and Crowding for the initial population
+		// it is necessary for the BinaryTournamentSelection
+		calcRankAndCrowding(population);
+		
+		// notify the listener
+		if (listener != null) listener.notify(population);
+
+		// while evaluations are left
 		while (evaluator.hasNext()) {
 
 			// create offspring population until size two times
-			SolutionSet<NSGAIISolution<V>, V> offsprings = new SolutionSet<>(populationSize);
+			SolutionSet<NSGAIISolution<V>> offsprings = new SolutionSet<>(populationSize);
 			while (offsprings.size() < populationSize) {
 
-				// crossover
-				SolutionSet<NSGAIISolution<V>, V> selected = selector.next(population, 2, rand);
+				// select two individuals using the binary tournament selection
+				SolutionSet<NSGAIISolution<V>> selected = selector.next(population, 2, rand);
+
+				// crossover of the individuals
 				List<V> off = crossover.crossover(selected.get(0).getVariable(), selected.get(1).getVariable(), rand);
-				
+
+				// for every offspring - maybe mutation and add to next
+				// generation
 				for (V offspring : off) {
 
 					// mutation of the offspring
@@ -86,6 +98,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 
 					offsprings.add(new NSGAIISolution<>(s));
 				}
+
 			}
 
 			// merge population and offsprings
@@ -102,8 +115,7 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 			population = new SolutionSet<>(population.subList(0, Math.min(populationSize, population.size())));
 
 			// update notifier and evaluator
-			if (listener != null)
-				listener.notify(population);
+			if (listener != null) listener.notify(population);
 			evaluator.notify(population);
 
 		}
@@ -112,37 +124,21 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 		// System.out.println(Hypervolume.calculate(population,Arrays.asList(1.01,
 		// 1.01)));
 
-		return new NonDominatedSet<ISolution<V>, V>(population);
+		return new NonDominatedSet<ISolution<V>>(population);
 
 	}
 
-	protected void initializePopulation(P problem, IEvaluator evaluator, MyRandom rand) {
+	protected SolutionSet<NSGAIISolution<V>> calcRankAndCrowding(SolutionSet<NSGAIISolution<V>> population) {
 
-		// initialize the population with populationSize
-		population = new SolutionSet<>(populationSize * 2);
-
-		for (int i = 0; i < populationSize; i++) {
-			ISolution<V> s = evaluator.evaluate(problem, factory.next(rand));
-			population.add(new NSGAIISolution<>(s));
-		}
-
-		// calculate Rank and Crowding for the initial population
-		// it is necessary for the BinaryTournamentSelection
-		calcRankAndCrowding(population);
-
-	}
-
-	protected SolutionSet<NSGAIISolution<V>, V> calcRankAndCrowding(SolutionSet<NSGAIISolution<V>, V> population) {
-
-		SolutionSet<NSGAIISolution<V>, V> solutions = new SolutionSet<>();
-
-		int ranking = 0;
+		SolutionSet<NSGAIISolution<V>> solutions = new SolutionSet<>();
 
 		// for every front of the population
-		for (NonDominatedSet<NSGAIISolution<V>, V> front : NaiveNonDominatedSorting.sort(population)) {
+		int ranking = 0;
 
-			SolutionSet<NSGAIISolution<V>, V> next = new SolutionSet<>();
-			front.getSolutions().forEach(s -> next.add((NSGAIISolution<V>) s));
+		// for every front in the current population
+		for (NonDominatedSet<NSGAIISolution<V>> front : SortingBestOrder.sort(population)) {
+
+			SolutionSet<NSGAIISolution<V>> next = front.getSolutions();
 
 			// calculate crowding
 			CrowdingDistance.calculate(next);
@@ -150,24 +146,20 @@ public class NSGAII<V extends IVariable, P extends IProblem<V>> extends AMultiOb
 			// sort by crowding
 			Collections.sort(next, (o1, o2) -> Double.compare(o2.getCrowding(), o1.getCrowding()));
 
-			// add solution to new population and save ranking
-			for (NSGAIISolution<V> s : next) {
-				solutions.add(s);
-				s.setRank(ranking);
-			}
+			// set the rank as attribute for the binary tournament
+			for (NSGAIISolution<V> solution : next)
+				solution.setRank(ranking);
+
+			// add the solutions sorted
+			solutions.addAll(next);
 
 			// since all other individuals are truncated anyway we could stop
-			// here
 			if (solutions.size() > populationSize)
 				break;
 
 			ranking++;
 
 		}
-
-		// Comparator<NSGAIISolution<V>> comp =
-		// Comparator.comparingInt(NSGAIISolution::getRank);
-		// comp.thenComparingDouble(NSGAIISolution::getCrowding).;
 
 		return solutions;
 

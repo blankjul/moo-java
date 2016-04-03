@@ -8,7 +8,7 @@ import com.msu.moo.util.MyRandom;
 
 
 
-public class RandomSelection<S extends ISolution<V>, V> extends ASelection<S, V> {
+public class RandomSelection<S extends ISolution<?>> extends ASelection<S> {
 
 	@Override
 	public S next(List<S> population, MyRandom rand) {

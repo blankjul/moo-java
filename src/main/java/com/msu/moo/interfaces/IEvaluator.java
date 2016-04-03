@@ -51,13 +51,13 @@ public interface IEvaluator {
 	/**
 	 * @param set current best non dominated solution set
 	 */
-	public <S extends ISolution<V>, V extends IVariable> void notify(SolutionSet<S,V> set);
+	public <S extends ISolution<?>> void notify(SolutionSet<S> set);
 	
 	
 	/**
 	 * @param set current best solution
 	 */
-	public <S extends ISolution<V>, V extends IVariable> void notify(S s);
+	public <S extends ISolution<?>> void notify(S s);
 	
 	
 	

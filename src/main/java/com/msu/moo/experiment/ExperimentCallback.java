@@ -22,8 +22,6 @@ public class ExperimentCallback<R, V extends IVariable, P extends IProblem<V>> i
 	public double duration;
 	public R result;
 	
-	
-
 
 
 	public ExperimentCallback(IAlgorithm<R, V, P> algorithm, P problem, MyRandom rand, int i, int j, int k,
@@ -41,7 +39,6 @@ public class ExperimentCallback<R, V extends IVariable, P extends IProblem<V>> i
 
 
 
-
 	@Override
 	public ExperimentCallback<R,V,P> call() throws Exception {
 		
@@ -55,6 +52,8 @@ public class ExperimentCallback<R, V extends IVariable, P extends IProblem<V>> i
 		return this;
 		
 	}
+	
+	
 	
 
 }

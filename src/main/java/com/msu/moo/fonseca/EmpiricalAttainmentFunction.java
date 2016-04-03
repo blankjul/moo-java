@@ -15,16 +15,16 @@ public class EmpiricalAttainmentFunction {
 
 
 
-	public static NonDominatedSet<ISolution<Object>, Object> calculate(Collection<Collection<? extends ISolution<?>>> sets) {
+	public static NonDominatedSet<ISolution<Object>> calculate(Collection<Collection<? extends ISolution<?>>> sets) {
 		return calculate(sets, (sets.size() / 2) + 1);
 	}
 
-	public static NonDominatedSet<ISolution<Object>, Object> calculate(Collection<Collection<? extends ISolution<?>>> sets, int level) {
+	public static NonDominatedSet<ISolution<Object>> calculate(Collection<Collection<? extends ISolution<?>>> sets, int level) {
 
 		if (!Util.doesFileExist(Configuration.PATH_TO_EAF)) throw new RuntimeException("Fonseca's Implementation not found!");
 		
 		// result where the value are added
-		NonDominatedSet<ISolution<Object>, Object> result = new NonDominatedSet<>();
+		NonDominatedSet<ISolution<Object>> result = new NonDominatedSet<>();
 		String command = getCommand(sets, level);
 		String out = BashExecutor.execute(command);
 		

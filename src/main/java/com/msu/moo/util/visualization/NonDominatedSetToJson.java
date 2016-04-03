@@ -33,7 +33,7 @@ public class NonDominatedSetToJson {
 
 	public <V> void append(Collection<ISolution<V>> set) {
 		
-		NonDominatedSet<ISolution<V>, V> isNonDominated = new NonDominatedSet<>(set);
+		NonDominatedSet<ISolution<V>> isNonDominated = new NonDominatedSet<>(set);
 
 		Scatter scNonDom = new Scatter();
 		Scatter scDom = new Scatter();

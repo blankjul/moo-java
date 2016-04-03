@@ -11,7 +11,7 @@ import com.msu.moo.util.MyRandom;
  * @param <V> variable type to select
  * @param <S> solution with variable type V
  */
-public interface ISelection<S extends ISolution<V>, V> {
+public interface ISelection<S extends ISolution<?>> {
 
 	/**
 	 * 
@@ -20,7 +20,7 @@ public interface ISelection<S extends ISolution<V>, V> {
 	 * @param rand randomness if needed
 	 * @return List of solutions which were selected
 	 */
-	public SolutionSet<S,V> next(List<S> population, int n, MyRandom rand);
+	public SolutionSet<S> next(List<S> population, int n, MyRandom rand);
 
 
 }

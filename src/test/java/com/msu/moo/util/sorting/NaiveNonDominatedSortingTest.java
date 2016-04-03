@@ -7,11 +7,11 @@ import java.util.List;
 
 import org.junit.Test;
 
-import com.msu.moo.algorithms.impl.nsgaII.NaiveNonDominatedSorting;
 import com.msu.moo.mock.MockSolution;
 import com.msu.moo.mock.MockSolutionSet;
 import com.msu.moo.mock.MockVariable;
 import com.msu.moo.model.solution.NonDominatedSet;
+import com.msu.moo.sorting.SortingNaive;
 
 
 /**
@@ -28,7 +28,7 @@ public class NaiveNonDominatedSortingTest {
 		MockSolution s2 = MockSolution.create(1, Arrays.asList(0d,0d));
 		
 		MockSolutionSet solutions = new MockSolutionSet(Arrays.asList(s1,s2));
-		List<NonDominatedSet<MockSolution, MockVariable>> set = NaiveNonDominatedSorting.sort(solutions);
+		List<NonDominatedSet<MockSolution, MockVariable>> set = SortingNaive.sort(solutions);
 		
 		assertEquals(2, set.size());
 		assertEquals(s2,set.get(0).getSolutions().get(0));

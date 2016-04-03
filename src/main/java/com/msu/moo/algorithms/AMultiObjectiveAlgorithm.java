@@ -11,7 +11,7 @@ public abstract class AMultiObjectiveAlgorithm<V extends IVariable, P extends IP
 
 	protected String name;
 	
-	public abstract NonDominatedSet<ISolution<V>, V> run_(P problem, IEvaluator evaluator, MyRandom rand);
+	public abstract NonDominatedSet<ISolution<V>> run_(P problem, IEvaluator evaluator, MyRandom rand);
 
 	
 	/**
@@ -20,7 +20,7 @@ public abstract class AMultiObjectiveAlgorithm<V extends IVariable, P extends IP
 	 * multi-objective algorithm.
 	 */
 	@Override
-	public NonDominatedSet<ISolution<V>, V> run(P problem, IEvaluator evaluator, MyRandom rand) {
+	public NonDominatedSet<ISolution<V>> run(P problem, IEvaluator evaluator, MyRandom rand) {
 		return run_(problem, evaluator, rand).removeSolutionWithConstraintViolations();
 	}
 

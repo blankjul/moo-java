@@ -31,7 +31,7 @@ public class CImplementationComparator {
 
 				List<String> list = stream.collect(Collectors.toList());
 
-				SolutionSet<ISolution<Integer>, Integer> set = new SolutionSet<>();
+				SolutionSet<ISolution<Integer>> set = new SolutionSet<>();
 
 				for (String line : list) {
 

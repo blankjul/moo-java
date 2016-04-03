@@ -8,13 +8,11 @@ import java.util.stream.Collectors;
 
 import com.msu.moo.interfaces.ISolution;
 
-public class NonDominatedSet<S extends ISolution<V>, V> implements Iterable<S> {
+public class NonDominatedSet<S extends ISolution<?>> implements Iterable<S> {
 
-	
 	// ! list which contains all the solutions
-	protected List<S> solutions = new SolutionSet<S,V>();
+	protected SolutionSet<S> solutions = new SolutionSet<>();
 
-	
 	public NonDominatedSet() {
 		super();
 	}
@@ -24,9 +22,9 @@ public class NonDominatedSet<S extends ISolution<V>, V> implements Iterable<S> {
 			add(s);
 	}
 
-
 	public void addAll(List<S> solutions) {
-		for (S entry : solutions) add(entry);
+		for (S entry : solutions)
+			add(entry);
 	}
 
 	public S get(int index) {
@@ -34,9 +32,21 @@ public class NonDominatedSet<S extends ISolution<V>, V> implements Iterable<S> {
 	}
 
 	public void addAll(Collection<S> set) {
-		for (S s : set) add(s);
+		for (S s : set)
+			add(s);
 	}
-	
+
+	/**
+	 * CAREFUL: No domination check is made!
+	 */
+	public boolean addWithoutCheck(S solutionToAdd) {
+		return solutions.add(solutionToAdd);
+	}
+
+	/**
+	 * Add solution by checking if it is dominated. All solutions which are
+	 * dominated by the new one are removed!
+	 */
 	public boolean add(S solutionToAdd) {
 
 		// all the solutions which are dominated by new one
@@ -46,23 +56,24 @@ public class NonDominatedSet<S extends ISolution<V>, V> implements Iterable<S> {
 
 			// if the solution objectives are exactly equal
 			if (SolutionDominator.isEqual(s, solutionToAdd)) {
-				
-				// if variable is null (e.g. after calc median front) dont add it.
+
+				// if variable is null (e.g. after calc median front) dont add
+				// it.
 				if (s.getVariable() == null || solutionToAdd.getVariable() == null) {
 					return false;
-					
-				// otherwise test if this solution exists in set
+
+					// otherwise test if this solution exists in set
 				} else {
 					return addEqualSolution(solutionToAdd);
 				}
 			}
 
 			// if one solution dominates the new one
-			if (SolutionDominator.isDominating(s, solutionToAdd))
+			else if (SolutionDominator.isDominating(s, solutionToAdd))
 				return false;
 
 			// if the new solution dominates one store them in a list
-			if (SolutionDominator.isDominatedBy(s, solutionToAdd))
+			else if (SolutionDominator.isDominatedBy(s, solutionToAdd))
 				areDominated.add(s);
 
 		}
@@ -94,11 +105,9 @@ public class NonDominatedSet<S extends ISolution<V>, V> implements Iterable<S> {
 	/**
 	 * @return all the solutions in a list!
 	 */
-	public SolutionSet<S, V> getSolutions() {
-		return new SolutionSet<>(solutions);
+	public SolutionSet<S> getSolutions() {
+		return solutions;
 	}
-	
-	
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
@@ -111,15 +120,14 @@ public class NonDominatedSet<S extends ISolution<V>, V> implements Iterable<S> {
 		return sb.substring(0, sb.length() - 1);
 	}
 
-
 	/**
 	 * Remove INPLACE all solutions which have violated constraints
 	 * 
 	 * @return
 	 */
-	public NonDominatedSet<S,V> removeSolutionWithConstraintViolations() {
+	public NonDominatedSet<S> removeSolutionWithConstraintViolations() {
 		List<S> l = solutions.stream().filter(s -> s.hasConstrainViolations() == false).collect(Collectors.toList());
-		solutions = new SolutionSet<S,V>(l);
+		solutions = new SolutionSet<S>(l);
 		return this;
 	}
 
@@ -127,7 +135,5 @@ public class NonDominatedSet<S extends ISolution<V>, V> implements Iterable<S> {
 	public Iterator<S> iterator() {
 		return solutions.iterator();
 	}
-
-	
 
 }

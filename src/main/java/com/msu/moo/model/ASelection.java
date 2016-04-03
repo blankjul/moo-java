@@ -10,10 +10,10 @@ import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.util.MyRandom;
 
-public abstract class ASelection<S extends ISolution<V>, V> implements ISelection<S, V>{
+public abstract class ASelection<S extends ISolution<?>> implements ISelection<S>{
 
 	@Override
-	public SolutionSet<S,V> next(List<S> population, int n, MyRandom rand) {
+	public SolutionSet<S> next(List<S> population, int n, MyRandom rand) {
 		List<S> result = new ArrayList<>();
 		for (int i = 0; i < n; i++) {
 			result.add(next(population, rand));

@@ -54,7 +54,7 @@ public class ConvergenceEvaluator extends AEvaluator {
 
 	
 	@Override
-	public <S extends ISolution<V>, V extends IVariable> void notify(SolutionSet<S,V> set) {
+	public <S extends ISolution<?>> void notify(SolutionSet<S> set) {
 		
 		List<S> list = set;
 		if (firstN != -1 && set.size() >  firstN) list = set.subList(0, firstN);

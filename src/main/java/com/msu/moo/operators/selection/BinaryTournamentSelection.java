@@ -16,7 +16,7 @@ import com.msu.moo.util.MyRandom;
  * always to individuals to a tournament and choose the winner by using a comparator!	
  *
  */
-public class BinaryTournamentSelection<S extends ISolution<V>, V> extends ASelection<S, V>  {
+public class BinaryTournamentSelection<S extends ISolution<?>> extends ASelection<S>  {
 
 
 	//! Comparator for choosing which solution is better.
@@ -37,7 +37,7 @@ public class BinaryTournamentSelection<S extends ISolution<V>, V> extends ASelec
 	
 	
 	@Override
-	public SolutionSet<S, V> next(List<S> population, int n, MyRandom rand) {
+	public SolutionSet<S> next(List<S> population, int n, MyRandom rand) {
 		
 		if (population.size() < 2) {
 			System.out.println(population);
@@ -45,7 +45,7 @@ public class BinaryTournamentSelection<S extends ISolution<V>, V> extends ASelec
 		}
 		
 		
-		SolutionSet<S, V> result = new SolutionSet<>();
+		SolutionSet<S> result = new SolutionSet<>();
 		Queue<S> q = new LinkedList<>();
 		
 		
