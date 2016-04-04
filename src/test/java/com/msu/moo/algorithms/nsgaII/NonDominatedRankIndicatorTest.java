@@ -34,11 +34,11 @@ public class NonDominatedRankIndicatorTest {
 	public void testCalcValuesOfExampleWithConstraints() {
 		SolutionSet<MockSolution> l = new SolutionSet<>();
 		l.add(MockSolution.create(1, Arrays.asList(5.0), Arrays.asList(2.0)));
-		l.add(MockSolution.create(2, Arrays.asList(100.0), Arrays.asList(1.0)));
+		l.add(MockSolution.create(2, Arrays.asList(20.0), Arrays.asList(1.0)));
 		l.add(MockSolution.create(3, Arrays.asList(20.0), Arrays.asList(1.0)));
 		l.add(MockSolution.create(4, Arrays.asList(100.0), Arrays.asList(0.0)));
 		
-		List<NonDominatedSet<MockSolution>> sets = SortingBestOrder.sort(l);
+		List<NonDominatedSet<MockSolution>> sets = SortingBestOrder.sortWithConstraints(l);
 		NonDominatedRankIndicator.assign(sets);
 		
 		assertEquals(new Integer(2), l.get(0).getRank());

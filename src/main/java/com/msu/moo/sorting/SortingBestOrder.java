@@ -19,40 +19,56 @@ import com.msu.moo.model.solution.SolutionSet;
 public class SortingBestOrder {
 
 	
-	public static <S extends ISolution<?>> List<NonDominatedSet<S>> sort(SolutionSet<S> solutions) {
+	public static <S extends ISolution<?>> List<NonDominatedSet<S>> sortWithConstraints(SolutionSet<S> solutions) {
+		
+		SolutionSet<S> copy = new SolutionSet<>(solutions);
 
-		
-		// population to sort with no constraints
-		SolutionSet<S> population = new SolutionSet<>();
-		SolutionSet<S> solutionsWithViolations = new SolutionSet<>();
-		
-		
-		// sort out the solutions with constraint violations
-		for(S s : solutions) {
-			if (s.hasConstrainViolations()) solutionsWithViolations.add(s);
-			else population.add(s);
-		}
-		
 		// create for each different constraint violation a front
-		Collections.sort(solutionsWithViolations, (s1,s2) -> Double.compare(s1.getSumOfConstraintViolation(), s2.getSumOfConstraintViolation()));
-		List<NonDominatedSet<S>> frontsWithViolations = new ArrayList<>();
+		Collections.sort(copy, (s1,s2) -> Double.compare(s1.getSumOfConstraintViolation(), s2.getSumOfConstraintViolation()));
 		
-		Iterator<S> it = solutionsWithViolations.iterator();
+		// iterator over all solutions
+		Iterator<S> it = copy.iterator();
 		
+		// last constraint violation
 		double lastConstraintViolation = -1;
-		NonDominatedSet<S> setWithSameViolations = new NonDominatedSet<>();
+		
+		// resulting fronts with the same constraint violations
+		List<SolutionSet<S>> frontsWithSameViolations = new ArrayList<>();
+		
+		// set that is filled and renewed every the loop
+		SolutionSet<S> setWithSameViolations = new SolutionSet<>();
+		
 		while (it.hasNext()) {
 			S s = it.next();
 			double violation = s.getSumOfConstraintViolation();
+			
+			// pool of solutions with the same violations found
 			if (lastConstraintViolation != -1 && violation > lastConstraintViolation){
-				frontsWithViolations.add(setWithSameViolations);
-				setWithSameViolations = new NonDominatedSet<>();
+				frontsWithSameViolations.add(setWithSameViolations);
+				setWithSameViolations = new SolutionSet<>();
 			}
-			setWithSameViolations.addWithoutCheck(s);
+			
+			setWithSameViolations.add(s);
 			lastConstraintViolation = violation;
 		}
-		frontsWithViolations.add(setWithSameViolations);
+		frontsWithSameViolations.add(setWithSameViolations);
 		
+		List<NonDominatedSet<S>> result = new ArrayList<>();
+		
+		for(SolutionSet<S> sameConstraintViolation : frontsWithSameViolations) {
+			result.addAll(sort(sameConstraintViolation));
+		}
+		
+		return result;
+		
+	}
+	
+	
+	
+	
+	
+	public static <S extends ISolution<?>> List<NonDominatedSet<S>> sort(SolutionSet<S> population) {
+
 		
 		final int M = population.get(0).numOfObjectives();
 		final int N = population.size();
@@ -104,6 +120,7 @@ public class SortingBestOrder {
 
 						List<SolutionNode> front = fronts.get(i);
 						boolean isDominated = false;
+						boolean isEqual = true;
 
 						// for every node in that front
 						outerloop: for (SolutionNode other : front) {
@@ -122,12 +139,17 @@ public class SortingBestOrder {
 									// if node is once better -> not dominated
 									if (objNode.get(j) < objOther.get(j)) {
 										continue outerloop;
+									} 
+									if (!objNode.get(j).equals(objOther.get(j))) {
+										isEqual = false;
 									}
 									
 								}
 
-								isDominated = true;
-								break outerloop;
+								if (!isEqual) {
+									isDominated = true;
+									break outerloop;
+								}
 
 							}
 
@@ -179,7 +201,6 @@ public class SortingBestOrder {
 			result.add(set);
 			
 		}
-		result.addAll(frontsWithViolations);
 		
 		return result;
 

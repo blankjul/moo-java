@@ -29,16 +29,16 @@ public class ExperimentExecutor {
 	protected final static int ITERATIONS = 10;
 
 	// ! max evaluations per run
-	protected final static IEvaluator EVALUATOR = new StandardEvaluator(20000);
+	protected final static IEvaluator EVALUATOR = new StandardEvaluator(100000);
 
 	// ! random seed for experiment execution
-	protected final static long SEED = 123456789;
+	protected final static long SEED = 654322; //654322
 
 	// ! allows to use multiple threads
 	protected final static int NUM_OF_THREADS = 10;
 	
 	//! if true the log of the experiment is shown
-	protected final static boolean showLog = true;
+	protected final static boolean showLog = false;
 	
 
 	@SuppressWarnings({ "unchecked" })

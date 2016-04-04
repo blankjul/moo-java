@@ -110,6 +110,7 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 			if (elimanateDuplicates)
 				population = new SolutionSet<>(new HashSet<>(population));
 
+			
 			// survival of the best population
 			population = calcRankAndCrowding(population);
 
@@ -119,6 +120,7 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 			// update notifier and evaluator
 			if (listener != null) listener.notify(population);
 			evaluator.notify(population);
+			
 
 		}
 
@@ -134,11 +136,10 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 	protected SolutionSet<NSGAIISolution<V>> calcRankAndCrowding(SolutionSet<NSGAIISolution<V>> population) {
 
 		SolutionSet<NSGAIISolution<V>> solutions = new SolutionSet<>();
-
-		// extract the fronts and assign the rank property
-		List<NonDominatedSet<NSGAIISolution<V>>> fronts = SortingBestOrder.sort(population);
-		NonDominatedRankIndicator.assign(fronts);
 		
+		// extract the fronts and assign the rank property
+		List<NonDominatedSet<NSGAIISolution<V>>> fronts= SortingBestOrder.sortWithConstraints(population);
+		NonDominatedRankIndicator.assign(fronts);
 
 		// for every front in the current population
 		for (NonDominatedSet<NSGAIISolution<V>> front : fronts) {
