@@ -8,8 +8,10 @@ import com.msu.moo.util.Range;
 public class Kursawe extends DoubleVariableListProblem {
 
 	@Override
-	protected void evaluate__(DoubleListVariable var, List<Double> objectives) {
+	protected void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 
+		constraintViolations.add(calcRangeViolation(var, getVariableConstraints()));
+		
 		double aux, xi, xj;
 		double[] fx = new double[2];
 		double[] x = new double[3];

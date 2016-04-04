@@ -59,8 +59,8 @@ public class ZDTExperiment extends AExperiment<NonDominatedSet<ISolution<DoubleL
 
 	@Override
 	protected void analyse(ExperimentCallback<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT> c) {
-		//Double hv = Hypervolume.calculate(c.result.getSolutions(), Arrays.asList(1.0, 1.0));
-		//System.out.println(String.format("%s,%f", c.algorithm, hv));
+		Double hv = Hypervolume.calculate(c.result.getSolutions(), Arrays.asList(1.0, 1.0));
+		System.out.println(String.format("%s,%f", c.algorithm, hv));
 	}
 
 

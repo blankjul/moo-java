@@ -29,10 +29,10 @@ public class ExperimentExecutor {
 	protected final static int ITERATIONS = 10;
 
 	// ! max evaluations per run
-	protected final static IEvaluator EVALUATOR = new StandardEvaluator(100000);
+	protected final static IEvaluator EVALUATOR = new StandardEvaluator(20000);
 
 	// ! random seed for experiment execution
-	protected final static long SEED = 654322; //654322
+	protected final static long SEED = 123; //654322
 
 	// ! allows to use multiple threads
 	protected final static int NUM_OF_THREADS = 10;

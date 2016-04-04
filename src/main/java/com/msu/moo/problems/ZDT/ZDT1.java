@@ -45,7 +45,9 @@ public class ZDT1 extends AbstractZDT  {
 
 	
 	@Override
-	protected void evaluate__(DoubleListVariable var, List<Double> objectives) {
+	protected void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
+
+		constraintViolations.add(calcRangeViolation(var, getVariableConstraints()));
 		
 		final double f = var.get(0);
 		objectives.add(f);
