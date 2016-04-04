@@ -1,7 +1,6 @@
-package com.msu.moo.mock;
+package com.msu.moo.model.variable;
 
 import com.msu.moo.interfaces.IEvolutionaryVariable;
-import com.msu.moo.model.variable.AVariable;
 import com.msu.moo.util.Util;
 
 /**

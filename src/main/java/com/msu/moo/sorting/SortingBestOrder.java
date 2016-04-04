@@ -2,17 +2,58 @@ package com.msu.moo.sorting;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 
 import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.model.solution.SolutionSet;
 
+/**
+ * Implementation based on https://github.com/Proteek/Best-Order-Sort
+ * 
+ * For algorithm details have a look at http://www.egr.msu.edu/~kdeb/reports.shtml , COIN Report No. 201600.
+ * The idea is adapted to work also with constraints.
+ *
+ */
 public class SortingBestOrder {
 
 	
-	public static <S extends ISolution<?>> List<NonDominatedSet<S>> sort(SolutionSet<S> population) {
+	public static <S extends ISolution<?>> List<NonDominatedSet<S>> sort(SolutionSet<S> solutions) {
 
+		
+		// population to sort with no constraints
+		SolutionSet<S> population = new SolutionSet<>();
+		SolutionSet<S> solutionsWithViolations = new SolutionSet<>();
+		
+		
+		// sort out the solutions with constraint violations
+		for(S s : solutions) {
+			if (s.hasConstrainViolations()) solutionsWithViolations.add(s);
+			else population.add(s);
+		}
+		
+		// create for each different constraint violation a front
+		Collections.sort(solutionsWithViolations, (s1,s2) -> Double.compare(s1.getSumOfConstraintViolation(), s2.getSumOfConstraintViolation()));
+		List<NonDominatedSet<S>> frontsWithViolations = new ArrayList<>();
+		
+		Iterator<S> it = solutionsWithViolations.iterator();
+		
+		double lastConstraintViolation = -1;
+		NonDominatedSet<S> setWithSameViolations = new NonDominatedSet<>();
+		while (it.hasNext()) {
+			S s = it.next();
+			double violation = s.getSumOfConstraintViolation();
+			if (lastConstraintViolation != -1 && violation > lastConstraintViolation){
+				frontsWithViolations.add(setWithSameViolations);
+				setWithSameViolations = new NonDominatedSet<>();
+			}
+			setWithSameViolations.addWithoutCheck(s);
+			lastConstraintViolation = violation;
+		}
+		frontsWithViolations.add(setWithSameViolations);
+		
+		
 		final int M = population.get(0).numOfObjectives();
 		final int N = population.size();
 
@@ -138,6 +179,8 @@ public class SortingBestOrder {
 			result.add(set);
 			
 		}
+		result.addAll(frontsWithViolations);
+		
 		return result;
 
 	}

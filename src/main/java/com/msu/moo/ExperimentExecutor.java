@@ -23,7 +23,7 @@ import com.msu.moo.util.ObjectFactory;
 public class ExperimentExecutor {
 
 	// ! experiment that should be executed
-	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.KursaweExperiment";
+	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.ZDTExperiment";
 
 	// ! number of iterations per experiment
 	protected final static int ITERATIONS = 10;
@@ -37,11 +37,15 @@ public class ExperimentExecutor {
 	// ! allows to use multiple threads
 	protected final static int NUM_OF_THREADS = 10;
 	
+	//! if true the log of the experiment is shown
+	protected final static boolean showLog = true;
+	
 
 	@SuppressWarnings({ "unchecked" })
 	public static void main(String[] args) {
 		BasicConfigurator.configure();
 		AExperiment<?, IVariable, IProblem<IVariable>> experiment = ObjectFactory.create(AExperiment.class, EXPERIMENT);
+		experiment.setVerbose(showLog);
 		experiment.run(EVALUATOR, ITERATIONS, SEED, NUM_OF_THREADS);
 	}
 

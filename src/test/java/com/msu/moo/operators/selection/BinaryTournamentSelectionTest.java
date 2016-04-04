@@ -3,11 +3,11 @@ package com.msu.moo.operators.selection;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.msu.moo.algorithms.impl.nsgaII.CrowdingDistance;
-import com.msu.moo.algorithms.impl.nsgaII.NonDominatedRankIndicator;
 import com.msu.moo.mock.ExampleSolutionSet;
 import com.msu.moo.mock.MockSolution;
 import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.sorting.indicator.CrowdingDistance;
+import com.msu.moo.sorting.indicator.NonDominatedRankIndicator;
 
 public class BinaryTournamentSelectionTest {
 	

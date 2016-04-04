@@ -15,7 +15,9 @@ import com.msu.moo.interfaces.ISelection;
 import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.model.solution.SolutionSet;
-import com.msu.moo.sorting.SortingNaive;
+import com.msu.moo.sorting.SortingBestOrder;
+import com.msu.moo.sorting.indicator.CrowdingDistance;
+import com.msu.moo.sorting.indicator.NonDominatedRankIndicator;
 import com.msu.moo.util.IListener;
 import com.msu.moo.util.MyRandom;
 
@@ -128,15 +130,18 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 
 	}
 
+	
 	protected SolutionSet<NSGAIISolution<V>> calcRankAndCrowding(SolutionSet<NSGAIISolution<V>> population) {
 
 		SolutionSet<NSGAIISolution<V>> solutions = new SolutionSet<>();
 
-		// for every front of the population
-		int ranking = 0;
+		// extract the fronts and assign the rank property
+		List<NonDominatedSet<NSGAIISolution<V>>> fronts = SortingBestOrder.sort(population);
+		NonDominatedRankIndicator.assign(fronts);
+		
 
 		// for every front in the current population
-		for (NonDominatedSet<NSGAIISolution<V>> front : SortingNaive.sort(population)) {
+		for (NonDominatedSet<NSGAIISolution<V>> front : fronts) {
 
 			SolutionSet<NSGAIISolution<V>> next = front.getSolutions();
 
@@ -146,18 +151,12 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 			// sort by crowding
 			Collections.sort(next, (o1, o2) -> Double.compare(o2.getCrowding(), o1.getCrowding()));
 
-			// set the rank as attribute for the binary tournament
-			for (NSGAIISolution<V> solution : next)
-				solution.setRank(ranking);
-
 			// add the solutions sorted
 			solutions.addAll(next);
 
 			// since all other individuals are truncated anyway we could stop
 			if (solutions.size() > populationSize)
 				break;
-
-			ranking++;
 
 		}
 

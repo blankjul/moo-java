@@ -29,11 +29,6 @@ public class SortingNaive  {
 			// empty set and search for all non dominated one
 			NonDominatedSet<S> set = new NonDominatedSet<>(copy);
 			
-			for(S s : copy) {
-				set.add(s);
-			}
-			
-
 			// add all non dominated solution to list
 			result.add(set);
 			

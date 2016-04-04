@@ -40,5 +40,9 @@ public class MockSolution extends NSGAIISolution<MockVariable> {
 		return new MockSolution(new MockVariable(i), objectives);
 	}
 	
+	public static MockSolution create(Integer i, List<Double> objectives, List<Double> constraintViolations) {
+		return new MockSolution(new MockVariable(i), objectives, constraintViolations);
+	}
+	
 
 }

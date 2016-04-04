@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import com.msu.moo.algorithms.impl.nsgaII.CrowdingDistance;
 import com.msu.moo.mock.ExampleSolutionSet;
 import com.msu.moo.mock.MockSolution;
 import com.msu.moo.model.solution.SolutionSet;
+import com.msu.moo.sorting.indicator.CrowdingDistance;
 
 public class CrowdingRankingIndicatorTest {
 	

@@ -46,4 +46,11 @@ public class NSGAIISolution<V> extends Solution<V> {
 		this.crowding = crowding;
 	}
 
+	@Override
+	public String toString() {
+		return "NSGAIISolution [rank=" + rank + ", crowding=" + crowding + ", objective=" + objective + ", constraintViolations=" + constraintViolations + "]";
+	}
+	
+	
+
 }

@@ -1,9 +1,10 @@
-package com.msu.moo.algorithms.impl.nsgaII;
+package com.msu.moo.sorting.indicator;
 
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+import com.msu.moo.algorithms.impl.nsgaII.NSGAIISolution;
 import com.msu.moo.model.solution.SolutionSet;
 
 public class CrowdingDistance {

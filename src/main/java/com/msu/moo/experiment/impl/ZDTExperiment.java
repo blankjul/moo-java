@@ -16,7 +16,7 @@ import com.msu.moo.model.variable.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.moo.operators.mutation.PolynomialMutation;
 import com.msu.moo.problems.ZDT.AbstractZDT;
-import com.msu.moo.problems.ZDT.ZDT3;
+import com.msu.moo.problems.ZDT.ZDT4;
 import com.msu.moo.util.Builder;
 import com.msu.moo.util.Range;
 
@@ -47,13 +47,12 @@ public class ZDTExperiment extends AExperiment<NonDominatedSet<ISolution<DoubleL
 	
 	@Override
 	protected void setProblems(List<AbstractZDT> problems) {
-		problems.add(new ZDT3());
+		problems.add(new ZDT4());
 	}
 
 	@Override
 	protected void analyse(ExperimentCallback<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT> c) {
-		System.out.println(Hypervolume.calculate(c.result.getSolutions(), Arrays.asList(1.01, 1.01)));
-		
+		//System.out.println(Hypervolume.calculate(c.result.getSolutions(), Arrays.asList(1.01, 1.01)));
 	}
 
 

@@ -24,7 +24,7 @@ public class Range<T extends Comparable<T>> {
 		}
 	}
 
-	public boolean add(List<T> l) {
+	public boolean accept(List<T> l) {
 		
 		boolean change = false;
 		

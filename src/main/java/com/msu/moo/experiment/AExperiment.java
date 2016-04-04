@@ -88,7 +88,11 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 					MyRandom rand = new MyRandom(seed + k);
 
 					ExperimentCallback<R, V, P> c = new ExperimentCallback<>(algorithm, problem, rand, i, j, k, Util.cloneObject(evaluator));
-
+					try {
+						c.call();
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					String prefix = String.format("[%s/%s | %s | %s/%s ]", c.i + 1, problems.size(), c.algorithm, c.k + 1, iterations);
 					logger.info(String.format("%s %s in %f s", prefix, c.algorithm, c.duration));
 
@@ -165,5 +169,15 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 		logger.info("Finished execution of the experiment.");
 
 	}
+
+	public boolean isVerbose() {
+		return verbose;
+	}
+
+	public void setVerbose(boolean verbose) {
+		this.verbose = verbose;
+	}
+	
+	
 
 }

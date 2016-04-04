@@ -22,10 +22,11 @@ public class SolutionDominator {
 	 */
 	public static boolean isDominating(ISolution<?> s1, ISolution<?> s2) {
 		
-		// if s1 has less constraint violations 
-		if (s1.getSumOfConstraintViolation() < s2.getSumOfConstraintViolation()) 
-			return true;
-		
+		// constraints are more important than objectives in the beginning.
+		if (s1.getSumOfConstraintViolation() < s2.getSumOfConstraintViolation()) return true;
+		else if (s1.getSumOfConstraintViolation() > s2.getSumOfConstraintViolation()) return false;
+			
+		// if constraint violations are equal
 		List<Double> obj1 = s1.getObjectives();
 		List<Double> obj2 = s2.getObjectives();
 		

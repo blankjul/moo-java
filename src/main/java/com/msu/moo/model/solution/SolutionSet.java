@@ -54,7 +54,7 @@ public class SolutionSet<S extends ISolution<?>> extends ArrayList<S> {
 	public Range<Double> getRange() {
 		Range<Double> r = new Range<>();
 		for (ISolution<?> s : this) {
-			r.add(s.getObjectives());
+			r.accept(s.getObjectives());
 		}
 		return r;
 	}
