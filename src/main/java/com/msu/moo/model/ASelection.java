@@ -3,7 +3,6 @@ package com.msu.moo.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.NotImplementedException;
 
 import com.msu.moo.interfaces.ISelection;
 import com.msu.moo.interfaces.ISolution;
@@ -22,8 +21,7 @@ public abstract class ASelection<S extends ISolution<?>> implements ISelection<S
 	}
 	
 	
-	public S next(List<S> population, MyRandom rand) {
-		throw new NotImplementedException("Not Implement how to select one item!");
-	}
-
+    public S next(List<S> population, MyRandom rand) {
+        throw new RuntimeException("Function not implemented!");
+    }
 }
