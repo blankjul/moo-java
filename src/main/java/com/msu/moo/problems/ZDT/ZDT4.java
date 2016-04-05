@@ -25,10 +25,13 @@ import com.msu.moo.util.exceptions.EvaluationException;
 
 public class ZDT4 extends AbstractZDT {
 
+	public ZDT4() {
+		super(new Range<Double>(10, -5d, 5d).set(0, 0d, 1d));
+	}
+
 	@Override
 	protected void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 
-		constraintViolations.add(calcRangeViolation(var, getVariableConstraints()));
 		List<Double> v = var.decode();
 
 		if (v.size() != 10) 
@@ -48,9 +51,5 @@ public class ZDT4 extends AbstractZDT {
 
 	}
 
-	@Override
-	public Range<Double> getVariableConstraints() {
-		return new Range<Double>(10, -5d, 5d).set(0, 0d, 1d);
-	}
 
 }

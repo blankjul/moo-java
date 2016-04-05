@@ -6,24 +6,18 @@ import java.util.List;
 import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.algorithms.impl.nsgaII.NSGAII;
 import com.msu.moo.algorithms.impl.nsgaII.NSGAIIBinaryTournament;
-import com.msu.moo.algorithms.impl.nsgaII.NSGAIISolution;
 import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.experiment.ExperimentCallback;
 import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.model.solution.NonDominatedSet;
-import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.moo.model.variable.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
 import com.msu.moo.operators.mutation.PolynomialMutation;
 import com.msu.moo.problems.ZDT.AbstractZDT;
 import com.msu.moo.problems.ZDT.ZDT3;
-import com.msu.moo.sorting.SortingBestOrder;
-import com.msu.moo.sorting.SortingNaive;
-import com.msu.moo.sorting.indicator.NonDominatedRankIndicator;
 import com.msu.moo.util.Builder;
-import com.msu.moo.util.IListener;
 import com.msu.moo.util.Range;
 
 public class ZDTExperiment extends AExperiment<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT> {
@@ -34,7 +28,7 @@ public class ZDTExperiment extends AExperiment<NonDominatedSet<ISolution<DoubleL
 	protected void setAlgorithms(AbstractZDT problem,
 			List<IAlgorithm<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT>> algorithms) {
 	
-		Range<Double> range = problem.getVariableConstraints();
+		Range<Double> range = problem.getRange();
 
 		Builder<NSGAII<DoubleListVariable, AbstractZDT>> nsgaII = new Builder<>(NSGAII.class);
 		nsgaII

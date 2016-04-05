@@ -10,14 +10,9 @@ public class ZDT6 extends AbstractZDT {
 	// ! could be differ for ZDT6
 	protected int numOfVariables = 10;
 	
-	
-	public ZDT6() {
-		super();
-	}
-	
 
 	public ZDT6(int numOfVariables) {
-		super();
+		super(new Range<Double>(numOfVariables, 0d, 1d));
 		this.numOfVariables = numOfVariables;
 	}
 
@@ -26,7 +21,6 @@ public class ZDT6 extends AbstractZDT {
 	@Override
 	protected void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 
-		constraintViolations.add(calcRangeViolation(var, getVariableConstraints()));
 		List<Double> v = var.decode();
 		
 		if (var.size() != numOfVariables) {
@@ -46,11 +40,6 @@ public class ZDT6 extends AbstractZDT {
 		objectives.add(f);
 		objectives.add(g * h);
 
-	}
-
-	@Override
-	public Range<Double> getVariableConstraints() {
-		return new Range<Double>(numOfVariables, 0d, 1d);
 	}
 
 

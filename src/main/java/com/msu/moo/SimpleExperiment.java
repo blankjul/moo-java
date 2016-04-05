@@ -41,7 +41,7 @@ public class SimpleExperiment {
 		
 		DoubleVariableListProblem problem =  ObjectFactory.create(DoubleVariableListProblem.class, PROBLEM);
 		
-		Range<Double> range = problem.getVariableConstraints();
+		Range<Double> range = problem.getRange();
 		
 		Builder<NSGAII<DoubleListVariable, DoubleVariableListProblem>> builder = new Builder<>(NSGAII.class);
 		builder

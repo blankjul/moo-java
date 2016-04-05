@@ -10,6 +10,12 @@ import com.msu.moo.util.Range;
  */
 public class ZDT1 extends AbstractZDT  {
 
+	
+	public ZDT1() {
+		super(new Range<Double>(30, 0d, 1d));
+	}
+
+
 	/**
 	 * Returns the value of the ZDT1 function G.
 	 * 
@@ -47,8 +53,6 @@ public class ZDT1 extends AbstractZDT  {
 	@Override
 	protected void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 
-		constraintViolations.add(calcRangeViolation(var, getVariableConstraints()));
-		
 		final double f = var.get(0);
 		objectives.add(f);
 		
@@ -59,11 +63,6 @@ public class ZDT1 extends AbstractZDT  {
 	}
 	
 
-
-	@Override
-	public Range<Double> getVariableConstraints() {
-		return new Range<Double>(30, 0d, 1d);
-	}
 
 
 	

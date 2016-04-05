@@ -11,7 +11,12 @@ public abstract class DoubleVariableListProblem extends AProblem<DoubleListVaria
 
 	protected abstract void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations);
 
-	public abstract Range<Double> getVariableConstraints();
+	protected Range<Double> range = null;
+	
+	
+	public DoubleVariableListProblem(Range<Double> range) {
+		this.range = range;
+	}
 
 	@Override
 	protected void evaluate_(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
@@ -21,6 +26,9 @@ public abstract class DoubleVariableListProblem extends AProblem<DoubleListVaria
 			throw new EvaluationException(
 					String.format("Variable needs to have %s entries, but %s are provided.", getNumberOfDoubleVariable(), var.decode().size()));
 
+		// add the range constraint
+		if (range != null) constraintViolations.add(calcRangeViolation(var, range));
+		
 		// call the evaluation method
 		evaluate__(var, objectives, constraintViolations);
 
@@ -51,7 +59,16 @@ public abstract class DoubleVariableListProblem extends AProblem<DoubleListVaria
 	}
 
 	public int getNumberOfDoubleVariable() {
-		return getVariableConstraints().size();
+		return range.size();
+	}
+
+	
+	public Range<Double> getRange() {
+		return range;
 	};
+	
+	
+	
+	
 
 }

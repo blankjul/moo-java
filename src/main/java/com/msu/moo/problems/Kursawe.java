@@ -7,10 +7,14 @@ import com.msu.moo.util.Range;
 
 public class Kursawe extends DoubleVariableListProblem {
 
+	public Kursawe() {
+		super(new Range<Double>(3, -5d, 5d));
+	}
+
+
 	@Override
 	protected void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 
-		constraintViolations.add(calcRangeViolation(var, getVariableConstraints()));
 		
 		double aux, xi, xj;
 		double[] fx = new double[2];
@@ -38,10 +42,6 @@ public class Kursawe extends DoubleVariableListProblem {
 	}
 
 	
-	public Range<Double> getVariableConstraints() {
-		return new Range<Double>(3, -5d, 5d);
-	}
-
 
 	
 	
