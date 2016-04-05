@@ -23,13 +23,13 @@ import com.msu.moo.util.ObjectFactory;
 public class ExperimentExecutor {
 
 	// ! experiment that should be executed
-	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.ZDTExperiment";
+	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.NSGAIIExperiment";
 
 	// ! number of iterations per experiment
 	protected final static int ITERATIONS = 10;
 
 	// ! max evaluations per run
-	protected final static IEvaluator EVALUATOR = new StandardEvaluator(20000);
+	protected final static IEvaluator EVALUATOR = new StandardEvaluator(10000);
 
 	// ! random seed for experiment execution
 	protected final static long SEED = 123; //654322

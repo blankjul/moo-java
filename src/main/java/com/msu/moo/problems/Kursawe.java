@@ -13,7 +13,7 @@ public class Kursawe extends DoubleVariableListProblem {
 
 
 	@Override
-	protected void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
+	protected void evaluate_(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 
 		
 		double aux, xi, xj;
@@ -54,7 +54,7 @@ public class Kursawe extends DoubleVariableListProblem {
 
 	@Override
 	public int getNumberOfConstraints() {
-		return 1;
+		return 0;
 	}
 
 

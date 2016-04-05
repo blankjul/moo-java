@@ -1,74 +1,49 @@
 package com.msu.moo.problems;
 
-import java.util.List;
-
 import com.msu.moo.model.AProblem;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.moo.util.Range;
-import com.msu.moo.util.exceptions.EvaluationException;
 
+/**
+ * This class represents a DoubleListProblem. A list of doubles is given in
+ * order to evaluate. There is also a range where the values have to lie in.
+ * 
+ * f(x,y) = ....
+ * 
+ * Many test function could be created by inheriting from this class.
+ *
+ */
 public abstract class DoubleVariableListProblem extends AProblem<DoubleListVariable> {
 
-	protected abstract void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations);
-
+	// ! range of the problem
 	protected Range<Double> range = null;
-	
-	
+
 	public DoubleVariableListProblem(Range<Double> range) {
 		this.range = range;
 	}
 
-	@Override
-	protected void evaluate_(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
+	public double calcRangeViolation(DoubleListVariable var) {
 
-		// check if the right number of variables are provided.
-		if (var.decode().size() != getNumberOfDoubleVariable())
-			throw new EvaluationException(
-					String.format("Variable needs to have %s entries, but %s are provided.", getNumberOfDoubleVariable(), var.decode().size()));
-
-		// add the range constraint
-		if (range != null) constraintViolations.add(calcRangeViolation(var, range));
-		
-		// call the evaluation method
-		evaluate__(var, objectives, constraintViolations);
-
-	}
-
-	@Override
-	public int getNumberOfConstraints() {
-		return 1;
-	}
-
-	
-	public static double calcRangeViolation(DoubleListVariable var, Range<Double> constraints) {
+		if (range == null)
+			return 0.0;
 
 		// add all the constraint violations.
-		
 		double violation = 0;
 
-		for (int i = 0; i < constraints.size(); i++) {
+		for (int i = 0; i < range.size(); i++) {
 
 			double value = var.decode().get(i);
 
-			if (value < constraints.getMinimum(i))
-				violation += Math.abs(constraints.getMinimum(i) - value);
-			else if (value > constraints.getMaximum(i))
-				violation += Math.abs(value - constraints.getMaximum(i));
+			if (value < range.getMinimum(i))
+				violation += Math.abs(range.getMinimum(i) - value);
+			else if (value > range.getMaximum(i))
+				violation += Math.abs(value - range.getMaximum(i));
 		}
 		return violation;
 	}
 
-	public int getNumberOfDoubleVariable() {
-		return range.size();
-	}
-
-	
 	public Range<Double> getRange() {
 		return range;
 	};
-	
-	
-	
-	
 
 }

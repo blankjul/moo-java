@@ -39,7 +39,7 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 	protected IFactory<V> factory;
 
 	// ! selector for getting parents from the population
-	protected ISelection<NSGAIISolution<V>> selector;
+	protected ISelection<NSGAIISolution<V>> selector = new NSGAIIBinaryTournament<>();
 
 	// ! allow external listener to get updates
 	protected IListener<SolutionSet<NSGAIISolution<V>>> listener;

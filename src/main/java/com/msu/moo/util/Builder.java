@@ -3,19 +3,20 @@ package com.msu.moo.util;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 
 public class Builder<T> {
 
 	// private object that is build during the process
-	private T obj;
+	protected T obj;
+	
+	protected Set<String> propertiesToSet = new HashSet<>();
 	
 	
 	private Builder() {
-	}
-	
-	public Builder(T obj) {
-		this.obj = obj;
 	}
 	
 	
@@ -38,6 +39,7 @@ public class Builder<T> {
 			field = Util.getField(key, obj.getClass());
 			field.setAccessible(true);
 			field.set(obj, param);
+			propertiesToSet.remove(key);
 		} catch (SecurityException | IllegalArgumentException | IllegalAccessException e) {
 			e.printStackTrace();
 			throw new RuntimeException(String.format("Could not set attribute %s for object.", key));
@@ -46,12 +48,19 @@ public class Builder<T> {
     }
 	
 
-
+	private void checkIfAllPropertiesSet() {
+		if (!propertiesToSet.isEmpty())
+			throw new RuntimeException(String.format("Not all properties are set. Please define %s.", Arrays.toString(propertiesToSet.toArray())));
+	
+	}
+	
     public T build(){
+    	checkIfAllPropertiesSet();
         return Util.cloneObject(obj);
     }
     
     public T buildNoClone(){
+    	checkIfAllPropertiesSet();
         return obj;
     }
     

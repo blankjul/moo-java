@@ -14,6 +14,11 @@ public abstract class AbstractZDT extends DoubleVariableListProblem {
 		return 2;
 	}
 
+	@Override
+	public int getNumberOfConstraints() {
+		return 0;
+	}
+
 	
 	
 

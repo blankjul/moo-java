@@ -33,7 +33,7 @@ public class ZDT3 extends AbstractZDT {
 
 
 	@Override
-	protected void evaluate__(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
+	protected void evaluate_(DoubleListVariable var, List<Double> objectives, List<Double> constraintViolations) {
 
 		List<Double> v = var.decode();
 		double g = 0.0;
