@@ -8,6 +8,7 @@ import com.msu.moo.util.MyRandom;
 public interface IAlgorithm<R, V extends IVariable, P extends IProblem<V>> {
 
 	public R run(P problem, IEvaluator evaluator, MyRandom rand);
+	
 
 }
 

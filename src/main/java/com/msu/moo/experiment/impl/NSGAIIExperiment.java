@@ -1,16 +1,18 @@
 package com.msu.moo.experiment.impl;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.List;
 
 import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.algorithms.builder.NSGAIIBuilder;
-import com.msu.moo.algorithms.impl.nsgaII.NSGAIISolution;
+import com.msu.moo.algorithms.builder.RandomSearchBuilder;
 import com.msu.moo.experiment.AExperiment;
 import com.msu.moo.experiment.ExperimentCallback;
 import com.msu.moo.fonseca.Hypervolume;
 import com.msu.moo.interfaces.ISolution;
+import com.msu.moo.model.AlgorithmState;
 import com.msu.moo.model.solution.NonDominatedSet;
-import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.model.variable.DoubleListVariable;
 import com.msu.moo.model.variable.DoubleListVariableFactory;
 import com.msu.moo.operators.crossover.SimulatedBinaryCrossover;
@@ -19,52 +21,56 @@ import com.msu.moo.operators.selection.RandomSelection;
 import com.msu.moo.problems.ZDT.AbstractZDT;
 import com.msu.moo.problems.ZDT.ZDT1;
 import com.msu.moo.util.IListener;
-import com.msu.moo.util.Range;
 
-public class NSGAIIExperiment extends AExperiment<NonDominatedSet<ISolution<?>>, DoubleListVariable, AbstractZDT> {
+public class NSGAIIExperiment extends AExperiment<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT> {
 
-	class HVListener implements IListener<SolutionSet<NSGAIISolution<DoubleListVariable>>> {
 
-		protected String nameOfAlgorithm = null;
-
-		public HVListener(String nameOfAlgorithm) {
-			super();
-			this.nameOfAlgorithm = nameOfAlgorithm;
-		}
-
-		int counter = 0;
-
-		@Override
-		public void notify(SolutionSet<NSGAIISolution<DoubleListVariable>> population) {
-			final double hv = Hypervolume.calculate(population);
-			System.out.println(String.format("%s,%s,%f", nameOfAlgorithm, counter++, hv));
-
-		}
-
+	private static final StringBuffer sb = new StringBuffer();
+	
+	
+	public NSGAIIExperiment() throws FileNotFoundException {
+		super();
+		sb.append("algorithm,generation,hv\n");
 	}
 
+	
 	@Override
-	protected void setAlgorithms(AbstractZDT problem, List<IAlgorithm<NonDominatedSet<ISolution<?>>, DoubleListVariable, AbstractZDT>> algorithms) {
-
-		Range<Double> range = problem.getRange();
-
+	protected void setAlgorithms(AbstractZDT problem, List<IAlgorithm<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT>> algorithms) {
+		
+		
 		NSGAIIBuilder<DoubleListVariable, AbstractZDT> builder = new NSGAIIBuilder<>();
 		builder
 		.set("name", "BinaryTournament")
 		.set("probMutation", 1.0)
 		.set("populationSize", 100)
-		.set("factory", new DoubleListVariableFactory(range))
-		.set("crossover", new SimulatedBinaryCrossover(range))
-		.set("mutation", new PolynomialMutation(range))
-		.set("listener", new HVListener("BinaryTournament"));
+		.set("factory", new DoubleListVariableFactory(problem.getRange()))
+		.set("crossover", new SimulatedBinaryCrossover(problem.getRange()))
+		.set("mutation", new PolynomialMutation(problem.getRange()))
+		.set("listener", new IListener<AlgorithmState>() {
+			@Override
+			public void notify(AlgorithmState state) {
+				int generation = state.getEvaluator().numOfEvaluations() / 100;
+				Double hv = Hypervolume.calculate(state.getSolutionSet());
+				sb.append(String.format("%s,%s,%f\n", state.getName(),generation , hv));
+			}
+		});
 
 		algorithms.add(builder.build());
 
 		builder
 			.set("selector", new RandomSelection<>())
-			.set("name", "RandomSelection")
-			.set("listener", new HVListener("RandomSelection"));
+			.set("name", "RandomSelection");
 		algorithms.add(builder.build());
+		
+		algorithms.add(new RandomSearchBuilder<DoubleListVariable, AbstractZDT>()
+				.set("listener", new IListener<AlgorithmState>() {
+					@Override
+					public void notify(AlgorithmState state) {
+						int generation = state.getEvaluator().numOfEvaluations() / 100;
+						double hv = Hypervolume.calculate(state.getSolutionSet());
+						sb.append(String.format("%s,%s,%f\n", state.getName(),generation , hv));
+					}})
+				.set("factory", new DoubleListVariableFactory(problem.getRange())).build());
 
 	}
 
@@ -74,7 +80,29 @@ public class NSGAIIExperiment extends AExperiment<NonDominatedSet<ISolution<?>>,
 	}
 
 	@Override
-	protected void analyse(ExperimentCallback<NonDominatedSet<ISolution<?>>, DoubleListVariable, AbstractZDT> callback) {
+	protected void analyse(ExperimentCallback<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT> callback) {
 	}
+
+	@Override
+	public void finalize() {
+		PrintWriter pw;
+		try {
+			pw = new PrintWriter("test.csv");
+			pw.append(sb.toString());
+			pw.flush();
+			pw.close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+
+
+	}
+
+	
+	
+	
+	
+	
+	
 
 }

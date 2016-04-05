@@ -47,7 +47,7 @@ public class Hypervolume {
 			sb.append("\"");
 		}
 		String out = BashExecutor.execute(sb.toString());
-		if (out == null) return null;
+		if (out == null) return 0.0d;
 		hv = Double.valueOf(out);
 		return hv;
 	}

@@ -165,6 +165,7 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 		}
 
 		executor.shutdown();
+		finalize();
 
 		logger.info("Finished execution of the experiment.");
 
@@ -177,6 +178,8 @@ public abstract class AExperiment<R, V extends IVariable, P extends IProblem<V>>
 	public void setVerbose(boolean verbose) {
 		this.verbose = verbose;
 	}
+	
+	public void finalize() {};
 	
 	
 

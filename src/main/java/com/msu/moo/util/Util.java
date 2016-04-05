@@ -86,8 +86,7 @@ public class Util {
 		return sb.toString();
 	}
 
-	public static <T> T cloneObject(T obj) {
-		Cloner cloner = new Cloner();
+	public static <T> T cloneObject(Cloner cloner, T obj) {
 		try {
 			T clone = cloner.deepClone(obj);
 			return clone;
@@ -96,6 +95,11 @@ public class Util {
 			throw new RuntimeException(String.format("Error while cloning object %s.", obj));
 		}
 	}
+	
+	public static <T> T cloneObject(T obj) {
+		return cloneObject(new Cloner(), obj);
+	}
+	
 
 	public static <T> List<T> createListWithDefault(int n, T t) {
 		List<T> l = new ArrayList<>();

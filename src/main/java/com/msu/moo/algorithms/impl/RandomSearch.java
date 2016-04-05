@@ -6,7 +6,9 @@ import com.msu.moo.interfaces.IFactory;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.ISolution;
 import com.msu.moo.interfaces.IVariable;
+import com.msu.moo.model.AlgorithmState;
 import com.msu.moo.model.solution.NonDominatedSet;
+import com.msu.moo.util.IListener;
 import com.msu.moo.util.MyRandom;
 
 /**
@@ -17,10 +19,13 @@ public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AM
 
 	// ! variable factory to create new solutions
 	protected IFactory<V> factory;
+	
+	// ! allow external listener to get updates
+	protected IListener<AlgorithmState> listener;
 
-	public RandomSearch(IFactory<V> factory) {
-		this.factory = factory;
-	}
+	private RandomSearch() {
+		super();
+	};
 
 	@Override
 	public NonDominatedSet<ISolution<V>> run_(P problem, IEvaluator evaluator, MyRandom rand) {
@@ -29,6 +34,11 @@ public class RandomSearch<V extends IVariable, P extends IProblem<V>> extends AM
 			V var = factory.next(rand);
 			ISolution<V> s = evaluator.evaluate(problem, var);
 			set.add(s);
+			
+			// every 100 evaluation function calls -> notify
+			if (listener != null && evaluator.numOfEvaluations() % 100 == 0) {
+				listener.notify(new AlgorithmState(name, evaluator, set.getSolutions()));
+			}
 			evaluator.notify(s);
 		}
 		return set;

@@ -26,16 +26,16 @@ public class ExperimentExecutor {
 	protected final static String EXPERIMENT = "com.msu.moo.experiment.impl.NSGAIIExperiment";
 
 	// ! number of iterations per experiment
-	protected final static int ITERATIONS = 10;
+	protected final static int ITERATIONS = 100;
 
 	// ! max evaluations per run
 	protected final static IEvaluator EVALUATOR = new StandardEvaluator(10000);
 
 	// ! random seed for experiment execution
-	protected final static long SEED = 123; //654322
-
+	protected final static long SEED = 123; 
+	
 	// ! allows to use multiple threads
-	protected final static int NUM_OF_THREADS = 10;
+	protected final static int NUM_OF_THREADS = 20;
 	
 	//! if true the log of the experiment is shown
 	protected final static boolean showLog = false;

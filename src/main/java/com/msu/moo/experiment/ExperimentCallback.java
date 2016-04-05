@@ -6,8 +6,10 @@ import com.msu.moo.algorithms.IAlgorithm;
 import com.msu.moo.interfaces.IEvaluator;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.IVariable;
+import com.msu.moo.util.IListener;
 import com.msu.moo.util.MyRandom;
 import com.msu.moo.util.Util;
+import com.rits.cloning.Cloner;
 
 /**
  * Callback when one thread is finished. This objects works as a clue between
@@ -40,11 +42,12 @@ public class ExperimentCallback<R, V extends IVariable, P extends IProblem<V>> i
 	@Override
 	public ExperimentCallback<R, V, P> call() throws Exception {
 
-		IAlgorithm<R, V, P> a = Util.cloneObject(algorithm);
+		
+		algorithm = Util.cloneObject(algorithm);
 		P p = Util.cloneObject(problem);
 
 		long startTime = System.currentTimeMillis();
-		result = a.run(p, evaluator, rand);
+		result = algorithm.run(p, evaluator, rand);
 		duration = ((System.currentTimeMillis() - startTime) / 1000.0);
 
 		return this;

@@ -13,6 +13,7 @@ import com.msu.moo.interfaces.IMutation;
 import com.msu.moo.interfaces.IProblem;
 import com.msu.moo.interfaces.ISelection;
 import com.msu.moo.interfaces.ISolution;
+import com.msu.moo.model.AlgorithmState;
 import com.msu.moo.model.solution.NonDominatedSet;
 import com.msu.moo.model.solution.SolutionSet;
 import com.msu.moo.sorting.SortingBestOrder;
@@ -42,7 +43,7 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 	protected ISelection<NSGAIISolution<V>> selector = new NSGAIIBinaryTournament<>();
 
 	// ! allow external listener to get updates
-	protected IListener<SolutionSet<NSGAIISolution<V>>> listener;
+	protected IListener<AlgorithmState> listener;
 
 	// population with NSGAII solutions -> allows to save rank and crowding
 	// directly
@@ -71,7 +72,7 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 		calcRankAndCrowding(population);
 		
 		// notify the listener
-		if (listener != null) listener.notify(population);
+		if (listener != null) listener.notify(new AlgorithmState(this.name, evaluator, population));
 
 		// while evaluations are left
 		while (evaluator.hasNext()) {
@@ -118,7 +119,7 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 			population = new SolutionSet<>(population.subList(0, Math.min(populationSize, population.size())));
 
 			// update notifier and evaluator
-			if (listener != null) listener.notify(population);
+			if (listener != null) listener.notify(new AlgorithmState(this.name, evaluator, population));
 			evaluator.notify(population);
 			
 
@@ -164,5 +165,7 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 		return solutions;
 
 	}
+
+	
 
 }

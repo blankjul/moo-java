@@ -18,13 +18,13 @@ import com.msu.moo.problems.ZDT.AbstractZDT;
 import com.msu.moo.problems.ZDT.ZDT3;
 import com.msu.moo.util.Range;
 
-public class ZDTExperiment extends AExperiment<NonDominatedSet<ISolution<?>>, DoubleListVariable, AbstractZDT> {
+public class ZDTExperiment extends AExperiment<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT> {
 
 
 
 	@Override
 	protected void setAlgorithms(AbstractZDT problem,
-			List<IAlgorithm<NonDominatedSet<ISolution<?>>, DoubleListVariable, AbstractZDT>> algorithms) {
+			List<IAlgorithm<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT>> algorithms) {
 	
 		Range<Double> range = problem.getRange();
 
@@ -49,7 +49,7 @@ public class ZDTExperiment extends AExperiment<NonDominatedSet<ISolution<?>>, Do
 	}
 
 	@Override
-	protected void analyse(ExperimentCallback<NonDominatedSet<ISolution<?>>, DoubleListVariable, AbstractZDT> c) {
+	protected void analyse(ExperimentCallback<NonDominatedSet<ISolution<DoubleListVariable>>, DoubleListVariable, AbstractZDT> c) {
 		Double hv = Hypervolume.calculate(c.result.getSolutions(), Arrays.asList(1.0, 1.0));
 		System.out.println(String.format("%s,%f", c.algorithm, hv));
 	}
