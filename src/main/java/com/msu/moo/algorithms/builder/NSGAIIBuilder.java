@@ -9,7 +9,6 @@ public class NSGAIIBuilder<V extends IEvolutionaryVariable<?>, P extends IProble
 
 	public NSGAIIBuilder() {
 		super(NSGAII.class);
-		
 		propertiesToSet.add("populationSize");
 		propertiesToSet.add("probMutation");
 		propertiesToSet.add("crossover");

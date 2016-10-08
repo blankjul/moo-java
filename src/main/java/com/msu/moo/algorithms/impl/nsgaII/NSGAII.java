@@ -166,6 +166,12 @@ public class NSGAII<V extends IEvolutionaryVariable<?>, P extends IProblem<V>> e
 
 	}
 
+	public SolutionSet<NSGAIISolution<V>> getPopulation() {
+		return population;
+	}
+	
+	
+
 	
 
 }
